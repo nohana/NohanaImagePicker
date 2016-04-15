@@ -1,0 +1,14 @@
+/* 
+  NohanaImagePicker.strings
+  NohanaImagePicker
+
+  Created by kazushi.hara on 2016/02/15.
+  Copyright © 2016年 nohana. All rights reserved.
+*/
+
+"albumlist.title" = "Photos";
+"albumlist.empty.message" = "No Photos";
+"albumlist.empty.description" = "Take some photos with Camera app.";
+"albumlist.moment.title" = "Moment";
+"toolbar.title.nolimit" = "Selected Items: %ld";
+"toolbar.title.haslimit" = "Selected Items: %ld / %ld";
