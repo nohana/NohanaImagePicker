@@ -43,7 +43,11 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
         guard let nohanaImagePickerController = nohanaImagePickerController else {
             return
         }
-        nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAssetList: photoKitAlbumList[exactRow(indexPath)].assetList)
+        if isMomentRow(indexPath) {
+            nohanaImagePickerController.delegate?.nohanaImagePickerDidSelectMoment?(nohanaImagePickerController)
+        } else {
+            nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAssetList: photoKitAlbumList[exactRow(indexPath)].assetList)
+        }
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
