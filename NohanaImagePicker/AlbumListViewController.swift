@@ -43,6 +43,10 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
         guard let nohanaImagePickerController = nohanaImagePickerController else {
             return
         }
+        if isMomentRow(indexPath) {
+            nohanaImagePickerController.delegate?.nohanaImagePickerDidSelectMoment?(nohanaImagePickerController)
+        }
+        
         nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAssetList: photoKitAlbumList[exactRow(indexPath)].assetList)
     }
     

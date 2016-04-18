@@ -17,6 +17,7 @@ public enum MediaType: Int {
 @objc public protocol NohanaImagePickerControllerDelegate {
     func nohanaImagePickerDidCancel(picker: NohanaImagePickerController)
     func nohanaImagePicker(picker: NohanaImagePickerController, didFinishPickingPhotoKitAssets pickedAssts :[PHAsset])
+    optional func nohanaImagePickerDidSelectMoment(picker: NohanaImagePickerController) -> Void
     optional func nohanaImagePicker(picker: NohanaImagePickerController, willPickPhotoKitAsset asset: PHAsset, pickedAssetsCount: Int) -> Bool
     optional func nohanaImagePicker(picker: NohanaImagePickerController, didPickPhotoKitAsset asset: PHAsset, pickedAssetsCount: Int)
     optional func nohanaImagePicker(picker: NohanaImagePickerController, willDropPhotoKitAsset asset: PHAsset, pickedAssetsCount: Int) -> Bool
