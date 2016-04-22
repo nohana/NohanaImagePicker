@@ -1,0 +1,14 @@
+/* 
+  NohanaImagePicker.strings
+  NohanaImagePicker
+
+  Created by kazushi.hara on 2016/02/15.
+  Copyright © 2016年 nohana. All rights reserved.
+*/
+
+"albumlist.title" = "アルバム";
+"albumlist.empty.message" = "アルバムに\n写真がありません";
+"albumlist.empty.description" = "カメラで写真を撮影しましょう";
+"albumlist.moment.title" = "日付から選択";
+"toolbar.title.nolimit" = "%ld枚選択中";
+"toolbar.title.haslimit" = "%ld枚選択中（最大%ld枚）";
