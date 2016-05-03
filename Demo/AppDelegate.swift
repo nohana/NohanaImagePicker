@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  NohanaImagePickerSample
+//  Demo
 //
-//  Created by kazushi.hara on 2016/02/08.
+//  Created by kazushi.hara on 2016/05/02.
 //  Copyright © 2016年 nohana. All rights reserved.
 //
 

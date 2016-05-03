@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		F202573A1C7343D20069B33A /* ImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20257391C7343D20069B33A /* ImageName.swift */; };
 		F202573C1C7418920069B33A /* PickedAssetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F202573B1C7418920069B33A /* PickedAssetList.swift */; };
+		F208E5541CD7370B00FFC9F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F208E5531CD7370B00FFC9F6 /* AppDelegate.swift */; };
+		F208E5591CD7370B00FFC9F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F208E5571CD7370B00FFC9F6 /* Main.storyboard */; };
+		F208E55B1CD7370B00FFC9F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F208E55A1CD7370B00FFC9F6 /* Assets.xcassets */; };
+		F208E55E1CD7370B00FFC9F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F208E55C1CD7370B00FFC9F6 /* LaunchScreen.storyboard */; };
+		F208E5631CD7373900FFC9F6 /* NohanaImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C08D741C68651900B00181 /* NohanaImagePicker.framework */; };
+		F208E5641CD7373900FFC9F6 /* NohanaImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2C08D741C68651900B00181 /* NohanaImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F208E5691CD738CD00FFC9F6 /* DemoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F208E5681CD738CD00FFC9F6 /* DemoListViewController.swift */; };
 		F2131F431C79615700797887 /* SwipeInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2131F421C79615700797887 /* SwipeInteractionController.swift */; };
 		F218D7D61C6B3D22001FCED1 /* PhotoKitAlbumList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F218D7D51C6B3D22001FCED1 /* PhotoKitAlbumList.swift */; };
 		F218D7DE1C6C3A5B001FCED1 /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F218D7DD1C6C3A5B001FCED1 /* AlbumCell.swift */; };
@@ -17,8 +24,6 @@
 		F237249B1C6DCF96005D1E8A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F237249A1C6DCF96005D1E8A /* Images.xcassets */; };
 		F23CC89E1CB745C800BCE443 /* ActivityIndicatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23CC89D1CB745C800BCE443 /* ActivityIndicatable.swift */; };
 		F24EB6901C68AEED0002EC86 /* AlbumListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24EB68F1C68AEED0002EC86 /* AlbumListViewController.swift */; };
-		F24EB6911C68AFB40002EC86 /* NohanaImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C08D741C68651900B00181 /* NohanaImagePicker.framework */; };
-		F24EB6921C68AFB40002EC86 /* NohanaImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2C08D741C68651900B00181 /* NohanaImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F25C10C21C8ED9BF007453C3 /* MomentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C10C11C8ED9BF007453C3 /* MomentViewController.swift */; };
 		F25C69881CA23A0A005935D6 /* MomentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C69871CA23A0A005935D6 /* MomentCell.swift */; };
 		F25C69901CA27311005935D6 /* EmptyIndicatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C698F1CA27311005935D6 /* EmptyIndicatable.swift */; };
@@ -33,12 +38,6 @@
 		F28F4AC31C6C49EE00B7D725 /* PhotoKitAssetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28F4AC21C6C49EE00B7D725 /* PhotoKitAssetList.swift */; };
 		F28F4AC51C6C59A500B7D725 /* PhotoKitAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28F4AC41C6C59A500B7D725 /* PhotoKitAsset.swift */; };
 		F2C08D781C68651900B00181 /* NohanaImagePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = F2C08D771C68651900B00181 /* NohanaImagePicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F2C08D951C688FC400B00181 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C08D941C688FC400B00181 /* AppDelegate.swift */; };
-		F2C08D971C688FC400B00181 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C08D961C688FC400B00181 /* ViewController.swift */; };
-		F2C08D9A1C688FC400B00181 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C08D981C688FC400B00181 /* Main.storyboard */; };
-		F2C08D9C1C688FC400B00181 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2C08D9B1C688FC400B00181 /* Assets.xcassets */; };
-		F2C08D9F1C688FC400B00181 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C08D9D1C688FC400B00181 /* LaunchScreen.storyboard */; };
-		F2C08DAA1C688FC400B00181 /* NohanaImagePickerSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C08DA91C688FC400B00181 /* NohanaImagePickerSampleTests.swift */; };
 		F2DA29771C7749D600B0A8E3 /* NotificationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DA29761C7749D600B0A8E3 /* NotificationInfo.swift */; };
 		F2DF3B151C6C76E500C1C0E4 /* AssetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF3B141C6C76E500C1C0E4 /* AssetListViewController.swift */; };
 		F2DF3B171C6C868E00C1C0E4 /* AssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF3B161C6C868E00C1C0E4 /* AssetCell.swift */; };
@@ -48,30 +47,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		F24EB6931C68AFB40002EC86 /* PBXContainerItemProxy */ = {
+		F208E5651CD7373900FFC9F6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F2C08D6B1C68651900B00181 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = F2C08D731C68651900B00181;
 			remoteInfo = NohanaImagePicker;
 		};
-		F2C08DA61C688FC400B00181 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F2C08D6B1C68651900B00181 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F2C08D911C688FC400B00181;
-			remoteInfo = NohanaImagePickerSample;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		F24EB6951C68AFB40002EC86 /* Embed Frameworks */ = {
+		F208E5671CD7373900FFC9F6 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F24EB6921C68AFB40002EC86 /* NohanaImagePicker.framework in Embed Frameworks */,
+				F208E5641CD7373900FFC9F6 /* NohanaImagePicker.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -81,6 +73,13 @@
 /* Begin PBXFileReference section */
 		F20257391C7343D20069B33A /* ImageName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageName.swift; sourceTree = "<group>"; };
 		F202573B1C7418920069B33A /* PickedAssetList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickedAssetList.swift; sourceTree = "<group>"; };
+		F208E5511CD7370B00FFC9F6 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F208E5531CD7370B00FFC9F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F208E5581CD7370B00FFC9F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F208E55A1CD7370B00FFC9F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F208E55D1CD7370B00FFC9F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F208E55F1CD7370B00FFC9F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F208E5681CD738CD00FFC9F6 /* DemoListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoListViewController.swift; sourceTree = "<group>"; };
 		F2131F421C79615700797887 /* SwipeInteractionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeInteractionController.swift; sourceTree = "<group>"; };
 		F218D7D51C6B3D22001FCED1 /* PhotoKitAlbumList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoKitAlbumList.swift; sourceTree = "<group>"; };
 		F218D7DD1C6C3A5B001FCED1 /* AlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
@@ -106,16 +105,6 @@
 		F2C08D741C68651900B00181 /* NohanaImagePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NohanaImagePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C08D771C68651900B00181 /* NohanaImagePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NohanaImagePicker.h; sourceTree = "<group>"; };
 		F2C08D791C68651900B00181 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F2C08D921C688FC400B00181 /* NohanaImagePickerSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NohanaImagePickerSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F2C08D941C688FC400B00181 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F2C08D961C688FC400B00181 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		F2C08D991C688FC400B00181 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F2C08D9B1C688FC400B00181 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F2C08D9E1C688FC400B00181 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		F2C08DA01C688FC400B00181 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F2C08DA51C688FC400B00181 /* NohanaImagePickerSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NohanaImagePickerSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F2C08DA91C688FC400B00181 /* NohanaImagePickerSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NohanaImagePickerSampleTests.swift; sourceTree = "<group>"; };
-		F2C08DAB1C688FC400B00181 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2DA29761C7749D600B0A8E3 /* NotificationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationInfo.swift; sourceTree = "<group>"; };
 		F2DF3B141C6C76E500C1C0E4 /* AssetListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetListViewController.swift; sourceTree = "<group>"; };
 		F2DF3B161C6C868E00C1C0E4 /* AssetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetCell.swift; sourceTree = "<group>"; };
@@ -125,22 +114,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F208E54E1CD7370B00FFC9F6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F208E5631CD7373900FFC9F6 /* NohanaImagePicker.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F2C08D701C68651900B00181 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F2C08D8F1C688FC400B00181 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F24EB6911C68AFB40002EC86 /* NohanaImagePicker.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F2C08DA21C688FC400B00181 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -150,6 +132,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F208E5521CD7370B00FFC9F6 /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				F208E5531CD7370B00FFC9F6 /* AppDelegate.swift */,
+				F208E5681CD738CD00FFC9F6 /* DemoListViewController.swift */,
+				F208E5571CD7370B00FFC9F6 /* Main.storyboard */,
+				F208E55A1CD7370B00FFC9F6 /* Assets.xcassets */,
+				F208E55C1CD7370B00FFC9F6 /* LaunchScreen.storyboard */,
+				F208E55F1CD7370B00FFC9F6 /* Info.plist */,
+			);
+			path = Demo;
+			sourceTree = "<group>";
+		};
 		F218D7DC1C6C3A3E001FCED1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,8 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				F2C08D761C68651900B00181 /* NohanaImagePicker */,
-				F2C08D931C688FC400B00181 /* NohanaImagePickerSample */,
-				F2C08DA81C688FC400B00181 /* NohanaImagePickerSampleTests */,
+				F208E5521CD7370B00FFC9F6 /* Demo */,
 				F2C08D751C68651900B00181 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -223,8 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				F2C08D741C68651900B00181 /* NohanaImagePicker.framework */,
-				F2C08D921C688FC400B00181 /* NohanaImagePickerSample.app */,
-				F2C08DA51C688FC400B00181 /* NohanaImagePickerSampleTests.xctest */,
+				F208E5511CD7370B00FFC9F6 /* Demo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -242,28 +235,6 @@
 				F235541F1C698BE900796DCA /* Resources */,
 			);
 			path = NohanaImagePicker;
-			sourceTree = "<group>";
-		};
-		F2C08D931C688FC400B00181 /* NohanaImagePickerSample */ = {
-			isa = PBXGroup;
-			children = (
-				F2C08D941C688FC400B00181 /* AppDelegate.swift */,
-				F2C08D961C688FC400B00181 /* ViewController.swift */,
-				F2C08D981C688FC400B00181 /* Main.storyboard */,
-				F2C08D9B1C688FC400B00181 /* Assets.xcassets */,
-				F2C08D9D1C688FC400B00181 /* LaunchScreen.storyboard */,
-				F2C08DA01C688FC400B00181 /* Info.plist */,
-			);
-			path = NohanaImagePickerSample;
-			sourceTree = "<group>";
-		};
-		F2C08DA81C688FC400B00181 /* NohanaImagePickerSampleTests */ = {
-			isa = PBXGroup;
-			children = (
-				F2C08DA91C688FC400B00181 /* NohanaImagePickerSampleTests.swift */,
-				F2C08DAB1C688FC400B00181 /* Info.plist */,
-			);
-			path = NohanaImagePickerSampleTests;
 			sourceTree = "<group>";
 		};
 		F2E508901C68B1770082EF93 /* ViewControllers */ = {
@@ -292,6 +263,25 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		F208E5501CD7370B00FFC9F6 /* Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F208E5621CD7370B00FFC9F6 /* Build configuration list for PBXNativeTarget "Demo" */;
+			buildPhases = (
+				F208E54D1CD7370B00FFC9F6 /* Sources */,
+				F208E54E1CD7370B00FFC9F6 /* Frameworks */,
+				F208E54F1CD7370B00FFC9F6 /* Resources */,
+				F208E5671CD7373900FFC9F6 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F208E5661CD7373900FFC9F6 /* PBXTargetDependency */,
+			);
+			name = Demo;
+			productName = Demo;
+			productReference = F208E5511CD7370B00FFC9F6 /* Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
 		F2C08D731C68651900B00181 /* NohanaImagePicker */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F2C08D881C68651900B00181 /* Build configuration list for PBXNativeTarget "NohanaImagePicker" */;
@@ -310,43 +300,6 @@
 			productReference = F2C08D741C68651900B00181 /* NohanaImagePicker.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		F2C08D911C688FC400B00181 /* NohanaImagePickerSample */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F2C08DAC1C688FC400B00181 /* Build configuration list for PBXNativeTarget "NohanaImagePickerSample" */;
-			buildPhases = (
-				F2C08D8E1C688FC400B00181 /* Sources */,
-				F2C08D8F1C688FC400B00181 /* Frameworks */,
-				F2C08D901C688FC400B00181 /* Resources */,
-				F24EB6951C68AFB40002EC86 /* Embed Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F24EB6941C68AFB40002EC86 /* PBXTargetDependency */,
-			);
-			name = NohanaImagePickerSample;
-			productName = NohanaImagePickerSample;
-			productReference = F2C08D921C688FC400B00181 /* NohanaImagePickerSample.app */;
-			productType = "com.apple.product-type.application";
-		};
-		F2C08DA41C688FC400B00181 /* NohanaImagePickerSampleTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F2C08DAF1C688FC400B00181 /* Build configuration list for PBXNativeTarget "NohanaImagePickerSampleTests" */;
-			buildPhases = (
-				F2C08DA11C688FC400B00181 /* Sources */,
-				F2C08DA21C688FC400B00181 /* Frameworks */,
-				F2C08DA31C688FC400B00181 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F2C08DA71C688FC400B00181 /* PBXTargetDependency */,
-			);
-			name = NohanaImagePickerSampleTests;
-			productName = NohanaImagePickerSampleTests;
-			productReference = F2C08DA51C688FC400B00181 /* NohanaImagePickerSampleTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -357,15 +310,11 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = nohana;
 				TargetAttributes = {
+					F208E5501CD7370B00FFC9F6 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
 					F2C08D731C68651900B00181 = {
 						CreatedOnToolsVersion = 7.2.1;
-					};
-					F2C08D911C688FC400B00181 = {
-						CreatedOnToolsVersion = 7.2.1;
-					};
-					F2C08DA41C688FC400B00181 = {
-						CreatedOnToolsVersion = 7.2.1;
-						TestTargetID = F2C08D911C688FC400B00181;
 					};
 				};
 			};
@@ -384,13 +333,22 @@
 			projectRoot = "";
 			targets = (
 				F2C08D731C68651900B00181 /* NohanaImagePicker */,
-				F2C08D911C688FC400B00181 /* NohanaImagePickerSample */,
-				F2C08DA41C688FC400B00181 /* NohanaImagePickerSampleTests */,
+				F208E5501CD7370B00FFC9F6 /* Demo */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		F208E54F1CD7370B00FFC9F6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F208E55E1CD7370B00FFC9F6 /* LaunchScreen.storyboard in Resources */,
+				F208E55B1CD7370B00FFC9F6 /* Assets.xcassets in Resources */,
+				F208E5591CD7370B00FFC9F6 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F2C08D721C68651900B00181 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -401,26 +359,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F2C08D901C688FC400B00181 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F2C08D9F1C688FC400B00181 /* LaunchScreen.storyboard in Resources */,
-				F2C08D9C1C688FC400B00181 /* Assets.xcassets in Resources */,
-				F2C08D9A1C688FC400B00181 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F2C08DA31C688FC400B00181 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		F208E54D1CD7370B00FFC9F6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F208E5541CD7370B00FFC9F6 /* AppDelegate.swift in Sources */,
+				F208E5691CD738CD00FFC9F6 /* DemoListViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F2C08D6F1C68651900B00181 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -454,39 +404,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F2C08D8E1C688FC400B00181 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F2C08D971C688FC400B00181 /* ViewController.swift in Sources */,
-				F2C08D951C688FC400B00181 /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F2C08DA11C688FC400B00181 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F2C08DAA1C688FC400B00181 /* NohanaImagePickerSampleTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		F24EB6941C68AFB40002EC86 /* PBXTargetDependency */ = {
+		F208E5661CD7373900FFC9F6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F2C08D731C68651900B00181 /* NohanaImagePicker */;
-			targetProxy = F24EB6931C68AFB40002EC86 /* PBXContainerItemProxy */;
-		};
-		F2C08DA71C688FC400B00181 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F2C08D911C688FC400B00181 /* NohanaImagePickerSample */;
-			targetProxy = F2C08DA61C688FC400B00181 /* PBXContainerItemProxy */;
+			targetProxy = F208E5651CD7373900FFC9F6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		F208E5571CD7370B00FFC9F6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F208E5581CD7370B00FFC9F6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F208E55C1CD7370B00FFC9F6 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F208E55D1CD7370B00FFC9F6 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		F27029CD1C71C43A001647AB /* NohanaImagePicker.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -496,25 +440,35 @@
 			name = NohanaImagePicker.strings;
 			sourceTree = "<group>";
 		};
-		F2C08D981C688FC400B00181 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F2C08D991C688FC400B00181 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		F2C08D9D1C688FC400B00181 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F2C08D9E1C688FC400B00181 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		F208E5601CD7370B00FFC9F6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = Demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = jp.co.nohana.NohanaImagePicker.Demo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F208E5611CD7370B00FFC9F6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = Demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = jp.co.nohana.NohanaImagePicker.Demo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		F2C08D861C68651900B00181 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -641,59 +595,18 @@
 			};
 			name = Release;
 		};
-		F2C08DAD1C688FC400B00181 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				INFOPLIST_FILE = NohanaImagePickerSample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = jp.co.nohana.NohanaImagePickerSample;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		F2C08DAE1C688FC400B00181 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				INFOPLIST_FILE = NohanaImagePickerSample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = jp.co.nohana.NohanaImagePickerSample;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		F2C08DB01C688FC400B00181 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = NohanaImagePickerSampleTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = jp.co.nohana.NohanaImagePickerSample;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NohanaImagePickerSample.app/NohanaImagePickerSample";
-			};
-			name = Debug;
-		};
-		F2C08DB11C688FC400B00181 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = NohanaImagePickerSampleTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = jp.co.nohana.NohanaImagePickerSample;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NohanaImagePickerSample.app/NohanaImagePickerSample";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F208E5621CD7370B00FFC9F6 /* Build configuration list for PBXNativeTarget "Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F208E5601CD7370B00FFC9F6 /* Debug */,
+				F208E5611CD7370B00FFC9F6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F2C08D6E1C68651900B00181 /* Build configuration list for PBXProject "NohanaImagePicker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -708,24 +621,6 @@
 			buildConfigurations = (
 				F2C08D891C68651900B00181 /* Debug */,
 				F2C08D8A1C68651900B00181 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F2C08DAC1C688FC400B00181 /* Build configuration list for PBXNativeTarget "NohanaImagePickerSample" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F2C08DAD1C688FC400B00181 /* Debug */,
-				F2C08DAE1C688FC400B00181 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F2C08DAF1C688FC400B00181 /* Build configuration list for PBXNativeTarget "NohanaImagePickerSampleTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F2C08DB01C688FC400B00181 /* Debug */,
-				F2C08DB11C688FC400B00181 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
