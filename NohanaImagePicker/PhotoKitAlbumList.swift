@@ -8,7 +8,6 @@
 
 import Photos
 
-@available(iOS 8.0, *)
 public class PhotoKitAlbumList: ItemListType {
     
     private var albumList:[Item] = []

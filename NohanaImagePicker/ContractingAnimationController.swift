@@ -8,7 +8,6 @@
 
 import AVFoundation
 
-@available(iOS 8.0, *)
 extension Size {
     static func contractingAnimationToCellRect(toVC: AssetListViewController, toCell: AssetCell) -> CGRect {
         let origin = CGPoint(x: toCell.frame.origin.x, y: toCell.frame.origin.y - toVC.collectionView!.contentOffset.y)
@@ -24,7 +23,6 @@ extension Size {
     }
 }
 
-@available(iOS 8.0, *)
 class ContractingAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
     
     var fromCell: AssetDetailCell

@@ -8,7 +8,6 @@
 
 import UIKit
 
-@available(iOS 8.0, *)
 class SwipeInteractionController: UIPercentDrivenInteractiveTransition {
     
     var viewController: UIViewController?

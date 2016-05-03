@@ -8,7 +8,6 @@
 
 import Foundation
 
-@available(iOS 8.0, *)
 class PickedAssetList: ItemListType {
     
     var assetlist: Array<AssetType> = []

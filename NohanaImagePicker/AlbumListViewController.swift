@@ -9,7 +9,6 @@
 import UIKit
 import Photos
 
-@available(iOS 8.0, *)
 class AlbumListViewController: UITableViewController, EmptyIndicatable, ActivityIndicatable {
     
     weak var nohanaImagePickerController: NohanaImagePickerController?
@@ -197,7 +196,6 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
     }
 }
 
-@available(iOS 8.0, *)
 extension UIViewController {
     
     // MARK: - Toolbar

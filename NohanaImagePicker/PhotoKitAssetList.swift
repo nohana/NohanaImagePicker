@@ -7,7 +7,6 @@
 //
 import Photos
 
-@available(iOS 8.0, *)
 public class PhotoKitAssetList :ItemListType {
     
     private let mediaType: MediaType

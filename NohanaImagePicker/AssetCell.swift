@@ -8,7 +8,6 @@
 
 import UIKit
 
-@available(iOS 8.0, *)
 class AssetCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
