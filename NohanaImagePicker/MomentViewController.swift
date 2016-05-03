@@ -9,7 +9,6 @@
 import UIKit
 import Photos
 
-@available(iOS 8.0, *)
 class MomentViewController: AssetListViewController, ActivityIndicatable {
     
     var momentAlbumList: PhotoKitAlbumList!

@@ -13,7 +13,6 @@ public enum MediaType: Int {
     case Any = 0, Photo, Video
 }
 
-@available(iOS 8.0, *)
 @objc public protocol NohanaImagePickerControllerDelegate {
     func nohanaImagePickerDidCancel(picker: NohanaImagePickerController)
     func nohanaImagePicker(picker: NohanaImagePickerController, didFinishPickingPhotoKitAssets pickedAssts :[PHAsset])
@@ -30,7 +29,6 @@ public enum MediaType: Int {
     
 }
 
-@available(iOS 8.0, *)
 public class NohanaImagePickerController: UIViewController {
     
     public var maximumNumberOfSelection: Int = 21 // set 0 to set no limit

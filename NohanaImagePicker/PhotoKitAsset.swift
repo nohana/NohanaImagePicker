@@ -8,7 +8,6 @@
 
 import Photos
 
-@available(iOS 8.0, *)
 public class PhotoKitAsset :AssetType {
     
     let asset: PHAsset

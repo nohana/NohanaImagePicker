@@ -8,7 +8,6 @@
 
 import AVFoundation
 
-@available(iOS 8.0, *)
 extension Size {
 
     static func expandingAnimationFromCellRect(fromVC: AssetListViewController, fromCell: AssetCell) -> CGRect {
@@ -21,7 +20,6 @@ extension Size {
     }
 }
 
-@available(iOS 8.0, *)
 class ExpandingAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
     
     var fromCell: AssetCell
