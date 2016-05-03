@@ -120,6 +120,15 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
         return isLoading
     }
     
+    // MARK: - UICollectionViewDelegate
+    
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        guard let nohanaImagePickerController = nohanaImagePickerController else {
+            return
+        }
+        nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: momentAlbumList[indexPath.section][indexPath.row].originalAsset)
+    }
+    
     // MARK: - Storyboard
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
