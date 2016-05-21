@@ -139,7 +139,7 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
         let assetListDetailViewController = segue.destinationViewController as! AssetDetailListViewController
         assetListDetailViewController.photoKitAssetList = momentAlbumList[selectedIndexPath.section]
         assetListDetailViewController.nohanaImagePickerController = nohanaImagePickerController
-        assetListDetailViewController.selectedIndexPath = NSIndexPath(forItem: selectedIndexPath.item, inSection: 0)
+        assetListDetailViewController.currentIndexPath = selectedIndexPath
     }
     
     // MARK: - IBAction

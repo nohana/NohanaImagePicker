@@ -45,10 +45,6 @@ class AssetListViewController: UICollectionViewController {
         super.viewWillAppear(animated)
         setToolbarTitle(nohanaImagePickerController)
         collectionView?.reloadData()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
         scrollCollectionViewToInitialPosition()
     }
     
@@ -120,10 +116,14 @@ class AssetListViewController: UICollectionViewController {
     // MARK: - Storyboard
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        guard let selectedIndexPath = collectionView?.indexPathsForSelectedItems()?.first else {
+            return
+        }
+        
         let assetListDetailViewController = segue.destinationViewController as! AssetDetailListViewController
         assetListDetailViewController.photoKitAssetList = photoKitAssetList
         assetListDetailViewController.nohanaImagePickerController = nohanaImagePickerController
-        assetListDetailViewController.selectedIndexPath = collectionView?.indexPathsForSelectedItems()?.first
+        assetListDetailViewController.currentIndexPath = selectedIndexPath
     }
     
     // MARK: - IBAction

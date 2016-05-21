@@ -27,14 +27,14 @@ class AnimatableNavigationController: UINavigationController, UINavigationContro
             else {
                 return nil
             }
-            return ExpandingAnimationController(fromCell: fromCell)
-        case .Pop where fromVC is AssetDetailListViewController:
+            return ExpandingAnimationController(fromCell)
+        case .Pop where toVC is AssetListViewController:
             guard let fromVC = fromVC as? AssetDetailListViewController,
-            fromCell = fromVC.collectionView?.cellForItemAtIndexPath(fromVC.currentIndexPath) as? AssetDetailCell
+            fromCell = fromVC.collectionView?.cellForItemAtIndexPath(NSIndexPath(forItem: fromVC.currentIndexPath.item, inSection: 0)) as? AssetDetailCell
             else {
                 return nil
             }
-            return ContractingAnimationController(fromCell: fromCell)
+            return ContractingAnimationController(fromCell)
         default:
             return nil
         }

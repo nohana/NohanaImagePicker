@@ -24,7 +24,7 @@ class ExpandingAnimationController: NSObject, UIViewControllerAnimatedTransition
     
     var fromCell: AssetCell
     
-    init(fromCell: AssetCell) {
+    init(_ fromCell: AssetCell) {
         self.fromCell = fromCell
     }
     
