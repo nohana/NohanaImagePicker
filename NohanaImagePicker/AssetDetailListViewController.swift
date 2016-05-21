@@ -10,7 +10,6 @@ import UIKit
 
 class AssetDetailListViewController: AssetListViewController {
     
-    var selectedIndexPath:NSIndexPath!
     var currentIndexPath: NSIndexPath = NSIndexPath() {
         willSet {
             if currentIndexPath != newValue {
@@ -18,6 +17,7 @@ class AssetDetailListViewController: AssetListViewController {
             }
         }
     }
+    
     @IBOutlet weak var pickButton: UIButton!
     
     override var cellSize: CGSize {
@@ -62,7 +62,8 @@ class AssetDetailListViewController: AssetListViewController {
         guard photoKitAssetList.count > 0 else {
             return
         }
-        collectionView?.scrollToItemAtIndexPath(self.selectedIndexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: false)
+        let indexPath = NSIndexPath(forRow: currentIndexPath.item, inSection: 0)
+        collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: false)
     }
     
     // MARK: - IBAction
@@ -120,7 +121,7 @@ class AssetDetailListViewController: AssetListViewController {
             return
         }
         let row = Int((collectionView.contentOffset.x + cellSize.width * 0.5) / cellSize.width)
-        currentIndexPath = NSIndexPath(forRow: row, inSection: 0)
+        currentIndexPath = NSIndexPath(forRow: row, inSection: currentIndexPath.section)
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout

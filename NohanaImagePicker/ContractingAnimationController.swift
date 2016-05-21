@@ -27,7 +27,7 @@ class ContractingAnimationController: NSObject, UIViewControllerAnimatedTransiti
     
     var fromCell: AssetDetailCell
     
-    init(fromCell: AssetDetailCell) {
+    init(_ fromCell: AssetDetailCell) {
         self.fromCell = fromCell
     }
     
@@ -39,18 +39,17 @@ class ContractingAnimationController: NSObject, UIViewControllerAnimatedTransiti
         guard
             let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) as? AssetDetailListViewController,
             toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as? AssetListViewController,
-            containerView = transitionContext.containerView(),
-            fromCellIndex = fromVC.collectionView?.indexPathForCell(fromCell)
+            containerView = transitionContext.containerView()
             else {
                 return
         }
         
-        var toCellTmp = toVC.collectionView?.cellForItemAtIndexPath(fromCellIndex) as? AssetCell
+        var toCellTmp = toVC.collectionView?.cellForItemAtIndexPath(fromVC.currentIndexPath) as? AssetCell
         if toCellTmp == nil {
             // if toCell is not shown in collection view, scroll collection view to toCell index path.
             toVC.collectionView?.scrollToItemAtIndexPath(fromVC.currentIndexPath, atScrollPosition: .CenteredVertically, animated: false)
             toVC.collectionView?.layoutIfNeeded()
-            toCellTmp = toVC.collectionView?.cellForItemAtIndexPath(fromCellIndex) as? AssetCell
+            toCellTmp = toVC.collectionView?.cellForItemAtIndexPath(fromVC.currentIndexPath) as? AssetCell
         }
         
         guard let toCell = toCellTmp else {
@@ -72,10 +71,10 @@ class ContractingAnimationController: NSObject, UIViewControllerAnimatedTransiti
             transitionDuration(transitionContext),
             delay: 0,
             options: .CurveEaseInOut,
-            animations: { () -> Void in
+            animations: { _ in
                 toVC.view.alpha = 1
                 contractingImageView.frame = Size.contractingAnimationToCellRect(toVC, toCell: toCell)
-            }) { (_) -> Void in
+            }) { _  in
                 self.fromCell.alpha = 1
                 toCell.alpha = 1
                 contractingImageView.removeFromSuperview()
