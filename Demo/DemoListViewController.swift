@@ -24,6 +24,13 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
         Cell(title: "Disable to pick assets", selector: "showDisableToPickAssetsPicker"),
     ]
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
+            tableView.deselectRowAtIndexPath(indexPathForSelectedRow, animated: true)
+        }
+    }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cells.count
     }
@@ -35,7 +42,42 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSelector(cells[indexPath.row].selector)
+        checkIfAuthorizedToAccessPhotos { isAuthorized in
+            dispatch_async(dispatch_get_main_queue(), { 
+                if isAuthorized {
+                    self.performSelector(self.cells[indexPath.row].selector)
+                } else {
+                    let alert = UIAlertController(title: "Error", message: "Denied access to photos.", preferredStyle: .Alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+            })
+        }
+        
+        
+    }
+    
+    // MARK: - Photos
+    
+    func checkIfAuthorizedToAccessPhotos(handler: (isAuthorized: Bool) -> Void) {
+        switch PHPhotoLibrary.authorizationStatus() {
+        case .NotDetermined:
+            PHPhotoLibrary.requestAuthorization{ status in
+                switch status {
+                case .Authorized:
+                    handler(isAuthorized: true)
+                default:
+                    handler(isAuthorized: false)
+                }
+            }
+            
+        case .Restricted:
+            handler(isAuthorized: false)
+        case .Denied:
+            handler(isAuthorized: false)
+        case .Authorized:
+            handler(isAuthorized: true)
+        }
     }
     
     // MARK: - Show NohanaImagePicker
