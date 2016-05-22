@@ -14,17 +14,17 @@ class AssetCell: UICollectionViewCell {
     @IBOutlet weak var pickButton: UIButton!
     @IBOutlet weak var overlayView: UIView!
     
-    weak var nohanaImagePickerController: NohanaImagePickerController?
+    weak var nohanaImagePickerController: NohanaImagePickerController!
     var asset: AssetType?
     
     override func willMoveToSuperview(newSuperview: UIView?) {
         super.willMoveToSuperview(newSuperview)
         
         pickButton.setImage(
-            UIImage(named: ImageName.AssetCell.PickButton.SizeM.dropped, inBundle: nohanaImagePickerController?.assetBundle, compatibleWithTraitCollection: nil),
+            UIImage(named: ImageName.AssetCell.PickButton.SizeM.dropped, inBundle: nohanaImagePickerController.assetBundle, compatibleWithTraitCollection: nil),
             forState: .Normal)
         pickButton.setImage(
-            UIImage(named: ImageName.AssetCell.PickButton.SizeM.picked, inBundle: nohanaImagePickerController?.assetBundle, compatibleWithTraitCollection: nil),
+            UIImage(named: ImageName.AssetCell.PickButton.SizeM.picked, inBundle: nohanaImagePickerController.assetBundle, compatibleWithTraitCollection: nil),
             forState: [.Normal, .Selected])
     }
     
@@ -44,11 +44,11 @@ class AssetCell: UICollectionViewCell {
         self.overlayView.hidden = !pickButton.selected
     }
     
-    func update(asset: AssetType, nohanaImagePickerController: NohanaImagePickerController?) {
+    func update(asset: AssetType, nohanaImagePickerController: NohanaImagePickerController) {
         self.asset = asset
         self.nohanaImagePickerController = nohanaImagePickerController
-        self.pickButton.selected = nohanaImagePickerController?.pickedAssetList.isPicked(asset) ?? false
+        self.pickButton.selected = nohanaImagePickerController.pickedAssetList.isPicked(asset) ?? false
         self.overlayView.hidden = !pickButton.selected
-        self.pickButton.hidden = !(nohanaImagePickerController?.canPickAsset(asset) ?? true)
+        self.pickButton.hidden = !(nohanaImagePickerController.canPickAsset(asset) ?? true)
     }
 }
