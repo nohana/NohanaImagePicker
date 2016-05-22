@@ -19,7 +19,7 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
     }
     
     override func updateTitle() {
-        title = NSLocalizedString("albumlist.moment.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController!.assetBundle, comment: "")
+        title = NSLocalizedString("albumlist.moment.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
     }
     
     override func scrollCollectionViewToInitialPosition() {
@@ -123,9 +123,6 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
     // MARK: - UICollectionViewDelegate
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        guard let nohanaImagePickerController = nohanaImagePickerController else {
-            return
-        }
         nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: momentAlbumList[indexPath.section][indexPath.row].originalAsset)
     }
     

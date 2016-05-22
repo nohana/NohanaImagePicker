@@ -11,7 +11,7 @@ import Foundation
 class PickedAssetList: ItemListType {
     
     var assetlist: Array<AssetType> = []
-    weak var nohanaImagePickerController: NohanaImagePickerController?
+    weak var nohanaImagePickerController: NohanaImagePickerController!
     
     // MARK: - ItemListType
     
@@ -54,9 +54,6 @@ class PickedAssetList: ItemListType {
         guard !isPicked(asset) else {
             return false
         }
-        guard let nohanaImagePickerController = nohanaImagePickerController else {
-            return false
-        }
         let assetsCountBeforePicking = self.count
         if asset is PhotoKitAsset {
             if let canPick = nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, willPickPhotoKitAsset: (asset as! PhotoKitAsset).originalAsset, pickedAssetsCount: assetsCountBeforePicking)
@@ -88,9 +85,6 @@ class PickedAssetList: ItemListType {
     }
     
     func dropAsset(asset: AssetType) -> Bool {
-        guard let nohanaImagePickerController = nohanaImagePickerController else {
-            return false
-        }
         let assetsCountBeforeDropping = self.count
         if asset is PhotoKitAsset {
             if let canDrop = nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, willDropPhotoKitAsset: (asset as! PhotoKitAsset).originalAsset, pickedAssetsCount: assetsCountBeforeDropping) where !canDrop {
