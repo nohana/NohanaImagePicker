@@ -100,10 +100,10 @@ public class NohanaImagePickerController: UIViewController {
                 assetCollectionSubtypes: assetCollectionSubtypes,
                 mediaType: mediaType,
                 shouldShowEmptyAlbum: shouldShowEmptyAlbum,
-                handler: {
+                handler: { [weak albumListViewController] in
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    albumListViewController.isLoading = false
-                    albumListViewController.tableView.reloadData()
+                    albumListViewController?.isLoading = false
+                    albumListViewController?.tableView.reloadData()
                 })
             })
         albumListViewController.nohanaImagePickerController = self

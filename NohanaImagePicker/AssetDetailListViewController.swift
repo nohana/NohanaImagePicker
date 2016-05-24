@@ -36,10 +36,6 @@ class AssetDetailListViewController: AssetListViewController {
             forState: [.Normal, .Selected])
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     override func updateTitle() {
         self.title = ""
     }
@@ -51,16 +47,20 @@ class AssetDetailListViewController: AssetListViewController {
         nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, assetDetailListViewController: self, didChangeAssetDetailPage: indexPath, photoKitAsset: asset.originalAsset)
     }
     
+    override func scrollCollectionView(to indexPath: NSIndexPath) {
+        guard photoKitAssetList.count > 0 else {
+            return
+        }
+        collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: false)
+    }
+    
     override func scrollCollectionViewToInitialPosition() {
         guard isFirstAppearance else {
             return
         }
-        isFirstAppearance = false
-        guard photoKitAssetList.count > 0 else {
-            return
-        }
         let indexPath = NSIndexPath(forRow: currentIndexPath.item, inSection: 0)
-        collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: false)
+        scrollCollectionView(to: indexPath)
+        isFirstAppearance = false
     }
     
     // MARK: - IBAction

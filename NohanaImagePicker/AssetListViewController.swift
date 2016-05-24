@@ -45,22 +45,28 @@ class AssetListViewController: UICollectionViewController {
         scrollCollectionViewToInitialPosition()
     }
     
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        collectionView?.reloadData()
+        scrollCollectionViewToInitialPosition()
+    }
+    
     var isFirstAppearance = true
     
     func updateTitle() {
         title = photoKitAssetList.title
     }
     
+    func scrollCollectionView(to indexPath: NSIndexPath) {
+        collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: false)
+    }
+    
     func scrollCollectionViewToInitialPosition() {
         guard isFirstAppearance else {
             return
         }
-        guard photoKitAssetList.count > 0 else {
-            return
-        }
-        let index = NSIndexPath(forRow: self.photoKitAssetList.count - 1, inSection: 0)
-        collectionView?.scrollToItemAtIndexPath(index, atScrollPosition: .Bottom, animated: false)
-        
+        let indexPath = NSIndexPath(forRow: self.photoKitAssetList.count - 1, inSection: 0)
+        scrollCollectionView(to: indexPath)
         isFirstAppearance = false
     }
     

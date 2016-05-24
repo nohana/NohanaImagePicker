@@ -51,6 +51,11 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
             tableView.deselectRowAtIndexPath(indexPathForSelectedRow, animated: true)
         }
     }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        tableView.reloadData()
+    }
 
     // MARK: - UITableViewDelegate
     
@@ -160,9 +165,10 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
                 mediaType: nohanaImagePickerController.mediaType,
                 shouldShowEmptyAlbum: nohanaImagePickerController.shouldShowEmptyAlbum,
                 handler: { () -> Void in
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        momentViewController.isLoading = false
-                        momentViewController.collectionView?.reloadData()
+                    dispatch_async(dispatch_get_main_queue(), { [weak momentViewController] in
+                        momentViewController?.isLoading = false
+                        momentViewController?.collectionView?.reloadData()
+                        momentViewController?.scrollCollectionViewToInitialPosition()
                     })
             })
         case .Albums:
