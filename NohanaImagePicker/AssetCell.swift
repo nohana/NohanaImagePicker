@@ -29,7 +29,7 @@ class AssetCell: UICollectionViewCell {
     }
     
     @IBAction func didPushPickButton(sender: UIButton) {
-        guard let asset = asset, nohanaImagePickerController = nohanaImagePickerController else {
+        guard let asset = asset else {
             return
         }
         if pickButton.selected {
