@@ -41,14 +41,27 @@ class AssetListViewController: UICollectionViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         setToolbarTitle(nohanaImagePickerController)
+        view.invalidateIntrinsicContentSize()
+        for subView in view.subviews {
+            subView.invalidateIntrinsicContentSize()
+        }
         collectionView?.reloadData()
+
         scrollCollectionViewToInitialPosition()
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-        collectionView?.reloadData()
-        scrollCollectionViewToInitialPosition()
+        view.hidden = true
+        coordinator.animateAlongsideTransition(nil) { _ in
+            // http://saygoodnight.com/2015/06/18/openpics-swift-rotation.html
+            if self.navigationController?.visibleViewController != self {
+                self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, size.width, size.height)
+            }
+            self.collectionView?.reloadData()
+            self.scrollCollectionViewToInitialPosition()
+            self.view.hidden = false
+        }
     }
     
     var isFirstAppearance = true
@@ -70,8 +83,7 @@ class AssetListViewController: UICollectionViewController {
         isFirstAppearance = false
     }
     
-    // MARK: - UICollectionViewDataSource
-    
+    // MARK: - UICollectionViewDataSource    
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photoKitAssetList.count
     }

@@ -36,6 +36,20 @@ class AssetDetailListViewController: AssetListViewController {
             forState: [.Normal, .Selected])
     }
     
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        let indexPath = currentIndexPath
+        view.hidden = true
+        coordinator.animateAlongsideTransition(nil) { _ in
+            self.view.invalidateIntrinsicContentSize()
+            for subView in self.view.subviews {
+                subView.invalidateIntrinsicContentSize()
+            }
+            self.collectionView?.reloadData()
+            self.scrollCollectionView(to: indexPath)
+            self.view.hidden = false
+        }
+    }
+    
     override func updateTitle() {
         self.title = ""
     }
@@ -51,7 +65,8 @@ class AssetDetailListViewController: AssetListViewController {
         guard photoKitAssetList.count > 0 else {
             return
         }
-        collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: false)
+        let toIndexPath = NSIndexPath(forItem: indexPath.item, inSection: 0)
+        collectionView?.scrollToItemAtIndexPath(toIndexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: false)
     }
     
     override func scrollCollectionViewToInitialPosition() {
@@ -85,6 +100,7 @@ class AssetDetailListViewController: AssetListViewController {
             else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetDetailCell\")")
         }
+        cell.invalidateIntrinsicContentSize()
         cell.scrollView.zoomScale = 1
         cell.tag = indexPath.item
         
@@ -114,7 +130,13 @@ class AssetDetailListViewController: AssetListViewController {
             return
         }
         let row = Int((collectionView.contentOffset.x + cellSize.width * 0.5) / cellSize.width)
-        currentIndexPath = NSIndexPath(forRow: row, inSection: currentIndexPath.section)
+        if row < 0 {
+            currentIndexPath = NSIndexPath(forRow: 0, inSection: currentIndexPath.section)
+        } else if row >= collectionView.numberOfItemsInSection(0) {
+            currentIndexPath = NSIndexPath(forRow: collectionView.numberOfItemsInSection(0) - 1, inSection: currentIndexPath.section)
+        } else {
+            currentIndexPath = NSIndexPath(forRow: row, inSection: currentIndexPath.section)
+        }
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout

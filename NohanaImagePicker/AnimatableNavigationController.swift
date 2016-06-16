@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AnimatableNavigationController: UINavigationController, UINavigationControllerDelegate, UIViewControllerTransitioningDelegate {
+class AnimatableNavigationController: UINavigationController, UINavigationControllerDelegate {
     
     let swipeInteractionController = SwipeInteractionController()
     
