@@ -41,8 +41,27 @@ class AssetListViewController: UICollectionViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         setToolbarTitle(nohanaImagePickerController)
+        view.invalidateIntrinsicContentSize()
+        for subView in view.subviews {
+            subView.invalidateIntrinsicContentSize()
+        }
         collectionView?.reloadData()
+
         scrollCollectionViewToInitialPosition()
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        view.hidden = true
+        coordinator.animateAlongsideTransition(nil) { _ in
+            // http://saygoodnight.com/2015/06/18/openpics-swift-rotation.html
+            if self.navigationController?.visibleViewController != self {
+                self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, size.width, size.height)
+            }
+            self.collectionView?.reloadData()
+            self.scrollCollectionViewToInitialPosition()
+            self.view.hidden = false
+        }
     }
     
     var isFirstAppearance = true
@@ -51,21 +70,20 @@ class AssetListViewController: UICollectionViewController {
         title = photoKitAssetList.title
     }
     
+    func scrollCollectionView(to indexPath: NSIndexPath) {
+        collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: false)
+    }
+    
     func scrollCollectionViewToInitialPosition() {
         guard isFirstAppearance else {
             return
         }
-        guard photoKitAssetList.count > 0 else {
-            return
-        }
-        let index = NSIndexPath(forRow: self.photoKitAssetList.count - 1, inSection: 0)
-        collectionView?.scrollToItemAtIndexPath(index, atScrollPosition: .Bottom, animated: false)
-        
+        let indexPath = NSIndexPath(forRow: self.photoKitAssetList.count - 1, inSection: 0)
+        scrollCollectionView(to: indexPath)
         isFirstAppearance = false
     }
     
-    // MARK: - UICollectionViewDataSource
-    
+    // MARK: - UICollectionViewDataSource    
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photoKitAssetList.count
     }
@@ -77,8 +95,7 @@ class AssetListViewController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier("AssetCell", forIndexPath: indexPath) as? AssetCell,
-            nohanaImagePickerController = nohanaImagePickerController else {
+        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier("AssetCell", forIndexPath: indexPath) as? AssetCell else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetCell\")")
         }
         cell.tag = indexPath.item

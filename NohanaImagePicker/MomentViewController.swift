@@ -26,18 +26,14 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
         guard isFirstAppearance else {
             return
         }
-        guard let collectionView = collectionView else {
-            return
-        }
         let lastSection = momentAlbumList.count - 1
         guard lastSection >= 0 else {
             return
         }
         
-        let index = NSIndexPath(forItem: momentAlbumList[lastSection].count - 1, inSection: lastSection)
-        collectionView.scrollToItemAtIndexPath(index, atScrollPosition: .Bottom, animated: false)
+        let indexPath = NSIndexPath(forItem: momentAlbumList[lastSection].count - 1, inSection: lastSection)
+        scrollCollectionView(to: indexPath)
         isFirstAppearance = false
-        
     }
     
     // MARK: - UICollectionViewDataSource
@@ -57,8 +53,7 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
     // MARK: - UICollectionViewDelegate
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier("AssetCell", forIndexPath: indexPath) as? AssetCell,
-            nohanaImagePickerController = nohanaImagePickerController else {
+        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier("AssetCell", forIndexPath: indexPath) as? AssetCell else {
                 return UICollectionViewCell(frame: CGRectZero)
         }
         

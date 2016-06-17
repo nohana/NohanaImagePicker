@@ -36,8 +36,18 @@ class AssetDetailListViewController: AssetListViewController {
             forState: [.Normal, .Selected])
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        let indexPath = currentIndexPath
+        view.hidden = true
+        coordinator.animateAlongsideTransition(nil) { _ in
+            self.view.invalidateIntrinsicContentSize()
+            for subView in self.view.subviews {
+                subView.invalidateIntrinsicContentSize()
+            }
+            self.collectionView?.reloadData()
+            self.scrollCollectionView(to: indexPath)
+            self.view.hidden = false
+        }
     }
     
     override func updateTitle() {
@@ -51,16 +61,21 @@ class AssetDetailListViewController: AssetListViewController {
         nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, assetDetailListViewController: self, didChangeAssetDetailPage: indexPath, photoKitAsset: asset.originalAsset)
     }
     
+    override func scrollCollectionView(to indexPath: NSIndexPath) {
+        guard photoKitAssetList.count > 0 else {
+            return
+        }
+        let toIndexPath = NSIndexPath(forItem: indexPath.item, inSection: 0)
+        collectionView?.scrollToItemAtIndexPath(toIndexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: false)
+    }
+    
     override func scrollCollectionViewToInitialPosition() {
         guard isFirstAppearance else {
             return
         }
-        isFirstAppearance = false
-        guard photoKitAssetList.count > 0 else {
-            return
-        }
         let indexPath = NSIndexPath(forRow: currentIndexPath.item, inSection: 0)
-        collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: false)
+        scrollCollectionView(to: indexPath)
+        isFirstAppearance = false
     }
     
     // MARK: - IBAction
@@ -81,11 +96,11 @@ class AssetDetailListViewController: AssetListViewController {
     // MARK: - UICollectionViewDelegate
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier("AssetDetailCell", forIndexPath: indexPath) as? AssetDetailCell,
-            nohanaImagePickerController = nohanaImagePickerController
+        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier("AssetDetailCell", forIndexPath: indexPath) as? AssetDetailCell
             else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetDetailCell\")")
         }
+        cell.invalidateIntrinsicContentSize()
         cell.scrollView.zoomScale = 1
         cell.tag = indexPath.item
         
@@ -115,7 +130,13 @@ class AssetDetailListViewController: AssetListViewController {
             return
         }
         let row = Int((collectionView.contentOffset.x + cellSize.width * 0.5) / cellSize.width)
-        currentIndexPath = NSIndexPath(forRow: row, inSection: currentIndexPath.section)
+        if row < 0 {
+            currentIndexPath = NSIndexPath(forRow: 0, inSection: currentIndexPath.section)
+        } else if row >= collectionView.numberOfItemsInSection(0) {
+            currentIndexPath = NSIndexPath(forRow: collectionView.numberOfItemsInSection(0) - 1, inSection: currentIndexPath.section)
+        } else {
+            currentIndexPath = NSIndexPath(forRow: row, inSection: currentIndexPath.section)
+        }
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
