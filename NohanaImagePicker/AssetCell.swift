@@ -14,18 +14,19 @@ class AssetCell: UICollectionViewCell {
     @IBOutlet weak var pickButton: UIButton!
     @IBOutlet weak var overlayView: UIView!
     
-    weak var nohanaImagePickerController: NohanaImagePickerController!
+    weak var nohanaImagePickerController: NohanaImagePickerController?
     var asset: AssetType?
     
     override func willMoveToSuperview(newSuperview: UIView?) {
         super.willMoveToSuperview(newSuperview)
-        
-        pickButton.setImage(
-            UIImage(named: ImageName.AssetCell.PickButton.SizeM.dropped, inBundle: nohanaImagePickerController.assetBundle, compatibleWithTraitCollection: nil),
-            forState: .Normal)
-        pickButton.setImage(
-            UIImage(named: ImageName.AssetCell.PickButton.SizeM.picked, inBundle: nohanaImagePickerController.assetBundle, compatibleWithTraitCollection: nil),
-            forState: [.Normal, .Selected])
+        if let nohanaImagePickerController = nohanaImagePickerController {
+            pickButton.setImage(
+                UIImage(named: ImageName.AssetCell.PickButton.SizeM.dropped, inBundle: nohanaImagePickerController.assetBundle, compatibleWithTraitCollection: nil),
+                forState: .Normal)
+            pickButton.setImage(
+                UIImage(named: ImageName.AssetCell.PickButton.SizeM.picked, inBundle: nohanaImagePickerController.assetBundle, compatibleWithTraitCollection: nil),
+                forState: [.Normal, .Selected])
+        }
     }
     
     @IBAction func didPushPickButton(sender: UIButton) {
@@ -33,11 +34,11 @@ class AssetCell: UICollectionViewCell {
             return
         }
         if pickButton.selected {
-            if nohanaImagePickerController.pickedAssetList.dropAsset(asset) {
+            if nohanaImagePickerController!.pickedAssetList.dropAsset(asset) {
                 pickButton.selected = false
             }
         } else {
-            if nohanaImagePickerController.pickedAssetList.pickAsset(asset) {
+            if nohanaImagePickerController!.pickedAssetList.pickAsset(asset) {
                 pickButton.selected = true
             }
         }

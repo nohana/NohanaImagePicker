@@ -28,12 +28,14 @@ class AssetDetailListViewController: AssetListViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        pickButton.setImage(
-            UIImage(named: ImageName.AssetCell.PickButton.SizeL.dropped, inBundle: nohanaImagePickerController.assetBundle, compatibleWithTraitCollection: nil),
-            forState: .Normal)
-        pickButton.setImage(
-            UIImage(named: ImageName.AssetCell.PickButton.SizeL.picked, inBundle: nohanaImagePickerController.assetBundle, compatibleWithTraitCollection: nil),
-            forState: [.Normal, .Selected])
+        if let nohanaImagePickerController = nohanaImagePickerController {
+            pickButton.setImage(
+                UIImage(named: ImageName.AssetCell.PickButton.SizeL.dropped, inBundle: nohanaImagePickerController.assetBundle, compatibleWithTraitCollection: nil),
+                forState: .Normal)
+            pickButton.setImage(
+                UIImage(named: ImageName.AssetCell.PickButton.SizeL.picked, inBundle: nohanaImagePickerController.assetBundle, compatibleWithTraitCollection: nil),
+                forState: [.Normal, .Selected])
+        }
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
@@ -55,6 +57,9 @@ class AssetDetailListViewController: AssetListViewController {
     }
     
     func didChangeAssetDetailPage(indexPath:NSIndexPath) {
+        guard let nohanaImagePickerController = nohanaImagePickerController else {
+            return
+        }
         let asset = photoKitAssetList[indexPath.item]
         pickButton.selected = nohanaImagePickerController.pickedAssetList.isPicked(asset) ?? false
         pickButton.hidden = !(nohanaImagePickerController.canPickAsset(asset) ?? true)
@@ -83,11 +88,11 @@ class AssetDetailListViewController: AssetListViewController {
     @IBAction func didPushPickButton(sender: UIButton) {
         let asset = photoKitAssetList[currentIndexPath.row]
         if pickButton.selected {
-            if nohanaImagePickerController.pickedAssetList.dropAsset(asset) {
+            if nohanaImagePickerController!.pickedAssetList.dropAsset(asset) {
                 pickButton.selected = false
             }
         } else {
-            if nohanaImagePickerController.pickedAssetList.pickAsset(asset) {
+            if nohanaImagePickerController!.pickedAssetList.pickAsset(asset) {
                 pickButton.selected = true
             }
         }
@@ -96,8 +101,8 @@ class AssetDetailListViewController: AssetListViewController {
     // MARK: - UICollectionViewDelegate
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier("AssetDetailCell", forIndexPath: indexPath) as? AssetDetailCell
-            else {
+        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier("AssetDetailCell", forIndexPath: indexPath) as? AssetDetailCell,
+            nohanaImagePickerController = nohanaImagePickerController else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetDetailCell\")")
         }
         cell.invalidateIntrinsicContentSize()

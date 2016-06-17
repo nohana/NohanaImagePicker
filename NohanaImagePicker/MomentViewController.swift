@@ -19,7 +19,9 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
     }
     
     override func updateTitle() {
-        title = NSLocalizedString("albumlist.moment.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
+        if let nohanaImagePickerController = nohanaImagePickerController {
+            title = NSLocalizedString("albumlist.moment.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
+        }
     }
     
     override func scrollCollectionViewToInitialPosition() {
@@ -53,8 +55,9 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
     // MARK: - UICollectionViewDelegate
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier("AssetCell", forIndexPath: indexPath) as? AssetCell else {
-                return UICollectionViewCell(frame: CGRectZero)
+        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier("AssetCell", forIndexPath: indexPath) as? AssetCell,
+            nohanaImagePickerController = nohanaImagePickerController else {
+                fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetCell\")")
         }
         
         let asset = momentAlbumList[indexPath.section][indexPath.row]
@@ -118,7 +121,9 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
     // MARK: - UICollectionViewDelegate
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: momentAlbumList[indexPath.section][indexPath.row].originalAsset)
+        if let nohanaImagePickerController = nohanaImagePickerController {
+            nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: momentAlbumList[indexPath.section][indexPath.row].originalAsset)
+        }
     }
     
     // MARK: - Storyboard
