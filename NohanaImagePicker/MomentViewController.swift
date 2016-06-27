@@ -127,6 +127,11 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
         return isLoading
     }
     
+    func didProgressComplete() {
+        isFirstAppearance = true
+        scrollCollectionViewToInitialPosition()
+    }
+    
     // MARK: - UICollectionViewDelegate
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
