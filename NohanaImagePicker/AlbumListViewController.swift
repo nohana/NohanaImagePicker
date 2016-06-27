@@ -187,6 +187,7 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
                 shouldShowEmptyAlbum: nohanaImagePickerController!.shouldShowEmptyAlbum,
                 handler: { () -> Void in
                     dispatch_async(dispatch_get_main_queue(), { [weak momentViewController] in
+                        momentViewController?.didProgressComplete()
                         momentViewController?.isLoading = false
                         momentViewController?.collectionView?.reloadData()
                         momentViewController?.scrollCollectionViewToInitialPosition()
