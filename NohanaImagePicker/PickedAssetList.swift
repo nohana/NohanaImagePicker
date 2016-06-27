@@ -1,14 +1,21 @@
-//
-//  PickedAssetList.swift
-//  NohanaImagePicker
-//
-//  Created by kazushi.hara on 2016/02/17.
-//  Copyright © 2016年 nohana. All rights reserved.
-//
+/*
+ * Copyright (C) 2016 nohana, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import Foundation
 
-@available(iOS 8.0, *)
 class PickedAssetList: ItemListType {
     
     var assetlist: Array<AssetType> = []
@@ -55,24 +62,21 @@ class PickedAssetList: ItemListType {
         guard !isPicked(asset) else {
             return false
         }
-        guard let nohanaImagePickerController = nohanaImagePickerController else {
-            return false
-        }
         let assetsCountBeforePicking = self.count
         if asset is PhotoKitAsset {
-            if let canPick = nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, willPickPhotoKitAsset: (asset as! PhotoKitAsset).originalAsset, pickedAssetsCount: assetsCountBeforePicking)
+            if let canPick = nohanaImagePickerController!.delegate?.nohanaImagePicker?(nohanaImagePickerController!, willPickPhotoKitAsset: (asset as! PhotoKitAsset).originalAsset, pickedAssetsCount: assetsCountBeforePicking)
                 where !canPick {
                 return false
             }
         }
-        guard nohanaImagePickerController.maximumNumberOfSelection == 0 || assetsCountBeforePicking < nohanaImagePickerController.maximumNumberOfSelection else {
+        guard nohanaImagePickerController!.maximumNumberOfSelection == 0 || assetsCountBeforePicking < nohanaImagePickerController!.maximumNumberOfSelection else {
             return false
         }
         assetlist.append(asset)
         let assetsCountAfterPicking = self.count
         if asset is PhotoKitAsset {
             let originalAsset = (asset as! PhotoKitAsset).originalAsset
-            nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didPickPhotoKitAsset: originalAsset, pickedAssetsCount: assetsCountAfterPicking)
+            nohanaImagePickerController!.delegate?.nohanaImagePicker?(nohanaImagePickerController!, didPickPhotoKitAsset: originalAsset, pickedAssetsCount: assetsCountAfterPicking)
             NSNotificationCenter.defaultCenter().postNotification(
                 NSNotification(
                     name: NotificationInfo.Asset.PhotoKit.didPick,
@@ -89,12 +93,9 @@ class PickedAssetList: ItemListType {
     }
     
     func dropAsset(asset: AssetType) -> Bool {
-        guard let nohanaImagePickerController = nohanaImagePickerController else {
-            return false
-        }
         let assetsCountBeforeDropping = self.count
         if asset is PhotoKitAsset {
-            if let canDrop = nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, willDropPhotoKitAsset: (asset as! PhotoKitAsset).originalAsset, pickedAssetsCount: assetsCountBeforeDropping) where !canDrop {
+            if let canDrop = nohanaImagePickerController!.delegate?.nohanaImagePicker?(nohanaImagePickerController!, willDropPhotoKitAsset: (asset as! PhotoKitAsset).originalAsset, pickedAssetsCount: assetsCountBeforeDropping) where !canDrop {
                 return false
             }
         }
@@ -102,7 +103,7 @@ class PickedAssetList: ItemListType {
         let assetsCountAfterDropping = self.count
         if asset is PhotoKitAsset {
             let originalAsset = (asset as! PhotoKitAsset).originalAsset
-            nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didDropPhotoKitAsset: originalAsset, pickedAssetsCount: assetsCountAfterDropping)
+            nohanaImagePickerController!.delegate?.nohanaImagePicker?(nohanaImagePickerController!, didDropPhotoKitAsset: originalAsset, pickedAssetsCount: assetsCountAfterDropping)
             NSNotificationCenter.defaultCenter().postNotification(
                 NSNotification(
                     name: NotificationInfo.Asset.PhotoKit.didDrop,

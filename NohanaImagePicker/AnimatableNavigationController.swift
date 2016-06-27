@@ -1,15 +1,22 @@
-//
-//  AnimatableNavigationController.swift
-//  NohanaImagePicker
-//
-//  Created by kazushi.hara on 2016/02/14.
-//  Copyright © 2016年 nohana. All rights reserved.
-//
+/*
+ * Copyright (C) 2016 nohana, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import UIKit
 
-@available(iOS 8.0, *)
-class AnimatableNavigationController: UINavigationController, UINavigationControllerDelegate, UIViewControllerTransitioningDelegate {
+class AnimatableNavigationController: UINavigationController, UINavigationControllerDelegate {
     
     let swipeInteractionController = SwipeInteractionController()
     
@@ -28,14 +35,14 @@ class AnimatableNavigationController: UINavigationController, UINavigationContro
             else {
                 return nil
             }
-            return ExpandingAnimationController(fromCell: fromCell)
-        case .Pop where fromVC is AssetDetailListViewController:
+            return ExpandingAnimationController(fromCell)
+        case .Pop where toVC is AssetListViewController:
             guard let fromVC = fromVC as? AssetDetailListViewController,
-            fromCell = fromVC.collectionView?.cellForItemAtIndexPath(fromVC.currentIndexPath) as? AssetDetailCell
+            fromCell = fromVC.collectionView?.cellForItemAtIndexPath(NSIndexPath(forItem: fromVC.currentIndexPath.item, inSection: 0)) as? AssetDetailCell
             else {
                 return nil
             }
-            return ContractingAnimationController(fromCell: fromCell)
+            return ContractingAnimationController(fromCell)
         default:
             return nil
         }

@@ -1,14 +1,21 @@
-//
-//  ContractingAnimationController.swift
-//  NohanaImagePicker
-//
-//  Created by kazushi.hara on 2016/02/15.
-//  Copyright © 2016年 nohana. All rights reserved.
-//
+/*
+ * Copyright (C) 2016 nohana, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import AVFoundation
 
-@available(iOS 8.0, *)
 extension Size {
     static func contractingAnimationToCellRect(toVC: AssetListViewController, toCell: AssetCell) -> CGRect {
         let origin = CGPoint(x: toCell.frame.origin.x, y: toCell.frame.origin.y - toVC.collectionView!.contentOffset.y)
@@ -24,12 +31,11 @@ extension Size {
     }
 }
 
-@available(iOS 8.0, *)
 class ContractingAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
     
     var fromCell: AssetDetailCell
     
-    init(fromCell: AssetDetailCell) {
+    init(_ fromCell: AssetDetailCell) {
         self.fromCell = fromCell
     }
     
@@ -41,18 +47,17 @@ class ContractingAnimationController: NSObject, UIViewControllerAnimatedTransiti
         guard
             let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) as? AssetDetailListViewController,
             toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as? AssetListViewController,
-            containerView = transitionContext.containerView(),
-            fromCellIndex = fromVC.collectionView?.indexPathForCell(fromCell)
+            containerView = transitionContext.containerView()
             else {
                 return
         }
         
-        var toCellTmp = toVC.collectionView?.cellForItemAtIndexPath(fromCellIndex) as? AssetCell
+        var toCellTmp = toVC.collectionView?.cellForItemAtIndexPath(fromVC.currentIndexPath) as? AssetCell
         if toCellTmp == nil {
             // if toCell is not shown in collection view, scroll collection view to toCell index path.
             toVC.collectionView?.scrollToItemAtIndexPath(fromVC.currentIndexPath, atScrollPosition: .CenteredVertically, animated: false)
             toVC.collectionView?.layoutIfNeeded()
-            toCellTmp = toVC.collectionView?.cellForItemAtIndexPath(fromCellIndex) as? AssetCell
+            toCellTmp = toVC.collectionView?.cellForItemAtIndexPath(fromVC.currentIndexPath) as? AssetCell
         }
         
         guard let toCell = toCellTmp else {
@@ -74,10 +79,10 @@ class ContractingAnimationController: NSObject, UIViewControllerAnimatedTransiti
             transitionDuration(transitionContext),
             delay: 0,
             options: .CurveEaseInOut,
-            animations: { () -> Void in
+            animations: { _ in
                 toVC.view.alpha = 1
                 contractingImageView.frame = Size.contractingAnimationToCellRect(toVC, toCell: toCell)
-            }) { (_) -> Void in
+            }) { _  in
                 self.fromCell.alpha = 1
                 toCell.alpha = 1
                 contractingImageView.removeFromSuperview()
