@@ -47,13 +47,11 @@ class AssetDetailListViewController: AssetListViewController {
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         let indexPath = currentIndexPath
         view.hidden = true
         coordinator.animateAlongsideTransition(nil) { _ in
             self.view.invalidateIntrinsicContentSize()
-            for subView in self.view.subviews {
-                subView.invalidateIntrinsicContentSize()
-            }
             self.collectionView?.reloadData()
             self.scrollCollectionView(to: indexPath)
             self.view.hidden = false
@@ -75,11 +73,13 @@ class AssetDetailListViewController: AssetListViewController {
     }
     
     override func scrollCollectionView(to indexPath: NSIndexPath) {
-        guard photoKitAssetList.count > 0 else {
+        guard photoKitAssetList?.count > 0 else {
             return
         }
-        let toIndexPath = NSIndexPath(forItem: indexPath.item, inSection: 0)
-        collectionView?.scrollToItemAtIndexPath(toIndexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: false)
+        dispatch_async(dispatch_get_main_queue()) {
+            let toIndexPath = NSIndexPath(forItem: indexPath.item, inSection: 0)
+            self.collectionView?.scrollToItemAtIndexPath(toIndexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: false)
+        }
     }
     
     override func scrollCollectionViewToInitialPosition() {
@@ -113,7 +113,6 @@ class AssetDetailListViewController: AssetListViewController {
             nohanaImagePickerController = nohanaImagePickerController else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetDetailCell\")")
         }
-        cell.invalidateIntrinsicContentSize()
         cell.scrollView.zoomScale = 1
         cell.tag = indexPath.item
         

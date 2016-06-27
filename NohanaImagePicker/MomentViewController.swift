@@ -36,14 +36,12 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
         guard isFirstAppearance else {
             return
         }
-        dispatch_async(dispatch_get_main_queue()) {
-            let lastSection = self.momentAlbumList.count - 1
-            guard lastSection >= 0 else {
-                return
-            }
-            let indexPath = NSIndexPath(forItem: self.momentAlbumList[lastSection].count - 1, inSection: lastSection)
-            self.scrollCollectionView(to: indexPath)
+        let lastSection = self.momentAlbumList.count - 1
+        guard lastSection >= 0 else {
+            return
         }
+        let indexPath = NSIndexPath(forItem: momentAlbumList[lastSection].count - 1, inSection: lastSection)
+        scrollCollectionView(to: indexPath)
         isFirstAppearance = false
     }
     
@@ -125,6 +123,11 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
     
     func isProgressing() -> Bool {
         return isLoading
+    }
+    
+    func didProgressComplete() {
+        isFirstAppearance = true
+        scrollCollectionViewToInitialPosition()
     }
     
     // MARK: - UICollectionViewDelegate
