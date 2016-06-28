@@ -26,7 +26,7 @@ struct Size {
     }
     
     static func navigationBarHeight(viewController: UIViewController) -> CGFloat {
-        return viewController.navigationController?.navigationBar.frame.size.height ?? CGFloat(44)
+        return viewController.navigationController?.navigationBar.frame.size.height ?? CGFloat(0)
     }
     
     static func appBarHeight(viewController: UIViewController) -> CGFloat {
