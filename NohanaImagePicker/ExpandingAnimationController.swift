@@ -56,7 +56,7 @@ class ExpandingAnimationController: NSObject, UIViewControllerAnimatedTransition
         containerView.addSubview(toVC.view)
         containerView.addSubview(expandingImageView)
         toVC.view.alpha = 0
-        toVC.collectionView?.hideen = true
+        toVC.collectionView?.hidden = true
         toVC.view.backgroundColor = UIColor.blackColor()
         fromCell.alpha = 0
         
@@ -71,7 +71,7 @@ class ExpandingAnimationController: NSObject, UIViewControllerAnimatedTransition
                 expandingImageView.frame = Size.expandingAnimationToCellRect(fromVC, toSize: expandingImageView.image!.size)
             }) { (_) -> Void in
                 self.fromCell.alpha = 1
-                toVC.collectionView?.hideen = false
+                toVC.collectionView?.hidden = false
                 expandingImageView.removeFromSuperview()
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
         }
