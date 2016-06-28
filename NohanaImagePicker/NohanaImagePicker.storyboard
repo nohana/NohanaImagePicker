@@ -278,10 +278,10 @@
             </objects>
             <point key="canvasLocation" x="1598" y="456"/>
         </scene>
-        <!--Animatable Navigation Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="RR9-zr-Qlw">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tkA-yz-hIq" customClass="AnimatableNavigationController" customModule="NohanaImagePicker" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tkA-yz-hIq" sceneMemberID="viewController">
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
