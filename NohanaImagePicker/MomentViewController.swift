@@ -32,18 +32,25 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
         }
     }
     
+    override func scrollCollectionView(to indexPath: NSIndexPath) {
+        guard momentAlbumList?.count > 0 else {
+            return
+        }
+        dispatch_async(dispatch_get_main_queue()) {
+            self.collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: false)
+        }
+    }
+    
     override func scrollCollectionViewToInitialPosition() {
         guard isFirstAppearance else {
             return
         }
-        dispatch_async(dispatch_get_main_queue()) {
-            let lastSection = self.momentAlbumList.count - 1
-            guard lastSection >= 0 else {
-                return
-            }
-            let indexPath = NSIndexPath(forItem: self.momentAlbumList[lastSection].count - 1, inSection: lastSection)
-            self.scrollCollectionView(to: indexPath)
+        let lastSection = momentAlbumList.count - 1
+        guard lastSection >= 0 else {
+            return
         }
+        let indexPath = NSIndexPath(forItem: momentAlbumList[lastSection].count - 1, inSection: lastSection)
+        scrollCollectionView(to: indexPath)
         isFirstAppearance = false
     }
     
@@ -127,11 +134,6 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
         return isLoading
     }
     
-    func didProgressComplete() {
-        isFirstAppearance = true
-        scrollCollectionViewToInitialPosition()
-    }
-    
     // MARK: - UICollectionViewDelegate
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -146,7 +148,6 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
         guard let selectedIndexPath = collectionView?.indexPathsForSelectedItems()?.first else {
             return
         }
-        
         let assetListDetailViewController = segue.destinationViewController as! AssetDetailListViewController
         assetListDetailViewController.photoKitAssetList = momentAlbumList[selectedIndexPath.section]
         assetListDetailViewController.nohanaImagePickerController = nohanaImagePickerController

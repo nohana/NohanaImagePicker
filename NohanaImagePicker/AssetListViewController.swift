@@ -91,10 +91,8 @@ class AssetListViewController: UICollectionViewController {
         guard isFirstAppearance else {
             return
         }
-        dispatch_async(dispatch_get_main_queue()) { 
-            let indexPath = NSIndexPath(forItem: self.photoKitAssetList.count - 1, inSection: 0)
-            self.scrollCollectionView(to: indexPath)
-        }
+        let indexPath = NSIndexPath(forItem: self.photoKitAssetList.count - 1, inSection: 0)
+        self.scrollCollectionView(to: indexPath)
         isFirstAppearance = false
     }
     
