@@ -1,10 +1,18 @@
-//
-//  NohanaImagePickerController.swift
-//  NohanaImagePicker
-//
-//  Created by kazushi.hara on 2016/02/09.
-//  Copyright © 2016年 nohana. All rights reserved.
-//
+/*
+ * Copyright (C) 2016 nohana, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import UIKit
 import Photos
@@ -13,7 +21,6 @@ public enum MediaType: Int {
     case Any = 0, Photo, Video
 }
 
-@available(iOS 8.0, *)
 @objc public protocol NohanaImagePickerControllerDelegate {
     func nohanaImagePickerDidCancel(picker: NohanaImagePickerController)
     func nohanaImagePicker(picker: NohanaImagePickerController, didFinishPickingPhotoKitAssets pickedAssts :[PHAsset])
@@ -30,7 +37,6 @@ public enum MediaType: Int {
     
 }
 
-@available(iOS 8.0, *)
 public class NohanaImagePickerController: UIViewController {
     
     public var maximumNumberOfSelection: Int = 21 // set 0 to set no limit
@@ -102,10 +108,10 @@ public class NohanaImagePickerController: UIViewController {
                 assetCollectionSubtypes: assetCollectionSubtypes,
                 mediaType: mediaType,
                 shouldShowEmptyAlbum: shouldShowEmptyAlbum,
-                handler: {
+                handler: { [weak albumListViewController] in
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    albumListViewController.isLoading = false
-                    albumListViewController.tableView.reloadData()
+                    albumListViewController?.isLoading = false
+                    albumListViewController?.tableView.reloadData()
                 })
             })
         albumListViewController.nohanaImagePickerController = self

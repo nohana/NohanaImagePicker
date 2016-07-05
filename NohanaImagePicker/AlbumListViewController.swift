@@ -1,25 +1,50 @@
-//
-//  AlbumListViewController.swift
-//  NohanaImagePicker
-//
-//  Created by kazushi.hara on 2016/02/08.
-//  Copyright © 2016年 nohana. All rights reserved.
-//
+/*
+ * Copyright (C) 2016 nohana, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import UIKit
 import Photos
 
-@available(iOS 8.0, *)
 class AlbumListViewController: UITableViewController, EmptyIndicatable, ActivityIndicatable {
+    
+    enum AlbumListViewControllerSectionType: Int {
+        case Moment = 0
+        case Albums
+        
+        static func count() -> Int {
+            var count: Int = 0
+            for i in 0..<Int.max {
+                guard AlbumListViewControllerSectionType(rawValue: i) != nil else {
+                    break
+                }
+                count = count + 1
+            }
+            return count
+        }
+    }
     
     weak var nohanaImagePickerController: NohanaImagePickerController?
     var photoKitAlbumList: PhotoKitAlbumList!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("albumlist.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController!.assetBundle, comment: "")
-        setUpToolbarItems()
-        navigationController?.setToolbarHidden(nohanaImagePickerController?.toolbarHidden ?? false, animated: false)
+        if let nohanaImagePickerController = nohanaImagePickerController {
+            title = NSLocalizedString("albumlist.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
+            setUpToolbarItems()
+            navigationController?.setToolbarHidden(nohanaImagePickerController.toolbarHidden ?? false, animated: false)
+        }
         setUpEmptyIndicator()
         setUpActivityIndicator()
         self.view.backgroundColor = ColorConfig.backgroundColor
@@ -31,36 +56,53 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        setToolbarTitle(nohanaImagePickerController)
+        if let nohanaImagePickerController = nohanaImagePickerController {
+            setToolbarTitle(nohanaImagePickerController)
+        }
         if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
             tableView.deselectRowAtIndexPath(indexPathForSelectedRow, animated: true)
         }
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        tableView.reloadData()
     }
 
     // MARK: - UITableViewDelegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        guard let sectionType = AlbumListViewControllerSectionType(rawValue: indexPath.section) else {
+            fatalError("Invalid section")
+        }
         guard let nohanaImagePickerController = nohanaImagePickerController else {
             return
         }
-        if isMomentRow(indexPath) {
+        switch sectionType {
+        case .Moment:
             nohanaImagePickerController.delegate?.nohanaImagePickerDidSelectMoment?(nohanaImagePickerController)
-        } else {
-            nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAssetList: photoKitAlbumList[exactRow(indexPath)].assetList)
+        case .Albums:
+            nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAssetList: photoKitAlbumList[indexPath.row].assetList)
         }
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        guard let nohanaImagePickerController = nohanaImagePickerController  else {
-            return 0
+        guard let sectionType = AlbumListViewControllerSectionType(rawValue: indexPath.section) else {
+            fatalError("Invalid section")
         }
-        if nohanaImagePickerController.shouldShowMoment && indexPath.row == 0 {
+        switch sectionType {
+        case .Moment:
             return 52
+        case .Albums:
+            return 82
         }
-        return 82
     }
     
     // MARK: - UITableViewDataSource
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return AlbumListViewControllerSectionType.count()
+    }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let emptyIndicator = emptyIndicator {
@@ -70,71 +112,90 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
             updateVisibilityOfActivityIndicator(activityIndicator)
         }
         
-        guard nohanaImagePickerController?.shouldShowMoment ?? false else {
+        guard let sectionType = AlbumListViewControllerSectionType(rawValue: section) else {
+            fatalError("Invalid section")
+        }
+        
+        switch sectionType {
+        case .Moment:
+            if let nohanaImagePickerController = nohanaImagePickerController {
+                return nohanaImagePickerController.shouldShowMoment ? 1 : 0
+            }
+            return 0
+            
+        case .Albums:
             return photoKitAlbumList.count
         }
-        return photoKitAlbumList.count != 0 ? photoKitAlbumList.count + 1 : 0
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        guard !isMomentRow(indexPath) else {
+        guard let sectionType = AlbumListViewControllerSectionType(rawValue: indexPath.section) else {
+            fatalError("Invalid section")
+        }
+        
+        switch sectionType {
+        case .Moment:
             guard let cell = tableView.dequeueReusableCellWithIdentifier("MomentAlbumCell") as? AlbumCell else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"MomentAlbumCell\")")
             }
-            cell.titleLabel?.text = NSLocalizedString("albumlist.moment.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController!.assetBundle, comment: "")
+            if let nohanaImagePickerController = nohanaImagePickerController {
+                cell.titleLabel?.text = NSLocalizedString("albumlist.moment.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
+            }
+            return cell
+        case .Albums:
+            guard let cell = tableView.dequeueReusableCellWithIdentifier("AlbumCell") as? AlbumCell else {
+                fatalError("failed to dequeueReusableCellWithIdentifier(\"AlbumCell\")")
+            }
+            let albumList = photoKitAlbumList[indexPath.row]
+            cell.titleLabel.text = albumList.title
+            cell.tag = indexPath.row
+            let imageSize = CGSize(
+                width: cell.thumbnailImageView.frame.size.width * UIScreen.mainScreen().scale,
+                height: cell.thumbnailImageView.frame.size.width * UIScreen.mainScreen().scale
+            )
+            if let lastAsset = albumList.last {
+                lastAsset.image(imageSize, handler: { (imageData) -> Void in
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        if let imageData = imageData {
+                            if cell.tag == indexPath.row {
+                                cell.thumbnailImageView.image = imageData.image
+                            }
+                        }
+                    })
+                })
+            } else {
+                cell.thumbnailImageView.image = nil
+            }
             return cell
         }
-        
-        guard let cell = tableView.dequeueReusableCellWithIdentifier("AlbumCell") as? AlbumCell else {
-            fatalError("failed to dequeueReusableCellWithIdentifier(\"AlbumCell\")")
-        }
-        let albumList = photoKitAlbumList[exactRow(indexPath)]
-        cell.titleLabel.text = albumList.title
-        cell.tag = exactRow(indexPath)
-        let imageSize = CGSize(
-            width: cell.thumbnailImageView.frame.size.width * UIScreen.mainScreen().scale,
-            height: cell.thumbnailImageView.frame.size.width * UIScreen.mainScreen().scale
-        )
-        if let lastAsset = albumList.last {
-            lastAsset.image(imageSize, handler: { (imageData) -> Void in
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    if let imageData = imageData {
-                        if cell.tag == self.exactRow(indexPath) {
-                            cell.thumbnailImageView.image = imageData.image
-                        }
-                    }
-                })
-            })
-        } else {
-            cell.thumbnailImageView.image = nil
-        }
-        return cell
     }
     
     // MARK: - Storyboard
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        guard let nohanaImagePickerController = nohanaImagePickerController else {
-            return
+        guard let sectionType = AlbumListViewControllerSectionType(rawValue: tableView.indexPathForSelectedRow!.section) else {
+            fatalError("Invalid section")
         }
-        
-        if isMomentRow(tableView.indexPathForSelectedRow!) {
+        switch sectionType {
+        case .Moment:
             let momentViewController = segue.destinationViewController as! MomentViewController
             momentViewController.nohanaImagePickerController = nohanaImagePickerController
             momentViewController.momentAlbumList = PhotoKitAlbumList(
                 assetCollectionTypes: [.Moment],
                 assetCollectionSubtypes: [.Any],
-                mediaType: nohanaImagePickerController.mediaType,
-                shouldShowEmptyAlbum: nohanaImagePickerController.shouldShowEmptyAlbum,
+                mediaType: nohanaImagePickerController!.mediaType,
+                shouldShowEmptyAlbum: nohanaImagePickerController!.shouldShowEmptyAlbum,
                 handler: { () -> Void in
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        momentViewController.isLoading = false
-                        momentViewController.collectionView?.reloadData()
+                    dispatch_async(dispatch_get_main_queue(), { [weak momentViewController] in
+                        momentViewController?.isLoading = false
+                        momentViewController?.collectionView?.reloadData()
+                        momentViewController?.isFirstAppearance = true
+                        momentViewController?.scrollCollectionViewToInitialPosition()
                     })
             })
-        } else {
+        case .Albums:
             let assetListViewController = segue.destinationViewController as! AssetListViewController
-            assetListViewController.photoKitAssetList = photoKitAlbumList[exactRow(tableView.indexPathForSelectedRow!)]
+            assetListViewController.photoKitAssetList = photoKitAlbumList[tableView.indexPathForSelectedRow!.row]
             assetListViewController.nohanaImagePickerController = nohanaImagePickerController
         }
     }
@@ -142,23 +203,9 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
     // MARK: - IBAction
     
     @IBAction func didPushCancel(sender: AnyObject) {
-        guard let nohanaImagePickerController = nohanaImagePickerController else {
-            return
+        if let nohanaImagePickerController = nohanaImagePickerController {
+            nohanaImagePickerController.delegate?.nohanaImagePickerDidCancel(nohanaImagePickerController)
         }
-        nohanaImagePickerController.delegate?.nohanaImagePickerDidCancel(nohanaImagePickerController)
-    }
-    
-    // MARK: - Private
-    
-    private func exactRow(indexPath: NSIndexPath) -> Int {
-        guard nohanaImagePickerController?.shouldShowMoment ?? false else {
-            return indexPath.row
-        }
-        return indexPath.row - 1
-    }
-    
-    private func isMomentRow(indexPath: NSIndexPath) -> Bool {
-        return indexPath.row == 0 && (nohanaImagePickerController?.shouldShowMoment ?? false)
     }
     
     // MARK: - EmptyIndicatable
@@ -167,9 +214,12 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
     
     func setUpEmptyIndicator() {
         let frame = CGRect(origin: CGPoint.zero, size: Size.screenRectWithoutAppBar(self).size)
+        guard let nohanaImagePickerController = nohanaImagePickerController else {
+            return
+        }
         emptyIndicator = AlbumListEmptyIndicator(
-            message: NSLocalizedString("albumlist.empty.message", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController!.assetBundle, comment: ""),
-            description: NSLocalizedString("albumlist.empty.description", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController!.assetBundle, comment: ""),
+            message: NSLocalizedString("albumlist.empty.message", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: ""),
+            description: NSLocalizedString("albumlist.empty.description", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: ""),
             frame: frame)
     }
     
@@ -197,7 +247,6 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
     }
 }
 
-@available(iOS 8.0, *)
 extension UIViewController {
     
     // MARK: - Toolbar
@@ -212,14 +261,11 @@ extension UIViewController {
         self.toolbarItems = [leftSpace, infoButton, rightSpace]
     }
     
-    func setToolbarTitle(nohanaImagePickerController:NohanaImagePickerController?) {
+    func setToolbarTitle(nohanaImagePickerController:NohanaImagePickerController) {
         guard toolbarItems?.count >= 2 else {
             return
         }
-        guard
-            let infoButton = toolbarItems?[1],
-            let nohanaImagePickerController = nohanaImagePickerController
-            else {
+        guard let infoButton = toolbarItems?[1] else {
             return
         }
         if nohanaImagePickerController.maximumNumberOfSelection == 0 {

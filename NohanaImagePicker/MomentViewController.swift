@@ -1,15 +1,22 @@
-//
-//  MomentViewController.swift
-//  NohanaImagePicker
-//
-//  Created by kazushi.hara on 2016/03/08.
-//  Copyright © 2016年 nohana. All rights reserved.
-//
+/*
+ * Copyright (C) 2016 nohana, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import UIKit
 import Photos
 
-@available(iOS 8.0, *)
 class MomentViewController: AssetListViewController, ActivityIndicatable {
     
     var momentAlbumList: PhotoKitAlbumList!
@@ -20,25 +27,31 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
     }
     
     override func updateTitle() {
-        title = NSLocalizedString("albumlist.moment.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController!.assetBundle, comment: "")
+        if let nohanaImagePickerController = nohanaImagePickerController {
+            title = NSLocalizedString("albumlist.moment.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
+        }
+    }
+    
+    override func scrollCollectionView(to indexPath: NSIndexPath) {
+        guard momentAlbumList?.count > 0 else {
+            return
+        }
+        dispatch_async(dispatch_get_main_queue()) {
+            self.collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: false)
+        }
     }
     
     override func scrollCollectionViewToInitialPosition() {
         guard isFirstAppearance else {
             return
         }
-        guard let collectionView = collectionView else {
-            return
-        }
         let lastSection = momentAlbumList.count - 1
         guard lastSection >= 0 else {
             return
         }
-        
-        let index = NSIndexPath(forItem: momentAlbumList[lastSection].count - 1, inSection: lastSection)
-        collectionView.scrollToItemAtIndexPath(index, atScrollPosition: .Bottom, animated: false)
+        let indexPath = NSIndexPath(forItem: momentAlbumList[lastSection].count - 1, inSection: lastSection)
+        scrollCollectionView(to: indexPath)
         isFirstAppearance = false
-        
     }
     
     // MARK: - UICollectionViewDataSource
@@ -60,7 +73,7 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier("AssetCell", forIndexPath: indexPath) as? AssetCell,
             nohanaImagePickerController = nohanaImagePickerController else {
-                return UICollectionViewCell(frame: CGRectZero)
+                fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetCell\")")
         }
         
         let asset = momentAlbumList[indexPath.section][indexPath.row]
@@ -121,17 +134,24 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
         return isLoading
     }
     
+    // MARK: - UICollectionViewDelegate
+    
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if let nohanaImagePickerController = nohanaImagePickerController {
+            nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: momentAlbumList[indexPath.section][indexPath.row].originalAsset)
+        }
+    }
+    
     // MARK: - Storyboard
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         guard let selectedIndexPath = collectionView?.indexPathsForSelectedItems()?.first else {
             return
         }
-        
         let assetListDetailViewController = segue.destinationViewController as! AssetDetailListViewController
         assetListDetailViewController.photoKitAssetList = momentAlbumList[selectedIndexPath.section]
         assetListDetailViewController.nohanaImagePickerController = nohanaImagePickerController
-        assetListDetailViewController.selectedIndexPath = NSIndexPath(forItem: selectedIndexPath.item, inSection: 0)
+        assetListDetailViewController.currentIndexPath = selectedIndexPath
     }
     
     // MARK: - IBAction
