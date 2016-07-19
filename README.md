@@ -1,4 +1,5 @@
-# NohanaImagePicker
+<img src="./Images/logo.png" width="480" height="280" />
+
 
 Multiple image picker for iOS app.
 
