@@ -1,5 +1,4 @@
-<img src="./Images/logo.png" width="480" height="280" />
-
+<p align="center"><img src="./Images/logo.png" width="480" height="280" /></p>
 
 Multiple image picker for iOS app.
 
