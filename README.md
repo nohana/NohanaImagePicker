@@ -4,6 +4,15 @@ Multiple image picker for iOS app.
 
 ## Demo
 
+### Select photos from multiple album
+
+<img src="./Images/collection.gif" width="216" />
+
+
+### Select photos from the moment
+
+<img src="./Images/moment.png" width="216" />
+
 ## Usage
 
 ```
@@ -93,7 +102,7 @@ Use [CocoaPods](https://cocoapods.org/).
 This library is licensed under Apache License v2.
 
 ```
-Copyright (C) 2014 nohana, Inc. All rights reserved.
+Copyright (C) 2016 nohana, Inc. All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
