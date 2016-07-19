@@ -1,17 +1,12 @@
 <p align="center"><img src="./Images/logo.png" width="480" height="280" /></p>
 
-Multiple image picker for iOS app.
+## Description
 
-## Demo
+### Multiple image picker for iOS app.
 
-### Select photos from multiple album
+NohanaImagePicker enables your app to pick images from multiple album, and the moment.
 
-<img src="./Images/collection.gif" width="216" />
-
-
-### Select photos from the moment
-
-<img src="./Images/moment.png" width="216" />
+<img src="./Images/collection.gif" width="216" /> <img src="./Images/moment.png" width="216" />
 
 ## Usage
 
