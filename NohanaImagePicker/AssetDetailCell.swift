@@ -27,7 +27,7 @@ class AssetDetailCell: UICollectionViewCell, UIScrollViewDelegate {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        doubleTapGestureRecognizer.addTarget(self, action: "didDoubleTap:")
+        doubleTapGestureRecognizer.addTarget(self, action: #selector(AssetDetailCell.didDoubleTap(_:)))
         doubleTapGestureRecognizer.numberOfTapsRequired = 2
     }
     
@@ -39,7 +39,7 @@ class AssetDetailCell: UICollectionViewCell, UIScrollViewDelegate {
     
     deinit {
         scrollView.removeGestureRecognizer(doubleTapGestureRecognizer)
-        doubleTapGestureRecognizer.removeTarget(self, action: "didDoubleTap:")
+        doubleTapGestureRecognizer.removeTarget(self, action: #selector(AssetDetailCell.didDoubleTap(_:)))
     }
     
     // MARK: - UIScrollViewDelegate
