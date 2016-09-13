@@ -13,19 +13,19 @@ NohanaImagePicker enables your app to pick images from multiple album, and the m
 ```
 import NohanaImagePicker
 class ViewController: UIViewController, NohanaImagePickerControllerDelegate {
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         let picker = NohanaImagePickerController()
         picker.delegate = self
         presentViewController(picker, animated: true, completion: nil)
     }
-    
+
     func nohanaImagePickerDidCancel(picker: NohanaImagePickerController) {
         print("🐷Canceled🙅")
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
-    
+
     func nohanaImagePicker(picker: NohanaImagePickerController, didFinishPickingPhotoKitAssets pickedAssts :[PHAsset]) {
         print("🐷Completed🙆\n\tpickedAssets = \(pickedAssts)")
         picker.dismissViewControllerAnimated(true, completion: nil)
@@ -75,7 +75,7 @@ ColorConfig.backgroundColor = UIColor.redColor()
 
 Use [Carthage](https://github.com/Carthage/Carthage).
 
-- Add `github "nohana/NohanaImagePicker" ~> 0.4` to your Cartfile.
+- Add `github "nohana/NohanaImagePicker"` to your Cartfile.
 - Run `carthage update`.
 
 ### Framework with CocoaPods
@@ -86,7 +86,7 @@ Use [CocoaPods](https://cocoapods.org/).
 
     ```ruby
     use_frameworks!
-    pod "NohanaImagePicker", "~> 0.4"
+    pod "NohanaImagePicker"
     ```
 
 - Run `pod install`.
