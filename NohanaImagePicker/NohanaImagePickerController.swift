@@ -49,7 +49,13 @@ public class NohanaImagePickerController: UIViewController {
     public var canPickAsset = { (asset:AssetType) -> Bool in
         return true
     }
-    lazy var assetBundle:NSBundle = NSBundle(forClass: self.dynamicType)
+    lazy var assetBundle:NSBundle = {
+        let bundle = NSBundle(forClass: self.dynamicType)
+        if let path = bundle.pathForResource("NohanaImagePicker", ofType: "bundle") {
+            return NSBundle(path: path)!
+        }
+        return bundle
+    }()
     let pickedAssetList: PickedAssetList
     let mediaType: MediaType
     let enableExpandingPhotoAnimation: Bool
