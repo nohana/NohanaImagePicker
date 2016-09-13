@@ -15,7 +15,7 @@
  */
 
 public protocol ItemListType: CollectionType {
-    typealias Item
+    associatedtype Item
     var title:String { get }
     func update(handler:(() -> Void)?)
     subscript (index: Int) -> Item { get }

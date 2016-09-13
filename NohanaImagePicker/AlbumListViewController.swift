@@ -283,8 +283,8 @@ extension UIViewController {
     // MARK: - Notification
     
     func addPickPhotoKitAssetNotificationObservers() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didPickPhotoKitAsset:", name: NotificationInfo.Asset.PhotoKit.didPick, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didDropPhotoKitAsset:", name: NotificationInfo.Asset.PhotoKit.didDrop, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AlbumListViewController.didPickPhotoKitAsset(_:)), name: NotificationInfo.Asset.PhotoKit.didPick, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AlbumListViewController.didDropPhotoKitAsset(_:)), name: NotificationInfo.Asset.PhotoKit.didDrop, object: nil)
     }
     
     func didPickPhotoKitAsset(notification: NSNotification) {
