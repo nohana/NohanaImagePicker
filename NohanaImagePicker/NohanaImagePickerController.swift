@@ -52,6 +52,7 @@ public class NohanaImagePickerController: UIViewController {
     lazy var assetBundle:NSBundle = NSBundle(forClass: self.dynamicType)
     let pickedAssetList: PickedAssetList
     let mediaType: MediaType
+    let enableExpandingPhotoAnimation: Bool
     private let assetCollectionSubtypes: [PHAssetCollectionSubtype]
     
     public init() {
@@ -70,13 +71,15 @@ public class NohanaImagePickerController: UIViewController {
         ]
         mediaType = .Photo
         pickedAssetList = PickedAssetList()
+        enableExpandingPhotoAnimation = true
         super.init(nibName: nil, bundle: nil)
         self.pickedAssetList.nohanaImagePickerController = self
     }
     
-    public init(assetCollectionSubtypes: [PHAssetCollectionSubtype], mediaType: MediaType) {
+    public init(assetCollectionSubtypes: [PHAssetCollectionSubtype], mediaType: MediaType, enableExpandingPhotoAnimation: Bool) {
         self.assetCollectionSubtypes = assetCollectionSubtypes
         self.mediaType = mediaType
+        self.enableExpandingPhotoAnimation = enableExpandingPhotoAnimation
         pickedAssetList = PickedAssetList()
         super.init(nibName: nil, bundle: nil)
         self.pickedAssetList.nohanaImagePickerController = self
@@ -91,7 +94,8 @@ public class NohanaImagePickerController: UIViewController {
         
         // show albumListViewController
         let storyboard = UIStoryboard(name: "NohanaImagePicker", bundle: assetBundle)
-        guard let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController else {
+        let viewControllerId = enableExpandingPhotoAnimation ? "EnableAnimationNavigationController" : "DisableAnimationNavigationController"
+        guard let navigationController = storyboard.instantiateViewControllerWithIdentifier(viewControllerId) as? UINavigationController else {
             fatalError("navigationController init failed.")
         }
         addChildViewController(navigationController)

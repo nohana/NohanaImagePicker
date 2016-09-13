@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tkA-yz-hIq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -281,7 +281,7 @@
         <!--Navigation Controller-->
         <scene sceneID="RR9-zr-Qlw">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tkA-yz-hIq" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="DisableAnimationNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="tkA-yz-hIq" sceneMemberID="viewController">
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
@@ -296,7 +296,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3iI-ph-cZF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="297" y="449"/>
+            <point key="canvasLocation" x="259" y="219"/>
+        </scene>
+        <!--Animatable Navigation Controller-->
+        <scene sceneID="Zpb-f1-dmj">
+            <objects>
+                <navigationController storyboardIdentifier="EnableAnimationNavigationController" id="Htb-sV-6b9" customClass="AnimatableNavigationController" customModule="NohanaImagePicker" customModuleProvider="target" sceneMemberID="viewController">
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="BOZ-Zf-lAN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="KD8-91-yw0" kind="relationship" relationship="rootViewController" id="tQI-o9-h2w"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sfb-mw-QnO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="259" y="882"/>
         </scene>
         <!--Moment View Controller-->
         <scene sceneID="kJ6-NP-kmc">
@@ -437,6 +455,7 @@
         <image name="btn_select_m" width="44" height="44"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="tQI-o9-h2w"/>
         <segue reference="Bed-w3-B1Q"/>
     </inferredMetricsTieBreakers>
 </document>
