@@ -24,17 +24,13 @@ public class PhotoKitAsset :AssetType {
     }
     
     public var originalAsset: PHAsset {
-        get {
-            return asset as PHAsset
-        }
+        return asset as PHAsset
     }
     
     // MARK: - AssetType
     
     public var identifier:Int {
-        get {
-            return asset.localIdentifier.hash
-        }
+        return asset.localIdentifier.hash
     }
     
     public func image(targetSize:CGSize, handler: @escaping (ImageData?) -> Void) {

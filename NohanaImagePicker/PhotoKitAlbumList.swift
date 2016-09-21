@@ -42,9 +42,7 @@ public class PhotoKitAlbumList: ItemListType {
     public typealias Item = PhotoKitAssetList
     
     open var title:String {
-        get {
-            return "PhotoKit"
-        }
+        return "PhotoKit"
     }
     
     open func update(_ handler:(() -> Void)?) {
@@ -79,23 +77,17 @@ public class PhotoKitAlbumList: ItemListType {
     }
     
     open subscript (index: Int) -> Item {
-        get {
-            return albumList[index] as Item
-        }
+        return albumList[index] as Item
     }
     
     // MARK: - CollectionType
     
     open var startIndex: Int {
-        get {
-            return albumList.startIndex
-        }
+        return albumList.startIndex
     }
     
     open var endIndex: Int {
-        get {
-            return albumList.endIndex
-        }
+        return albumList.endIndex
     }
     
 }

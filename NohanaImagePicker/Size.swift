@@ -17,12 +17,10 @@
 struct Size {
     
     static var statusBarHeight: CGFloat {
-        get {
-            if UIApplication.shared.isStatusBarHidden {
-                return 0
-            }
-            return UIApplication.shared.statusBarFrame.size.height
+        if UIApplication.shared.isStatusBarHidden {
+            return 0
         }
+        return UIApplication.shared.statusBarFrame.size.height
     }
     
     static func navigationBarHeight(_ viewController: UIViewController) -> CGFloat {

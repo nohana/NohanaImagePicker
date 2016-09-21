@@ -31,18 +31,16 @@ class AssetListViewController: UICollectionViewController {
     }
     
     var cellSize: CGSize {
-        get {
-            guard let nohanaImagePickerController = nohanaImagePickerController else {
-                return CGSize.zero
-            }
-            var numberOfColumns = nohanaImagePickerController.numberOfColumnsInLandscape
-            if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
-                numberOfColumns = nohanaImagePickerController.numberOfColumnsInPortrait
-            }
-            let cellMargin:CGFloat = 2
-            let cellWidth = (view.frame.width - cellMargin * (CGFloat(numberOfColumns) - 1)) / CGFloat(numberOfColumns)
-            return CGSize(width: cellWidth, height: cellWidth)
+        guard let nohanaImagePickerController = nohanaImagePickerController else {
+            return CGSize.zero
         }
+        var numberOfColumns = nohanaImagePickerController.numberOfColumnsInLandscape
+        if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
+            numberOfColumns = nohanaImagePickerController.numberOfColumnsInPortrait
+        }
+        let cellMargin:CGFloat = 2
+        let cellWidth = (view.frame.width - cellMargin * (CGFloat(numberOfColumns) - 1)) / CGFloat(numberOfColumns)
+        return CGSize(width: cellWidth, height: cellWidth)
     }
     
     deinit {

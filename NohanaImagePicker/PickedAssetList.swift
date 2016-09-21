@@ -26,34 +26,25 @@ class PickedAssetList: ItemListType {
     typealias Item = AssetType
     
     var title: String {
-        get {
-            return "Selected Assets"
-        }
+        return "Selected Assets"
     }
     
     func update(_ handler:(() -> Void)?) {
         fatalError("not supported")
     }
     
-    
     subscript (index: Int) -> Item {
-        get {
-            return assetlist[index]
-        }
+        return assetlist[index]
     }
     
     // MARK: - CollectionType
     
     var startIndex: Int {
-        get {
-            return 0
-        }
+        return 0
     }
     
     var endIndex: Int {
-        get {
-            return assetlist.count
-        }
+        return assetlist.count
     }
     
     // MARK: - Manage assetlist

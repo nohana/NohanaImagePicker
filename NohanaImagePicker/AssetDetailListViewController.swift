@@ -29,9 +29,7 @@ class AssetDetailListViewController: AssetListViewController {
     @IBOutlet weak var pickButton: UIButton!
     
     override var cellSize: CGSize {
-        get {
-            return Size.screenRectWithoutAppBar(self).size
-        }
+        return Size.screenRectWithoutAppBar(self).size
     }
     
     override func viewDidLoad() {

@@ -33,15 +33,11 @@ open class PhotoKitAssetList :ItemListType {
     public typealias Item = PhotoKitAsset
     
     open var title: String {
-        get{
-            return assetList.localizedTitle ?? ""
-        }
+        return assetList.localizedTitle ?? ""
     }
     
     open var date: Date? {
-        get {
-            return assetList.startDate
-        }
+        return assetList.startDate
     }
     
     class func fetchOptions(_ mediaType: MediaType) -> PHFetchOptions {
@@ -69,14 +65,10 @@ open class PhotoKitAssetList :ItemListType {
     // MARK: - CollectionType
     
     open var startIndex: Int {
-        get {
-            return 0
-        }
+        return 0
     }
     
     open var endIndex: Int {
-        get {
-            return fetchResult.count
-        }
+        return fetchResult.count
     }
 }
