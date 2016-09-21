@@ -97,11 +97,11 @@ class AssetDetailListViewController: AssetListViewController {
     @IBAction func didPushPickButton(_ sender: UIButton) {
         let asset = photoKitAssetList[(currentIndexPath as NSIndexPath).row]
         if pickButton.isSelected {
-            if nohanaImagePickerController!.pickedAssetList.dropAsset(asset) {
+            if nohanaImagePickerController!.pickedAssetList.drop(asset: asset) {
                 pickButton.isSelected = false
             }
         } else {
-            if nohanaImagePickerController!.pickedAssetList.pickAsset(asset) {
+            if nohanaImagePickerController!.pickedAssetList.pick(asset: asset) {
                 pickButton.isSelected = true
             }
         }

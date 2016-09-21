@@ -58,7 +58,7 @@ class PickedAssetList: ItemListType {
     
     // MARK: - Manage assetlist
     
-    func pickAsset(_ asset: AssetType) -> Bool {
+    func pick(asset: AssetType) -> Bool {
         guard !isPicked(asset) else {
             return false
         }
@@ -92,7 +92,7 @@ class PickedAssetList: ItemListType {
         
     }
     
-    func dropAsset(_ asset: AssetType) -> Bool {
+    func drop(asset: AssetType) -> Bool {
         let assetsCountBeforeDropping = self.count
         if asset is PhotoKitAsset {
             if let canDrop = nohanaImagePickerController!.delegate?.nohanaImagePicker?(nohanaImagePickerController!, willDropPhotoKitAsset: (asset as! PhotoKitAsset).originalAsset, pickedAssetsCount: assetsCountBeforeDropping) , !canDrop {

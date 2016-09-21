@@ -128,11 +128,11 @@ open class NohanaImagePickerController: UIViewController {
     }
     
     open func pickAsset(_ asset: AssetType) {
-        _ = pickedAssetList.pickAsset(asset)
+        _ = pickedAssetList.pick(asset: asset)
     }
     
     open func dropAsset(_ asset: AssetType) {
-        _ = pickedAssetList.dropAsset(asset)
+        _ = pickedAssetList.drop(asset: asset)
     }
 }
 
