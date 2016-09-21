@@ -41,36 +41,36 @@ public class PhotoKitAlbumList: ItemListType {
     
     public typealias Item = PhotoKitAssetList
     
-    public var title:String {
+    open var title:String {
         get {
             return "PhotoKit"
         }
     }
     
-    public func update(handler:(() -> Void)?) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
-            var albumListFetchResult: [PHFetchResult] = []
+    open func update(_ handler:(() -> Void)?) {
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async { () -> Void in
+            var albumListFetchResult: [PHFetchResult] = []       as! [PHFetchResult]
             for type in self.assetCollectionTypes {
-                albumListFetchResult = albumListFetchResult + [PHAssetCollection.fetchAssetCollectionsWithType(type, subtype: .Any, options: nil)]
+                albumListFetchResult = albumListFetchResult + [PHAssetCollection.fetchAssetCollections(with: type, subtype: .any, options: nil)]
             }
             
             self.albumList = []
             var tmpAlbumList:[Item] = []
-            let isAssetCollectionSubtypeAny = self.assetCollectionSubtypes.contains(.Any)
+            let isAssetCollectionSubtypeAny = self.assetCollectionSubtypes.contains(.any)
             for fetchResult in albumListFetchResult {
-                fetchResult.enumerateObjectsUsingBlock { (album, index, stop) -> Void in
+                fetchResult.enumerateObjects { (album, index, stop) -> Void in
                     guard let album = album as? PHAssetCollection else {
                         return
                     }
                     if self.assetCollectionSubtypes.contains(album.assetCollectionSubtype) || isAssetCollectionSubtypeAny {
-                        if self.shouldShowEmptyAlbum || PHAsset.fetchAssetsInAssetCollection(album, options: PhotoKitAssetList.fetchOptions(self.mediaType)).count != 0 {
+                        if self.shouldShowEmptyAlbum || PHAsset.fetchAssets(in: album, options: PhotoKitAssetList.fetchOptions(self.mediaType)).count != 0 {
                             tmpAlbumList.append(PhotoKitAssetList(album: album, mediaType: self.mediaType))
                         }
                     }
                 }
             }
-            if self.assetCollectionTypes == [.Moment] {
-                self.albumList =  tmpAlbumList.sort{ $0.date?.timeIntervalSince1970 < $1.date?.timeIntervalSince1970 }
+            if self.assetCollectionTypes == [.moment] {
+                self.albumList =  tmpAlbumList.sorted{ $0.date?.timeIntervalSince1970 < $1.date?.timeIntervalSince1970 }
             } else {
                 self.albumList =  tmpAlbumList
             }
@@ -81,7 +81,7 @@ public class PhotoKitAlbumList: ItemListType {
         }
     }
     
-    public subscript (index: Int) -> Item {
+    open subscript (index: Int) -> Item {
         get {
             return albumList[index] as Item
         }
@@ -89,13 +89,13 @@ public class PhotoKitAlbumList: ItemListType {
     
     // MARK: - CollectionType
     
-    public var startIndex: Int {
+    open var startIndex: Int {
         get {
             return albumList.startIndex
         }
     }
     
-    public var endIndex: Int {
+    open var endIndex: Int {
         get {
             return albumList.endIndex
         }

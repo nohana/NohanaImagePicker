@@ -16,11 +16,11 @@
 
 import Photos
 
-public class PhotoKitAssetList :ItemListType {
+open class PhotoKitAssetList :ItemListType {
     
-    private let mediaType: MediaType
-    public let assetList: PHAssetCollection
-    private var fetchResult: PHFetchResult!
+    fileprivate let mediaType: MediaType
+    open let assetList: PHAssetCollection
+    fileprivate var fetchResult: PHFetchResult<AnyObject>!
     
     init(album: PHAssetCollection, mediaType: MediaType) {
         self.assetList = album
@@ -32,37 +32,37 @@ public class PhotoKitAssetList :ItemListType {
     
     public typealias Item = PhotoKitAsset
     
-    public var title: String {
+    open var title: String {
         get{
             return assetList.localizedTitle ?? ""
         }
     }
     
-    public var date: NSDate? {
+    open var date: Date? {
         get {
             return assetList.startDate
         }
     }
     
-    class func fetchOptions(mediaType: MediaType) -> PHFetchOptions {
+    class func fetchOptions(_ mediaType: MediaType) -> PHFetchOptions {
         let options = PHFetchOptions()
         switch mediaType {
-        case .Photo:
-            options.predicate = NSPredicate(format: "mediaType == %ld", PHAssetMediaType.Image.rawValue)
+        case .photo:
+            options.predicate = NSPredicate(format: "mediaType == %ld", PHAssetMediaType.image.rawValue)
         default:
             fatalError("not supported .Video and .Any yet")
         }
         return options
     }
     
-    public func update(handler: (() -> Void)? = nil) {
-        fetchResult = PHAsset.fetchAssetsInAssetCollection(assetList, options: PhotoKitAssetList.fetchOptions(mediaType))
+    open func update(_ handler: (() -> Void)? = nil) {
+        fetchResult = PHAsset.fetchAssets(in: assetList, options: PhotoKitAssetList.fetchOptions(mediaType))
         if let handler = handler {
             handler()
         }
     }
     
-    public subscript (index: Int) -> Item {
+    open subscript (index: Int) -> Item {
         get {
             guard let asset = fetchResult[index] as? PHAsset else {
                 fatalError("invalid index")
@@ -73,13 +73,13 @@ public class PhotoKitAssetList :ItemListType {
     
     // MARK: - CollectionType
     
-    public var startIndex: Int {
+    open var startIndex: Int {
         get {
             return 0
         }
     }
     
-    public var endIndex: Int {
+    open var endIndex: Int {
         get {
             return fetchResult.count
         }

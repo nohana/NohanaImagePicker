@@ -20,13 +20,13 @@ class SwipeInteractionController: UIPercentDrivenInteractiveTransition {
     
     var viewController: UIViewController?
     
-    func attachToViewController(viewController: UIViewController) {
+    func attachToViewController(_ viewController: UIViewController) {
         guard viewController.navigationController?.viewControllers.count > 1 else {
             return
         }
-        let target = viewController.navigationController?.valueForKey("_cachedInteractionController")
+        let target = viewController.navigationController?.value(forKey: "_cachedInteractionController")
         let gesture = UIScreenEdgePanGestureRecognizer(target: target, action: Selector("handleNavigationTransition:"))
-        gesture.edges = .Left
+        gesture.edges = .left
         viewController.view.addGestureRecognizer(gesture)
     }
 }

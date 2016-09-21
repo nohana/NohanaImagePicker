@@ -32,12 +32,12 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
         }
     }
     
-    override func scrollCollectionView(to indexPath: NSIndexPath) {
+    override func scrollCollectionView(to indexPath: IndexPath) {
         guard momentAlbumList?.count > 0 else {
             return
         }
-        dispatch_async(dispatch_get_main_queue()) {
-            self.collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: false)
+        DispatchQueue.main.async {
+            self.collectionView?.scrollToItem(at: indexPath, at: .bottom, animated: false)
         }
     }
     
@@ -49,14 +49,14 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
         guard lastSection >= 0 else {
             return
         }
-        let indexPath = NSIndexPath(forItem: momentAlbumList[lastSection].count - 1, inSection: lastSection)
+        let indexPath = IndexPath(item: momentAlbumList[lastSection].count - 1, section: lastSection)
         scrollCollectionView(to: indexPath)
         isFirstAppearance = false
     }
     
     // MARK: - UICollectionViewDataSource
     
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         if let activityIndicator = activityIndicator {
             updateVisibilityOfActivityIndicator(activityIndicator)
         }
@@ -64,15 +64,15 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
         return momentAlbumList.count
     }
     
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return momentAlbumList[section].count
     }
     
     // MARK: - UICollectionViewDelegate
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier("AssetCell", forIndexPath: indexPath) as? AssetCell,
-            nohanaImagePickerController = nohanaImagePickerController else {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssetCell", for: indexPath) as? AssetCell,
+            let nohanaImagePickerController = nohanaImagePickerController else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetCell\")")
         }
         
@@ -81,11 +81,11 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
         cell.update(asset, nohanaImagePickerController: nohanaImagePickerController)
 
         let imageSize = CGSize(
-            width: cellSize.width * UIScreen.mainScreen().scale,
-            height: cellSize.height * UIScreen.mainScreen().scale
+            width: cellSize.width * UIScreen.main.scale,
+            height: cellSize.height * UIScreen.main.scale
         )
         asset.image(imageSize) { (imageData) -> Void in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 if let imageData = imageData {
                     if cell.tag == indexPath.item {
                         cell.imageView.image = imageData.image
@@ -96,19 +96,19 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
         return (nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, assetListViewController: self, cell: cell, indexPath: indexPath, photoKitAsset: asset.originalAsset)) ?? cell
     }
     
-    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionElementKindSectionHeader:
             let album = momentAlbumList[indexPath.section]
-            guard let header = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "MomentHeader", forIndexPath: indexPath) as? MomentSectionHeaderView else {
+            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "MomentHeader", for: indexPath) as? MomentSectionHeaderView else {
                 fatalError("failed to create MomentHeader")
             }
             header.locationLabel.text = album.title
             if let date =  album.date {
-                let formatter = NSDateFormatter()
-                formatter.dateStyle = .LongStyle
-                formatter.timeStyle = NSDateFormatterStyle.NoStyle
-                header.dateLabel.text = formatter.stringFromDate(date)
+                let formatter = DateFormatter()
+                formatter.dateStyle = .long
+                formatter.timeStyle = DateFormatter.Style.none
+                header.dateLabel.text = formatter.string(from: date as Date)
             } else  {
                 header.dateLabel.text = ""
             }
@@ -124,7 +124,7 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
     var isLoading = true
     
     func setUpActivityIndicator() {
-        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         let screenRect = Size.screenRectWithoutAppBar(self)
         activityIndicator?.center = CGPoint(x: screenRect.size.width / 2, y: screenRect.size.height / 2)
         activityIndicator?.startAnimating()
@@ -136,7 +136,7 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
     
     // MARK: - UICollectionViewDelegate
     
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let nohanaImagePickerController = nohanaImagePickerController {
             nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: momentAlbumList[indexPath.section][indexPath.row].originalAsset)
         }
@@ -144,11 +144,11 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
     
     // MARK: - Storyboard
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        guard let selectedIndexPath = collectionView?.indexPathsForSelectedItems()?.first else {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let selectedIndexPath = collectionView?.indexPathsForSelectedItems?.first else {
             return
         }
-        let assetListDetailViewController = segue.destinationViewController as! AssetDetailListViewController
+        let assetListDetailViewController = segue.destination as! AssetDetailListViewController
         assetListDetailViewController.photoKitAssetList = momentAlbumList[selectedIndexPath.section]
         assetListDetailViewController.nohanaImagePickerController = nohanaImagePickerController
         assetListDetailViewController.currentIndexPath = selectedIndexPath
@@ -156,7 +156,7 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
     
     // MARK: - IBAction
     
-    @IBAction override func didPushDone(sender: AnyObject) {
+    @IBAction override func didPushDone(_ sender: AnyObject) {
         super.didPushDone(sender)
     }
     
