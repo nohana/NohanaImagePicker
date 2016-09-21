@@ -55,8 +55,8 @@ class AssetCell: UICollectionViewCell {
     func update(asset: AssetType, nohanaImagePickerController: NohanaImagePickerController) {
         self.asset = asset
         self.nohanaImagePickerController = nohanaImagePickerController
-        self.pickButton.isSelected = nohanaImagePickerController.pickedAssetList.isPicked(asset) ?? false
+        self.pickButton.isSelected = nohanaImagePickerController.pickedAssetList.isPicked(asset) 
         self.overlayView.isHidden = !pickButton.isSelected
-        self.pickButton.isHidden = !(nohanaImagePickerController.canPickAsset(asset) ?? true)
+        self.pickButton.isHidden = !(nohanaImagePickerController.canPickAsset(asset) )
     }
 }

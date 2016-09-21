@@ -21,9 +21,15 @@ public protocol ItemListType: Collection {
     subscript (index: Int) -> Item { get }
 }
 
+extension ItemListType {
+    public func index(after i: Int) -> Int {
+        return i + 1
+    }
+}
+
 public protocol AssetType {
     var identifier:Int { get }
-    func image(targetSize:CGSize, handler: (ImageData?) -> Void)
+    func image(targetSize:CGSize, handler: @escaping (ImageData?) -> Void)
 }
 
 public struct ImageData {

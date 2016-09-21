@@ -20,7 +20,7 @@ open class PhotoKitAssetList :ItemListType {
     
     fileprivate let mediaType: MediaType
     open let assetList: PHAssetCollection
-    fileprivate var fetchResult: PHFetchResult<AnyObject>!
+    fileprivate var fetchResult: PHFetchResult<PHAsset>!
     
     init(album: PHAssetCollection, mediaType: MediaType) {
         self.assetList = album
@@ -63,12 +63,7 @@ open class PhotoKitAssetList :ItemListType {
     }
     
     open subscript (index: Int) -> Item {
-        get {
-            guard let asset = fetchResult[index] as? PHAsset else {
-                fatalError("invalid index")
-            }
-            return Item(asset: asset)
-        }
+        return Item(asset: fetchResult.object(at: index))
     }
     
     // MARK: - CollectionType

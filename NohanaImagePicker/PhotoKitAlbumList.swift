@@ -48,8 +48,8 @@ public class PhotoKitAlbumList: ItemListType {
     }
     
     open func update(_ handler:(() -> Void)?) {
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async { () -> Void in
-            var albumListFetchResult: [PHFetchResult] = []       as! [PHFetchResult]
+        DispatchQueue.global(qos: .default).async {
+            var albumListFetchResult: [PHFetchResult<PHAssetCollection>] = []
             for type in self.assetCollectionTypes {
                 albumListFetchResult = albumListFetchResult + [PHAssetCollection.fetchAssetCollections(with: type, subtype: .any, options: nil)]
             }
@@ -58,19 +58,16 @@ public class PhotoKitAlbumList: ItemListType {
             var tmpAlbumList:[Item] = []
             let isAssetCollectionSubtypeAny = self.assetCollectionSubtypes.contains(.any)
             for fetchResult in albumListFetchResult {
-                fetchResult.enumerateObjects { (album, index, stop) -> Void in
-                    guard let album = album as? PHAssetCollection else {
-                        return
-                    }
+                fetchResult.enumerateObjects({ (album, index, stop) in
                     if self.assetCollectionSubtypes.contains(album.assetCollectionSubtype) || isAssetCollectionSubtypeAny {
                         if self.shouldShowEmptyAlbum || PHAsset.fetchAssets(in: album, options: PhotoKitAssetList.fetchOptions(self.mediaType)).count != 0 {
                             tmpAlbumList.append(PhotoKitAssetList(album: album, mediaType: self.mediaType))
                         }
                     }
-                }
+                })
             }
             if self.assetCollectionTypes == [.moment] {
-                self.albumList =  tmpAlbumList.sorted{ $0.date?.timeIntervalSince1970 < $1.date?.timeIntervalSince1970 }
+                self.albumList =  tmpAlbumList.sorted{ $0.date!.timeIntervalSince1970 < $1.date!.timeIntervalSince1970 }
             } else {
                 self.albumList =  tmpAlbumList
             }

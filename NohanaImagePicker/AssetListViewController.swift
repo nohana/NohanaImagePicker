@@ -79,7 +79,8 @@ class AssetListViewController: UICollectionViewController {
     }
     
     func scrollCollectionView(to indexPath: IndexPath) {
-        guard photoKitAssetList?.count > 0 else {
+        let count: Int? = photoKitAssetList?.count
+        guard count != nil && count! > 0 else {
             return
         }
         DispatchQueue.main.async {
@@ -116,14 +117,14 @@ class AssetListViewController: UICollectionViewController {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetCell\")")
         }
         cell.tag = indexPath.item
-        cell.update(photoKitAssetList[indexPath.row], nohanaImagePickerController: nohanaImagePickerController)
+        cell.update(asset: photoKitAssetList[indexPath.row], nohanaImagePickerController: nohanaImagePickerController)
         
         let imageSize = CGSize(
             width: cellSize.width * UIScreen.main.scale,
             height: cellSize.height * UIScreen.main.scale
         )
         let asset = photoKitAssetList[indexPath.item]
-        asset.image(imageSize) { (imageData) -> Void in
+        asset.image(targetSize: imageSize) { (imageData) -> Void in
             DispatchQueue.main.async(execute: { () -> Void in
                 if let imageData = imageData {
                     if cell.tag == indexPath.item {

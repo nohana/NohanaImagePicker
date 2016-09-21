@@ -67,13 +67,14 @@ class AssetDetailListViewController: AssetListViewController {
             return
         }
         let asset = photoKitAssetList[(indexPath as NSIndexPath).item]
-        pickButton.isSelected = nohanaImagePickerController.pickedAssetList.isPicked(asset) ?? false
-        pickButton.isHidden = !(nohanaImagePickerController.canPickAsset(asset) ?? true)
+        pickButton.isSelected = nohanaImagePickerController.pickedAssetList.isPicked(asset)
+        pickButton.isHidden = !(nohanaImagePickerController.canPickAsset(asset) )
         nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, assetDetailListViewController: self, didChangeAssetDetailPage: indexPath, photoKitAsset: asset.originalAsset)
     }
     
     override func scrollCollectionView(to indexPath: IndexPath) {
-        guard photoKitAssetList?.count > 0 else {
+        let count: Int? = photoKitAssetList?.count
+        guard count != nil && count! > 0 else {
             return
         }
         DispatchQueue.main.async {
@@ -121,7 +122,7 @@ class AssetDetailListViewController: AssetListViewController {
             height: cellSize.height * UIScreen.main.scale
         )
         let asset = photoKitAssetList[(indexPath as NSIndexPath).item]
-        asset.image(imageSize) { (imageData) -> Void in
+        asset.image(targetSize: imageSize) { (imageData) -> Void in
             DispatchQueue.main.async(execute: { () -> Void in
                 if let imageData = imageData {
                     if cell.tag == (indexPath as NSIndexPath).item {

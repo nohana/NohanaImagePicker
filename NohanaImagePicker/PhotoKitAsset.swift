@@ -15,7 +15,7 @@
  */
 import Photos
 
-open class PhotoKitAsset: AssetType {
+public class PhotoKitAsset :AssetType {
     
     let asset: PHAsset
     
@@ -23,7 +23,7 @@ open class PhotoKitAsset: AssetType {
         self.asset = asset
     }
     
-    open var originalAsset: PHAsset {
+    public var originalAsset: PHAsset {
         get {
             return asset as PHAsset
         }
@@ -31,17 +31,17 @@ open class PhotoKitAsset: AssetType {
     
     // MARK: - AssetType
     
-    open var identifier:Int {
+    public var identifier:Int {
         get {
             return asset.localIdentifier.hash
         }
     }
     
-    open func image(targetSize:CGSize, handler: @escaping (ImageData?) -> Void) {
+    public func image(targetSize:CGSize, handler: @escaping (ImageData?) -> Void) {
         let option = PHImageRequestOptions()
         option.isNetworkAccessAllowed = true
-        
-        PHImageManager.default().requestImage(
+
+        _ = PHImageManager.default().requestImage(
             for: self.asset,
             targetSize: targetSize,
             contentMode: .aspectFit,

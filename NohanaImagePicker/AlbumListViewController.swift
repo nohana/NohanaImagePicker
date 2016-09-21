@@ -43,7 +43,7 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
         if let nohanaImagePickerController = nohanaImagePickerController {
             title = NSLocalizedString("albumlist.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
             setUpToolbarItems()
-            navigationController?.setToolbarHidden(nohanaImagePickerController.toolbarHidden ?? false, animated: false)
+            navigationController?.setToolbarHidden(nohanaImagePickerController.toolbarHidden ,animated: false)
         }
         setUpEmptyIndicator()
         setUpActivityIndicator()
@@ -153,8 +153,10 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
                 width: cell.thumbnailImageView.frame.size.width * UIScreen.main.scale,
                 height: cell.thumbnailImageView.frame.size.width * UIScreen.main.scale
             )
-            if let lastAsset = albumList.last {
-                lastAsset.image(imageSize, handler: { (imageData) -> Void in
+            let albumCount = albumList.count
+            if albumCount > 0 {
+                let lastAsset = albumList[albumCount - 1]
+                lastAsset.image(targetSize: imageSize, handler: { (imageData) -> Void in
                     DispatchQueue.main.async(execute: { () -> Void in
                         if let imageData = imageData {
                             if cell.tag == (indexPath as NSIndexPath).row {
@@ -262,7 +264,8 @@ extension UIViewController {
     }
     
     func setToolbarTitle(_ nohanaImagePickerController:NohanaImagePickerController) {
-        guard toolbarItems?.count >= 2 else {
+        let count: Int? = toolbarItems?.count
+        guard count != nil && count! >= 2 else {
             return
         }
         guard let infoButton = toolbarItems?[1] else {
@@ -283,8 +286,8 @@ extension UIViewController {
     // MARK: - Notification
     
     func addPickPhotoKitAssetNotificationObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(AlbumListViewController.didPickPhotoKitAsset(_:)), name: NSNotification.Name(rawValue: NotificationInfo.Asset.PhotoKit.didPick), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(AlbumListViewController.didDropPhotoKitAsset(_:)), name: NSNotification.Name(rawValue: NotificationInfo.Asset.PhotoKit.didDrop), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AlbumListViewController.didPickPhotoKitAsset(_:)), name: NotificationInfo.Asset.PhotoKit.didPick, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AlbumListViewController.didDropPhotoKitAsset(_:)), name:  NotificationInfo.Asset.PhotoKit.didDrop, object: nil)
     }
     
     func didPickPhotoKitAsset(_ notification: Notification) {

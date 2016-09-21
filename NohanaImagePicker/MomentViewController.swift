@@ -33,7 +33,8 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
     }
     
     override func scrollCollectionView(to indexPath: IndexPath) {
-        guard momentAlbumList?.count > 0 else {
+        let count: Int? = momentAlbumList?.count
+        guard count != nil && count! > 0 else {
             return
         }
         DispatchQueue.main.async {
@@ -78,13 +79,13 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
         
         let asset = momentAlbumList[indexPath.section][indexPath.row]
         cell.tag = indexPath.item
-        cell.update(asset, nohanaImagePickerController: nohanaImagePickerController)
+        cell.update(asset: asset, nohanaImagePickerController: nohanaImagePickerController)
 
         let imageSize = CGSize(
             width: cellSize.width * UIScreen.main.scale,
             height: cellSize.height * UIScreen.main.scale
         )
-        asset.image(imageSize) { (imageData) -> Void in
+        asset.image(targetSize: imageSize) { (imageData) -> Void in
             DispatchQueue.main.async(execute: { () -> Void in
                 if let imageData = imageData {
                     if cell.tag == indexPath.item {

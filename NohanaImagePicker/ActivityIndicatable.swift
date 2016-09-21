@@ -16,12 +16,12 @@
 
 public protocol ActivityIndicatable {
     func isProgressing() -> Bool
-    func updateVisibility(of activityIndicator: UIView)
+    func updateVisibilityOfActivityIndicator(_ activityIndicator: UIView)
 }
 
 public extension ActivityIndicatable where Self: UIViewController {
     
-    func updateVisibility(of activityIndicator: UIView) {
+    func updateVisibilityOfActivityIndicator(_ activityIndicator: UIView) {
         if isProgressing() {
             if !view.subviews.contains(activityIndicator) {
                 view.addSubview(activityIndicator)
