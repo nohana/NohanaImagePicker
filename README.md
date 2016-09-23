@@ -21,12 +21,12 @@ class ViewController: UIViewController, NohanaImagePickerControllerDelegate {
         presentViewController(picker, animated: true, completion: nil)
     }
 
-    func nohanaImagePickerDidCancel(picker: NohanaImagePickerController) {
+    func nohanaImagePickerDidCancel(_ picker: NohanaImagePickerController) {
         print("🐷Canceled🙅")
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
 
-    func nohanaImagePicker(picker: NohanaImagePickerController, didFinishPickingPhotoKitAssets pickedAssts :[PHAsset]) {
+    func nohanaImagePicker(_ picker: NohanaImagePickerController, didFinishPickingPhotoKitAssets pickedAssts :[PHAsset]) {
         print("🐷Completed🙆\n\tpickedAssets = \(pickedAssts)")
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -66,7 +66,7 @@ ColorConfig.backgroundColor = UIColor.redColor()
 
 ## Requirements
 
-- Swift2.2
+- Swift2.2 later
 - iOS8.0 later
 
 ## Installation
@@ -76,6 +76,8 @@ ColorConfig.backgroundColor = UIColor.redColor()
 Use [Carthage](https://github.com/Carthage/Carthage).
 
 - Add `github "nohana/NohanaImagePicker"` to your Cartfile.
+  - If you want to use Swift2.3, add `github "nohana/NohanaImagePicker", "0.6.0"` instead.
+  - If you want to use Swift2.2, add `github "nohana/NohanaImagePicker", "0.5.0"` instead.
 - Run `carthage update`.
 
 ### Framework with CocoaPods
@@ -84,13 +86,14 @@ Use [CocoaPods](https://cocoapods.org/).
 
 - Add the followings to your Podfile:
 
-    ```ruby
-    use_frameworks!
-    pod "NohanaImagePicker"
-    ```
+  ```ruby
+  use_frameworks!
+  pod "NohanaImagePicker"
+  ```
+
+  - If you want to use Swift2.3 write `pod "NohanaImagePicker",  "0.6.0"` instead of `pod "NohanaImagePicker"`.
 
 - Run `pod install`.
-
 
 ## License
 
