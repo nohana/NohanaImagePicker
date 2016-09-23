@@ -24,33 +24,29 @@ public class PhotoKitAsset :AssetType {
     }
     
     public var originalAsset: PHAsset {
-        get {
-            return asset as PHAsset
-        }
+        return asset as PHAsset
     }
     
     // MARK: - AssetType
     
     public var identifier:Int {
-        get {
-            return asset.localIdentifier.hash
-        }
+        return asset.localIdentifier.hash
     }
     
-    public func image(targetSize:CGSize, handler: (ImageData?) -> Void) {
+    public func image(targetSize:CGSize, handler: @escaping (ImageData?) -> Void) {
         let option = PHImageRequestOptions()
-        option.networkAccessAllowed = true
-        
-        PHImageManager.defaultManager().requestImageForAsset(
-            self.asset,
+        option.isNetworkAccessAllowed = true
+
+        _ = PHImageManager.default().requestImage(
+            for: self.asset,
             targetSize: targetSize,
-            contentMode: .AspectFit,
+            contentMode: .aspectFit,
             options: option ) { (image, info) -> Void in
                 guard let image = image else {
                     handler(nil)
                     return
                 }
-                handler(ImageData(image: image, info: info))
+                handler(ImageData(image: image, info: info as Dictionary<NSObject, AnyObject>?))
         }
     }
 }

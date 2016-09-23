@@ -31,8 +31,8 @@ class AssetDetailCell: UICollectionViewCell, UIScrollViewDelegate {
         doubleTapGestureRecognizer.numberOfTapsRequired = 2
     }
     
-    override func willMoveToSuperview(newSuperview: UIView?) {
-        super.willMoveToSuperview(newSuperview)
+    override func willMove(toSuperview newSuperview: UIView?) {
+        super.willMove(toSuperview: newSuperview)
         scrollView.removeGestureRecognizer(doubleTapGestureRecognizer)
         scrollView.addGestureRecognizer(doubleTapGestureRecognizer)
     }
@@ -44,23 +44,23 @@ class AssetDetailCell: UICollectionViewCell, UIScrollViewDelegate {
     
     // MARK: - UIScrollViewDelegate
     
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
     }
     
     // MARK: - Zoom
     
-    func didDoubleTap(sender: UITapGestureRecognizer) {
+    func didDoubleTap(_ sender: UITapGestureRecognizer) {
         if scrollView.zoomScale < scrollView.maximumZoomScale {
-            let center = sender.locationInView(imageView)
-            scrollView.zoomToRect(zoomRect(center), animated: true)
+            let center = sender.location(in: imageView)
+            scrollView.zoom(to: zoomRect(center), animated: true)
         } else {
             let defaultScale: CGFloat = 1
             scrollView.setZoomScale(defaultScale, animated: true)
         }
     }
     
-    func zoomRect(center: CGPoint) -> CGRect {
+    func zoomRect(_ center: CGPoint) -> CGRect {
         var zoomRect: CGRect = CGRect()
         zoomRect.size.height = scrollView.frame.size.height / scrollView.maximumZoomScale
         zoomRect.size.width = scrollView.frame.size.width / scrollView.maximumZoomScale

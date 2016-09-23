@@ -15,7 +15,7 @@
  */
 
 public struct ColorConfig {
-    public static var backgroundColor = UIColor.whiteColor()
+    public static var backgroundColor = UIColor.white
     public static var emptyIndicator = UIColor(red: 0x88/0xff, green: 0x88/0xff, blue: 0x88/0xff, alpha: 1)
     
     public struct AlbumList {

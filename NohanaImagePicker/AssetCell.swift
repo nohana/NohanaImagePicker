@@ -24,39 +24,39 @@ class AssetCell: UICollectionViewCell {
     weak var nohanaImagePickerController: NohanaImagePickerController?
     var asset: AssetType?
     
-    override func willMoveToSuperview(newSuperview: UIView?) {
-        super.willMoveToSuperview(newSuperview)
+    override func willMove(toSuperview newSuperview: UIView?) {
+        super.willMove(toSuperview: newSuperview)
         if let nohanaImagePickerController = nohanaImagePickerController {
             pickButton.setImage(
-                UIImage(named: ImageName.AssetCell.PickButton.SizeM.dropped, inBundle: nohanaImagePickerController.assetBundle, compatibleWithTraitCollection: nil),
-                forState: .Normal)
+                UIImage(named: ImageName.AssetCell.PickButton.SizeM.dropped, in: nohanaImagePickerController.assetBundle, compatibleWith: nil),
+                for: UIControlState())
             pickButton.setImage(
-                UIImage(named: ImageName.AssetCell.PickButton.SizeM.picked, inBundle: nohanaImagePickerController.assetBundle, compatibleWithTraitCollection: nil),
-                forState: [.Normal, .Selected])
+                UIImage(named: ImageName.AssetCell.PickButton.SizeM.picked, in: nohanaImagePickerController.assetBundle, compatibleWith: nil),
+                for: .selected)
         }
     }
     
-    @IBAction func didPushPickButton(sender: UIButton) {
+    @IBAction func didPushPickButton(_ sender: UIButton) {
         guard let asset = asset else {
             return
         }
-        if pickButton.selected {
-            if nohanaImagePickerController!.pickedAssetList.dropAsset(asset) {
-                pickButton.selected = false
+        if pickButton.isSelected {
+            if nohanaImagePickerController!.pickedAssetList.drop(asset: asset) {
+                pickButton.isSelected = false
             }
         } else {
-            if nohanaImagePickerController!.pickedAssetList.pickAsset(asset) {
-                pickButton.selected = true
+            if nohanaImagePickerController!.pickedAssetList.pick(asset: asset) {
+                pickButton.isSelected = true
             }
         }
-        self.overlayView.hidden = !pickButton.selected
+        self.overlayView.isHidden = !pickButton.isSelected
     }
     
     func update(asset: AssetType, nohanaImagePickerController: NohanaImagePickerController) {
         self.asset = asset
         self.nohanaImagePickerController = nohanaImagePickerController
-        self.pickButton.selected = nohanaImagePickerController.pickedAssetList.isPicked(asset) ?? false
-        self.overlayView.hidden = !pickButton.selected
-        self.pickButton.hidden = !(nohanaImagePickerController.canPickAsset(asset) ?? true)
+        self.pickButton.isSelected = nohanaImagePickerController.pickedAssetList.isPicked(asset) 
+        self.overlayView.isHidden = !pickButton.isSelected
+        self.pickButton.isHidden = !(nohanaImagePickerController.canPickAsset(asset) )
     }
 }

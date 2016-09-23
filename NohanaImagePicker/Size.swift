@@ -17,39 +17,37 @@
 struct Size {
     
     static var statusBarHeight: CGFloat {
-        get {
-            if UIApplication.sharedApplication().statusBarHidden {
-                return 0
-            }
-            return UIApplication.sharedApplication().statusBarFrame.size.height
+        if UIApplication.shared.isStatusBarHidden {
+            return 0
         }
+        return UIApplication.shared.statusBarFrame.size.height
     }
     
-    static func navigationBarHeight(viewController: UIViewController) -> CGFloat {
+    static func navigationBarHeight(_ viewController: UIViewController) -> CGFloat {
         return viewController.navigationController?.navigationBar.frame.size.height ?? CGFloat(0)
     }
     
-    static func appBarHeight(viewController: UIViewController) -> CGFloat {
+    static func appBarHeight(_ viewController: UIViewController) -> CGFloat {
         return statusBarHeight + navigationBarHeight(viewController)
     }
     
-    static func toolbarHeight(viewController: UIViewController) -> CGFloat {
+    static func toolbarHeight(_ viewController: UIViewController) -> CGFloat {
         guard let navigationController = viewController.navigationController else {
             return 0
         }
-        guard !navigationController.toolbarHidden else {
+        guard !navigationController.isToolbarHidden else {
             return 0
         }
         return navigationController.toolbar.frame.size.height
     }
     
-    static func screenRectWithoutAppBar(viewController: UIViewController) -> CGRect {
+    static func screenRectWithoutAppBar(_ viewController: UIViewController) -> CGRect {
         let appBarHeight = Size.appBarHeight(viewController)
         let toolbarHeight = Size.toolbarHeight(viewController)
         return CGRect(
             x: 0,
             y: appBarHeight,
-            width: UIScreen.mainScreen().bounds.width,
-            height: UIScreen.mainScreen().bounds.height - appBarHeight - toolbarHeight)
+            width: UIScreen.main.bounds.width,
+            height: UIScreen.main.bounds.height - appBarHeight - toolbarHeight)
     }
 }

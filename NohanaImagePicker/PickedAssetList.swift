@@ -26,46 +26,37 @@ class PickedAssetList: ItemListType {
     typealias Item = AssetType
     
     var title: String {
-        get {
-            return "Selected Assets"
-        }
+        return "Selected Assets"
     }
     
-    func update(handler:(() -> Void)?) {
+    func update(_ handler:(() -> Void)?) {
         fatalError("not supported")
     }
     
-    
     subscript (index: Int) -> Item {
-        get {
-            return assetlist[index]
-        }
+        return assetlist[index]
     }
     
     // MARK: - CollectionType
     
     var startIndex: Int {
-        get {
-            return 0
-        }
+        return 0
     }
     
     var endIndex: Int {
-        get {
-            return assetlist.count
-        }
+        return assetlist.count
     }
     
     // MARK: - Manage assetlist
     
-    func pickAsset(asset: AssetType) -> Bool {
+    func pick(asset: AssetType) -> Bool {
         guard !isPicked(asset) else {
             return false
         }
         let assetsCountBeforePicking = self.count
         if asset is PhotoKitAsset {
             if let canPick = nohanaImagePickerController!.delegate?.nohanaImagePicker?(nohanaImagePickerController!, willPickPhotoKitAsset: (asset as! PhotoKitAsset).originalAsset, pickedAssetsCount: assetsCountBeforePicking)
-                where !canPick {
+                , !canPick {
                 return false
             }
         }
@@ -77,8 +68,8 @@ class PickedAssetList: ItemListType {
         if asset is PhotoKitAsset {
             let originalAsset = (asset as! PhotoKitAsset).originalAsset
             nohanaImagePickerController!.delegate?.nohanaImagePicker?(nohanaImagePickerController!, didPickPhotoKitAsset: originalAsset, pickedAssetsCount: assetsCountAfterPicking)
-            NSNotificationCenter.defaultCenter().postNotification(
-                NSNotification(
+            NotificationCenter.default.post(
+                Notification(
                     name: NotificationInfo.Asset.PhotoKit.didPick,
                     object: nohanaImagePickerController,
                     userInfo: [
@@ -92,10 +83,10 @@ class PickedAssetList: ItemListType {
         
     }
     
-    func dropAsset(asset: AssetType) -> Bool {
+    func drop(asset: AssetType) -> Bool {
         let assetsCountBeforeDropping = self.count
         if asset is PhotoKitAsset {
-            if let canDrop = nohanaImagePickerController!.delegate?.nohanaImagePicker?(nohanaImagePickerController!, willDropPhotoKitAsset: (asset as! PhotoKitAsset).originalAsset, pickedAssetsCount: assetsCountBeforeDropping) where !canDrop {
+            if let canDrop = nohanaImagePickerController!.delegate?.nohanaImagePicker?(nohanaImagePickerController!, willDropPhotoKitAsset: (asset as! PhotoKitAsset).originalAsset, pickedAssetsCount: assetsCountBeforeDropping) , !canDrop {
                 return false
             }
         }
@@ -104,8 +95,8 @@ class PickedAssetList: ItemListType {
         if asset is PhotoKitAsset {
             let originalAsset = (asset as! PhotoKitAsset).originalAsset
             nohanaImagePickerController!.delegate?.nohanaImagePicker?(nohanaImagePickerController!, didDropPhotoKitAsset: originalAsset, pickedAssetsCount: assetsCountAfterDropping)
-            NSNotificationCenter.defaultCenter().postNotification(
-                NSNotification(
+            NotificationCenter.default.post(
+                Notification(
                     name: NotificationInfo.Asset.PhotoKit.didDrop,
                     object: nohanaImagePickerController,
                     userInfo: [
@@ -118,7 +109,7 @@ class PickedAssetList: ItemListType {
         return true
     }
     
-    func isPicked(asset: AssetType) -> Bool {
+    func isPicked(_ asset: AssetType) -> Bool {
         return assetlist.contains{ $0.identifier == asset.identifier }
     }
     
