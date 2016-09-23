@@ -64,7 +64,7 @@ class AssetDetailListViewController: AssetListViewController {
         guard let nohanaImagePickerController = nohanaImagePickerController else {
             return
         }
-        let asset = photoKitAssetList[(indexPath as NSIndexPath).item]
+        let asset = photoKitAssetList[indexPath.item]
         pickButton.isSelected = nohanaImagePickerController.pickedAssetList.isPicked(asset)
         pickButton.isHidden = !(nohanaImagePickerController.canPickAsset(asset) )
         nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, assetDetailListViewController: self, didChangeAssetDetailPage: indexPath, photoKitAsset: asset.originalAsset)
@@ -76,7 +76,7 @@ class AssetDetailListViewController: AssetListViewController {
             return
         }
         DispatchQueue.main.async {
-            let toIndexPath = IndexPath(item: (indexPath as NSIndexPath).item, section: 0)
+            let toIndexPath = IndexPath(item: indexPath.item, section: 0)
             self.collectionView?.scrollToItem(at: toIndexPath, at: UICollectionViewScrollPosition.centeredHorizontally, animated: false)
         }
     }
@@ -113,17 +113,17 @@ class AssetDetailListViewController: AssetListViewController {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetDetailCell\")")
         }
         cell.scrollView.zoomScale = 1
-        cell.tag = (indexPath as NSIndexPath).item
+        cell.tag = indexPath.item
         
         let imageSize = CGSize(
             width: cellSize.width * UIScreen.main.scale,
             height: cellSize.height * UIScreen.main.scale
         )
-        let asset = photoKitAssetList[(indexPath as NSIndexPath).item]
+        let asset = photoKitAssetList[indexPath.item]
         asset.image(targetSize: imageSize) { (imageData) -> Void in
             DispatchQueue.main.async(execute: { () -> Void in
                 if let imageData = imageData {
-                    if cell.tag == (indexPath as NSIndexPath).item {
+                    if cell.tag == indexPath.item {
                         cell.imageView.image = imageData.image
                         cell.imageViewHeightConstraint.constant = self.cellSize.height
                         cell.imageViewWidthConstraint.constant = self.cellSize.width
