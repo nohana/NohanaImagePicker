@@ -175,7 +175,7 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
     // MARK: - Storyboard
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let sectionType = AlbumListViewControllerSectionType(rawValue: (tableView.indexPathForSelectedRow! as NSIndexPath).section) else {
+        guard let sectionType = AlbumListViewControllerSectionType(rawValue: tableView.indexPathForSelectedRow!.section) else {
             fatalError("Invalid section")
         }
         switch sectionType {
@@ -197,7 +197,7 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
             })
         case .albums:
             let assetListViewController = segue.destination as! AssetListViewController
-            assetListViewController.photoKitAssetList = photoKitAlbumList[(tableView.indexPathForSelectedRow! as NSIndexPath).row]
+            assetListViewController.photoKitAssetList = photoKitAlbumList[tableView.indexPathForSelectedRow!.row]
             assetListViewController.nohanaImagePickerController = nohanaImagePickerController
         }
     }

@@ -85,7 +85,7 @@ class AssetDetailListViewController: AssetListViewController {
         guard isFirstAppearance else {
             return
         }
-        let indexPath = IndexPath(row: (currentIndexPath as NSIndexPath).item, section: 0)
+        let indexPath = IndexPath(row: currentIndexPath.item, section: 0)
         scrollCollectionView(to: indexPath)
         isFirstAppearance = false
     }
@@ -93,7 +93,7 @@ class AssetDetailListViewController: AssetListViewController {
     // MARK: - IBAction
     
     @IBAction func didPushPickButton(_ sender: UIButton) {
-        let asset = photoKitAssetList[(currentIndexPath as NSIndexPath).row]
+        let asset = photoKitAssetList[currentIndexPath.row]
         if pickButton.isSelected {
             if nohanaImagePickerController!.pickedAssetList.drop(asset: asset) {
                 pickButton.isSelected = false
@@ -142,11 +142,11 @@ class AssetDetailListViewController: AssetListViewController {
         }
         let row = Int((collectionView.contentOffset.x + cellSize.width * 0.5) / cellSize.width)
         if row < 0 {
-            currentIndexPath = IndexPath(row: 0, section: (currentIndexPath as NSIndexPath).section)
+            currentIndexPath = IndexPath(row: 0, section: currentIndexPath.section)
         } else if row >= collectionView.numberOfItems(inSection: 0) {
-            currentIndexPath = IndexPath(row: collectionView.numberOfItems(inSection: 0) - 1, section: (currentIndexPath as NSIndexPath).section)
+            currentIndexPath = IndexPath(row: collectionView.numberOfItems(inSection: 0) - 1, section: currentIndexPath.section)
         } else {
-            currentIndexPath = IndexPath(row: row, section: (currentIndexPath as NSIndexPath).section)
+            currentIndexPath = IndexPath(row: row, section: currentIndexPath.section)
         }
     }
     
