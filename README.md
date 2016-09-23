@@ -18,17 +18,17 @@ class ViewController: UIViewController, NohanaImagePickerControllerDelegate {
         super.viewDidAppear(true)
         let picker = NohanaImagePickerController()
         picker.delegate = self
-        presentViewController(picker, animated: true, completion: nil)
+        present(picker, animated: true, completion: nil)
     }
 
     func nohanaImagePickerDidCancel(_ picker: NohanaImagePickerController) {
         print("🐷Canceled🙅")
-        picker.dismissViewControllerAnimated(true, completion: nil)
+        picker.dismiss(animated: true, completion: nil)
     }
 
     func nohanaImagePicker(_ picker: NohanaImagePickerController, didFinishPickingPhotoKitAssets pickedAssts :[PHAsset]) {
         print("🐷Completed🙆\n\tpickedAssets = \(pickedAssts)")
-        picker.dismissViewControllerAnimated(true, completion: nil)
+        picker.dismiss(animated: true, completion: nil)
     }
 
 }
