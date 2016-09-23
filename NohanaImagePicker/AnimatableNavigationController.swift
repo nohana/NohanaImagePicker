@@ -38,7 +38,7 @@ class AnimatableNavigationController: UINavigationController, UINavigationContro
             return ExpandingAnimationController(fromCell)
         case .pop where toVC is AssetListViewController:
             guard let fromVC = fromVC as? AssetDetailListViewController,
-            let fromCell = fromVC.collectionView?.cellForItem(at: IndexPath(item: (fromVC.currentIndexPath as NSIndexPath).item, section: 0)) as? AssetDetailCell
+            let fromCell = fromVC.collectionView?.cellForItem(at: IndexPath(item: fromVC.currentIndexPath.item, section: 0)) as? AssetDetailCell
             else {
                 return nil
             }
