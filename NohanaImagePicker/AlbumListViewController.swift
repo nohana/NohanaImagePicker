@@ -20,8 +20,8 @@ import Photos
 class AlbumListViewController: UITableViewController, EmptyIndicatable, ActivityIndicatable {
     
     enum AlbumListViewControllerSectionType: Int {
-        case Moment = 0
-        case Albums
+        case moment = 0
+        case albums
         
         static func count() -> Int {
             var count: Int = 0
@@ -43,7 +43,7 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
         if let nohanaImagePickerController = nohanaImagePickerController {
             title = NSLocalizedString("albumlist.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
             setUpToolbarItems()
-            navigationController?.setToolbarHidden(nohanaImagePickerController.toolbarHidden ?? false, animated: false)
+            navigationController?.setToolbarHidden(nohanaImagePickerController.toolbarHidden ,animated: false)
         }
         setUpEmptyIndicator()
         setUpActivityIndicator()
@@ -51,27 +51,27 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let nohanaImagePickerController = nohanaImagePickerController {
             setToolbarTitle(nohanaImagePickerController)
         }
         if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
-            tableView.deselectRowAtIndexPath(indexPathForSelectedRow, animated: true)
+            tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
         }
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         tableView.reloadData()
     }
 
     // MARK: - UITableViewDelegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let sectionType = AlbumListViewControllerSectionType(rawValue: indexPath.section) else {
             fatalError("Invalid section")
         }
@@ -79,32 +79,32 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
             return
         }
         switch sectionType {
-        case .Moment:
+        case .moment:
             nohanaImagePickerController.delegate?.nohanaImagePickerDidSelectMoment?(nohanaImagePickerController)
-        case .Albums:
+        case .albums:
             nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAssetList: photoKitAlbumList[indexPath.row].assetList)
         }
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let sectionType = AlbumListViewControllerSectionType(rawValue: indexPath.section) else {
             fatalError("Invalid section")
         }
         switch sectionType {
-        case .Moment:
+        case .moment:
             return 52
-        case .Albums:
+        case .albums:
             return 82
         }
     }
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return AlbumListViewControllerSectionType.count()
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let emptyIndicator = emptyIndicator {
             updateVisibilityOfEmptyIndicator(emptyIndicator)
         }
@@ -117,45 +117,47 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
         }
         
         switch sectionType {
-        case .Moment:
+        case .moment:
             if let nohanaImagePickerController = nohanaImagePickerController {
                 return nohanaImagePickerController.shouldShowMoment ? 1 : 0
             }
             return 0
             
-        case .Albums:
+        case .albums:
             return photoKitAlbumList.count
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let sectionType = AlbumListViewControllerSectionType(rawValue: indexPath.section) else {
             fatalError("Invalid section")
         }
         
         switch sectionType {
-        case .Moment:
-            guard let cell = tableView.dequeueReusableCellWithIdentifier("MomentAlbumCell") as? AlbumCell else {
+        case .moment:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "MomentAlbumCell") as? AlbumCell else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"MomentAlbumCell\")")
             }
             if let nohanaImagePickerController = nohanaImagePickerController {
                 cell.titleLabel?.text = NSLocalizedString("albumlist.moment.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
             }
             return cell
-        case .Albums:
-            guard let cell = tableView.dequeueReusableCellWithIdentifier("AlbumCell") as? AlbumCell else {
+        case .albums:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "AlbumCell") as? AlbumCell else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AlbumCell\")")
             }
             let albumList = photoKitAlbumList[indexPath.row]
             cell.titleLabel.text = albumList.title
             cell.tag = indexPath.row
             let imageSize = CGSize(
-                width: cell.thumbnailImageView.frame.size.width * UIScreen.mainScreen().scale,
-                height: cell.thumbnailImageView.frame.size.width * UIScreen.mainScreen().scale
+                width: cell.thumbnailImageView.frame.size.width * UIScreen.main.scale,
+                height: cell.thumbnailImageView.frame.size.width * UIScreen.main.scale
             )
-            if let lastAsset = albumList.last {
-                lastAsset.image(imageSize, handler: { (imageData) -> Void in
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            let albumCount = albumList.count
+            if albumCount > 0 {
+                let lastAsset = albumList[albumCount - 1]
+                lastAsset.image(targetSize: imageSize, handler: { (imageData) -> Void in
+                    DispatchQueue.main.async(execute: { () -> Void in
                         if let imageData = imageData {
                             if cell.tag == indexPath.row {
                                 cell.thumbnailImageView.image = imageData.image
@@ -172,29 +174,29 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
     
     // MARK: - Storyboard
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let sectionType = AlbumListViewControllerSectionType(rawValue: tableView.indexPathForSelectedRow!.section) else {
             fatalError("Invalid section")
         }
         switch sectionType {
-        case .Moment:
-            let momentViewController = segue.destinationViewController as! MomentViewController
+        case .moment:
+            let momentViewController = segue.destination as! MomentViewController
             momentViewController.nohanaImagePickerController = nohanaImagePickerController
             momentViewController.momentAlbumList = PhotoKitAlbumList(
-                assetCollectionTypes: [.Moment],
-                assetCollectionSubtypes: [.Any],
+                assetCollectionTypes: [.moment],
+                assetCollectionSubtypes: [.any],
                 mediaType: nohanaImagePickerController!.mediaType,
                 shouldShowEmptyAlbum: nohanaImagePickerController!.shouldShowEmptyAlbum,
                 handler: { () -> Void in
-                    dispatch_async(dispatch_get_main_queue(), { [weak momentViewController] in
+                    DispatchQueue.main.async(execute: { [weak momentViewController] in
                         momentViewController?.isLoading = false
                         momentViewController?.collectionView?.reloadData()
                         momentViewController?.isFirstAppearance = true
                         momentViewController?.scrollCollectionViewToInitialPosition()
                     })
             })
-        case .Albums:
-            let assetListViewController = segue.destinationViewController as! AssetListViewController
+        case .albums:
+            let assetListViewController = segue.destination as! AssetListViewController
             assetListViewController.photoKitAssetList = photoKitAlbumList[tableView.indexPathForSelectedRow!.row]
             assetListViewController.nohanaImagePickerController = nohanaImagePickerController
         }
@@ -202,7 +204,7 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
     
     // MARK: - IBAction
     
-    @IBAction func didPushCancel(sender: AnyObject) {
+    @IBAction func didPushCancel(_ sender: AnyObject) {
         if let nohanaImagePickerController = nohanaImagePickerController {
             nohanaImagePickerController.delegate?.nohanaImagePickerDidCancel(nohanaImagePickerController)
         }
@@ -236,7 +238,7 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
     var isLoading = true
     
     func setUpActivityIndicator() {
-        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         let screenRect = Size.screenRectWithoutAppBar(self)
         activityIndicator?.center = CGPoint(x: screenRect.size.width / 2, y: screenRect.size.height / 2)
         activityIndicator?.startAnimating()
@@ -252,17 +254,18 @@ extension UIViewController {
     // MARK: - Toolbar
     
     func setUpToolbarItems() {
-        let leftSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
-        let rightSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+        let leftSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let rightSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
-        let infoButton = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
-        infoButton.enabled = false
-        infoButton.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFontOfSize(14), NSForegroundColorAttributeName: UIColor.blackColor()], forState: .Normal)
+        let infoButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        infoButton.isEnabled = false
+        infoButton.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName: UIColor.black], for: UIControlState())
         self.toolbarItems = [leftSpace, infoButton, rightSpace]
     }
     
-    func setToolbarTitle(nohanaImagePickerController:NohanaImagePickerController) {
-        guard toolbarItems?.count >= 2 else {
+    func setToolbarTitle(_ nohanaImagePickerController:NohanaImagePickerController) {
+        let count: Int? = toolbarItems?.count
+        guard count != nil && count! >= 2 else {
             return
         }
         guard let infoButton = toolbarItems?[1] else {
@@ -283,18 +286,18 @@ extension UIViewController {
     // MARK: - Notification
     
     func addPickPhotoKitAssetNotificationObservers() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AlbumListViewController.didPickPhotoKitAsset(_:)), name: NotificationInfo.Asset.PhotoKit.didPick, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AlbumListViewController.didDropPhotoKitAsset(_:)), name: NotificationInfo.Asset.PhotoKit.didDrop, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AlbumListViewController.didPickPhotoKitAsset(_:)), name: NotificationInfo.Asset.PhotoKit.didPick, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AlbumListViewController.didDropPhotoKitAsset(_:)), name:  NotificationInfo.Asset.PhotoKit.didDrop, object: nil)
     }
     
-    func didPickPhotoKitAsset(notification: NSNotification) {
+    func didPickPhotoKitAsset(_ notification: Notification) {
         guard let picker = notification.object as? NohanaImagePickerController else {
             return
         }
         setToolbarTitle(picker)
     }
     
-    func didDropPhotoKitAsset(notification: NSNotification) {
+    func didDropPhotoKitAsset(_ notification: Notification) {
         guard let picker = notification.object as? NohanaImagePickerController else {
             return
         }

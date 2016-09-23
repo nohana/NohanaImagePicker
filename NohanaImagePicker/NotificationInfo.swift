@@ -17,10 +17,10 @@
 struct NotificationInfo {
     struct Asset {
         struct PhotoKit {
-            static let didPick = "jp.co.nohana.NotificationName.Asset.PhotoKit.didPick"
+            static let didPick = Notification.Name("jp.co.nohana.NotificationName.Asset.PhotoKit.didPick")
             static let didPickUserInfoKeyAsset = "asset"
             static let didPickUserInfoKeyPickedAssetsCount = "pickedAssetsCount"
-            static let didDrop = "jp.co.nohana.NotificationName.Asset.PhotoKit.didDrop"
+            static let didDrop = Notification.Name("jp.co.nohana.NotificationName.Asset.PhotoKit.didDrop")
             static let didDropUserInfoKeyAsset = "asset"
             static let didDropUserInfoKeyPickedAssetsCount = "pickedAssetsCount"
         }

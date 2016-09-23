@@ -18,64 +18,64 @@ import UIKit
 import Photos
 
 public enum MediaType: Int {
-    case Any = 0, Photo, Video
+    case any = 0, photo, video
 }
 
 @objc public protocol NohanaImagePickerControllerDelegate {
-    func nohanaImagePickerDidCancel(picker: NohanaImagePickerController)
-    func nohanaImagePicker(picker: NohanaImagePickerController, didFinishPickingPhotoKitAssets pickedAssts :[PHAsset])
-    optional func nohanaImagePicker(picker: NohanaImagePickerController, willPickPhotoKitAsset asset: PHAsset, pickedAssetsCount: Int) -> Bool
-    optional func nohanaImagePicker(picker: NohanaImagePickerController, didPickPhotoKitAsset asset: PHAsset, pickedAssetsCount: Int)
-    optional func nohanaImagePicker(picker: NohanaImagePickerController, willDropPhotoKitAsset asset: PHAsset, pickedAssetsCount: Int) -> Bool
-    optional func nohanaImagePicker(picker: NohanaImagePickerController, didDropPhotoKitAsset asset: PHAsset, pickedAssetsCount: Int)
-    optional func nohanaImagePicker(picker: NohanaImagePickerController, didSelectPhotoKitAsset asset: PHAsset)
-    optional func nohanaImagePicker(picker: NohanaImagePickerController, didSelectPhotoKitAssetList assetList: PHAssetCollection)
-    optional func nohanaImagePickerDidSelectMoment(picker: NohanaImagePickerController) -> Void
-    optional func nohanaImagePicker(picker: NohanaImagePickerController, assetListViewController: UICollectionViewController, cell: UICollectionViewCell, indexPath: NSIndexPath, photoKitAsset: PHAsset) -> UICollectionViewCell
-    optional func nohanaImagePicker(picker: NohanaImagePickerController, assetDetailListViewController: UICollectionViewController, cell: UICollectionViewCell, indexPath: NSIndexPath, photoKitAsset: PHAsset) -> UICollectionViewCell
-    optional func nohanaImagePicker(picker: NohanaImagePickerController, assetDetailListViewController: UICollectionViewController, didChangeAssetDetailPage indexPath: NSIndexPath, photoKitAsset: PHAsset)
+    func nohanaImagePickerDidCancel(_ picker: NohanaImagePickerController)
+    func nohanaImagePicker(_ picker: NohanaImagePickerController, didFinishPickingPhotoKitAssets pickedAssts :[PHAsset])
+    @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, willPickPhotoKitAsset asset: PHAsset, pickedAssetsCount: Int) -> Bool
+    @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, didPickPhotoKitAsset asset: PHAsset, pickedAssetsCount: Int)
+    @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, willDropPhotoKitAsset asset: PHAsset, pickedAssetsCount: Int) -> Bool
+    @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, didDropPhotoKitAsset asset: PHAsset, pickedAssetsCount: Int)
+    @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, didSelectPhotoKitAsset asset: PHAsset)
+    @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, didSelectPhotoKitAssetList assetList: PHAssetCollection)
+    @objc optional func nohanaImagePickerDidSelectMoment(_ picker: NohanaImagePickerController) -> Void
+    @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, assetListViewController: UICollectionViewController, cell: UICollectionViewCell, indexPath: IndexPath, photoKitAsset: PHAsset) -> UICollectionViewCell
+    @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, assetDetailListViewController: UICollectionViewController, cell: UICollectionViewCell, indexPath: IndexPath, photoKitAsset: PHAsset) -> UICollectionViewCell
+    @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, assetDetailListViewController: UICollectionViewController, didChangeAssetDetailPage indexPath: IndexPath, photoKitAsset: PHAsset)
     
 }
 
-public class NohanaImagePickerController: UIViewController {
+open class NohanaImagePickerController: UIViewController {
     
-    public var maximumNumberOfSelection: Int = 21 // set 0 to set no limit
-    public var numberOfColumnsInPortrait: Int = 4
-    public var numberOfColumnsInLandscape: Int = 7
-    public weak var delegate: NohanaImagePickerControllerDelegate?
-    public var shouldShowMoment: Bool = true
-    public var shouldShowEmptyAlbum: Bool = false
-    public var toolbarHidden: Bool = false
-    public var canPickAsset = { (asset:AssetType) -> Bool in
+    open var maximumNumberOfSelection: Int = 21 // set 0 to set no limit
+    open var numberOfColumnsInPortrait: Int = 4
+    open var numberOfColumnsInLandscape: Int = 7
+    open weak var delegate: NohanaImagePickerControllerDelegate?
+    open var shouldShowMoment: Bool = true
+    open var shouldShowEmptyAlbum: Bool = false
+    open var toolbarHidden: Bool = false
+    open var canPickAsset = { (asset:AssetType) -> Bool in
         return true
     }
-    lazy var assetBundle:NSBundle = {
-        let bundle = NSBundle(forClass: self.dynamicType)
-        if let path = bundle.pathForResource("NohanaImagePicker", ofType: "bundle") {
-            return NSBundle(path: path)!
+    lazy var assetBundle:Bundle = {
+        let bundle = Bundle(for: type(of: self))
+        if let path = bundle.path(forResource: "NohanaImagePicker", ofType: "bundle") {
+            return Bundle(path: path)!
         }
         return bundle
     }()
     let pickedAssetList: PickedAssetList
     let mediaType: MediaType
     let enableExpandingPhotoAnimation: Bool
-    private let assetCollectionSubtypes: [PHAssetCollectionSubtype]
+    fileprivate let assetCollectionSubtypes: [PHAssetCollectionSubtype]
     
     public init() {
         assetCollectionSubtypes = [
-            .AlbumRegular,
-            .AlbumSyncedEvent,
-            .AlbumSyncedFaces,
-            .AlbumSyncedAlbum,
-            .AlbumImported,
-            .AlbumMyPhotoStream,
-            .AlbumCloudShared,
-            .SmartAlbumGeneric,
-            .SmartAlbumFavorites,
-            .SmartAlbumRecentlyAdded,
-            .SmartAlbumUserLibrary
+            .albumRegular,
+            .albumSyncedEvent,
+            .albumSyncedFaces,
+            .albumSyncedAlbum,
+            .albumImported,
+            .albumMyPhotoStream,
+            .albumCloudShared,
+            .smartAlbumGeneric,
+            .smartAlbumFavorites,
+            .smartAlbumRecentlyAdded,
+            .smartAlbumUserLibrary
         ]
-        mediaType = .Photo
+        mediaType = .photo
         pickedAssetList = PickedAssetList()
         enableExpandingPhotoAnimation = true
         super.init(nibName: nil, bundle: nil)
@@ -95,18 +95,18 @@ public class NohanaImagePickerController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         
         // show albumListViewController
         let storyboard = UIStoryboard(name: "NohanaImagePicker", bundle: assetBundle)
         let viewControllerId = enableExpandingPhotoAnimation ? "EnableAnimationNavigationController" : "DisableAnimationNavigationController"
-        guard let navigationController = storyboard.instantiateViewControllerWithIdentifier(viewControllerId) as? UINavigationController else {
+        guard let navigationController = storyboard.instantiateViewController(withIdentifier: viewControllerId) as? UINavigationController else {
             fatalError("navigationController init failed.")
         }
         addChildViewController(navigationController)
         view.addSubview(navigationController.view)
-        navigationController.didMoveToParentViewController(self)
+        navigationController.didMove(toParentViewController: self)
         
         // setup albumListViewController
         guard let albumListViewController = navigationController.topViewController as? AlbumListViewController else {
@@ -114,12 +114,12 @@ public class NohanaImagePickerController: UIViewController {
         }
         albumListViewController.photoKitAlbumList =
             PhotoKitAlbumList(
-                assetCollectionTypes: [.SmartAlbum, .Album],
+                assetCollectionTypes: [.smartAlbum, .album],
                 assetCollectionSubtypes: assetCollectionSubtypes,
                 mediaType: mediaType,
                 shouldShowEmptyAlbum: shouldShowEmptyAlbum,
                 handler: { [weak albumListViewController] in
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                DispatchQueue.main.async(execute: { () -> Void in
                     albumListViewController?.isLoading = false
                     albumListViewController?.tableView.reloadData()
                 })
@@ -127,12 +127,12 @@ public class NohanaImagePickerController: UIViewController {
         albumListViewController.nohanaImagePickerController = self
     }
     
-    public func pickAsset(asset: AssetType) {
-        pickedAssetList.pickAsset(asset)
+    open func pickAsset(_ asset: AssetType) {
+        _ = pickedAssetList.pick(asset: asset)
     }
     
-    public func dropAsset(asset: AssetType) {
-        pickedAssetList.dropAsset(asset)
+    open func dropAsset(_ asset: AssetType) {
+        _ = pickedAssetList.drop(asset: asset)
     }
 }
 

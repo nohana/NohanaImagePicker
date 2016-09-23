@@ -25,20 +25,20 @@ class AnimatableNavigationController: UINavigationController, UINavigationContro
         self.delegate = self
     }
     
-    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
         switch operation {
-        case .Push where fromVC is AssetListViewController:
+        case .push where fromVC is AssetListViewController:
             guard let fromVC = fromVC as? AssetListViewController,
-            selectedIndex = fromVC.collectionView?.indexPathsForSelectedItems()?.first,
-            fromCell = fromVC.collectionView?.cellForItemAtIndexPath(selectedIndex) as? AssetCell
+            let selectedIndex = fromVC.collectionView?.indexPathsForSelectedItems?.first,
+            let fromCell = fromVC.collectionView?.cellForItem(at: selectedIndex) as? AssetCell
             else {
                 return nil
             }
             return ExpandingAnimationController(fromCell)
-        case .Pop where toVC is AssetListViewController:
+        case .pop where toVC is AssetListViewController:
             guard let fromVC = fromVC as? AssetDetailListViewController,
-            fromCell = fromVC.collectionView?.cellForItemAtIndexPath(NSIndexPath(forItem: fromVC.currentIndexPath.item, inSection: 0)) as? AssetDetailCell
+            let fromCell = fromVC.collectionView?.cellForItem(at: IndexPath(item: fromVC.currentIndexPath.item, section: 0)) as? AssetDetailCell
             else {
                 return nil
             }
@@ -48,11 +48,11 @@ class AnimatableNavigationController: UINavigationController, UINavigationContro
         }
     }
     
-    func navigationController(navigationController: UINavigationController, didShowViewController viewController: UIViewController, animated: Bool) {        
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {        
         swipeInteractionController.attachToViewController(viewController)
     }
     
-    func navigationController(navigationController: UINavigationController, interactionControllerForAnimationController animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         if animationController is ExpandingAnimationController {
             return nil
         }
