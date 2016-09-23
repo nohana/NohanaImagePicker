@@ -72,7 +72,7 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
     // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let sectionType = AlbumListViewControllerSectionType(rawValue: (indexPath as NSIndexPath).section) else {
+        guard let sectionType = AlbumListViewControllerSectionType(rawValue: indexPath.section) else {
             fatalError("Invalid section")
         }
         guard let nohanaImagePickerController = nohanaImagePickerController else {
@@ -82,12 +82,12 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
         case .moment:
             nohanaImagePickerController.delegate?.nohanaImagePickerDidSelectMoment?(nohanaImagePickerController)
         case .albums:
-            nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAssetList: photoKitAlbumList[(indexPath as NSIndexPath).row].assetList)
+            nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAssetList: photoKitAlbumList[indexPath.row].assetList)
         }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let sectionType = AlbumListViewControllerSectionType(rawValue: (indexPath as NSIndexPath).section) else {
+        guard let sectionType = AlbumListViewControllerSectionType(rawValue: indexPath.section) else {
             fatalError("Invalid section")
         }
         switch sectionType {
@@ -129,7 +129,7 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let sectionType = AlbumListViewControllerSectionType(rawValue: (indexPath as NSIndexPath).section) else {
+        guard let sectionType = AlbumListViewControllerSectionType(rawValue: indexPath.section) else {
             fatalError("Invalid section")
         }
         
@@ -146,9 +146,9 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AlbumCell") as? AlbumCell else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AlbumCell\")")
             }
-            let albumList = photoKitAlbumList[(indexPath as NSIndexPath).row]
+            let albumList = photoKitAlbumList[indexPath.row]
             cell.titleLabel.text = albumList.title
-            cell.tag = (indexPath as NSIndexPath).row
+            cell.tag = indexPath.row
             let imageSize = CGSize(
                 width: cell.thumbnailImageView.frame.size.width * UIScreen.main.scale,
                 height: cell.thumbnailImageView.frame.size.width * UIScreen.main.scale
@@ -159,7 +159,7 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
                 lastAsset.image(targetSize: imageSize, handler: { (imageData) -> Void in
                     DispatchQueue.main.async(execute: { () -> Void in
                         if let imageData = imageData {
-                            if cell.tag == (indexPath as NSIndexPath).row {
+                            if cell.tag == indexPath.row {
                                 cell.thumbnailImageView.image = imageData.image
                             }
                         }
