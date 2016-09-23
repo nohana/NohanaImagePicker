@@ -20,26 +20,26 @@ class AlbumListEmptyIndicator: UILabel {
         super.init(frame: frame)
         
         let centerStyle = NSMutableParagraphStyle()
-        centerStyle.alignment = NSTextAlignment.Center
+        centerStyle.alignment = NSTextAlignment.center
         
         let messageAttributes = [
             NSForegroundColorAttributeName : ColorConfig.emptyIndicator,
-            NSFontAttributeName : UIFont.systemFontOfSize(26),
+            NSFontAttributeName : UIFont.systemFont(ofSize: 26),
             NSParagraphStyleAttributeName : centerStyle
         ]
         let messageText = NSAttributedString(string: message, attributes: messageAttributes)
         
         let descriptionAttributes = [
             NSForegroundColorAttributeName : ColorConfig.emptyIndicator,
-            NSFontAttributeName : UIFont.systemFontOfSize(14),
+            NSFontAttributeName : UIFont.systemFont(ofSize: 14),
             NSParagraphStyleAttributeName : centerStyle
         ]
         let descriptionText = NSAttributedString(string: description, attributes: descriptionAttributes)
         
         let attributedText = NSMutableAttributedString()
-        attributedText.appendAttributedString(messageText)
-        attributedText.appendAttributedString(NSAttributedString(string: "\n\n", attributes: [NSFontAttributeName : UIFont.systemFontOfSize(6)]))
-        attributedText.appendAttributedString(descriptionText)
+        attributedText.append(messageText)
+        attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 6)]))
+        attributedText.append(descriptionText)
         
         self.numberOfLines = 0
         self.attributedText = attributedText
