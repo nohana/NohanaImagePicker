@@ -42,8 +42,7 @@ class ExpandingAnimationController: NSObject, UIViewControllerAnimatedTransition
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         guard let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) as? AssetListViewController,
-            toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as? AssetDetailListViewController,
-            containerView = transitionContext.containerView()
+            toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as? AssetDetailListViewController
             else {
                 return
         }
@@ -53,6 +52,7 @@ class ExpandingAnimationController: NSObject, UIViewControllerAnimatedTransition
         expandingImageView.clipsToBounds = true
         expandingImageView.frame = Size.expandingAnimationFromCellRect(fromVC, fromCell: fromCell)
 
+        let containerView = transitionContext.containerView()
         containerView.addSubview(toVC.view)
         containerView.addSubview(expandingImageView)
         toVC.view.alpha = 0

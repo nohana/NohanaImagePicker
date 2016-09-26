@@ -46,8 +46,7 @@ class ContractingAnimationController: NSObject, UIViewControllerAnimatedTransiti
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         guard
             let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) as? AssetDetailListViewController,
-            toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as? AssetListViewController,
-            containerView = transitionContext.containerView()
+            toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as? AssetListViewController
             else {
                 return
         }
@@ -69,6 +68,7 @@ class ContractingAnimationController: NSObject, UIViewControllerAnimatedTransiti
         contractingImageView.clipsToBounds = true
         contractingImageView.frame = Size.contractingAnimationFromCellRect(fromVC, fromCell: fromCell, contractingImageSize: contractingImageView.image!.size)
 
+        let containerView = transitionContext.containerView()
         containerView.addSubview(toVC.view)
         containerView.addSubview(contractingImageView)
         toVC.view.alpha = 0
