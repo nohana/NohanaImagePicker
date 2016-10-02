@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-public protocol ItemListType: Collection {
+public protocol ItemList: Collection {
     associatedtype Item
     var title:String { get }
     func update(_ handler:(() -> Void)?)
     subscript (index: Int) -> Item { get }
 }
 
-extension ItemListType {
+extension ItemList {
     public func index(after i: Int) -> Int {
         return i + 1
     }

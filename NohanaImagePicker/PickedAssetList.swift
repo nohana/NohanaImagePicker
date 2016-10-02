@@ -16,12 +16,12 @@
 
 import Foundation
 
-class PickedAssetList: ItemListType {
+class PickedAssetList: ItemList {
     
     var assetlist: Array<AssetType> = []
     weak var nohanaImagePickerController: NohanaImagePickerController?
     
-    // MARK: - ItemListType
+    // MARK: - ItemList
     
     typealias Item = AssetType
     
