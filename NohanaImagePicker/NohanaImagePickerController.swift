@@ -46,7 +46,7 @@ open class NohanaImagePickerController: UIViewController {
     open var shouldShowMoment: Bool = true
     open var shouldShowEmptyAlbum: Bool = false
     open var toolbarHidden: Bool = false
-    open var canPickAsset = { (asset:AssetType) -> Bool in
+    open var canPickAsset = { (asset:Asset) -> Bool in
         return true
     }
     lazy var assetBundle:Bundle = {
@@ -127,11 +127,11 @@ open class NohanaImagePickerController: UIViewController {
         albumListViewController.nohanaImagePickerController = self
     }
     
-    open func pickAsset(_ asset: AssetType) {
+    open func pickAsset(_ asset: Asset) {
         _ = pickedAssetList.pick(asset: asset)
     }
     
-    open func dropAsset(_ asset: AssetType) {
+    open func dropAsset(_ asset: Asset) {
         _ = pickedAssetList.drop(asset: asset)
     }
 }

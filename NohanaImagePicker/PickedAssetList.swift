@@ -16,14 +16,14 @@
 
 import Foundation
 
-class PickedAssetList: ItemListType {
+class PickedAssetList: ItemList {
     
-    var assetlist: Array<AssetType> = []
+    var assetlist: Array<Asset> = []
     weak var nohanaImagePickerController: NohanaImagePickerController?
     
-    // MARK: - ItemListType
+    // MARK: - ItemList
     
-    typealias Item = AssetType
+    typealias Item = Asset
     
     var title: String {
         return "Selected Assets"
@@ -49,7 +49,7 @@ class PickedAssetList: ItemListType {
     
     // MARK: - Manage assetlist
     
-    func pick(asset: AssetType) -> Bool {
+    func pick(asset: Asset) -> Bool {
         guard !isPicked(asset) else {
             return false
         }
@@ -83,7 +83,7 @@ class PickedAssetList: ItemListType {
         
     }
     
-    func drop(asset: AssetType) -> Bool {
+    func drop(asset: Asset) -> Bool {
         let assetsCountBeforeDropping = self.count
         if asset is PhotoKitAsset {
             if let canDrop = nohanaImagePickerController!.delegate?.nohanaImagePicker?(nohanaImagePickerController!, willDropPhotoKitAsset: (asset as! PhotoKitAsset).originalAsset, pickedAssetsCount: assetsCountBeforeDropping) , !canDrop {
@@ -109,7 +109,7 @@ class PickedAssetList: ItemListType {
         return true
     }
     
-    func isPicked(_ asset: AssetType) -> Bool {
+    func isPicked(_ asset: Asset) -> Bool {
         return assetlist.contains{ $0.identifier == asset.identifier }
     }
     
