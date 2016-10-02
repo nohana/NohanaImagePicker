@@ -56,7 +56,7 @@ picker.shouldShowMoment = shouldShowEmptyAlbum = true
 picker.shouldShowEmptyAlbum = true
 
 // Disable to pick asset
-picker.canPickAsset = { (asset:AssetType) -> Bool in
+picker.canPickAsset = { (asset:Asset) -> Bool in
     return false
 }
 
