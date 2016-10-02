@@ -22,7 +22,7 @@ class AssetCell: UICollectionViewCell {
     @IBOutlet weak var overlayView: UIView!
     
     weak var nohanaImagePickerController: NohanaImagePickerController?
-    var asset: AssetType?
+    var asset: Asset?
     
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
@@ -52,7 +52,7 @@ class AssetCell: UICollectionViewCell {
         self.overlayView.isHidden = !pickButton.isSelected
     }
     
-    func update(asset: AssetType, nohanaImagePickerController: NohanaImagePickerController) {
+    func update(asset: Asset, nohanaImagePickerController: NohanaImagePickerController) {
         self.asset = asset
         self.nohanaImagePickerController = nohanaImagePickerController
         self.pickButton.isSelected = nohanaImagePickerController.pickedAssetList.isPicked(asset) 

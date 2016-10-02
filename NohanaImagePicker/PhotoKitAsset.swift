@@ -15,7 +15,7 @@
  */
 import Photos
 
-public class PhotoKitAsset :AssetType {
+public class PhotoKitAsset :Asset {
     
     let asset: PHAsset
     
@@ -27,7 +27,7 @@ public class PhotoKitAsset :AssetType {
         return asset as PHAsset
     }
     
-    // MARK: - AssetType
+    // MARK: - Asset
     
     public var identifier:Int {
         return asset.localIdentifier.hash

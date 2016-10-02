@@ -15,7 +15,7 @@
  */
 import Photos
 
-public class PhotoKitAlbumList: ItemListType {
+public class PhotoKitAlbumList: ItemList {
     
     private var albumList:[Item] = []
     private let assetCollectionTypes: [PHAssetCollectionType]
@@ -37,7 +37,7 @@ public class PhotoKitAlbumList: ItemListType {
         }
     }
     
-    // MARK: - ItemListType
+    // MARK: - ItemList
     
     public typealias Item = PhotoKitAssetList
     

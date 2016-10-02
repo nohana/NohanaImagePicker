@@ -56,7 +56,7 @@ picker.shouldShowMoment = shouldShowEmptyAlbum = true
 picker.shouldShowEmptyAlbum = true
 
 // Disable to pick asset
-picker.canPickAsset = { (asset:AssetType) -> Bool in
+picker.canPickAsset = { (asset:Asset) -> Bool in
     return false
 }
 
@@ -76,7 +76,7 @@ ColorConfig.backgroundColor = UIColor.redColor()
 Use [Carthage](https://github.com/Carthage/Carthage).
 
 - Add `github "nohana/NohanaImagePicker"` to your Cartfile.
-  - If you want to use Swift2.3, add `github "nohana/NohanaImagePicker", "0.6.0"` instead.
+  - If you want to use Swift2.3, add `github "nohana/NohanaImagePicker", "0.6.1"` instead.
   - If you want to use Swift2.2, add `github "nohana/NohanaImagePicker", "0.5.0"` instead.
 - Run `carthage update`.
 
@@ -91,7 +91,7 @@ Use [CocoaPods](https://cocoapods.org/).
   pod "NohanaImagePicker"
   ```
 
-  - If you want to use Swift2.3 write `pod "NohanaImagePicker",  "0.6.0"` instead of `pod "NohanaImagePicker"`.
+  - If you want to use Swift2.3 write `pod "NohanaImagePicker",  "0.6.1"` instead of `pod "NohanaImagePicker"`.
 
 - Run `pod install`.
 

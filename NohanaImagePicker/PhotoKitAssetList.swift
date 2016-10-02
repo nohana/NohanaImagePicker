@@ -16,7 +16,7 @@
 
 import Photos
 
-open class PhotoKitAssetList :ItemListType {
+open class PhotoKitAssetList :ItemList {
     
     fileprivate let mediaType: MediaType
     open let assetList: PHAssetCollection
@@ -28,7 +28,7 @@ open class PhotoKitAssetList :ItemListType {
         update()
     }
     
-    // MARK: - ItemListType
+    // MARK: - ItemList
     
     public typealias Item = PhotoKitAsset
     

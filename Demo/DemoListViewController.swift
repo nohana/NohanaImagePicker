@@ -117,7 +117,7 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
     func showDisableToPickAssetsPicker() {
         let picker = NohanaImagePickerController()
         picker.delegate = self
-        picker.canPickAsset = { (asset:AssetType) -> Bool in
+        picker.canPickAsset = { (asset:Asset) -> Bool in
             return asset.identifier % 2 == 0
         }
         present(picker, animated: true, completion: nil)
