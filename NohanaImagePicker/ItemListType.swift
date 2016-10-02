@@ -27,7 +27,7 @@ extension ItemList {
     }
 }
 
-public protocol AssetType {
+public protocol Asset {
     var identifier:Int { get }
     func image(targetSize:CGSize, handler: @escaping (ImageData?) -> Void)
 }
