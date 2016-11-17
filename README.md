@@ -66,8 +66,8 @@ ColorConfig.backgroundColor = UIColor.redColor()
 
 ## Requirements
 
-- Swift2.2 later
-- iOS8.0 later
+- Swift 2.2 later
+- iOS 8.0 later
 
 ## Installation
 
