@@ -10,7 +10,7 @@ NohanaImagePicker enables your app to pick images from multiple album, and the m
 
 ## Usage
 
-```
+```swift
 import NohanaImagePicker
 class ViewController: UIViewController, NohanaImagePickerControllerDelegate {
 
@@ -36,7 +36,7 @@ class ViewController: UIViewController, NohanaImagePickerControllerDelegate {
 
 ### Customize
 
-```
+```swift
 let picker = NohanaImagePickerController()
 
 // Set the maximum number of selectable images
@@ -66,8 +66,8 @@ ColorConfig.backgroundColor = UIColor.redColor()
 
 ## Requirements
 
-- Swift2.2 later
-- iOS8.0 later
+- Swift 2.2 later
+- iOS 8.0 later
 
 ## Installation
 
@@ -86,12 +86,12 @@ Use [CocoaPods](https://cocoapods.org/).
 
 - Add the followings to your Podfile:
 
-  ```ruby
-  use_frameworks!
-  pod "NohanaImagePicker"
-  ```
+```ruby
+use_frameworks!
+pod "NohanaImagePicker"
+```
 
-  - If you want to use Swift2.3 write `pod "NohanaImagePicker",  "0.6.1"` instead of `pod "NohanaImagePicker"`.
+- If you want to use Swift2.3 write `pod "NohanaImagePicker",  "0.6.1"` instead of `pod "NohanaImagePicker"`.
 
 - Run `pod install`.
 
