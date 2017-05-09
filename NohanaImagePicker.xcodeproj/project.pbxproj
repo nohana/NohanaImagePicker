@@ -76,6 +76,7 @@
 		3569CAA51EC1918E000C41C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NohanaImagePicker.strings; sourceTree = "<group>"; };
 		3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NohanaImagePicker.xcassets; sourceTree = "<group>"; };
 		3569CAA71EC1918E000C41C0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/NohanaImagePicker.strings; sourceTree = "<group>"; };
+		3590F1F51EC1A79400F32E06 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/NohanaImagePicker.strings; sourceTree = "<group>"; };
 		F20257391C7343D20069B33A /* ImageName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageName.swift; sourceTree = "<group>"; };
 		F202573B1C7418920069B33A /* PickedAssetList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickedAssetList.swift; sourceTree = "<group>"; };
 		F208E5511CD7370B00FFC9F6 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -343,6 +344,7 @@
 				en,
 				Base,
 				ja,
+				ru,
 			);
 			mainGroup = F2C08D6A1C68651900B00181;
 			productRefGroup = F2C08D751C68651900B00181 /* Products */;
@@ -464,6 +466,7 @@
 			children = (
 				F27029CC1C71C43A001647AB /* en */,
 				F27029CF1C71C4FE001647AB /* ja */,
+				3590F1F51EC1A79400F32E06 /* ru */,
 			);
 			name = NohanaImagePicker.strings;
 			sourceTree = "<group>";
