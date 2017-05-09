@@ -64,8 +64,13 @@ picker.canPickAsset = { (asset:Asset) -> Bool in
     return false
 }
 
+// If set to Bundle Object, You can change 'NohanaImagePicker.strings' and 'NohanaImagePicker.xcassets'.
+picker.assetBundle = Bundle.main
+
 // Color
-ColorConfig.backgroundColor = UIColor.redColor()
+ColorConfig.backgroundColor = UIColor.lightGray
+ColorConfig.emptyIndicator = UIColor.lightGray
+ColorConfig.AlbumList.momentCellSeparator = UIColor.lightGray
 ```
 
 ## Requirements
