@@ -49,7 +49,7 @@ open class NohanaImagePickerController: UIViewController {
     open var canPickAsset = { (asset:Asset) -> Bool in
         return true
     }
-    lazy var assetBundle:Bundle = {
+    open lazy var assetBundle:Bundle = {
         let bundle = Bundle(for: type(of: self))
         if let path = bundle.path(forResource: "NohanaImagePicker", ofType: "bundle") {
             return Bundle(path: path)!
@@ -99,7 +99,7 @@ open class NohanaImagePickerController: UIViewController {
         super.viewDidLoad()
         
         // show albumListViewController
-        let storyboard = UIStoryboard(name: "NohanaImagePicker", bundle: assetBundle)
+        let storyboard = UIStoryboard(name: "NohanaImagePicker", bundle: Bundle(for: type(of: self)))
         let viewControllerId = enableExpandingPhotoAnimation ? "EnableAnimationNavigationController" : "DisableAnimationNavigationController"
         guard let navigationController = storyboard.instantiateViewController(withIdentifier: viewControllerId) as? UINavigationController else {
             fatalError("navigationController init failed.")

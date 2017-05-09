@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3569CAA81EC1918E000C41C0 /* NohanaImagePicker.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3569CAA41EC1918E000C41C0 /* NohanaImagePicker.strings */; };
+		3569CAA91EC1918E000C41C0 /* NohanaImagePicker.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */; };
 		F202573A1C7343D20069B33A /* ImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20257391C7343D20069B33A /* ImageName.swift */; };
 		F202573C1C7418920069B33A /* PickedAssetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F202573B1C7418920069B33A /* PickedAssetList.swift */; };
 		F208E5541CD7370B00FFC9F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F208E5531CD7370B00FFC9F6 /* AppDelegate.swift */; };
@@ -21,7 +23,7 @@
 		F218D7DE1C6C3A5B001FCED1 /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F218D7DD1C6C3A5B001FCED1 /* AlbumCell.swift */; };
 		F23554261C69D19C00796DCA /* NohanaImagePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F23554251C69D19C00796DCA /* NohanaImagePicker.storyboard */; };
 		F23554281C69D5DB00796DCA /* NohanaImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23554271C69D5DB00796DCA /* NohanaImagePickerController.swift */; };
-		F237249B1C6DCF96005D1E8A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F237249A1C6DCF96005D1E8A /* Images.xcassets */; };
+		F237249B1C6DCF96005D1E8A /* NohanaImagePicker.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F237249A1C6DCF96005D1E8A /* NohanaImagePicker.xcassets */; };
 		F23CC89E1CB745C800BCE443 /* ActivityIndicatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23CC89D1CB745C800BCE443 /* ActivityIndicatable.swift */; };
 		F24EB6901C68AEED0002EC86 /* AlbumListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24EB68F1C68AEED0002EC86 /* AlbumListViewController.swift */; };
 		F25C10C21C8ED9BF007453C3 /* MomentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C10C11C8ED9BF007453C3 /* MomentViewController.swift */; };
@@ -71,6 +73,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3569CAA51EC1918E000C41C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NohanaImagePicker.strings; sourceTree = "<group>"; };
+		3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NohanaImagePicker.xcassets; sourceTree = "<group>"; };
+		3569CAA71EC1918E000C41C0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/NohanaImagePicker.strings; sourceTree = "<group>"; };
 		F20257391C7343D20069B33A /* ImageName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageName.swift; sourceTree = "<group>"; };
 		F202573B1C7418920069B33A /* PickedAssetList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickedAssetList.swift; sourceTree = "<group>"; };
 		F208E5511CD7370B00FFC9F6 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,7 +90,7 @@
 		F218D7DD1C6C3A5B001FCED1 /* AlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
 		F23554251C69D19C00796DCA /* NohanaImagePicker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NohanaImagePicker.storyboard; sourceTree = "<group>"; };
 		F23554271C69D5DB00796DCA /* NohanaImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NohanaImagePickerController.swift; sourceTree = "<group>"; };
-		F237249A1C6DCF96005D1E8A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F237249A1C6DCF96005D1E8A /* NohanaImagePicker.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NohanaImagePicker.xcassets; sourceTree = "<group>"; };
 		F23CC89D1CB745C800BCE443 /* ActivityIndicatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatable.swift; sourceTree = "<group>"; };
 		F24EB68F1C68AEED0002EC86 /* AlbumListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumListViewController.swift; sourceTree = "<group>"; };
 		F25C10C11C8ED9BF007453C3 /* MomentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MomentViewController.swift; sourceTree = "<group>"; };
@@ -132,9 +137,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3569CAA31EC1918E000C41C0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3569CAA41EC1918E000C41C0 /* NohanaImagePicker.strings */,
+				3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		F208E5521CD7370B00FFC9F6 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				3569CAA31EC1918E000C41C0 /* Resources */,
 				F208E5531CD7370B00FFC9F6 /* AppDelegate.swift */,
 				F208E5681CD738CD00FFC9F6 /* DemoListViewController.swift */,
 				F208E5571CD7370B00FFC9F6 /* Main.storyboard */,
@@ -163,7 +178,7 @@
 			children = (
 				F23554251C69D19C00796DCA /* NohanaImagePicker.storyboard */,
 				F27029CD1C71C43A001647AB /* NohanaImagePicker.strings */,
-				F237249A1C6DCF96005D1E8A /* Images.xcassets */,
+				F237249A1C6DCF96005D1E8A /* NohanaImagePicker.xcassets */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -346,8 +361,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F208E55E1CD7370B00FFC9F6 /* LaunchScreen.storyboard in Resources */,
+				3569CAA91EC1918E000C41C0 /* NohanaImagePicker.xcassets in Resources */,
 				F208E55B1CD7370B00FFC9F6 /* Assets.xcassets in Resources */,
 				F208E5591CD7370B00FFC9F6 /* Main.storyboard in Resources */,
+				3569CAA81EC1918E000C41C0 /* NohanaImagePicker.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,7 +374,7 @@
 			files = (
 				F23554261C69D19C00796DCA /* NohanaImagePicker.storyboard in Resources */,
 				F27029CB1C71C43A001647AB /* NohanaImagePicker.strings in Resources */,
-				F237249B1C6DCF96005D1E8A /* Images.xcassets in Resources */,
+				F237249B1C6DCF96005D1E8A /* NohanaImagePicker.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +434,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3569CAA41EC1918E000C41C0 /* NohanaImagePicker.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3569CAA51EC1918E000C41C0 /* en */,
+				3569CAA71EC1918E000C41C0 /* ja */,
+			);
+			name = NohanaImagePicker.strings;
+			sourceTree = "<group>";
+		};
 		F208E5571CD7370B00FFC9F6 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

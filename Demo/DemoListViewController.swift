@@ -29,6 +29,7 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
         Cell(title: "Large thumbnail", selector: #selector(DemoListViewController.showLargeThumbnailPicker)),
         Cell(title: "No toolbar", selector: #selector(DemoListViewController.showNoToolbarPicker)),
         Cell(title: "Disable to pick assets", selector: #selector(DemoListViewController.showDisableToPickAssetsPicker)),
+        Cell(title: "Custom UI", selector: #selector(DemoListViewController.showCustomUIPicker)),
     ]
     
     override func viewDidAppear(_ animated: Bool) {
@@ -122,6 +123,15 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
         }
         present(picker, animated: true, completion: nil)
     }
+    
+    @objc
+    func showCustomUIPicker() {
+        let picker = NohanaImagePickerController()
+        picker.delegate = self
+        picker.assetBundle = Bundle.main
+        present(picker, animated: true, completion: nil)
+    }
+    
     
     // MARK: - NohanaImagePickerControllerDelegate
     
