@@ -144,8 +144,6 @@ extension NohanaImagePickerController {
             public var background: UIColor = .white
             public var empty: UIColor = UIColor(red: 0x88/0xff, green: 0x88/0xff, blue: 0x88/0xff, alpha: 1)
             public var separator: UIColor = UIColor(red: 0xbb/0xff, green: 0xbb/0xff, blue: 0xbb/0xff, alpha: 1)
-            public var picked: UIColor = UIColor(red: 158/0xff, green: 197/0xff, blue: 46/0xff, alpha: 1)
-            public var dropped: UIColor = .red
         }
         public var color: Color = Color()
         
