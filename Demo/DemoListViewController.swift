@@ -39,6 +39,11 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ColorConfig.backgroundColor = UIColor.white
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cells.count
     }
