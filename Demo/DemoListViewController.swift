@@ -41,7 +41,6 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        ColorConfig.backgroundColor = UIColor.white
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,8 +65,6 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
                 }
             })
         }
-        
-        
     }
     
     // MARK: - Photos
@@ -131,11 +128,9 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
     
     @objc
     func showCustomUIPicker() {
-        ColorConfig.backgroundColor = UIColor.lightGray
-        
         let picker = NohanaImagePickerController()
         picker.delegate = self
-        picker.assetBundle = Bundle.main
+        picker.config.color.background = .lightGray
         present(picker, animated: true, completion: nil)
     }
     

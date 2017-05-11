@@ -35,12 +35,11 @@ class AssetDetailListViewController: AssetListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let nohanaImagePickerController = nohanaImagePickerController {
-            pickButton.setImage(
-                UIImage(named: ImageName.AssetCell.PickButton.SizeL.dropped, in: nohanaImagePickerController.assetBundle, compatibleWith: nil),
-                for: UIControlState())
-            pickButton.setImage(
-                UIImage(named: ImageName.AssetCell.PickButton.SizeL.picked, in: nohanaImagePickerController.assetBundle, compatibleWith: nil),
-                for: .selected)
+            let droppedImage: UIImage? = nohanaImagePickerController.config.image.droppedLarge ?? UIImage(named: "btn_select_l", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
+            let pickedImage: UIImage? = nohanaImagePickerController.config.image.pickedLarge ?? UIImage(named: "btn_selected_l", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
+            
+            pickButton.setImage(droppedImage, for: UIControlState())
+            pickButton.setImage(pickedImage, for: .selected)
         }
     }
     

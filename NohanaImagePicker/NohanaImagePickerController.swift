@@ -39,7 +39,7 @@ public enum MediaType: Int {
 
 open class NohanaImagePickerController: UIViewController {
     
-    open var maximumNumberOfSelection: Int = 21 // set 0 to set no limit
+    open var maximumNumberOfSelection: Int = 21 // set 0 to no limit
     open var numberOfColumnsInPortrait: Int = 4
     open var numberOfColumnsInLandscape: Int = 7
     open weak var delegate: NohanaImagePickerControllerDelegate?
@@ -49,15 +49,15 @@ open class NohanaImagePickerController: UIViewController {
     open var canPickAsset = { (asset:Asset) -> Bool in
         return true
     }
-    open lazy var assetBundle: Bundle = self.selectAssetBundle()
-    func selectAssetBundle () -> Bundle {
+    open var config: Config = Config()
+    
+    lazy var assetBundle:Bundle = {
         let bundle = Bundle(for: type(of: self))
         if let path = bundle.path(forResource: "NohanaImagePicker", ofType: "bundle") {
             return Bundle(path: path)!
         }
         return bundle
-    }
-
+    }()
     let pickedAssetList: PickedAssetList
     let mediaType: MediaType
     let enableExpandingPhotoAnimation: Bool
@@ -101,7 +101,7 @@ open class NohanaImagePickerController: UIViewController {
         super.viewDidLoad()
         
         // show albumListViewController
-        let storyboard = UIStoryboard(name: "NohanaImagePicker", bundle: selectAssetBundle())
+        let storyboard = UIStoryboard(name: "NohanaImagePicker", bundle: assetBundle)
         let viewControllerId = enableExpandingPhotoAnimation ? "EnableAnimationNavigationController" : "DisableAnimationNavigationController"
         guard let navigationController = storyboard.instantiateViewController(withIdentifier: viewControllerId) as? UINavigationController else {
             fatalError("navigationController init failed.")
@@ -138,3 +138,24 @@ open class NohanaImagePickerController: UIViewController {
     }
 }
 
+extension NohanaImagePickerController {
+    public struct Config {
+        public struct Color {
+            public var background: UIColor = .white
+            public var empty: UIColor = UIColor(red: 0x88/0xff, green: 0x88/0xff, blue: 0x88/0xff, alpha: 1)
+            public var separator: UIColor = UIColor(red: 0xbb/0xff, green: 0xbb/0xff, blue: 0xbb/0xff, alpha: 1)
+            public var picked: UIColor = UIColor(red: 158/0xff, green: 197/0xff, blue: 46/0xff, alpha: 1)
+            public var dropped: UIColor = .red
+        }
+        public var color: Color = Color()
+        
+        public struct Image {
+            public var pickedSmall: UIImage?
+            public var pickedLarge: UIImage?
+            public var droppedSmall: UIImage?
+            public var droppedLarge: UIImage?
+        }
+        public var image: Image = Image()
+    }
+    
+}

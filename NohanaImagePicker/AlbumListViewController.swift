@@ -47,7 +47,7 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
         }
         setUpEmptyIndicator()
         setUpActivityIndicator()
-        self.view.backgroundColor = ColorConfig.backgroundColor
+        self.view.backgroundColor = nohanaImagePickerController?.config.color.background
     }
     
     deinit {
@@ -135,10 +135,11 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
         
         switch sectionType {
         case .moment:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "MomentAlbumCell") as? AlbumCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "MomentAlbumCell") as? MomentCell else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"MomentAlbumCell\")")
             }
             if let nohanaImagePickerController = nohanaImagePickerController {
+                cell.config = nohanaImagePickerController.config
                 cell.titleLabel?.text = NSLocalizedString("albumlist.moment.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
             }
             return cell
@@ -222,7 +223,8 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
         emptyIndicator = AlbumListEmptyIndicator(
             message: NSLocalizedString("albumlist.empty.message", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: ""),
             description: NSLocalizedString("albumlist.empty.description", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: ""),
-            frame: frame)
+            frame: frame,
+            config: nohanaImagePickerController.config)
     }
     
     func isEmpty() -> Bool {
