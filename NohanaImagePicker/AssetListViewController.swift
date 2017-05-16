@@ -27,7 +27,7 @@ class AssetListViewController: UICollectionViewController {
         updateTitle()
         setUpToolbarItems()
         addPickPhotoKitAssetNotificationObservers()
-        self.view.backgroundColor = ColorConfig.backgroundColor
+        self.view.backgroundColor = nohanaImagePickerController?.config.color.background
     }
     
     var cellSize: CGSize {

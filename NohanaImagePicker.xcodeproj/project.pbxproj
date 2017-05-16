@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3569CAA81EC1918E000C41C0 /* NohanaImagePicker.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3569CAA41EC1918E000C41C0 /* NohanaImagePicker.strings */; };
 		3569CAA91EC1918E000C41C0 /* NohanaImagePicker.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */; };
-		F202573A1C7343D20069B33A /* ImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20257391C7343D20069B33A /* ImageName.swift */; };
 		F202573C1C7418920069B33A /* PickedAssetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F202573B1C7418920069B33A /* PickedAssetList.swift */; };
 		F208E5541CD7370B00FFC9F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F208E5531CD7370B00FFC9F6 /* AppDelegate.swift */; };
 		F208E5591CD7370B00FFC9F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F208E5571CD7370B00FFC9F6 /* Main.storyboard */; };
@@ -30,7 +28,6 @@
 		F25C69881CA23A0A005935D6 /* MomentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C69871CA23A0A005935D6 /* MomentCell.swift */; };
 		F25C69901CA27311005935D6 /* EmptyIndicatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C698F1CA27311005935D6 /* EmptyIndicatable.swift */; };
 		F25C69921CA28728005935D6 /* AlbumListEmptyIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C69911CA28728005935D6 /* AlbumListEmptyIndicator.swift */; };
-		F25C699B1CA2B79A005935D6 /* ColorConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C699A1CA2B79A005935D6 /* ColorConfig.swift */; };
 		F26775DE1C701FA7002E786C /* ItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26775DD1C701FA7002E786C /* ItemList.swift */; };
 		F26775E11C7046C7002E786C /* ExpandingAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26775E01C7046C7002E786C /* ExpandingAnimationController.swift */; };
 		F26775E51C70574F002E786C /* AnimatableNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26775E41C70574F002E786C /* AnimatableNavigationController.swift */; };
@@ -73,11 +70,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3569CAA51EC1918E000C41C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NohanaImagePicker.strings; sourceTree = "<group>"; };
 		3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NohanaImagePicker.xcassets; sourceTree = "<group>"; };
-		3569CAA71EC1918E000C41C0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/NohanaImagePicker.strings; sourceTree = "<group>"; };
 		3590F1F51EC1A79400F32E06 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/NohanaImagePicker.strings; sourceTree = "<group>"; };
-		F20257391C7343D20069B33A /* ImageName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageName.swift; sourceTree = "<group>"; };
 		F202573B1C7418920069B33A /* PickedAssetList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickedAssetList.swift; sourceTree = "<group>"; };
 		F208E5511CD7370B00FFC9F6 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F208E5531CD7370B00FFC9F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -98,7 +92,6 @@
 		F25C69871CA23A0A005935D6 /* MomentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MomentCell.swift; sourceTree = "<group>"; };
 		F25C698F1CA27311005935D6 /* EmptyIndicatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyIndicatable.swift; sourceTree = "<group>"; };
 		F25C69911CA28728005935D6 /* AlbumListEmptyIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumListEmptyIndicator.swift; sourceTree = "<group>"; };
-		F25C699A1CA2B79A005935D6 /* ColorConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorConfig.swift; sourceTree = "<group>"; };
 		F26775DD1C701FA7002E786C /* ItemList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemList.swift; sourceTree = "<group>"; };
 		F26775E01C7046C7002E786C /* ExpandingAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandingAnimationController.swift; sourceTree = "<group>"; };
 		F26775E41C70574F002E786C /* AnimatableNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatableNavigationController.swift; sourceTree = "<group>"; };
@@ -141,7 +134,6 @@
 		3569CAA31EC1918E000C41C0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3569CAA41EC1918E000C41C0 /* NohanaImagePicker.strings */,
 				3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */,
 			);
 			path = Resources;
@@ -210,12 +202,10 @@
 			children = (
 				F26775DD1C701FA7002E786C /* ItemList.swift */,
 				F202573B1C7418920069B33A /* PickedAssetList.swift */,
-				F20257391C7343D20069B33A /* ImageName.swift */,
 				F26775E71C7073CD002E786C /* Size.swift */,
 				F2DA29761C7749D600B0A8E3 /* NotificationInfo.swift */,
 				F25C698F1CA27311005935D6 /* EmptyIndicatable.swift */,
 				F23CC89D1CB745C800BCE443 /* ActivityIndicatable.swift */,
-				F25C699A1CA2B79A005935D6 /* ColorConfig.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -366,7 +356,6 @@
 				3569CAA91EC1918E000C41C0 /* NohanaImagePicker.xcassets in Resources */,
 				F208E55B1CD7370B00FFC9F6 /* Assets.xcassets in Resources */,
 				F208E5591CD7370B00FFC9F6 /* Main.storyboard in Resources */,
-				3569CAA81EC1918E000C41C0 /* NohanaImagePicker.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,7 +393,6 @@
 				F25C10C21C8ED9BF007453C3 /* MomentViewController.swift in Sources */,
 				F25C69881CA23A0A005935D6 /* MomentCell.swift in Sources */,
 				F2FE1F781C901D9400FDBE7B /* MomentSectionHeaderView.swift in Sources */,
-				F202573A1C7343D20069B33A /* ImageName.swift in Sources */,
 				F23554281C69D5DB00796DCA /* NohanaImagePickerController.swift in Sources */,
 				F25C69921CA28728005935D6 /* AlbumListEmptyIndicator.swift in Sources */,
 				F2131F431C79615700797887 /* SwipeInteractionController.swift in Sources */,
@@ -419,7 +407,6 @@
 				F2DF3B2B1C6CC4DB00C1C0E4 /* AssetDetailListViewController.swift in Sources */,
 				F218D7D61C6B3D22001FCED1 /* PhotoKitAlbumList.swift in Sources */,
 				F24EB6901C68AEED0002EC86 /* AlbumListViewController.swift in Sources */,
-				F25C699B1CA2B79A005935D6 /* ColorConfig.swift in Sources */,
 				F28F4AC31C6C49EE00B7D725 /* PhotoKitAssetList.swift in Sources */,
 				F26775EA1C71645A002E786C /* ContractingAnimationController.swift in Sources */,
 			);
@@ -436,15 +423,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3569CAA41EC1918E000C41C0 /* NohanaImagePicker.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3569CAA51EC1918E000C41C0 /* en */,
-				3569CAA71EC1918E000C41C0 /* ja */,
-			);
-			name = NohanaImagePicker.strings;
-			sourceTree = "<group>";
-		};
 		F208E5571CD7370B00FFC9F6 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
