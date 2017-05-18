@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3569CAA91EC1918E000C41C0 /* NohanaImagePicker.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */; };
+		35334D3C1ECDA179002519BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35334D3B1ECDA179002519BB /* Assets.xcassets */; };
 		F202573C1C7418920069B33A /* PickedAssetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F202573B1C7418920069B33A /* PickedAssetList.swift */; };
 		F208E5541CD7370B00FFC9F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F208E5531CD7370B00FFC9F6 /* AppDelegate.swift */; };
 		F208E5591CD7370B00FFC9F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F208E5571CD7370B00FFC9F6 /* Main.storyboard */; };
-		F208E55B1CD7370B00FFC9F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F208E55A1CD7370B00FFC9F6 /* Assets.xcassets */; };
 		F208E55E1CD7370B00FFC9F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F208E55C1CD7370B00FFC9F6 /* LaunchScreen.storyboard */; };
 		F208E5631CD7373900FFC9F6 /* NohanaImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C08D741C68651900B00181 /* NohanaImagePicker.framework */; };
 		F208E5641CD7373900FFC9F6 /* NohanaImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2C08D741C68651900B00181 /* NohanaImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -70,13 +69,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NohanaImagePicker.xcassets; sourceTree = "<group>"; };
+		35334D3B1ECDA179002519BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3590F1F51EC1A79400F32E06 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/NohanaImagePicker.strings; sourceTree = "<group>"; };
 		F202573B1C7418920069B33A /* PickedAssetList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickedAssetList.swift; sourceTree = "<group>"; };
 		F208E5511CD7370B00FFC9F6 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F208E5531CD7370B00FFC9F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F208E5581CD7370B00FFC9F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F208E55A1CD7370B00FFC9F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F208E55D1CD7370B00FFC9F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F208E55F1CD7370B00FFC9F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F208E5681CD738CD00FFC9F6 /* DemoListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoListViewController.swift; sourceTree = "<group>"; };
@@ -134,7 +132,7 @@
 		3569CAA31EC1918E000C41C0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */,
+				35334D3B1ECDA179002519BB /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -146,7 +144,6 @@
 				F208E5531CD7370B00FFC9F6 /* AppDelegate.swift */,
 				F208E5681CD738CD00FFC9F6 /* DemoListViewController.swift */,
 				F208E5571CD7370B00FFC9F6 /* Main.storyboard */,
-				F208E55A1CD7370B00FFC9F6 /* Assets.xcassets */,
 				F208E55C1CD7370B00FFC9F6 /* LaunchScreen.storyboard */,
 				F208E55F1CD7370B00FFC9F6 /* Info.plist */,
 			);
@@ -353,8 +350,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F208E55E1CD7370B00FFC9F6 /* LaunchScreen.storyboard in Resources */,
-				3569CAA91EC1918E000C41C0 /* NohanaImagePicker.xcassets in Resources */,
-				F208E55B1CD7370B00FFC9F6 /* Assets.xcassets in Resources */,
+				35334D3C1ECDA179002519BB /* Assets.xcassets in Resources */,
 				F208E5591CD7370B00FFC9F6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

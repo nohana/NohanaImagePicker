@@ -49,7 +49,7 @@ open class NohanaImagePickerController: UIViewController {
     open var canPickAsset = { (asset:Asset) -> Bool in
         return true
     }
-    open var config: Config = Config()
+    open var config: NohanaImagePickerConfig = NohanaImagePickerConfig.init()
     
     lazy var assetBundle:Bundle = {
         let bundle = Bundle(for: type(of: self))
@@ -101,9 +101,8 @@ open class NohanaImagePickerController: UIViewController {
         super.viewDidLoad()
         
         // show albumListViewController
-        let storyboard = UIStoryboard(name: "NohanaImagePicker", bundle: assetBundle)
         let viewControllerId = enableExpandingPhotoAnimation ? "EnableAnimationNavigationController" : "DisableAnimationNavigationController"
-        guard let navigationController = storyboard.instantiateViewController(withIdentifier: viewControllerId) as? UINavigationController else {
+        guard let navigationController = self.config.storyboard.instantiateViewController(withIdentifier: viewControllerId) as? UINavigationController else {
             fatalError("navigationController init failed.")
         }
         addChildViewController(navigationController)
@@ -138,22 +137,38 @@ open class NohanaImagePickerController: UIViewController {
     }
 }
 
-extension NohanaImagePickerController {
-    public struct Config {
-        public struct Color {
-            public var background: UIColor = .white
-            public var empty: UIColor = UIColor(red: 0x88/0xff, green: 0x88/0xff, blue: 0x88/0xff, alpha: 1)
-            public var separator: UIColor = UIColor(red: 0xbb/0xff, green: 0xbb/0xff, blue: 0xbb/0xff, alpha: 1)
+open class NohanaImagePickerConfig {
+ 
+    class func selectBundle() -> Bundle {
+        let bundle = Bundle(for: NohanaImagePickerController.self)
+        if let path = bundle.path(forResource: "NohanaImagePicker", ofType: "bundle") {
+            return Bundle(path: path)!
         }
-        public var color: Color = Color()
-        
-        public struct Image {
-            public var pickedSmall: UIImage?
-            public var pickedLarge: UIImage?
-            public var droppedSmall: UIImage?
-            public var droppedLarge: UIImage?
-        }
-        public var image: Image = Image()
+        return bundle
     }
+    
+    let storyboard: UIStoryboard = UIStoryboard(name: "NohanaImagePicker", bundle: NohanaImagePickerConfig.selectBundle())
+    
+    public struct Color {
+        public var background: UIColor = .white
+        public var empty: UIColor = UIColor(red: 0x88/0xff, green: 0x88/0xff, blue: 0x88/0xff, alpha: 1)
+        public var separator: UIColor = UIColor(red: 0xbb/0xff, green: 0xbb/0xff, blue: 0xbb/0xff, alpha: 1)
+    }
+    public var color: Color = Color()
+    
+    public struct Image {
+        public var pickedSmall: UIImage = UIImage(named: "btn_selected_m", in: NohanaImagePickerConfig.selectBundle(), compatibleWith: nil)!
+        public var pickedLarge: UIImage?
+        public var droppedSmall: UIImage?
+        public var droppedLarge: UIImage?
+    }
+    public var image: Image = Image()
+    
+    public struct Strings {
+        public var albumlistTitle: String = {
+            return NSLocalizedString("albumlist.title", tableName: "NohanaImagePicker", bundle: NohanaImagePickerConfig.selectBundle(), comment: "")
+        }()
+    }
+    public var strings: Strings = Strings()
     
 }
