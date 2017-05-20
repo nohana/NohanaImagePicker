@@ -34,10 +34,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Album Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YSz-MM-h6f">
-                                            <rect key="frame" x="100" y="33" width="187" height="16"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="16" id="X2y-hP-9aM"/>
-                                            </constraints>
+                                            <rect key="frame" x="100" y="31.5" width="187" height="19.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -383,11 +380,10 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNJ-Oh-VhZ">
-                                    <rect key="frame" x="12" y="11" width="120" height="21"/>
+                                    <rect key="frame" x="12" y="13" width="120" height="17"/>
                                     <constraints>
                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="KSm-hH-VZX"/>
                                         <constraint firstAttribute="width" constant="120" id="QzC-0j-DZA"/>
-                                        <constraint firstAttribute="height" constant="21" id="XMh-5E-eAL"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -399,10 +395,7 @@
                                     </variation>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Aa-PA-AHS">
-                                    <rect key="frame" x="132" y="12" width="176" height="21"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="21" id="QVr-qn-Rz7"/>
-                                    </constraints>
+                                    <rect key="frame" x="132" y="15.5" width="176" height="14.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -449,7 +442,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="vma-iJ-kti"/>
         <segue reference="tQI-o9-h2w"/>
+        <segue reference="Bed-w3-B1Q"/>
     </inferredMetricsTieBreakers>
 </document>
