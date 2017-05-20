@@ -131,6 +131,7 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
         let picker = NohanaImagePickerController()
         picker.delegate = self
         picker.config.color.background = .lightGray
+        picker.config.strings.albumlistTitle = "テストタイトル"
         present(picker, animated: true, completion: nil)
     }
     

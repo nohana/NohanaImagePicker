@@ -16,7 +16,7 @@
 
 class AlbumListEmptyIndicator: UILabel {
     
-    init(message: String, description: String, frame: CGRect, config: NohanaImagePickerController.Config) {
+    init(message: String, description: String, frame: CGRect, config: NohanaImagePickerConfig) {
         super.init(frame: frame)
         
         let centerStyle = NSMutableParagraphStyle()

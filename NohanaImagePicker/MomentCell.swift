@@ -17,7 +17,7 @@
 import UIKit
 
 class MomentCell: AlbumCell {
-    var config: NohanaImagePickerController.Config!
+    var config: NohanaImagePickerConfig!
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
