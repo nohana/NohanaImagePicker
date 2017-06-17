@@ -141,9 +141,9 @@ open class NohanaImagePickerController: UIViewController {
 extension NohanaImagePickerController {
     public struct Config {
         public struct Color {
-            public var background = UIColor.white
-            public var empty = UIColor(red: 0x88/0xff, green: 0x88/0xff, blue: 0x88/0xff, alpha: 1)
-            public var separator = UIColor(red: 0xbb/0xff, green: 0xbb/0xff, blue: 0xbb/0xff, alpha: 1)
+            public var background: UIColor?
+            public var empty: UIColor?
+            public var separator: UIColor?
         }
         public var color = Color()
         

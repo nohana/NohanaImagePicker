@@ -130,7 +130,8 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
     func showCustomUIPicker() {
         let picker = NohanaImagePickerController()
         picker.delegate = self
-        picker.config.color.background = .darkGray
+        picker.config.color.background = UIColor(red: 0xff/0xff, green: 0xcc/0xff, blue: 0xcc/0xff, alpha: 1)
+        picker.config.color.separator = .darkGray
         picker.config.strings.albumListTitle = "🏞"
         present(picker, animated: true, completion: nil)
     }
