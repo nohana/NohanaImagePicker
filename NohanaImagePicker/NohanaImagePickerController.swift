@@ -39,7 +39,7 @@ public enum MediaType: Int {
 
 open class NohanaImagePickerController: UIViewController {
     
-    open var maximumNumberOfSelection: Int = 21 // set 0 to set no limit
+    open var maximumNumberOfSelection: Int = 21 // set 0 to no limit
     open var numberOfColumnsInPortrait: Int = 4
     open var numberOfColumnsInLandscape: Int = 7
     open weak var delegate: NohanaImagePickerControllerDelegate?
@@ -49,6 +49,8 @@ open class NohanaImagePickerController: UIViewController {
     open var canPickAsset = { (asset:Asset) -> Bool in
         return true
     }
+    open var config: Config = Config()
+    
     lazy var assetBundle:Bundle = {
         let bundle = Bundle(for: type(of: self))
         if let path = bundle.path(forResource: "NohanaImagePicker", ofType: "bundle") {
@@ -136,3 +138,31 @@ open class NohanaImagePickerController: UIViewController {
     }
 }
 
+extension NohanaImagePickerController {
+    public struct Config {
+        public struct Color {
+            public var background: UIColor?
+            public var empty: UIColor?
+            public var separator: UIColor?
+        }
+        public var color = Color()
+        
+        public struct Image {
+            public var pickedSmall: UIImage?
+            public var pickedLarge: UIImage?
+            public var droppedSmall: UIImage?
+            public var droppedLarge: UIImage?
+        }
+        public var image = Image()
+        
+        public struct Strings {
+            public var albumListTitle: String?
+            public var albumListMomentTitle: String?
+            public var albumListEmptyMessage: String?
+            public var albumListEmptyDescription: String?
+            public var toolbarTitleNoLimit: String?
+            public var toolbarTitleHasLimit: String?
+        }
+        public var strings = Strings()
+    }
+}

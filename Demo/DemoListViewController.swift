@@ -29,6 +29,7 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
         Cell(title: "Large thumbnail", selector: #selector(DemoListViewController.showLargeThumbnailPicker)),
         Cell(title: "No toolbar", selector: #selector(DemoListViewController.showNoToolbarPicker)),
         Cell(title: "Disable to pick assets", selector: #selector(DemoListViewController.showDisableToPickAssetsPicker)),
+        Cell(title: "Custom UI", selector: #selector(DemoListViewController.showCustomUIPicker)),
     ]
     
     override func viewDidAppear(_ animated: Bool) {
@@ -36,6 +37,10 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
         if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -60,8 +65,6 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
                 }
             })
         }
-        
-        
     }
     
     // MARK: - Photos
@@ -120,6 +123,18 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
         picker.canPickAsset = { (asset:Asset) -> Bool in
             return asset.identifier % 2 == 0
         }
+        present(picker, animated: true, completion: nil)
+    }
+    
+    @objc
+    func showCustomUIPicker() {
+        let picker = NohanaImagePickerController()
+        picker.delegate = self
+        picker.config.color.background = UIColor(red: 0xcc/0xff, green: 0xff/0xff, blue: 0xff/0xff, alpha: 1)
+        picker.config.color.separator = UIColor(red: 0x00/0xff, green: 0x66/0xff, blue: 0x66/0xff, alpha: 1)
+        picker.config.strings.albumListTitle = "🏞"
+        picker.config.image.droppedSmall = UIImage(named: "btn_select_m")
+        picker.config.image.pickedSmall = UIImage(named: "btn_selected_m")
         present(picker, animated: true, completion: nil)
     }
     

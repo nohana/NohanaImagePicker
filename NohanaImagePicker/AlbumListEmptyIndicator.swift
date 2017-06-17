@@ -16,21 +16,21 @@
 
 class AlbumListEmptyIndicator: UILabel {
     
-    init(message: String, description: String, frame: CGRect) {
+    init(message: String, description: String, frame: CGRect, config: NohanaImagePickerController.Config) {
         super.init(frame: frame)
         
         let centerStyle = NSMutableParagraphStyle()
         centerStyle.alignment = NSTextAlignment.center
         
         let messageAttributes = [
-            NSForegroundColorAttributeName : ColorConfig.emptyIndicator,
+            NSForegroundColorAttributeName : config.color.empty ?? UIColor(red: 0x88/0xff, green: 0x88/0xff, blue: 0x88/0xff, alpha: 1),
             NSFontAttributeName : UIFont.systemFont(ofSize: 26),
             NSParagraphStyleAttributeName : centerStyle
         ]
         let messageText = NSAttributedString(string: message, attributes: messageAttributes)
         
         let descriptionAttributes = [
-            NSForegroundColorAttributeName : ColorConfig.emptyIndicator,
+            NSForegroundColorAttributeName : config.color.empty ?? UIColor(red: 0x88/0xff, green: 0x88/0xff, blue: 0x88/0xff, alpha: 1),
             NSFontAttributeName : UIFont.systemFont(ofSize: 14),
             NSParagraphStyleAttributeName : centerStyle
         ]
