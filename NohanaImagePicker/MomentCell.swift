@@ -22,7 +22,8 @@ class MomentCell: AlbumCell {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         let lineWidth: CGFloat = 1 / UIScreen.main.scale
-        config.color.separator.setFill()
+        let separatorColor: UIColor = config.color.separator ?? UIColor(red: 0xbb/0xff, green: 0xbb/0xff, blue: 0xbb/0xff, alpha: 1)
+        separatorColor.setFill()
         UIRectFill(CGRect(x: 16, y: frame.size.height - lineWidth, width: frame.size.width, height:lineWidth))
     }
 

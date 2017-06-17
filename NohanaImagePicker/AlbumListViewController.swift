@@ -41,13 +41,13 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
     override func viewDidLoad() {
         super.viewDidLoad()
         if let nohanaImagePickerController = nohanaImagePickerController {
-            title = NSLocalizedString("albumlist.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
+            view.backgroundColor = nohanaImagePickerController.config.color.background ?? .white
+            title = nohanaImagePickerController.config.strings.albumListTitle ?? NSLocalizedString("albumlist.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
             setUpToolbarItems()
             navigationController?.setToolbarHidden(nohanaImagePickerController.toolbarHidden ,animated: false)
         }
         setUpEmptyIndicator()
         setUpActivityIndicator()
-        self.view.backgroundColor = nohanaImagePickerController?.config.color.background
     }
     
     deinit {
@@ -140,7 +140,7 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
             }
             if let nohanaImagePickerController = nohanaImagePickerController {
                 cell.config = nohanaImagePickerController.config
-                cell.titleLabel?.text = NSLocalizedString("albumlist.moment.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
+                cell.titleLabel?.text = nohanaImagePickerController.config.strings.albumListMomentTitle ?? NSLocalizedString("albumlist.moment.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
             }
             return cell
         case .albums:
@@ -221,8 +221,8 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
             return
         }
         emptyIndicator = AlbumListEmptyIndicator(
-            message: NSLocalizedString("albumlist.empty.message", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: ""),
-            description: NSLocalizedString("albumlist.empty.description", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: ""),
+            message: nohanaImagePickerController.config.strings.albumListEmptyMessage ?? NSLocalizedString("albumlist.empty.message", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: ""),
+            description: nohanaImagePickerController.config.strings.albumListEmptyDescription ?? NSLocalizedString("albumlist.empty.description", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: ""),
             frame: frame,
             config: nohanaImagePickerController.config)
     }
@@ -274,11 +274,11 @@ extension UIViewController {
             return
         }
         if nohanaImagePickerController.maximumNumberOfSelection == 0 {
-            let title = String(format: NSLocalizedString("toolbar.title.nolimit", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: ""),
+            let title = String(format: nohanaImagePickerController.config.strings.toolbarTitleNoLimit ?? NSLocalizedString("toolbar.title.nolimit", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: ""),
                 nohanaImagePickerController.pickedAssetList.count)
             infoButton.title = title
         } else {
-            let title = String(format: NSLocalizedString("toolbar.title.haslimit", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: ""),
+            let title = String(format: nohanaImagePickerController.config.strings.toolbarTitleHasLimit ?? NSLocalizedString("toolbar.title.haslimit", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: ""),
                 nohanaImagePickerController.pickedAssetList.count,
                 nohanaImagePickerController.maximumNumberOfSelection)
             infoButton.title = title

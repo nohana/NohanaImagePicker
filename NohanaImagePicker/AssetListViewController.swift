@@ -24,10 +24,10 @@ class AssetListViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = nohanaImagePickerController?.config.color.background ?? .white
         updateTitle()
         setUpToolbarItems()
         addPickPhotoKitAssetNotificationObservers()
-        self.view.backgroundColor = nohanaImagePickerController?.config.color.background
     }
     
     var cellSize: CGSize {

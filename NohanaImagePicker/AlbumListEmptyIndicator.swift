@@ -23,14 +23,14 @@ class AlbumListEmptyIndicator: UILabel {
         centerStyle.alignment = NSTextAlignment.center
         
         let messageAttributes = [
-            NSForegroundColorAttributeName : config.color.empty,
+            NSForegroundColorAttributeName : config.color.empty ?? UIColor(red: 0x88/0xff, green: 0x88/0xff, blue: 0x88/0xff, alpha: 1),
             NSFontAttributeName : UIFont.systemFont(ofSize: 26),
             NSParagraphStyleAttributeName : centerStyle
         ]
         let messageText = NSAttributedString(string: message, attributes: messageAttributes)
         
         let descriptionAttributes = [
-            NSForegroundColorAttributeName : config.color.empty,
+            NSForegroundColorAttributeName : config.color.empty ?? UIColor(red: 0x88/0xff, green: 0x88/0xff, blue: 0x88/0xff, alpha: 1),
             NSFontAttributeName : UIFont.systemFont(ofSize: 14),
             NSParagraphStyleAttributeName : centerStyle
         ]
