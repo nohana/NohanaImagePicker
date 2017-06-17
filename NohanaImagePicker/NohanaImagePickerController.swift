@@ -141,11 +141,11 @@ open class NohanaImagePickerController: UIViewController {
 extension NohanaImagePickerController {
     public struct Config {
         public struct Color {
-            public var background: UIColor = .white
-            public var empty: UIColor = UIColor(red: 0x88/0xff, green: 0x88/0xff, blue: 0x88/0xff, alpha: 1)
-            public var separator: UIColor = UIColor(red: 0xbb/0xff, green: 0xbb/0xff, blue: 0xbb/0xff, alpha: 1)
+            public var background = UIColor.white
+            public var empty = UIColor(red: 0x88/0xff, green: 0x88/0xff, blue: 0x88/0xff, alpha: 1)
+            public var separator = UIColor(red: 0xbb/0xff, green: 0xbb/0xff, blue: 0xbb/0xff, alpha: 1)
         }
-        public var color: Color = Color()
+        public var color = Color()
         
         public struct Image {
             public var pickedSmall: UIImage?
@@ -153,7 +153,16 @@ extension NohanaImagePickerController {
             public var droppedSmall: UIImage?
             public var droppedLarge: UIImage?
         }
-        public var image: Image = Image()
+        public var image = Image()
+        
+        public struct Strings {
+            public var albumListTitle: String?
+            public var albumListMomentTitle: String?
+            public var albumListEmptyMessage: String?
+            public var albumListEmptyDescription: String?
+            public var toolbarTitleNoLimit: String?
+            public var toolbarTitleHasLimit: String?
+        }
+        public var strings = Strings()
     }
-    
 }
