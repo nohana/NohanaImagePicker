@@ -14,17 +14,9 @@
  * limitations under the License.
  */
 
-struct ImageName {
-    struct AssetCell {
-        struct PickButton {
-            struct SizeM {
-                static let picked = "btn_selected_m"
-                static let dropped = "btn_select_m"
-            }
-            struct SizeL {
-                static let picked = "btn_selected_l"
-                static let dropped = "btn_select_l"
-            }
-        }
-    }
-}
+"albumlist.title" = "Фотографии";
+"albumlist.empty.message" = "Нет фотографий";
+"albumlist.empty.description" = "Получить фото с камеры";
+"albumlist.moment.title" = "Моменты";
+"toolbar.title.nolimit" = "Выбрано: %ld";
+"toolbar.title.haslimit" = "Выбрано: %ld / %ld";

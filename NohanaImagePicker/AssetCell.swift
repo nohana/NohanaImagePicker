@@ -27,12 +27,11 @@ class AssetCell: UICollectionViewCell {
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         if let nohanaImagePickerController = nohanaImagePickerController {
-            pickButton.setImage(
-                UIImage(named: ImageName.AssetCell.PickButton.SizeM.dropped, in: nohanaImagePickerController.assetBundle, compatibleWith: nil),
-                for: UIControlState())
-            pickButton.setImage(
-                UIImage(named: ImageName.AssetCell.PickButton.SizeM.picked, in: nohanaImagePickerController.assetBundle, compatibleWith: nil),
-                for: .selected)
+            let droppedImage: UIImage? = nohanaImagePickerController.config.image.droppedSmall ?? UIImage(named: "btn_select_m", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
+            let pickedImage: UIImage? = nohanaImagePickerController.config.image.pickedSmall ?? UIImage(named: "btn_selected_m", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
+            
+            pickButton.setImage(droppedImage, for: UIControlState())
+            pickButton.setImage(pickedImage, for: .selected)
         }
     }
     

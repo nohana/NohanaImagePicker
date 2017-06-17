@@ -11,15 +11,20 @@ NohanaImagePicker enables your app to pick images from multiple album, and the m
 ## Usage
 
 ```swift
+import UIKit
+import Photos
 import NohanaImagePicker
-class ViewController: UIViewController, NohanaImagePickerControllerDelegate {
+class MyViewController: UIViewController {
+    let picker = NohanaImagePickerController()
 
     override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
-        let picker = NohanaImagePickerController()
-        picker.delegate = self
-        present(picker, animated: true, completion: nil)
+        super.viewDidAppear(animated)
+        self.picker.delegate = self
+        present(self.picker, animated: true, completion: nil)
     }
+}
+
+extension MyViewController: NohanaImagePickerControllerDelegate {
 
     func nohanaImagePickerDidCancel(_ picker: NohanaImagePickerController) {
         print("🐷Canceled🙅")
@@ -30,7 +35,6 @@ class ViewController: UIViewController, NohanaImagePickerControllerDelegate {
         print("🐷Completed🙆\n\tpickedAssets = \(pickedAssts)")
         picker.dismiss(animated: true, completion: nil)
     }
-
 }
 ```
 
@@ -60,8 +64,13 @@ picker.canPickAsset = { (asset:Asset) -> Bool in
     return false
 }
 
+// If set to Bundle Object, You can change 'NohanaImagePicker.strings' and 'NohanaImagePicker.xcassets'.
+picker.assetBundle = Bundle.main
+
 // Color
-ColorConfig.backgroundColor = UIColor.redColor()
+ColorConfig.backgroundColor = UIColor.lightGray
+ColorConfig.emptyIndicator = UIColor.lightGray
+ColorConfig.AlbumList.momentCellSeparator = UIColor.lightGray
 ```
 
 ## Requirements
@@ -83,6 +92,8 @@ Use [Carthage](https://github.com/Carthage/Carthage).
 ### Framework with CocoaPods
 
 Use [CocoaPods](https://cocoapods.org/).
+
+- Try; ``pod try NohanaImagePicker``
 
 - Add the followings to your Podfile:
 
