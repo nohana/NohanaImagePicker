@@ -155,6 +155,15 @@ class AssetListViewController: UICollectionViewController {
     
     // MARK: - IBAction
     @IBAction func didPushDone(_ sender: AnyObject) {
+        if nohanaImagePickerController!.pickedAssetList.count < nohanaImagePickerController!.minimumNumberOfSelection {
+            let message =  nohanaImagePickerController!.config.strings.alertMessageUnderMinimumSelection ??
+                String(format: NSLocalizedString("alert.message.underMinimumSelection", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController!.assetBundle, comment: ""),
+                       nohanaImagePickerController!.minimumNumberOfSelection)
+            let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
         let pickedPhotoKitAssets = nohanaImagePickerController!.pickedAssetList.map{ ($0 as! PhotoKitAsset).originalAsset }
         nohanaImagePickerController!.delegate?.nohanaImagePicker(nohanaImagePickerController!, didFinishPickingPhotoKitAssets: pickedPhotoKitAssets )
     }
