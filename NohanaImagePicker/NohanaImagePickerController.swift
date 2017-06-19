@@ -40,6 +40,7 @@ public enum MediaType: Int {
 open class NohanaImagePickerController: UIViewController {
     
     open var maximumNumberOfSelection: Int = 21 // set 0 to no limit
+    open var minimumNumberOfSelection: Int = 0
     open var numberOfColumnsInPortrait: Int = 4
     open var numberOfColumnsInLandscape: Int = 7
     open weak var delegate: NohanaImagePickerControllerDelegate?
@@ -162,6 +163,7 @@ extension NohanaImagePickerController {
             public var albumListEmptyDescription: String?
             public var toolbarTitleNoLimit: String?
             public var toolbarTitleHasLimit: String?
+            public var alertMessageUnderMinimumSelection: String?
         }
         public var strings = Strings()
     }
