@@ -15,25 +15,25 @@
  */
 import Photos
 
-public class PhotoKitAsset :Asset {
-    
+public class PhotoKitAsset: Asset {
+
     let asset: PHAsset
-    
+
     public init(asset: PHAsset) {
         self.asset = asset
     }
-    
+
     public var originalAsset: PHAsset {
         return asset as PHAsset
     }
-    
+
     // MARK: - Asset
-    
-    public var identifier:Int {
+
+    public var identifier: Int {
         return asset.localIdentifier.hash
     }
-    
-    public func image(targetSize:CGSize, handler: @escaping (ImageData?) -> Void) {
+
+    public func image(targetSize: CGSize, handler: @escaping (ImageData?) -> Void) {
         let option = PHImageRequestOptions()
         option.isNetworkAccessAllowed = true
 

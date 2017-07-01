@@ -17,16 +17,16 @@
 import UIKit
 
 class AnimatableNavigationController: UINavigationController, UINavigationControllerDelegate {
-    
+
     let swipeInteractionController = SwipeInteractionController()
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.delegate = self
     }
-    
+
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
+
         switch operation {
         case .push where fromVC is AssetListViewController:
             guard let fromVC = fromVC as? AssetListViewController,
@@ -47,11 +47,11 @@ class AnimatableNavigationController: UINavigationController, UINavigationContro
             return nil
         }
     }
-    
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {        
+
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         swipeInteractionController.attachToViewController(viewController)
     }
-    
+
     func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         if animationController is ExpandingAnimationController {
             return nil
@@ -61,5 +61,5 @@ class AnimatableNavigationController: UINavigationController, UINavigationContro
         }
         return swipeInteractionController
     }
-    
+
 }

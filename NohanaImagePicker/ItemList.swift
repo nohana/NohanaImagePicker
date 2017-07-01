@@ -16,7 +16,7 @@
 
 public protocol ItemList: Collection {
     associatedtype Item
-    var title:String { get }
+    var title: String { get }
     func update(_ handler:(() -> Void)?)
     subscript (index: Int) -> Item { get }
 }
@@ -28,8 +28,8 @@ extension ItemList {
 }
 
 public protocol Asset {
-    var identifier:Int { get }
-    func image(targetSize:CGSize, handler: @escaping (ImageData?) -> Void)
+    var identifier: Int { get }
+    func image(targetSize: CGSize, handler: @escaping (ImageData?) -> Void)
 }
 
 public struct ImageData {

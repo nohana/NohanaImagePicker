@@ -17,46 +17,45 @@
 import Foundation
 
 class PickedAssetList: ItemList {
-    
+
     var assetlist: Array<Asset> = []
     weak var nohanaImagePickerController: NohanaImagePickerController?
-    
+
     // MARK: - ItemList
-    
+
     typealias Item = Asset
-    
+
     var title: String {
         return "Selected Assets"
     }
-    
+
     func update(_ handler:(() -> Void)?) {
         fatalError("not supported")
     }
-    
+
     subscript (index: Int) -> Item {
         return assetlist[index]
     }
-    
+
     // MARK: - CollectionType
-    
+
     var startIndex: Int {
         return 0
     }
-    
+
     var endIndex: Int {
         return assetlist.count
     }
-    
+
     // MARK: - Manage assetlist
-    
+
     func pick(asset: Asset) -> Bool {
         guard !isPicked(asset) else {
             return false
         }
         let assetsCountBeforePicking = self.count
         if asset is PhotoKitAsset {
-            if let canPick = nohanaImagePickerController!.delegate?.nohanaImagePicker?(nohanaImagePickerController!, willPickPhotoKitAsset: (asset as! PhotoKitAsset).originalAsset, pickedAssetsCount: assetsCountBeforePicking)
-                , !canPick {
+            if let canPick = nohanaImagePickerController!.delegate?.nohanaImagePicker?(nohanaImagePickerController!, willPickPhotoKitAsset: (asset as! PhotoKitAsset).originalAsset, pickedAssetsCount: assetsCountBeforePicking), !canPick {
                 return false
             }
         }
@@ -80,17 +79,17 @@ class PickedAssetList: ItemList {
             )
         }
         return true
-        
+
     }
-    
+
     func drop(asset: Asset) -> Bool {
         let assetsCountBeforeDropping = self.count
         if asset is PhotoKitAsset {
-            if let canDrop = nohanaImagePickerController!.delegate?.nohanaImagePicker?(nohanaImagePickerController!, willDropPhotoKitAsset: (asset as! PhotoKitAsset).originalAsset, pickedAssetsCount: assetsCountBeforeDropping) , !canDrop {
+            if let canDrop = nohanaImagePickerController!.delegate?.nohanaImagePicker?(nohanaImagePickerController!, willDropPhotoKitAsset: (asset as! PhotoKitAsset).originalAsset, pickedAssetsCount: assetsCountBeforeDropping), !canDrop {
                 return false
             }
         }
-        assetlist = assetlist.filter{ $0.identifier != asset.identifier }
+        assetlist = assetlist.filter { $0.identifier != asset.identifier }
         let assetsCountAfterDropping = self.count
         if asset is PhotoKitAsset {
             let originalAsset = (asset as! PhotoKitAsset).originalAsset
@@ -108,9 +107,9 @@ class PickedAssetList: ItemList {
         }
         return true
     }
-    
+
     func isPicked(_ asset: Asset) -> Bool {
-        return assetlist.contains{ $0.identifier == asset.identifier }
+        return assetlist.contains { $0.identifier == asset.identifier }
     }
-    
+
 }
