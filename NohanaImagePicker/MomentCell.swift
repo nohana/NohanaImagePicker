@@ -18,7 +18,7 @@ import UIKit
 
 class MomentCell: AlbumCell {
     var config: NohanaImagePickerController.Config!
-    
+
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         let lineWidth: CGFloat = 1 / UIScreen.main.scale

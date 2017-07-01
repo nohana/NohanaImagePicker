@@ -16,30 +16,30 @@
 
 import Photos
 
-open class PhotoKitAssetList :ItemList {
-    
+open class PhotoKitAssetList: ItemList {
+
     fileprivate let mediaType: MediaType
     open let assetList: PHAssetCollection
     fileprivate var fetchResult: PHFetchResult<PHAsset>!
-    
+
     init(album: PHAssetCollection, mediaType: MediaType) {
         self.assetList = album
         self.mediaType = mediaType
         update()
     }
-    
+
     // MARK: - ItemList
-    
+
     public typealias Item = PhotoKitAsset
-    
+
     open var title: String {
         return assetList.localizedTitle ?? ""
     }
-    
+
     open var date: Date? {
         return assetList.startDate
     }
-    
+
     class func fetchOptions(_ mediaType: MediaType) -> PHFetchOptions {
         let options = PHFetchOptions()
         switch mediaType {
@@ -50,24 +50,24 @@ open class PhotoKitAssetList :ItemList {
         }
         return options
     }
-    
+
     open func update(_ handler: (() -> Void)? = nil) {
         fetchResult = PHAsset.fetchAssets(in: assetList, options: PhotoKitAssetList.fetchOptions(mediaType))
         if let handler = handler {
             handler()
         }
     }
-    
+
     open subscript (index: Int) -> Item {
         return Item(asset: fetchResult.object(at: index))
     }
-    
+
     // MARK: - CollectionType
-    
+
     open var startIndex: Int {
         return 0
     }
-    
+
     open var endIndex: Int {
         return fetchResult.count
     }
