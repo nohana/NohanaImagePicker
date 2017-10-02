@@ -50,7 +50,7 @@ class AssetDetailCell: UICollectionViewCell, UIScrollViewDelegate {
 
     // MARK: - Zoom
 
-    func didDoubleTap(_ sender: UITapGestureRecognizer) {
+    @objc func didDoubleTap(_ sender: UITapGestureRecognizer) {
         if scrollView.zoomScale < scrollView.maximumZoomScale {
             let center = sender.location(in: imageView)
             scrollView.zoom(to: zoomRect(center), animated: true)

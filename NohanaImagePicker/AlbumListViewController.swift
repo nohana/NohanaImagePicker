@@ -261,7 +261,7 @@ extension UIViewController {
 
         let infoButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         infoButton.isEnabled = false
-        infoButton.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName: UIColor.black], for: UIControlState())
+        infoButton.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.black], for: UIControlState())
         self.toolbarItems = [leftSpace, infoButton, rightSpace]
     }
 
@@ -292,14 +292,14 @@ extension UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(AlbumListViewController.didDropPhotoKitAsset(_:)), name:  NotificationInfo.Asset.PhotoKit.didDrop, object: nil)
     }
 
-    func didPickPhotoKitAsset(_ notification: Notification) {
+    @objc func didPickPhotoKitAsset(_ notification: Notification) {
         guard let picker = notification.object as? NohanaImagePickerController else {
             return
         }
         setToolbarTitle(picker)
     }
 
-    func didDropPhotoKitAsset(_ notification: Notification) {
+    @objc func didDropPhotoKitAsset(_ notification: Notification) {
         guard let picker = notification.object as? NohanaImagePickerController else {
             return
         }
