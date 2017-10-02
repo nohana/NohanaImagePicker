@@ -78,7 +78,7 @@ class ContractingAnimationController: NSObject, UIViewControllerAnimatedTransiti
             withDuration: transitionDuration(using: transitionContext),
             delay: 0,
             options: UIViewAnimationOptions(),
-            animations: { 
+            animations: {
                 toVC.view.alpha = 1
                 contractingImageView.frame = Size.contractingAnimationToCellRect(toVC, toCell: toCell)
             }) { _  in
