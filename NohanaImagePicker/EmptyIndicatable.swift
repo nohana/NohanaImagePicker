@@ -21,7 +21,7 @@ public protocol EmptyIndicatable {
 
 public extension EmptyIndicatable where Self: UIViewController {
     func updateVisibilityOfEmptyIndicator(_ emptyIndicator: UIView) {
-        if isEmpty(){
+        if isEmpty() {
             if !view.subviews.contains(emptyIndicator) {
                 view.addSubview(emptyIndicator)
             }

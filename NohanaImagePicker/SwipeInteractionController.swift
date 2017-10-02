@@ -17,9 +17,9 @@
 import UIKit
 
 class SwipeInteractionController: UIPercentDrivenInteractiveTransition {
-    
+
     var viewController: UIViewController?
-    
+
     func attachToViewController(_ viewController: UIViewController) {
         let count: Int? = viewController.navigationController?.viewControllers.count
         guard count != nil && count! > 1 else {

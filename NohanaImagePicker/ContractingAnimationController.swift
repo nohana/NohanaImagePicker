@@ -21,7 +21,7 @@ extension Size {
         let origin = CGPoint(x: toCell.frame.origin.x, y: toCell.frame.origin.y - toVC.collectionView!.contentOffset.y)
         return CGRect(origin: origin, size: toCell.frame.size)
     }
-    
+
     static func contractingAnimationFromCellRect(_ fromVC: AssetDetailListViewController, fromCell: AssetDetailCell, contractingImageSize: CGSize) -> CGRect {
         var rect = AVMakeRect(aspectRatio: contractingImageSize, insideRect: fromCell.imageView.frame)
         rect.origin.y += Size.appBarHeight(fromVC)
@@ -32,17 +32,17 @@ extension Size {
 }
 
 class ContractingAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
-    
+
     var fromCell: AssetDetailCell
-    
+
     init(_ fromCell: AssetDetailCell) {
         self.fromCell = fromCell
     }
-    
+
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.3
     }
-    
+
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard
             let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as? AssetDetailListViewController,
@@ -50,7 +50,7 @@ class ContractingAnimationController: NSObject, UIViewControllerAnimatedTransiti
             else {
                 return
         }
-        
+
         var toCellTmp = toVC.collectionView?.cellForItem(at: fromVC.currentIndexPath as IndexPath) as? AssetCell
         if toCellTmp == nil {
             // if toCell is not shown in collection view, scroll collection view to toCell index path.
@@ -58,11 +58,11 @@ class ContractingAnimationController: NSObject, UIViewControllerAnimatedTransiti
             toVC.collectionView?.layoutIfNeeded()
             toCellTmp = toVC.collectionView?.cellForItem(at: fromVC.currentIndexPath as IndexPath) as? AssetCell
         }
-        
+
         guard let toCell = toCellTmp else {
             return
         }
-        
+
         let contractingImageView = UIImageView(image: fromCell.imageView.image)
         contractingImageView.contentMode = toCell.imageView.contentMode
         contractingImageView.clipsToBounds = true
@@ -73,7 +73,7 @@ class ContractingAnimationController: NSObject, UIViewControllerAnimatedTransiti
         toVC.view.alpha = 0
         fromCell.alpha = 0
         toCell.alpha = 0
-        
+
         UIView.animate(
             withDuration: transitionDuration(using: transitionContext),
             delay: 0,
@@ -87,8 +87,8 @@ class ContractingAnimationController: NSObject, UIViewControllerAnimatedTransiti
                 contractingImageView.removeFromSuperview()
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
-        
+
     }
-    
-    
+
+
 }

@@ -15,22 +15,22 @@
  */
 
 struct Size {
-    
+
     static var statusBarHeight: CGFloat {
         if UIApplication.shared.isStatusBarHidden {
             return 0
         }
         return UIApplication.shared.statusBarFrame.size.height
     }
-    
+
     static func navigationBarHeight(_ viewController: UIViewController) -> CGFloat {
         return viewController.navigationController?.navigationBar.frame.size.height ?? CGFloat(0)
     }
-    
+
     static func appBarHeight(_ viewController: UIViewController) -> CGFloat {
         return statusBarHeight + navigationBarHeight(viewController)
     }
-    
+
     static func toolbarHeight(_ viewController: UIViewController) -> CGFloat {
         guard let navigationController = viewController.navigationController else {
             return 0
@@ -40,7 +40,7 @@ struct Size {
         }
         return navigationController.toolbar.frame.size.height
     }
-    
+
     static func screenRectWithoutAppBar(_ viewController: UIViewController) -> CGRect {
         let appBarHeight = Size.appBarHeight(viewController)
         let toolbarHeight = Size.toolbarHeight(viewController)

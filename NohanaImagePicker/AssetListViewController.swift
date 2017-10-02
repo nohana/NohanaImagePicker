@@ -18,10 +18,10 @@ import UIKit
 import Photos
 
 class AssetListViewController: UICollectionViewController {
-    
+
     weak var nohanaImagePickerController: NohanaImagePickerController?
     var photoKitAssetList: PhotoKitAssetList!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = nohanaImagePickerController?.config.color.background ?? .white
@@ -29,7 +29,7 @@ class AssetListViewController: UICollectionViewController {
         setUpToolbarItems()
         addPickPhotoKitAssetNotificationObservers()
     }
-    
+
     var cellSize: CGSize {
         guard let nohanaImagePickerController = nohanaImagePickerController else {
             return CGSize.zero
@@ -38,15 +38,15 @@ class AssetListViewController: UICollectionViewController {
         if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
             numberOfColumns = nohanaImagePickerController.numberOfColumnsInPortrait
         }
-        let cellMargin:CGFloat = 2
+        let cellMargin: CGFloat = 2
         let cellWidth = (view.frame.width - cellMargin * (CGFloat(numberOfColumns) - 1)) / CGFloat(numberOfColumns)
         return CGSize(width: cellWidth, height: cellWidth)
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let nohanaImagePickerController = nohanaImagePickerController {
@@ -55,7 +55,7 @@ class AssetListViewController: UICollectionViewController {
         collectionView?.reloadData()
         scrollCollectionViewToInitialPosition()
     }
-    
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         view.isHidden = true
@@ -69,13 +69,13 @@ class AssetListViewController: UICollectionViewController {
             self.view.isHidden = false
         }
     }
-    
+
     var isFirstAppearance = true
-    
+
     func updateTitle() {
         title = photoKitAssetList.title
     }
-    
+
     func scrollCollectionView(to indexPath: IndexPath) {
         let count: Int? = photoKitAssetList?.count
         guard count != nil && count! > 0 else {
@@ -85,7 +85,7 @@ class AssetListViewController: UICollectionViewController {
             self.collectionView?.scrollToItem(at: indexPath, at: .bottom, animated: false)
         }
     }
-    
+
     func scrollCollectionViewToInitialPosition() {
         guard isFirstAppearance else {
             return
@@ -94,21 +94,21 @@ class AssetListViewController: UICollectionViewController {
         self.scrollCollectionView(to: indexPath)
         isFirstAppearance = false
     }
-    
-    // MARK: - UICollectionViewDataSource    
-    
+
+    // MARK: - UICollectionViewDataSource
+
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photoKitAssetList.count
     }
-    
+
     // MARK: - UICollectionViewDelegate
-    
+
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let nohanaImagePickerController = nohanaImagePickerController {
             nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: photoKitAssetList[indexPath.item].originalAsset)
         }
     }
-    
+
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssetCell", for: indexPath) as? AssetCell,
             let nohanaImagePickerController  = nohanaImagePickerController else {
@@ -116,7 +116,7 @@ class AssetListViewController: UICollectionViewController {
         }
         cell.tag = indexPath.item
         cell.update(asset: photoKitAssetList[indexPath.row], nohanaImagePickerController: nohanaImagePickerController)
-        
+
         let imageSize = CGSize(
             width: cellSize.width * UIScreen.main.scale,
             height: cellSize.height * UIScreen.main.scale
@@ -133,31 +133,29 @@ class AssetListViewController: UICollectionViewController {
         }
         return (nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, assetListViewController: self, cell: cell, indexPath: indexPath, photoKitAsset: asset.originalAsset)) ?? cell
     }
-    
+
     // MARK: - UICollectionViewDelegateFlowLayout
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         return cellSize
     }
-    
+
     // MARK: - Storyboard
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let selectedIndexPath = collectionView?.indexPathsForSelectedItems?.first else {
             return
         }
-        
+
         let assetListDetailViewController = segue.destination as! AssetDetailListViewController
         assetListDetailViewController.photoKitAssetList = photoKitAssetList
         assetListDetailViewController.nohanaImagePickerController = nohanaImagePickerController
         assetListDetailViewController.currentIndexPath = selectedIndexPath
     }
-    
+
     // MARK: - IBAction
     @IBAction func didPushDone(_ sender: AnyObject) {
-        let pickedPhotoKitAssets = nohanaImagePickerController!.pickedAssetList.map{ ($0 as! PhotoKitAsset).originalAsset }
+        let pickedPhotoKitAssets = nohanaImagePickerController!.pickedAssetList.map { ($0 as! PhotoKitAsset).originalAsset }
         nohanaImagePickerController!.delegate?.nohanaImagePicker(nohanaImagePickerController!, didFinishPickingPhotoKitAssets: pickedPhotoKitAssets )
     }
 }
-
-

@@ -22,31 +22,31 @@ extension Size {
         let origin = CGPoint(x: fromCell.frame.origin.x, y: fromCell.frame.origin.y - fromVC.collectionView!.contentOffset.y)
         return CGRect(origin: origin, size: fromCell.frame.size)
     }
-    
-    static func expandingAnimationToCellRect(_ fromVC: UIViewController, toSize:CGSize) -> CGRect {
+
+    static func expandingAnimationToCellRect(_ fromVC: UIViewController, toSize: CGSize) -> CGRect {
         return AVMakeRect(aspectRatio: toSize, insideRect: Size.screenRectWithoutAppBar(fromVC))
     }
 }
 
 class ExpandingAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
-    
+
     var fromCell: AssetCell
-    
+
     init(_ fromCell: AssetCell) {
         self.fromCell = fromCell
     }
-    
+
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.3
     }
-    
+
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as? AssetListViewController,
             let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as? AssetDetailListViewController
             else {
                 return
         }
-        
+
         let expandingImageView = UIImageView(image: fromCell.imageView.image)
         expandingImageView.contentMode = fromCell.imageView.contentMode
         expandingImageView.clipsToBounds = true
@@ -58,7 +58,7 @@ class ExpandingAnimationController: NSObject, UIViewControllerAnimatedTransition
         toVC.collectionView?.isHidden = true
         toVC.view.backgroundColor = UIColor.black
         fromCell.alpha = 0
-        
+
         UIView.animate(
             withDuration: transitionDuration(using: transitionContext),
             delay: 0,
@@ -75,6 +75,5 @@ class ExpandingAnimationController: NSObject, UIViewControllerAnimatedTransition
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
     }
-    
-}
 
+}
