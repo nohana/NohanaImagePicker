@@ -92,15 +92,13 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
 
     // MARK: - Show NohanaImagePicker
 
-    @objc
-    func showDefaultPicker() {
+    @objc func showDefaultPicker() {
         let picker = NohanaImagePickerController()
         picker.delegate = self
         present(picker, animated: true, completion: nil)
     }
 
-    @objc
-    func showLargeThumbnailPicker() {
+    @objc func showLargeThumbnailPicker() {
         let picker = NohanaImagePickerController()
         picker.delegate = self
         picker.numberOfColumnsInPortrait = 2
@@ -108,16 +106,14 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
         present(picker, animated: true, completion: nil)
     }
 
-    @objc
-    func showNoToolbarPicker() {
+    @objc func showNoToolbarPicker() {
         let picker = NohanaImagePickerController()
         picker.delegate = self
         picker.toolbarHidden = true
         present(picker, animated: true, completion: nil)
     }
 
-    @objc
-    func showDisableToPickAssetsPicker() {
+    @objc func showDisableToPickAssetsPicker() {
         let picker = NohanaImagePickerController()
         picker.delegate = self
         picker.canPickAsset = { (asset: Asset) -> Bool in
@@ -126,8 +122,7 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
         present(picker, animated: true, completion: nil)
     }
 
-    @objc
-    func showCustomUIPicker() {
+    @objc func showCustomUIPicker() {
         let picker = NohanaImagePickerController()
         picker.delegate = self
         picker.config.color.background = UIColor(red: 0xcc/0xff, green: 0xff/0xff, blue: 0xff/0xff, alpha: 1)
