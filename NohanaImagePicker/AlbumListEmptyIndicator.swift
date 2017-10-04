@@ -23,22 +23,22 @@ class AlbumListEmptyIndicator: UILabel {
         centerStyle.alignment = NSTextAlignment.center
 
         let messageAttributes = [
-            NSForegroundColorAttributeName : config.color.empty ?? UIColor(red: 0x88/0xff, green: 0x88/0xff, blue: 0x88/0xff, alpha: 1),
-            NSFontAttributeName : UIFont.systemFont(ofSize: 26),
-            NSParagraphStyleAttributeName : centerStyle
+            NSAttributedStringKey.foregroundColor : config.color.empty ?? UIColor(red: 0x88/0xff, green: 0x88/0xff, blue: 0x88/0xff, alpha: 1),
+            NSAttributedStringKey.font : UIFont.systemFont(ofSize: 26),
+            NSAttributedStringKey.paragraphStyle : centerStyle
         ]
         let messageText = NSAttributedString(string: message, attributes: messageAttributes)
 
         let descriptionAttributes = [
-            NSForegroundColorAttributeName : config.color.empty ?? UIColor(red: 0x88/0xff, green: 0x88/0xff, blue: 0x88/0xff, alpha: 1),
-            NSFontAttributeName : UIFont.systemFont(ofSize: 14),
-            NSParagraphStyleAttributeName : centerStyle
+            NSAttributedStringKey.foregroundColor : config.color.empty ?? UIColor(red: 0x88/0xff, green: 0x88/0xff, blue: 0x88/0xff, alpha: 1),
+            NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14),
+            NSAttributedStringKey.paragraphStyle : centerStyle
         ]
         let descriptionText = NSAttributedString(string: description, attributes: descriptionAttributes)
 
         let attributedText = NSMutableAttributedString()
         attributedText.append(messageText)
-        attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 6)]))
+        attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 6)]))
         attributedText.append(descriptionText)
 
         self.numberOfLines = 0

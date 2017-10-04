@@ -17,7 +17,7 @@
 import UIKit
 import Photos
 
-class AssetListViewController: UICollectionViewController {
+class AssetListViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     weak var nohanaImagePickerController: NohanaImagePickerController?
     var photoKitAssetList: PhotoKitAssetList!
@@ -136,7 +136,7 @@ class AssetListViewController: UICollectionViewController {
 
     // MARK: - UICollectionViewDelegateFlowLayout
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return cellSize
     }
 
