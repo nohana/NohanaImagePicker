@@ -73,14 +73,15 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
         switch PHPhotoLibrary.authorizationStatus() {
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization { status in
-                switch status {
-                case .authorized:
-                    handler(true)
-                default:
-                    handler(false)
+                DispatchQueue.main.async {
+                    switch status {
+                    case .authorized:
+                        handler(true)
+                    default:
+                        handler(false)
+                    }
                 }
             }
-
         case .restricted:
             handler(false)
         case .denied:
