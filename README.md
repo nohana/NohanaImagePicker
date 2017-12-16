@@ -81,6 +81,12 @@ Use [Carthage](https://github.com/Carthage/Carthage).
   - If you want to use Swift2.3, add `github "nohana/NohanaImagePicker", "0.6.1"` instead.
   - If you want to use Swift2.2, add `github "nohana/NohanaImagePicker", "0.5.0"` instead.
 - Run `carthage update`.
+- Add the followings to your Info.plist:
+
+```
+<key>NSPhotoLibraryUsageDescription</key>
+<string>To pick some photos.</string>
+```
 
 ### Framework with CocoaPods
 
