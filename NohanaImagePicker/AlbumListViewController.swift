@@ -211,7 +211,14 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
         }
     }
 
-    // MARK: - EmptyIndicatable
+	@IBAction func didPushDone(_ sender: Any) {
+		if let nohanaImagePickerController = nohanaImagePickerController {
+			let pickedPhotoKitAssets = nohanaImagePickerController.pickedAssetList.compactMap { ($0 as? PhotoKitAsset)?.originalAsset }
+			nohanaImagePickerController.delegate?.nohanaImagePicker(nohanaImagePickerController, didFinishPickingPhotoKitAssets: pickedPhotoKitAssets)
+		}
+	}
+	
+	// MARK: - EmptyIndicatable
 
     var emptyIndicator: UIView?
 
