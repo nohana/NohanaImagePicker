@@ -153,6 +153,7 @@ extension NohanaImagePickerController {
             public var background: UIColor?
             public var empty: UIColor?
             public var separator: UIColor?
+			public var selectionTint: UIColor?
         }
         public var color = Color()
 
