@@ -32,6 +32,10 @@ class AssetCell: UICollectionViewCell {
 
             pickButton.setImage(droppedImage, for: UIControlState())
             pickButton.setImage(pickedImage, for: .selected)
+			
+			if let selectionTint = nohanaImagePickerController.config.color.selectionTint {
+				overlayView.backgroundColor = selectionTint
+			}
         }
     }
 

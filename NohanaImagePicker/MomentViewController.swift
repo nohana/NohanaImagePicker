@@ -28,7 +28,7 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
 
     override func updateTitle() {
         if let nohanaImagePickerController = nohanaImagePickerController {
-            title = NSLocalizedString("albumlist.moment.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
+            title = nohanaImagePickerController.config.strings.albumListMomentTitle ?? NSLocalizedString("albumlist.moment.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
         }
     }
 
