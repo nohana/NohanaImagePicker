@@ -128,6 +128,10 @@ open class NohanaImagePickerController: UIViewController {
             })
         albumListViewController.nohanaImagePickerController = self
     }
+	
+	override open var preferredStatusBarStyle: UIStatusBarStyle {
+		return config.style.statusBar ?? .default
+	}
 
     open func pickAsset(_ asset: Asset) {
         _ = pickedAssetList.pick(asset: asset)
@@ -140,6 +144,11 @@ open class NohanaImagePickerController: UIViewController {
 
 extension NohanaImagePickerController {
     public struct Config {
+		public struct Style {
+			public var statusBar: UIStatusBarStyle?
+		}
+		public var style = Style()
+		
         public struct Color {
             public var background: UIColor?
             public var empty: UIColor?
