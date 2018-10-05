@@ -240,7 +240,7 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
     var isLoading = true
 
     func setUpActivityIndicator() {
-        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        activityIndicator = UIActivityIndicatorView(style: .gray)
         let screenRect = Size.screenRectWithoutAppBar(self)
         activityIndicator?.center = CGPoint(x: screenRect.size.width / 2, y: screenRect.size.height / 2)
         activityIndicator?.startAnimating()
@@ -261,7 +261,7 @@ extension UIViewController {
 
         let infoButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         infoButton.isEnabled = false
-        infoButton.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.black], for: UIControlState())
+        infoButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.black], for: UIControl.State())
         self.toolbarItems = [leftSpace, infoButton, rightSpace]
     }
 

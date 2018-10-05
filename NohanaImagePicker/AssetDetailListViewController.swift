@@ -38,7 +38,7 @@ class AssetDetailListViewController: AssetListViewController {
             let droppedImage: UIImage? = nohanaImagePickerController.config.image.droppedLarge ?? UIImage(named: "btn_select_l", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
             let pickedImage: UIImage? = nohanaImagePickerController.config.image.pickedLarge ?? UIImage(named: "btn_selected_l", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
 
-            pickButton.setImage(droppedImage, for: UIControlState())
+            pickButton.setImage(droppedImage, for: UIControl.State())
             pickButton.setImage(pickedImage, for: .selected)
         }
     }
@@ -76,7 +76,7 @@ class AssetDetailListViewController: AssetListViewController {
         }
         DispatchQueue.main.async {
             let toIndexPath = IndexPath(item: indexPath.item, section: 0)
-            self.collectionView?.scrollToItem(at: toIndexPath, at: UICollectionViewScrollPosition.centeredHorizontally, animated: false)
+            self.collectionView?.scrollToItem(at: toIndexPath, at: UICollectionView.ScrollPosition.centeredHorizontally, animated: false)
         }
     }
 

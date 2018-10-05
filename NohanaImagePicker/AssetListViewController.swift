@@ -35,7 +35,7 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
             return CGSize.zero
         }
         var numberOfColumns = nohanaImagePickerController.numberOfColumnsInLandscape
-        if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
+        if UIApplication.shared.statusBarOrientation.isPortrait {
             numberOfColumns = nohanaImagePickerController.numberOfColumnsInPortrait
         }
         let cellMargin: CGFloat = 2

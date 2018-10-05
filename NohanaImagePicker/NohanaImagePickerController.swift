@@ -106,9 +106,9 @@ open class NohanaImagePickerController: UIViewController {
         guard let navigationController = storyboard.instantiateViewController(withIdentifier: viewControllerId) as? UINavigationController else {
             fatalError("navigationController init failed.")
         }
-        addChildViewController(navigationController)
+        addChild(navigationController)
         view.addSubview(navigationController.view)
-        navigationController.didMove(toParentViewController: self)
+        navigationController.didMove(toParent: self)
 
         // setup albumListViewController
         guard let albumListViewController = navigationController.topViewController as? AlbumListViewController else {
