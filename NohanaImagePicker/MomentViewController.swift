@@ -94,6 +94,9 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
                 }
             })
         }
+        
+        cell.setLongPressAction(forCellAt: indexPath, collectionView: collectionView, viewController: self, segueIdentifier: "AssetDetailListViewController2")
+        
         return (nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, assetListViewController: self, cell: cell, indexPath: indexPath, photoKitAsset: asset.originalAsset)) ?? cell
     }
 

@@ -131,6 +131,9 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
                 }
             })
         }
+        
+        cell.setLongPressAction(forCellAt: indexPath, collectionView: collectionView, viewController: self, segueIdentifier: "AssetDetailListViewController1")
+        
         return (nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, assetListViewController: self, cell: cell, indexPath: indexPath, photoKitAsset: asset.originalAsset)) ?? cell
     }
 
@@ -141,6 +144,24 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
     }
 
     // MARK: - Storyboard
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if let cellMainAction = nohanaImagePickerController?.cellMainAction {
+            switch cellMainAction {
+            case .tapShowLargeImage:
+                return true
+            case .longPressShowLargeImage:
+                // This actually represent a tap action: Using it for changing picked state.
+                if let indexPaths = collectionView.indexPathsForSelectedItems, indexPaths.count > 0,
+                    let cell = collectionView.cellForItem(at: indexPaths[0]) as? AssetCell {
+                    cell.pushPickButton()
+                }
+                return false
+            }
+        }
+        
+        return true
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let selectedIndexPath = collectionView?.indexPathsForSelectedItems?.first else {

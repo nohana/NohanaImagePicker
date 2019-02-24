@@ -46,6 +46,15 @@ open class NohanaImagePickerController: UIViewController {
     open var shouldShowMoment: Bool = true
     open var shouldShowEmptyAlbum: Bool = false
     open var toolbarHidden: Bool = false
+    
+    public enum CellMainAction {
+        case tapShowLargeImage
+        
+        // A single tap on the main part of the cell toggles the selected state; a long press shows the start image.
+        case longPressShowLargeImage
+    }
+    open var cellMainAction: CellMainAction? = .tapShowLargeImage
+    
     open var canPickAsset = { (asset: Asset) -> Bool in
         return true
     }
