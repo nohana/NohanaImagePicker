@@ -59,7 +59,7 @@ struct Size {
         return CGRect(
             x: 0,
             y: appBarHeight,
-            width: UIScreen.main.bounds.width,
-            height: UIScreen.main.bounds.height - appBarHeight - toolbarHeight)
+            width: viewController.view.bounds.width,
+            height: viewController.view.bounds.height - appBarHeight - toolbarHeight)
     }
 }
