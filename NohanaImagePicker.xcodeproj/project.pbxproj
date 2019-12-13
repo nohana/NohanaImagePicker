@@ -319,7 +319,7 @@
 				TargetAttributes = {
 					F208E5501CD7370B00FFC9F6 = {
 						CreatedOnToolsVersion = 7.2.1;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1130;
 					};
 					F2C08D731C68651900B00181 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -466,7 +466,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = jp.co.nohana.NohanaImagePicker.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -481,7 +481,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = jp.co.nohana.NohanaImagePicker.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

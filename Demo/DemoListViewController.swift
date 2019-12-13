@@ -88,6 +88,8 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
             handler(false)
         case .authorized:
             handler(true)
+        @unknown default:
+            fatalError()
         }
     }
 
