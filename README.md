@@ -77,6 +77,7 @@ picker.canPickAsset = { (asset:Asset) -> Bool in
 Use [Carthage](https://github.com/Carthage/Carthage).
 
 - Add `github "nohana/NohanaImagePicker"` to your Cartfile.
+  - If you want to use Swift4.2, add `github "nohana/NohanaImagePicker", "0.9.2"` instead.
   - If you want to use Swift3.0, add `github "nohana/NohanaImagePicker", "0.8.0"` instead.
   - If you want to use Swift2.3, add `github "nohana/NohanaImagePicker", "0.6.1"` instead.
   - If you want to use Swift2.2, add `github "nohana/NohanaImagePicker", "0.5.0"` instead.
