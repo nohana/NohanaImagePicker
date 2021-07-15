@@ -64,11 +64,7 @@ public class PhotoKitAlbumList: ItemList {
                     }
                 })
             }
-            if self.assetCollectionTypes == [.moment] {
-                self.albumList =  tmpAlbumList.sorted { $0.date!.timeIntervalSince1970 < $1.date!.timeIntervalSince1970 }
-            } else {
-                self.albumList =  tmpAlbumList
-            }
+            self.albumList = tmpAlbumList
 
             if let handler = handler {
                 handler()

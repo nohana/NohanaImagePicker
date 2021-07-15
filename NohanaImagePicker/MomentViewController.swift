@@ -19,11 +19,19 @@ import Photos
 
 class MomentViewController: AssetListViewController, ActivityIndicatable {
 
-    var momentAlbumList: PhotoKitAlbumList!
+    var momentInfoSectionList: [MomentInfoSection] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpActivityIndicator()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self, let mediaType = self.nohanaImagePickerController?.mediaType else { return }
+            self.momentInfoSectionList = MomentInfoSectionCreater().createSections(mediaType: mediaType)
+            self.isLoading = false
+            self.collectionView?.reloadData()
+            self.isFirstAppearance = true
+            self.scrollCollectionViewToInitialPosition()
+        }
     }
 
     override func updateTitle() {
@@ -33,7 +41,7 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
     }
 
     override func scrollCollectionView(to indexPath: IndexPath) {
-        let count: Int? = momentAlbumList?.count
+        let count: Int? = momentInfoSectionList.count
         guard count != nil && count! > 0 else {
             return
         }
@@ -46,11 +54,11 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
         guard isFirstAppearance else {
             return
         }
-        let lastSection = momentAlbumList.count - 1
+        let lastSection = momentInfoSectionList.count - 1
         guard lastSection >= 0 else {
             return
         }
-        let indexPath = IndexPath(item: momentAlbumList[lastSection].count - 1, section: lastSection)
+        let indexPath = IndexPath(item: momentInfoSectionList[lastSection].assetResult.count - 1, section: lastSection)
         scrollCollectionView(to: indexPath)
         isFirstAppearance = false
     }
@@ -62,11 +70,11 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
             updateVisibilityOfActivityIndicator(activityIndicator)
         }
 
-        return momentAlbumList.count
+        return momentInfoSectionList.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return momentAlbumList[section].count
+        return momentInfoSectionList[section].assetResult.count
     }
 
     // MARK: - UICollectionViewDelegate
@@ -77,7 +85,7 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetCell\")")
         }
 
-        let asset = momentAlbumList[indexPath.section][indexPath.row]
+        let asset = PhotoKitAsset(asset: momentInfoSectionList[indexPath.section].assetResult[indexPath.row])
         cell.tag = indexPath.item
         cell.update(asset: asset, nohanaImagePickerController: nohanaImagePickerController)
 
@@ -100,19 +108,14 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            let album = momentAlbumList[indexPath.section]
+            let album = momentInfoSectionList[indexPath.section]
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "MomentHeader", for: indexPath) as? MomentSectionHeaderView else {
                 fatalError("failed to create MomentHeader")
             }
-            header.locationLabel.text = album.title
-            if let date =  album.date {
-                let formatter = DateFormatter()
-                formatter.dateStyle = .long
-                formatter.timeStyle = DateFormatter.Style.none
-                header.dateLabel.text = formatter.string(from: date as Date)
-            } else {
-                header.dateLabel.text = ""
-            }
+            let formatter = DateFormatter()
+            formatter.dateStyle = .long
+            formatter.timeStyle = DateFormatter.Style.none
+            header.dateLabel.text = formatter.string(from: album.creationDate)
             return header
         default:
             fatalError("failed to create MomentHeader")
@@ -139,7 +142,7 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let nohanaImagePickerController = nohanaImagePickerController {
-            nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: momentAlbumList[indexPath.section][indexPath.row].originalAsset)
+            nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: momentInfoSectionList[indexPath.section].assetResult[indexPath.row])
         }
     }
 
@@ -150,7 +153,8 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
             return
         }
         let assetListDetailViewController = segue.destination as! AssetDetailListViewController
-        assetListDetailViewController.photoKitAssetList = momentAlbumList[selectedIndexPath.section]
+        // TODO
+//        assetListDetailViewController.photoKitAssetList = momentInfoSectionList[selectedIndexPath.section]
         assetListDetailViewController.nohanaImagePickerController = nohanaImagePickerController
         assetListDetailViewController.currentIndexPath = selectedIndexPath
     }
@@ -161,4 +165,64 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
         super.didPushDone(sender)
     }
 
+}
+
+struct MomentInfoSection {
+    let creationDate: Date
+    let assetResult: PHFetchResult<PHAsset>
+}
+
+class MomentInfoSectionCreater {
+    func createSections(mediaType: MediaType) -> [MomentInfoSection] {
+        if case .video = mediaType {
+            fatalError("not supported .Video and .Any yet")
+        }
+        var momentInfoSectionList = [MomentInfoSection]()
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .none
+        let allPhotosOptions = PHFetchOptions()
+        allPhotosOptions.predicate = NSPredicate(format: "mediaType == %ld", PHAssetMediaType.image.rawValue)
+        allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+        let fetchAssetlist = PHAsset.fetchAssets(with: allPhotosOptions)
+        // MEMO: run faster create temp list than reference creationDate of fetchAssetlist.
+        var creationDateList = [Date]()
+        var dateList = [String]()
+
+        for index in 0..<fetchAssetlist.count {
+            if let creationDate = fetchAssetlist[index].creationDate {
+                let formattedDate = formatter.string(from: creationDate)
+                if !dateList.contains(formattedDate) {
+                    dateList.append(formattedDate)
+                    creationDateList.append(creationDate)
+                    if let section = fetchInfoSection(date: creationDate, fetchOptions: allPhotosOptions) {
+                        momentInfoSectionList.append(section)
+                    }
+                }
+            }
+        }
+        return momentInfoSectionList
+    }
+    
+    private func fetchInfoSection(date: Date, fetchOptions: PHFetchOptions) -> MomentInfoSection? {
+        if let startDate = createDate(forDay: date, forHour: 0, forMinute: 0, forSecond: 0), let endDate = createDate(forDay: date, forHour: 23, forMinute: 59, forSecond: 59) {
+            fetchOptions.predicate = NSPredicate(format: "creationDate => %@ AND creationDate < %@ && mediaType == %ld", startDate as NSDate, endDate as NSDate, PHAssetMediaType.image.rawValue)
+            let assetsPhotoFetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+            return MomentInfoSection(creationDate: date, assetResult: assetsPhotoFetchResult)
+        }
+        return nil
+    }
+    
+    private func createDate(forDay date: Date, forHour hour: Int, forMinute minute: Int, forSecond second: Int) -> Date? {
+        var dateComponents = DateComponents()
+        let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        let tempDate = calendar.dateComponents(in: TimeZone.current, from: date)
+        dateComponents.day = tempDate.day
+        dateComponents.month = tempDate.month
+        dateComponents.year = tempDate.year
+        dateComponents.hour = hour
+        dateComponents.minute = minute
+        dateComponents.second = second
+        return calendar.date(from: dateComponents)
+    }
 }
