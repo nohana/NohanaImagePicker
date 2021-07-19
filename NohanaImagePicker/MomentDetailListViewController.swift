@@ -16,7 +16,7 @@
 
 import UIKit
 
-final class MomentDetailListViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout  {
+final class MomentDetailListViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, DetailListViewControllerProtocol {
 
     var currentIndexPath: IndexPath = IndexPath() {
         willSet {

@@ -16,7 +16,7 @@
 
 import UIKit
 
-class AssetDetailListViewController: AssetListViewController {
+class AssetDetailListViewController: AssetListViewController, DetailListViewControllerProtocol {
 
     var currentIndexPath: IndexPath = IndexPath() {
         willSet {
