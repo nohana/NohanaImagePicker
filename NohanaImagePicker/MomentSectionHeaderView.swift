@@ -19,5 +19,4 @@ import UIKit
 class MomentSectionHeaderView: UICollectionReusableView {
 
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
 }

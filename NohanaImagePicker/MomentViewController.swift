@@ -17,12 +17,32 @@
 import UIKit
 import Photos
 
-class MomentViewController: AssetListViewController, ActivityIndicatable {
+final class MomentViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, ActivityIndicatable {
 
+    weak var nohanaImagePickerController: NohanaImagePickerController?
+    var photoKitAssetList: PhotoKitAssetList!
     var momentInfoSectionList: [MomentInfoSection] = []
+    var isFirstAppearance = true
+    
+    var cellSize: CGSize {
+        guard let nohanaImagePickerController = nohanaImagePickerController else {
+            return CGSize.zero
+        }
+        var numberOfColumns = nohanaImagePickerController.numberOfColumnsInLandscape
+        if UIApplication.shared.statusBarOrientation.isPortrait {
+            numberOfColumns = nohanaImagePickerController.numberOfColumnsInPortrait
+        }
+        let cellMargin: CGFloat = 2
+        let cellWidth = (view.frame.width - cellMargin * (CGFloat(numberOfColumns) - 1)) / CGFloat(numberOfColumns)
+        return CGSize(width: cellWidth, height: cellWidth)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = nohanaImagePickerController?.config.color.background ?? .white
+        updateTitle()
+        setUpToolbarItems()
+        addPickPhotoKitAssetNotificationObservers()
         setUpActivityIndicator()
         DispatchQueue.main.async { [weak self] in
             guard let self = self, let mediaType = self.nohanaImagePickerController?.mediaType else { return }
@@ -33,14 +53,23 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
             self.scrollCollectionViewToInitialPosition()
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let nohanaImagePickerController = nohanaImagePickerController {
+            setToolbarTitle(nohanaImagePickerController)
+        }
+        collectionView?.reloadData()
+        scrollCollectionViewToInitialPosition()
+    }
 
-    override func updateTitle() {
+    func updateTitle() {
         if let nohanaImagePickerController = nohanaImagePickerController {
             title = NSLocalizedString("albumlist.moment.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
         }
     }
 
-    override func scrollCollectionView(to indexPath: IndexPath) {
+    func scrollCollectionView(to indexPath: IndexPath) {
         let count: Int? = momentInfoSectionList.count
         guard count != nil && count! > 0 else {
             return
@@ -50,7 +79,7 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
         }
     }
 
-    override func scrollCollectionViewToInitialPosition() {
+    func scrollCollectionViewToInitialPosition() {
         guard isFirstAppearance else {
             return
         }
@@ -121,6 +150,12 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
             fatalError("failed to create MomentHeader")
         }
     }
+    
+    // MARK: - UICollectionViewDelegateFlowLayout
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return cellSize
+    }
 
     // MARK: - ActivityIndicatable
 
@@ -152,17 +187,17 @@ class MomentViewController: AssetListViewController, ActivityIndicatable {
         guard let selectedIndexPath = collectionView?.indexPathsForSelectedItems?.first else {
             return
         }
-        let assetListDetailViewController = segue.destination as! AssetDetailListViewController
-        // TODO
-//        assetListDetailViewController.photoKitAssetList = momentInfoSectionList[selectedIndexPath.section]
-        assetListDetailViewController.nohanaImagePickerController = nohanaImagePickerController
-        assetListDetailViewController.currentIndexPath = selectedIndexPath
+        let momentDetailListViewController = segue.destination as! MomentDetailListViewController
+        momentDetailListViewController.momentInfoSection = momentInfoSectionList[selectedIndexPath.section]
+        momentDetailListViewController.nohanaImagePickerController = nohanaImagePickerController
+        momentDetailListViewController.currentIndexPath = selectedIndexPath
     }
 
     // MARK: - IBAction
 
-    @IBAction override func didPushDone(_ sender: AnyObject) {
-        super.didPushDone(sender)
+    @IBAction func didPushDone(_ sender: AnyObject) {
+        let pickedPhotoKitAssets = nohanaImagePickerController!.pickedAssetList.map { ($0 as! PhotoKitAsset).originalAsset }
+        nohanaImagePickerController!.delegate?.nohanaImagePicker(nohanaImagePickerController!, didFinishPickingPhotoKitAssets: pickedPhotoKitAssets )
     }
 
 }
