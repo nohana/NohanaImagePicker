@@ -93,13 +93,12 @@ final class MomentDetailListViewController: UICollectionViewController, UICollec
         }
         let asset = PhotoKitAsset(asset: momentInfoSection.assetResult[indexPath.item])
         pickButton.isSelected = nohanaImagePickerController.pickedAssetList.isPicked(asset)
-        pickButton.isHidden = !(nohanaImagePickerController.canPickAsset(asset) )
+        pickButton.isHidden = !(nohanaImagePickerController.canPickAsset(asset))
         nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, assetDetailListViewController: self, didChangeAssetDetailPage: indexPath, photoKitAsset: asset.originalAsset)
     }
 
     func scrollCollectionView(to indexPath: IndexPath) {
-        let count: Int? = momentInfoSection?.assetResult.count
-        guard count != nil && count! > 0 else {
+        guard let count = momentInfoSection?.assetResult.count, count > 0 else {
             return
         }
         DispatchQueue.main.async {
@@ -184,14 +183,14 @@ final class MomentDetailListViewController: UICollectionViewController, UICollec
     // MARK: - IBAction
     
     @IBAction func didPushPickButton(_ sender: UIButton) {
-        guard let momentInfoSection = momentInfoSection else { return }
+        guard let nohanaImagePickerController = nohanaImagePickerController, let momentInfoSection = momentInfoSection else { return }
         let asset = PhotoKitAsset(asset: momentInfoSection.assetResult[currentIndexPath.item])
         if pickButton.isSelected {
-            if nohanaImagePickerController!.pickedAssetList.drop(asset: asset) {
+            if nohanaImagePickerController.pickedAssetList.drop(asset: asset) {
                 pickButton.isSelected = false
             }
         } else {
-            if nohanaImagePickerController!.pickedAssetList.pick(asset: asset) {
+            if nohanaImagePickerController.pickedAssetList.pick(asset: asset) {
                 pickButton.isSelected = true
             }
         }

@@ -196,8 +196,9 @@ final class MomentViewController: UICollectionViewController, UICollectionViewDe
     // MARK: - IBAction
 
     @IBAction func didPushDone(_ sender: AnyObject) {
-        let pickedPhotoKitAssets = nohanaImagePickerController!.pickedAssetList.map { ($0 as! PhotoKitAsset).originalAsset }
-        nohanaImagePickerController!.delegate?.nohanaImagePicker(nohanaImagePickerController!, didFinishPickingPhotoKitAssets: pickedPhotoKitAssets )
+        if let nohanaImagePickerController = nohanaImagePickerController {
+            let pickedPhotoKitAssets = nohanaImagePickerController.pickedAssetList.map { ($0 as! PhotoKitAsset).originalAsset }
+            nohanaImagePickerController.delegate?.nohanaImagePicker(nohanaImagePickerController, didFinishPickingPhotoKitAssets: pickedPhotoKitAssets)
+        }
     }
-
 }
