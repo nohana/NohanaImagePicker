@@ -183,19 +183,6 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
         case .moment:
             let momentViewController = segue.destination as! MomentViewController
             momentViewController.nohanaImagePickerController = nohanaImagePickerController
-            momentViewController.momentAlbumList = PhotoKitAlbumList(
-                assetCollectionTypes: [.moment],
-                assetCollectionSubtypes: [.any],
-                mediaType: nohanaImagePickerController!.mediaType,
-                shouldShowEmptyAlbum: nohanaImagePickerController!.shouldShowEmptyAlbum,
-                handler: { () -> Void in
-                    DispatchQueue.main.async(execute: { [weak momentViewController] in
-                        momentViewController?.isLoading = false
-                        momentViewController?.collectionView?.reloadData()
-                        momentViewController?.isFirstAppearance = true
-                        momentViewController?.scrollCollectionViewToInitialPosition()
-                    })
-            })
         case .albums:
             let assetListViewController = segue.destination as! AssetListViewController
             assetListViewController.photoKitAssetList = photoKitAlbumList[tableView.indexPathForSelectedRow!.row]
