@@ -6,7 +6,7 @@
 
 NohanaImagePicker enables your app to pick images from multiple album, and the moment.
 
-<img src="./Images/collection.gif" width="216" /> <img src="./Images/moment.png" width="216" />
+<img src="./Images/collection.gif" width="216" /> 
 
 ## Usage
 

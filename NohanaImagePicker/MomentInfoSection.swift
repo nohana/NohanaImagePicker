@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 nohana, Inc.
+ * Copyright (C) 2021 nohana, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import UIKit
+import Photos
 
-class MomentSectionHeaderView: UICollectionReusableView {
-
-    @IBOutlet weak var dateLabel: UILabel!
+struct MomentInfoSection {
+    let creationDate: Date
+    let assetResult: PHFetchResult<PHAsset>
 }

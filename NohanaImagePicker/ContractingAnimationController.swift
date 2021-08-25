@@ -17,12 +17,12 @@
 import AVFoundation
 
 extension Size {
-    static func contractingAnimationToCellRect(_ toVC: AssetListViewController, toCell: AssetCell) -> CGRect {
+    static func contractingAnimationToCellRect(_ toVC: UICollectionViewController, toCell: AssetCell) -> CGRect {
         let origin = CGPoint(x: toCell.frame.origin.x, y: toCell.frame.origin.y - toVC.collectionView!.contentOffset.y)
         return CGRect(origin: origin, size: toCell.frame.size)
     }
 
-    static func contractingAnimationFromCellRect(_ fromVC: AssetDetailListViewController, fromCell: AssetDetailCell, contractingImageSize: CGSize) -> CGRect {
+    static func contractingAnimationFromCellRect(_ fromVC: UIViewController, fromCell: AssetDetailCell, contractingImageSize: CGSize) -> CGRect {
         var rect = AVMakeRect(aspectRatio: contractingImageSize, insideRect: fromCell.imageView.frame)
         rect.origin.y += Size.appBarHeight(fromVC)
         rect.origin.x -= fromCell.scrollView.contentOffset.x
@@ -45,8 +45,9 @@ class ContractingAnimationController: NSObject, UIViewControllerAnimatedTransiti
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard
-            let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as? AssetDetailListViewController,
-            let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as? AssetListViewController
+            let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as? DetailListViewControllerProtocol,
+            let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as? UICollectionViewController,
+            toVC is AssetListViewController || toVC is MomentViewController
             else {
                 return
         }
@@ -89,6 +90,4 @@ class ContractingAnimationController: NSObject, UIViewControllerAnimatedTransiti
         }
 
     }
-
-
 }
