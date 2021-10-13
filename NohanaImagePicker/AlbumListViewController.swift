@@ -246,10 +246,12 @@ extension UIViewController {
         let leftSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let rightSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
-        let infoButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        infoButton.isEnabled = false
-        infoButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.black], for: UIControl.State())
-        self.toolbarItems = [leftSpace, infoButton, rightSpace]
+        let label = UILabel()
+        label.textColor = .black
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 16)
+        let labelItem = UIBarButtonItem(customView: label)
+        self.toolbarItems = [leftSpace, labelItem, rightSpace]
     }
 
     func setToolbarTitle(_ nohanaImagePickerController: NohanaImagePickerController) {
@@ -257,18 +259,20 @@ extension UIViewController {
         guard count != nil && count! >= 2 else {
             return
         }
-        guard let infoButton = toolbarItems?[1] else {
+        guard let labelItem = toolbarItems?[1], let titleLabel = labelItem.customView as? UILabel else {
             return
         }
         if nohanaImagePickerController.maximumNumberOfSelection == 0 {
             let title = String(format: nohanaImagePickerController.config.strings.toolbarTitleNoLimit ?? NSLocalizedString("toolbar.title.nolimit", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: ""),
                 nohanaImagePickerController.pickedAssetList.count)
-            infoButton.title = title
+            titleLabel.text = title
+            titleLabel.sizeToFit()
         } else {
             let title = String(format: nohanaImagePickerController.config.strings.toolbarTitleHasLimit ?? NSLocalizedString("toolbar.title.haslimit", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: ""),
                 nohanaImagePickerController.pickedAssetList.count,
                 nohanaImagePickerController.maximumNumberOfSelection)
-            infoButton.title = title
+            titleLabel.text = title
+            titleLabel.sizeToFit()
         }
     }
 
