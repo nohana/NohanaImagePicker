@@ -249,7 +249,7 @@ extension UIViewController {
         let label = UILabel()
         label.textColor = .black
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 16)
+        label.font = .systemFont(ofSize: 17)
         let labelItem = UIBarButtonItem(customView: label)
         self.toolbarItems = [leftSpace, labelItem, rightSpace]
     }
