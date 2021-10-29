@@ -31,6 +31,11 @@ class AssetDetailListViewController: AssetListViewController, DetailListViewCont
     override var cellSize: CGSize {
         return Size.screenRectWithoutAppBar(self).size
     }
+    
+    override func loadView() {
+        super.loadView()
+        self.collectionView.backgroundColor = .black
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
