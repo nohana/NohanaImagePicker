@@ -29,44 +29,28 @@ final class MomentInfoSectionCreater {
         allPhotosOptions.predicate = NSPredicate(format: "mediaType == %ld", PHAssetMediaType.image.rawValue)
         allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
         let fetchAssetlist = PHAsset.fetchAssets(with: allPhotosOptions)
-        // MEMO: run faster create temp list than reference creationDate of fetchAssetlist.
-        var creationDateList = [Date]()
-        var dateList = [String]()
-
-        for index in 0..<fetchAssetlist.count {
-            if let creationDate = fetchAssetlist[index].creationDate {
-                let formattedDate = formatter.string(from: creationDate)
-                if !dateList.contains(formattedDate) {
-                    dateList.append(formattedDate)
-                    creationDateList.append(creationDate)
-                    if let section = fetchInfoSection(date: creationDate, fetchOptions: allPhotosOptions) {
-                        momentInfoSectionList.append(section)
-                    }
+        // Group date by day, year, month.
+        let allAssets = fetchAssetlist.objects(at: IndexSet(0..<fetchAssetlist.count))
+        let calender = Calendar.current
+        var assetsByDate = [(DateComponents, [PHAsset])]()
+        var assetsByDateIndex = 0
+        for asset in allAssets {
+            if  assetsByDateIndex > 0 {
+                if assetsByDate[assetsByDateIndex - 1].0 == calender.dateComponents([.day, .year, .month], from: (asset.creationDate)!) {
+                    assetsByDate[assetsByDateIndex - 1].1.append(asset)
+                } else {
+                    let value = (calender.dateComponents([.day, .year, .month], from: (asset.creationDate)!), [asset])
+                    assetsByDate.append(value)
+                    assetsByDateIndex += 1
                 }
+            } else if assetsByDate.count == assetsByDateIndex {
+                let value = (calender.dateComponents([.day, .year, .month], from: (asset.creationDate)!), [asset])
+                assetsByDate.append(value)
+                assetsByDateIndex += 1
             }
         }
+        momentInfoSectionList = assetsByDate.map { MomentInfoSection(creationDate: calender.date(from: $0.0) ?? Date(timeIntervalSince1970: 0), assetResult: $0.1) }
+
         return momentInfoSectionList
-    }
-    
-    private func fetchInfoSection(date: Date, fetchOptions: PHFetchOptions) -> MomentInfoSection? {
-        if let startDate = createDate(forDay: date, forHour: 0, forMinute: 0, forSecond: 0), let endDate = createDate(forDay: date, forHour: 23, forMinute: 59, forSecond: 59) {
-            fetchOptions.predicate = NSPredicate(format: "creationDate => %@ AND creationDate < %@ && mediaType == %ld", startDate as NSDate, endDate as NSDate, PHAssetMediaType.image.rawValue)
-            let assetsPhotoFetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
-            return MomentInfoSection(creationDate: date, assetResult: assetsPhotoFetchResult)
-        }
-        return nil
-    }
-    
-    private func createDate(forDay date: Date, forHour hour: Int, forMinute minute: Int, forSecond second: Int) -> Date? {
-        var dateComponents = DateComponents()
-        let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
-        let tempDate = calendar.dateComponents(in: TimeZone.current, from: date)
-        dateComponents.day = tempDate.day
-        dateComponents.month = tempDate.month
-        dateComponents.year = tempDate.year
-        dateComponents.hour = hour
-        dateComponents.minute = minute
-        dateComponents.second = second
-        return calendar.date(from: dateComponents)
     }
 }
