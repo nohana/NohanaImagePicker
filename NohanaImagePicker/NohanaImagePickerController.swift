@@ -50,6 +50,7 @@ open class NohanaImagePickerController: UIViewController {
         return true
     }
     open var config: Config = Config()
+    open var canPickDateSection: Bool = false
 
     lazy var assetBundle: Bundle = {
         let bundle = Bundle(for: type(of: self))

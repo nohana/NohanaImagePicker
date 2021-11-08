@@ -83,6 +83,11 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
             nohanaImagePickerController.delegate?.nohanaImagePickerDidSelectMoment?(nohanaImagePickerController)
         case .albums:
             nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAssetList: photoKitAlbumList[indexPath.row].assetList)
+            if nohanaImagePickerController.canPickDateSection {
+                performSegue(withIdentifier: "toAssetListViewSelectableDateSectionController", sender: nil)
+            } else {
+                performSegue(withIdentifier: "toAssetListViewController", sender: nil)
+            }
         }
     }
 
@@ -184,9 +189,17 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
             let momentViewController = segue.destination as! MomentViewController
             momentViewController.nohanaImagePickerController = nohanaImagePickerController
         case .albums:
-            let assetListViewController = segue.destination as! AssetListViewController
-            assetListViewController.photoKitAssetList = photoKitAlbumList[tableView.indexPathForSelectedRow!.row]
-            assetListViewController.nohanaImagePickerController = nohanaImagePickerController
+            switch segue.identifier {
+            case "toAssetListViewController":
+                let assetListViewController = segue.destination as! AssetListViewController
+                assetListViewController.photoKitAssetList = photoKitAlbumList[tableView.indexPathForSelectedRow!.row]
+                assetListViewController.nohanaImagePickerController = nohanaImagePickerController
+            case "toAssetListViewSelectableDateSectionController":
+                // TODO
+                print("show selectable view")
+            default:
+                fatalError("unexpected segue identifer")
+            }
         }
     }
 

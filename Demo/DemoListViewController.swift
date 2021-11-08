@@ -30,6 +30,7 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
         Cell(title: "No toolbar", selector: #selector(DemoListViewController.showNoToolbarPicker)),
         Cell(title: "Disable to pick assets", selector: #selector(DemoListViewController.showDisableToPickAssetsPicker)),
         Cell(title: "Custom UI", selector: #selector(DemoListViewController.showCustomUIPicker)),
+        Cell(title: "Selectable Album Date Section", selector: #selector(DemoListViewController.showSelectableDateSectionPicker)),
     ]
 
     override func viewDidAppear(_ animated: Bool) {
@@ -133,6 +134,13 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
         picker.config.strings.albumListTitle = "🏞"
         picker.config.image.droppedSmall = UIImage(named: "btn_select_m")
         picker.config.image.pickedSmall = UIImage(named: "btn_selected_m")
+        present(picker, animated: true, completion: nil)
+    }
+
+    @objc func showSelectableDateSectionPicker() {
+        let picker = NohanaImagePickerController()
+        picker.canPickDateSection = true
+        picker.delegate = self
         present(picker, animated: true, completion: nil)
     }
 
