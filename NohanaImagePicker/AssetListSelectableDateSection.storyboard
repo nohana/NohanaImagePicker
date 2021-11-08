@@ -1,35 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5Bh-Qc-bpd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Y8D-wX-eXv">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="g51-2k-Pcf">
+        <!--Asset List Selectable Date Section Controller-->
+        <scene sceneID="nNs-bz-pLI">
             <objects>
-                <viewController id="5Bh-Qc-bpd" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Di9-wY-5LK"/>
-                        <viewControllerLayoutGuide type="bottom" id="Pcg-OR-PXX"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lRg-N0-9s9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                <collectionViewController id="Y8D-wX-eXv" customClass="AssetListSelectableDateSectionController" customModule="NohanaImagePicker" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="u96-G1-tlm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="B5j-gE-ayg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="pMb-FN-qxT">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="50" height="44"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="2" maxX="0.0" maxY="10"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AssetCell" id="BAL-WW-HN0" customClass="AssetCell" customModule="NohanaImagePicker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="46" width="78" height="78"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="78" height="78"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gBL-Tw-h3e">
+                                            <rect key="frame" x="0.0" y="0.0" width="78" height="78"/>
+                                        </imageView>
+                                        <view hidden="YES" alpha="0.30000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7pN-6U-K6c">
+                                            <rect key="frame" x="0.0" y="0.0" width="78" height="78"/>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="byV-w7-CIM">
+                                            <rect key="frame" x="34" y="0.0" width="44" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="44" id="FE2-AU-SQh"/>
+                                                <constraint firstAttribute="height" constant="44" id="fvx-Oh-FtF"/>
+                                            </constraints>
+                                            <connections>
+                                                <action selector="didPushPickButton:" destination="BAL-WW-HN0" eventType="touchUpInside" id="Bis-wp-gsa"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="gBL-Tw-h3e" firstAttribute="top" secondItem="BAL-WW-HN0" secondAttribute="topMargin" constant="-8" id="AcO-lc-opb"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="7pN-6U-K6c" secondAttribute="trailing" constant="-8" id="Fe7-an-ray"/>
+                                    <constraint firstItem="gBL-Tw-h3e" firstAttribute="leading" secondItem="BAL-WW-HN0" secondAttribute="leadingMargin" constant="-8" id="HBN-DU-pmo"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="7pN-6U-K6c" secondAttribute="bottom" constant="-8" id="MwQ-se-FB4"/>
+                                    <constraint firstItem="7pN-6U-K6c" firstAttribute="top" secondItem="BAL-WW-HN0" secondAttribute="topMargin" constant="-8" id="gH4-Ga-GBe"/>
+                                    <constraint firstItem="7pN-6U-K6c" firstAttribute="leading" secondItem="BAL-WW-HN0" secondAttribute="leadingMargin" constant="-8" id="gI1-tV-WJ4"/>
+                                    <constraint firstItem="byV-w7-CIM" firstAttribute="top" secondItem="BAL-WW-HN0" secondAttribute="topMargin" constant="-8" id="mMg-UM-DTs"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="byV-w7-CIM" secondAttribute="trailing" constant="-8" id="rba-6y-760"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="gBL-Tw-h3e" secondAttribute="bottom" constant="-8" id="wyf-rN-sPd"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="gBL-Tw-h3e" secondAttribute="trailing" constant="-8" id="yZR-lD-Rpy"/>
+                                </constraints>
+                                <size key="customSize" width="78" height="78"/>
+                                <connections>
+                                    <outlet property="imageView" destination="gBL-Tw-h3e" id="3MR-ED-vnu"/>
+                                    <outlet property="overlayView" destination="7pN-6U-K6c" id="iAv-Uk-1Kx"/>
+                                    <outlet property="pickButton" destination="byV-w7-CIM" id="t52-nd-9qH"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AlbumDateSectionHeader" id="XXe-ul-EPT" customClass="AlbumDateSectionHeaderView" customModule="NohanaImagePicker" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zez-RG-eKO">
+                                    <rect key="frame" x="11.999999999999998" y="13.666666666666664" width="30.333333333333329" height="17"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="aZE-cw-Q5P"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="aZE-cw-Q5P"/>
+                                        </mask>
+                                    </variation>
+                                </label>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="zez-RG-eKO" firstAttribute="centerY" secondItem="XXe-ul-EPT" secondAttribute="centerY" id="LuP-NY-gzM"/>
+                                <constraint firstItem="zez-RG-eKO" firstAttribute="leading" secondItem="XXe-ul-EPT" secondAttribute="leadingMargin" id="N3P-bG-NqX"/>
+                                <constraint firstItem="zez-RG-eKO" firstAttribute="centerY" secondItem="XXe-ul-EPT" secondAttribute="centerY" id="eKF-zk-Lja"/>
+                                <constraint firstItem="zez-RG-eKO" firstAttribute="leading" secondItem="XXe-ul-EPT" secondAttribute="leadingMargin" constant="4" id="r97-8Y-s4a"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="N3P-bG-NqX"/>
+                                    <exclude reference="eKF-zk-Lja"/>
+                                </mask>
+                            </variation>
+                            <connections>
+                                <outlet property="dateLabel" destination="zez-RG-eKO" id="7Gr-9R-XKl"/>
+                            </connections>
+                        </collectionReusableView>
+                        <connections>
+                            <outlet property="dataSource" destination="Y8D-wX-eXv" id="10j-Ri-DMe"/>
+                            <outlet property="delegate" destination="Y8D-wX-eXv" id="8HW-5X-Tnd"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="Gjb-DI-GwA">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="o0c-Z9-H5e">
+                            <connections>
+                                <action selector="didPushDone:" destination="Y8D-wX-eXv" id="Vhb-TD-nrx"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gV9-4e-BRv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="190" y="763"/>
+            <point key="canvasLocation" x="142" y="738"/>
         </scene>
     </scenes>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

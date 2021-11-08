@@ -10,6 +10,9 @@
 		3569CAA91EC1918E000C41C0 /* NohanaImagePicker.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */; };
 		F181095026A5361A001C2BDE /* MomentDetailListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F181094F26A5361A001C2BDE /* MomentDetailListViewController.swift */; };
 		F1A26CCD2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1A26CCC2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard */; };
+		F1A26CCF2738E7E400433E9F /* AssetListSelectableDateSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A26CCE2738E7E400433E9F /* AssetListSelectableDateSectionController.swift */; };
+		F1A26CD12738E88700433E9F /* AlbumDateSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A26CD02738E88700433E9F /* AlbumDateSection.swift */; };
+		F1A26CD32739194300433E9F /* AlbumDateSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A26CD22739194300433E9F /* AlbumDateSectionHeaderView.swift */; };
 		F1E5DE7D26A57F0B004B9EDE /* DetailListViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E5DE7C26A57F0B004B9EDE /* DetailListViewControllerProtocol.swift */; };
 		F1E5DE8026A58346004B9EDE /* MomentInfoSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E5DE7F26A58346004B9EDE /* MomentInfoSection.swift */; };
 		F1E5DE8226A58386004B9EDE /* MomentInfoSectionCreater.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E5DE8126A58386004B9EDE /* MomentInfoSectionCreater.swift */; };
@@ -80,6 +83,9 @@
 		3590F1F51EC1A79400F32E06 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/NohanaImagePicker.strings; sourceTree = "<group>"; };
 		F181094F26A5361A001C2BDE /* MomentDetailListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentDetailListViewController.swift; sourceTree = "<group>"; };
 		F1A26CCC2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetListSelectableDateSection.storyboard; sourceTree = "<group>"; };
+		F1A26CCE2738E7E400433E9F /* AssetListSelectableDateSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetListSelectableDateSectionController.swift; sourceTree = "<group>"; };
+		F1A26CD02738E88700433E9F /* AlbumDateSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDateSection.swift; sourceTree = "<group>"; };
+		F1A26CD22739194300433E9F /* AlbumDateSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDateSectionHeaderView.swift; sourceTree = "<group>"; };
 		F1E5DE7C26A57F0B004B9EDE /* DetailListViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailListViewControllerProtocol.swift; sourceTree = "<group>"; };
 		F1E5DE7F26A58346004B9EDE /* MomentInfoSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentInfoSection.swift; sourceTree = "<group>"; };
 		F1E5DE8126A58386004B9EDE /* MomentInfoSectionCreater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentInfoSectionCreater.swift; sourceTree = "<group>"; };
@@ -155,6 +161,7 @@
 			children = (
 				F1E5DE7F26A58346004B9EDE /* MomentInfoSection.swift */,
 				F1E5DE8126A58386004B9EDE /* MomentInfoSectionCreater.swift */,
+				F1A26CD02738E88700433E9F /* AlbumDateSection.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -182,6 +189,7 @@
 				F25C69871CA23A0A005935D6 /* MomentCell.swift */,
 				F2FE1F761C901D9400FDBE7B /* MomentSectionHeaderView.swift */,
 				F25C69911CA28728005935D6 /* AlbumListEmptyIndicator.swift */,
+				F1A26CD22739194300433E9F /* AlbumDateSectionHeaderView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -275,6 +283,7 @@
 				F2DF3B2A1C6CC4DB00C1C0E4 /* AssetDetailListViewController.swift */,
 				F181094F26A5361A001C2BDE /* MomentDetailListViewController.swift */,
 				F1E5DE7C26A57F0B004B9EDE /* DetailListViewControllerProtocol.swift */,
+				F1A26CCE2738E7E400433E9F /* AssetListSelectableDateSectionController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -420,6 +429,7 @@
 				F25C10C21C8ED9BF007453C3 /* MomentViewController.swift in Sources */,
 				F25C69881CA23A0A005935D6 /* MomentCell.swift in Sources */,
 				F2FE1F781C901D9400FDBE7B /* MomentSectionHeaderView.swift in Sources */,
+				F1A26CD12738E88700433E9F /* AlbumDateSection.swift in Sources */,
 				F23554281C69D5DB00796DCA /* NohanaImagePickerController.swift in Sources */,
 				F1E5DE8026A58346004B9EDE /* MomentInfoSection.swift in Sources */,
 				F181095026A5361A001C2BDE /* MomentDetailListViewController.swift in Sources */,
@@ -428,11 +438,13 @@
 				F2DF3B2D1C6D780100C1C0E4 /* AssetDetailCell.swift in Sources */,
 				F25C69901CA27311005935D6 /* EmptyIndicatable.swift in Sources */,
 				F2DA29771C7749D600B0A8E3 /* NotificationInfo.swift in Sources */,
+				F1A26CCF2738E7E400433E9F /* AssetListSelectableDateSectionController.swift in Sources */,
 				F1E5DE7D26A57F0B004B9EDE /* DetailListViewControllerProtocol.swift in Sources */,
 				F218D7DE1C6C3A5B001FCED1 /* AlbumCell.swift in Sources */,
 				F26775E11C7046C7002E786C /* ExpandingAnimationController.swift in Sources */,
 				F28F4AC51C6C59A500B7D725 /* PhotoKitAsset.swift in Sources */,
 				F2DF3B151C6C76E500C1C0E4 /* AssetListViewController.swift in Sources */,
+				F1A26CD32739194300433E9F /* AlbumDateSectionHeaderView.swift in Sources */,
 				F26775E51C70574F002E786C /* AnimatableNavigationController.swift in Sources */,
 				F2DF3B2B1C6CC4DB00C1C0E4 /* AssetDetailListViewController.swift in Sources */,
 				F218D7D61C6B3D22001FCED1 /* PhotoKitAlbumList.swift in Sources */,

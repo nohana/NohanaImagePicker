@@ -195,8 +195,9 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
                 assetListViewController.photoKitAssetList = photoKitAlbumList[tableView.indexPathForSelectedRow!.row]
                 assetListViewController.nohanaImagePickerController = nohanaImagePickerController
             case "toAssetListViewSelectableDateSectionController":
-                // TODO
-                print("show selectable view")
+                let assetListSelectableDateSectionController = segue.destination as! AssetListSelectableDateSectionController
+                assetListSelectableDateSectionController.photoKitAssetList = photoKitAlbumList[tableView.indexPathForSelectedRow!.row]
+                assetListSelectableDateSectionController.nohanaImagePickerController = nohanaImagePickerController
             default:
                 fatalError("unexpected segue identifer")
             }
