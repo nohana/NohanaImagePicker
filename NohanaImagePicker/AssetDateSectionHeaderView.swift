@@ -30,7 +30,9 @@ class AssetDateSectionHeaderView: UICollectionReusableView {
     @IBAction func didPushPickButton(_ sender: UIButton) {
         let firstButtonState = sender.isSelected
         var isNotPickedAsset = false
-        for asset in assets {
+        let maxSelectionCount = min(assets.count, nohanaImagePickerController?.maximumNumberOfSelection ?? assets.count)
+        for index in 0..<maxSelectionCount {
+            let asset = assets[index]
             if firstButtonState {
                 _ = nohanaImagePickerController?.pickedAssetList.drop(asset: asset)
                 sender.isSelected = false
@@ -61,11 +63,11 @@ class AssetDateSectionHeaderView: UICollectionReusableView {
             pickButton.setImage(pickedImage, for: .selected)
         }
 
-        let cantPickOnly = !assets.map { nohanaImagePickerController.canPickAsset($0) }.contains(where: {$0 == true})
-        pickButton.isHidden = cantPickOnly
-        if cantPickOnly { return }
+        let canPick = assets.contains(where: { nohanaImagePickerController.canPickAsset($0) == true })
+        pickButton.isHidden = !canPick
+        if !canPick { return }
         let canPickAssets = assets.compactMap { nohanaImagePickerController.canPickAsset($0) ? $0 : nil }
-        let isAllSelected = !canPickAssets.map { nohanaImagePickerController.pickedAssetList.isPicked($0) }.contains(where: {$0 == false})
-        pickButton.isSelected = isAllSelected
+        let existNotSelected = canPickAssets.contains(where: {  nohanaImagePickerController.pickedAssetList.isPicked($0) == false })
+        pickButton.isSelected = !existNotSelected
     }
 }
