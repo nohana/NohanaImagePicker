@@ -16,21 +16,32 @@
 
 import UIKit
 
+protocol AssetDateSectionHeaderViewDelegate: AnyObject {
+    func didPushPickButton(isSelected: Bool, indexPath: IndexPath)
+}
+
 class AssetDateSectionHeaderView: UICollectionReusableView {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var pickButton: UIButton!
-    
+    var indexPath: IndexPath?
+    weak var delegate: AssetDateSectionHeaderViewDelegate?
+
     @IBAction func didPushPickButton(_ sender: UIButton) {
-        // TODO data selection
-        sender.isSelected = !sender.isSelected
+        if let indexPath = indexPath {
+            delegate?.didPushPickButton(isSelected: sender.isSelected, indexPath: indexPath)
+            sender.isSelected = !sender.isSelected
+        }
     }
-    
-    func update(nohanaImagePickerController: NohanaImagePickerController) {
+
+    func update(assets: [Asset], indexPath: IndexPath, nohanaImagePickerController: NohanaImagePickerController) {
+        self.indexPath = indexPath
         if pickButton.image(for: UIControl.State()) == nil, pickButton.image(for: .selected) == nil {
             let droppedImage: UIImage? = nohanaImagePickerController.config.image.droppedSmall ?? UIImage(named: "btn_select_l", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
             let pickedImage: UIImage? = nohanaImagePickerController.config.image.pickedSmall ?? UIImage(named: "btn_selected_l", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
             pickButton.setImage(droppedImage, for: UIControl.State())
             pickButton.setImage(pickedImage, for: .selected)
         }
+        let isAllSelected = !assets.map { nohanaImagePickerController.pickedAssetList.isPicked($0) }.contains(where: {$0 == false})
+        pickButton.isSelected = isAllSelected
     }
 }

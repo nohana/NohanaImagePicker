@@ -174,7 +174,9 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
             formatter.dateStyle = .long
             formatter.timeStyle = DateFormatter.Style.none
             header.dateLabel.text = formatter.string(from: album.creationDate)
-            header.update(nohanaImagePickerController: nohanaImagePickerController)
+            header.delegate = self
+            let assets = dateSectionList[indexPath.section].assetResult.map { PhotoKitAsset(asset: $0) }
+            header.update(assets: assets, indexPath: indexPath, nohanaImagePickerController: nohanaImagePickerController)
             return header
         default:
             fatalError("failed to create AssetDateSectionHeader")
@@ -227,5 +229,22 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
             let pickedPhotoKitAssets = nohanaImagePickerController.pickedAssetList.map { ($0 as! PhotoKitAsset).originalAsset }
             nohanaImagePickerController.delegate?.nohanaImagePicker(nohanaImagePickerController, didFinishPickingPhotoKitAssets: pickedPhotoKitAssets)
         }
+    }
+}
+
+// MARK: - AssetDateSectionHeaderViewDelegate
+extension AssetListSelectableDateSectionController: AssetDateSectionHeaderViewDelegate {
+    func didPushPickButton(isSelected: Bool, indexPath: IndexPath) {
+        let assets = dateSectionList[indexPath.section].assetResult.map { PhotoKitAsset(asset: $0) }
+        for asset in assets {
+            if isSelected {
+                _ = nohanaImagePickerController?.pickedAssetList.drop(asset: asset)
+            } else {
+                if nohanaImagePickerController?.canPickAsset(asset) ?? false {
+                    _ = nohanaImagePickerController?.pickedAssetList.pick(asset: asset)
+                }
+            }
+        }
+        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
     }
 }
