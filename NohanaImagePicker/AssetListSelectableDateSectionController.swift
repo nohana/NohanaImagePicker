@@ -144,6 +144,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
 
         let asset = PhotoKitAsset(asset: dateSectionList[indexPath.section].assetResult[indexPath.row])
         cell.tag = indexPath.item
+        cell.delegate = self
         cell.update(asset: asset, nohanaImagePickerController: nohanaImagePickerController)
 
         let imageSize = CGSize(
@@ -246,5 +247,19 @@ extension AssetListSelectableDateSectionController: AssetDateSectionHeaderViewDe
             }
         }
         collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+    }
+}
+
+// MARK: - AssetCellDelegate
+extension AssetListSelectableDateSectionController: AssetCellDelegate {
+    func didPushPickButton(cell: AssetCell) {
+        if let indexPath = collectionView.indexPath(for: cell) {
+            UIView.animate(withDuration: 0) { [weak self] in
+                self?.collectionView.performBatchUpdates({ [weak self] in
+                    let indexSet = IndexSet(integer: indexPath.section)
+                    self?.collectionView.reloadSections(indexSet)
+                }, completion: nil)
+            }
+        }
     }
 }

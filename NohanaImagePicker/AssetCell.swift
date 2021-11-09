@@ -15,12 +15,17 @@
  */
 import UIKit
 
+protocol AssetCellDelegate: AnyObject {
+    func didPushPickButton(cell: AssetCell)
+}
+
 class AssetCell: UICollectionViewCell {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var pickButton: UIButton!
     @IBOutlet weak var overlayView: UIView!
 
+    weak var delegate: AssetCellDelegate?
     weak var nohanaImagePickerController: NohanaImagePickerController?
     var asset: Asset?
 
@@ -49,6 +54,7 @@ class AssetCell: UICollectionViewCell {
             }
         }
         self.overlayView.isHidden = !pickButton.isSelected
+        delegate?.didPushPickButton(cell: self)
     }
 
     func update(asset: Asset, nohanaImagePickerController: NohanaImagePickerController) {
