@@ -16,7 +16,7 @@
 
 import Photos
 
-struct AlbumDateSection {
+struct AssetDateSection {
     let creationDate: Date
     let assetResult: [PHAsset]
 }

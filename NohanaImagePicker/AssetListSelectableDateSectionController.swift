@@ -21,7 +21,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     
     weak var nohanaImagePickerController: NohanaImagePickerController?
     var photoKitAssetList: PhotoKitAssetList!
-    var dateSectionList: [AlbumDateSection] = []
+    var dateSectionList: [AssetDateSection] = []
     var isFirstAppearance = true
     
     var cellSize: CGSize {
@@ -49,7 +49,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
             // TODO: DI
             self.dateSectionList = { [weak self] in
                 guard let self = self else { return [] }
-                var albumDateSectionList = [AlbumDateSection]()
+                var albumDateSectionList = [AssetDateSection]()
                 let options = PHFetchOptions()
                 options.predicate = NSPredicate(format: "mediaType == %ld", PHAssetMediaType.image.rawValue)
                 options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
@@ -73,7 +73,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
                         assetsByDateIndex += 1
                     }
                 }
-                albumDateSectionList = assetsByDate.map { AlbumDateSection(creationDate: calender.date(from: $0.0) ?? Date(timeIntervalSince1970: 0), assetResult: $0.1) }
+                albumDateSectionList = assetsByDate.map { AssetDateSection(creationDate: calender.date(from: $0.0) ?? Date(timeIntervalSince1970: 0), assetResult: $0.1) }
 
                 return albumDateSectionList
             }()
@@ -166,16 +166,18 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let album = dateSectionList[indexPath.section]
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "AlbumDateSectionHeader", for: indexPath) as? AlbumDateSectionHeaderView else {
-                fatalError("failed to create AlbumDateSectionHeader")
+            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "AssetDateSectionHeader", for: indexPath) as? AssetDateSectionHeaderView,
+                  let nohanaImagePickerController = nohanaImagePickerController else {
+                fatalError("failed to create AssetDateSectionHeader")
             }
             let formatter = DateFormatter()
             formatter.dateStyle = .long
             formatter.timeStyle = DateFormatter.Style.none
             header.dateLabel.text = formatter.string(from: album.creationDate)
+            header.update(nohanaImagePickerController: nohanaImagePickerController)
             return header
         default:
-            fatalError("failed to create AlbumDateSectionHeader")
+            fatalError("failed to create AssetDateSectionHeader")
         }
     }
     
