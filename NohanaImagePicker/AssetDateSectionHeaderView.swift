@@ -60,7 +60,12 @@ class AssetDateSectionHeaderView: UICollectionReusableView {
             pickButton.setImage(droppedImage, for: UIControl.State())
             pickButton.setImage(pickedImage, for: .selected)
         }
-        let isAllSelected = !assets.map { nohanaImagePickerController.pickedAssetList.isPicked($0) }.contains(where: {$0 == false})
+
+        let cantPickOnly = !assets.map { nohanaImagePickerController.canPickAsset($0) }.contains(where: {$0 == true})
+        pickButton.isHidden = cantPickOnly
+        if cantPickOnly { return }
+        let canPickAssets = assets.compactMap { nohanaImagePickerController.canPickAsset($0) ? $0 : nil }
+        let isAllSelected = !canPickAssets.map { nohanaImagePickerController.pickedAssetList.isPicked($0) }.contains(where: {$0 == false})
         pickButton.isSelected = isAllSelected
     }
 }
