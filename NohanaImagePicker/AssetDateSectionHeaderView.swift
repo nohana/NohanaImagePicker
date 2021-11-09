@@ -17,24 +17,43 @@
 import UIKit
 
 protocol AssetDateSectionHeaderViewDelegate: AnyObject {
-    func didPushPickButton(isSelected: Bool, indexPath: IndexPath)
+    func didPushPickButton()
 }
 
 class AssetDateSectionHeaderView: UICollectionReusableView {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var pickButton: UIButton!
-    var indexPath: IndexPath?
+    var assets = [Asset]()
+    weak var nohanaImagePickerController: NohanaImagePickerController?
     weak var delegate: AssetDateSectionHeaderViewDelegate?
 
     @IBAction func didPushPickButton(_ sender: UIButton) {
-        if let indexPath = indexPath {
-            delegate?.didPushPickButton(isSelected: sender.isSelected, indexPath: indexPath)
-            sender.isSelected = !sender.isSelected
+        let firstButtonState = sender.isSelected
+        var isNotPickedAsset = false
+        for asset in assets {
+            if firstButtonState {
+                _ = nohanaImagePickerController?.pickedAssetList.drop(asset: asset)
+                sender.isSelected = false
+            } else {
+                guard nohanaImagePickerController?.canPickAsset(asset) ?? false,
+                      !(nohanaImagePickerController?.pickedAssetList.isPicked(asset) ?? true)
+                else { continue }
+                if nohanaImagePickerController?.pickedAssetList.pick(asset: asset) ?? false {
+                    sender.isSelected = true
+                } else {
+                    isNotPickedAsset = true
+                }
+            }
         }
+        if isNotPickedAsset {
+            sender.isSelected = false
+        }
+        delegate?.didPushPickButton()
     }
 
     func update(assets: [Asset], indexPath: IndexPath, nohanaImagePickerController: NohanaImagePickerController) {
-        self.indexPath = indexPath
+        self.assets = assets
+        self.nohanaImagePickerController = nohanaImagePickerController
         if pickButton.image(for: UIControl.State()) == nil, pickButton.image(for: .selected) == nil {
             let droppedImage: UIImage? = nohanaImagePickerController.config.image.droppedSmall ?? UIImage(named: "btn_select_l", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
             let pickedImage: UIImage? = nohanaImagePickerController.config.image.pickedSmall ?? UIImage(named: "btn_selected_l", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)

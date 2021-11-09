@@ -235,17 +235,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
 
 // MARK: - AssetDateSectionHeaderViewDelegate
 extension AssetListSelectableDateSectionController: AssetDateSectionHeaderViewDelegate {
-    func didPushPickButton(isSelected: Bool, indexPath: IndexPath) {
-        let assets = dateSectionList[indexPath.section].assetResult.map { PhotoKitAsset(asset: $0) }
-        for asset in assets {
-            if isSelected {
-                _ = nohanaImagePickerController?.pickedAssetList.drop(asset: asset)
-            } else {
-                if nohanaImagePickerController?.canPickAsset(asset) ?? false {
-                    _ = nohanaImagePickerController?.pickedAssetList.pick(asset: asset)
-                }
-            }
-        }
+    func didPushPickButton() {
         collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
     }
 }
