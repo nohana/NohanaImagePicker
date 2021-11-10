@@ -46,37 +46,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         setUpActivityIndicator()
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            // TODO: DI
-            self.dateSectionList = { [weak self] in
-                guard let self = self else { return [] }
-                var albumDateSectionList = [AssetDateSection]()
-                let options = PHFetchOptions()
-                options.predicate = NSPredicate(format: "mediaType == %ld", PHAssetMediaType.image.rawValue)
-                options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
-                let fetchAssetlist = PHAsset.fetchAssets(in: self.photoKitAssetList.assetList, options: options)
-                let allAssets = fetchAssetlist.objects(at: IndexSet(0..<fetchAssetlist.count))
-                let calender = Calendar.current
-                var assetsByDate = [(DateComponents, [PHAsset])]()
-                var assetsByDateIndex = 0
-                for asset in allAssets {
-                    if  assetsByDateIndex > 0 {
-                        if assetsByDate[assetsByDateIndex - 1].0 == calender.dateComponents([.day, .year, .month], from: (asset.creationDate)!) {
-                            assetsByDate[assetsByDateIndex - 1].1.append(asset)
-                        } else {
-                            let value = (calender.dateComponents([.day, .year, .month], from: (asset.creationDate)!), [asset])
-                            assetsByDate.append(value)
-                            assetsByDateIndex += 1
-                        }
-                    } else if assetsByDate.count == assetsByDateIndex {
-                        let value = (calender.dateComponents([.day, .year, .month], from: (asset.creationDate)!), [asset])
-                        assetsByDate.append(value)
-                        assetsByDateIndex += 1
-                    }
-                }
-                albumDateSectionList = assetsByDate.map { AssetDateSection(creationDate: calender.date(from: $0.0) ?? Date(timeIntervalSince1970: 0), assetResult: $0.1) }
-
-                return albumDateSectionList
-            }()
+            self.dateSectionList = AssetDateSectionCreater().createSections(assetList: self.photoKitAssetList.assetList, options: PhotoKitAssetList.fetchOptions(self.photoKitAssetList.mediaType))
             self.isLoading = false
             self.collectionView?.reloadData()
             self.isFirstAppearance = true

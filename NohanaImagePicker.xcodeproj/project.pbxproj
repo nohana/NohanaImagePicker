@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3569CAA91EC1918E000C41C0 /* NohanaImagePicker.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */; };
+		F117F732273B6A2600E11BC7 /* AssetDateSectionCreater.swift in Sources */ = {isa = PBXBuildFile; fileRef = F117F731273B6A2600E11BC7 /* AssetDateSectionCreater.swift */; };
 		F181095026A5361A001C2BDE /* MomentDetailListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F181094F26A5361A001C2BDE /* MomentDetailListViewController.swift */; };
 		F1A26CCD2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1A26CCC2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard */; };
 		F1A26CCF2738E7E400433E9F /* AssetListSelectableDateSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A26CCE2738E7E400433E9F /* AssetListSelectableDateSectionController.swift */; };
@@ -81,6 +82,7 @@
 		23D1CD93207CEB1200F8115E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/NohanaImagePicker.strings; sourceTree = "<group>"; };
 		3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NohanaImagePicker.xcassets; sourceTree = "<group>"; };
 		3590F1F51EC1A79400F32E06 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/NohanaImagePicker.strings; sourceTree = "<group>"; };
+		F117F731273B6A2600E11BC7 /* AssetDateSectionCreater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDateSectionCreater.swift; sourceTree = "<group>"; };
 		F181094F26A5361A001C2BDE /* MomentDetailListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentDetailListViewController.swift; sourceTree = "<group>"; };
 		F1A26CCC2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetListSelectableDateSection.storyboard; sourceTree = "<group>"; };
 		F1A26CCE2738E7E400433E9F /* AssetListSelectableDateSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetListSelectableDateSectionController.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				F1E5DE7F26A58346004B9EDE /* MomentInfoSection.swift */,
 				F1E5DE8126A58386004B9EDE /* MomentInfoSectionCreater.swift */,
 				F1A26CD02738E88700433E9F /* AssetDateSection.swift */,
+				F117F731273B6A2600E11BC7 /* AssetDateSectionCreater.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -437,6 +440,7 @@
 				F2131F431C79615700797887 /* SwipeInteractionController.swift in Sources */,
 				F2DF3B2D1C6D780100C1C0E4 /* AssetDetailCell.swift in Sources */,
 				F25C69901CA27311005935D6 /* EmptyIndicatable.swift in Sources */,
+				F117F732273B6A2600E11BC7 /* AssetDateSectionCreater.swift in Sources */,
 				F2DA29771C7749D600B0A8E3 /* NotificationInfo.swift in Sources */,
 				F1A26CCF2738E7E400433E9F /* AssetListSelectableDateSectionController.swift in Sources */,
 				F1E5DE7D26A57F0B004B9EDE /* DetailListViewControllerProtocol.swift in Sources */,

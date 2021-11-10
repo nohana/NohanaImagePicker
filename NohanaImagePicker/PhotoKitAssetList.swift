@@ -18,7 +18,7 @@ import Photos
 
 open class PhotoKitAssetList: ItemList {
 
-    fileprivate let mediaType: MediaType
+    public let mediaType: MediaType
     public let assetList: PHAssetCollection
     fileprivate var fetchResult: PHFetchResult<PHAsset>!
 
