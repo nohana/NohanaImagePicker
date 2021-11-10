@@ -217,10 +217,23 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     // MARK: - Storyboard
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let selectedIndexPath = collectionView?.indexPathsForSelectedItems?.first else {
+        guard let selectedIndexPath = collectionView?.indexPathsForSelectedItems?.first,
+              selectedIndexPath.section < dateSectionList.count else {
             return
         }
-        // TODO show detail views
+        var assetListDetailCurrentRow = 0
+        for section in 0..<(selectedIndexPath.section + 1) {
+            if selectedIndexPath.section == section {
+                assetListDetailCurrentRow += selectedIndexPath.row
+            } else {
+                assetListDetailCurrentRow += dateSectionList[section].assetResult.count
+            }
+        }
+        
+        let assetListDetailViewController = segue.destination as! AssetDetailListViewController
+        assetListDetailViewController.photoKitAssetList = photoKitAssetList
+        assetListDetailViewController.nohanaImagePickerController = nohanaImagePickerController
+        assetListDetailViewController.currentIndexPath = IndexPath(item: assetListDetailCurrentRow, section: 0)
     }
 
     // MARK: - IBAction

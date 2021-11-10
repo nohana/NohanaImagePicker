@@ -45,6 +45,7 @@ open class PhotoKitAssetList: ItemList {
         switch mediaType {
         case .photo:
             options.predicate = NSPredicate(format: "mediaType == %ld", PHAssetMediaType.image.rawValue)
+            options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
         default:
             fatalError("not supported .Video and .Any yet")
         }
