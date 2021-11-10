@@ -29,26 +29,18 @@ class AssetDateSectionHeaderView: UICollectionReusableView {
 
     @IBAction func didPushPickButton(_ sender: UIButton) {
         let firstButtonState = sender.isSelected
-        var isNotPickedAsset = false
-        let maxSelectionCount = min(assets.count, nohanaImagePickerController?.maximumNumberOfSelection ?? assets.count)
-        for index in 0..<maxSelectionCount {
-            let asset = assets[index]
+        for asset in assets {
             if firstButtonState {
                 _ = nohanaImagePickerController?.pickedAssetList.drop(asset: asset)
                 sender.isSelected = false
             } else {
-                guard nohanaImagePickerController?.canPickAsset(asset) ?? false,
-                      !(nohanaImagePickerController?.pickedAssetList.isPicked(asset) ?? true)
-                else { continue }
                 if nohanaImagePickerController?.pickedAssetList.pick(asset: asset) ?? false {
                     sender.isSelected = true
-                } else {
-                    isNotPickedAsset = true
+                } else if nohanaImagePickerController?.pickedAssetList.count == nohanaImagePickerController?.maximumNumberOfSelection {
+                    sender.isSelected = false
+                    break
                 }
             }
-        }
-        if isNotPickedAsset {
-            sender.isSelected = false
         }
         delegate?.didPushPickButton()
     }
