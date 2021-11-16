@@ -141,10 +141,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
                   let nohanaImagePickerController = nohanaImagePickerController else {
                 fatalError("failed to create AssetDateSectionHeader")
             }
-            let formatter = DateFormatter()
-            formatter.dateStyle = .long
-            formatter.timeStyle = DateFormatter.Style.none
-            header.dateLabel.text = formatter.string(from: album.creationDate)
+            header.date = album.creationDate
             header.delegate = self
             let assets = dateSectionList[indexPath.section].assetResult.map { PhotoKitAsset(asset: $0) }
             header.update(assets: assets, indexPath: indexPath, nohanaImagePickerController: nohanaImagePickerController)

@@ -21,8 +21,20 @@ protocol AssetDateSectionHeaderViewDelegate: AnyObject {
 }
 
 class AssetDateSectionHeaderView: UICollectionReusableView {
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak private var dateLabel: UILabel!
     @IBOutlet weak var pickButton: UIButton!
+    var date: Date? {
+        didSet {
+            if let dete = date {
+                let formatter = DateFormatter()
+                formatter.dateStyle = .long
+                formatter.timeStyle = DateFormatter.Style.none
+                dateLabel.text = formatter.string(from: dete)
+            } else {
+                dateLabel.text = ""
+            }
+        }
+    }
     var assets = [Asset]()
     weak var nohanaImagePickerController: NohanaImagePickerController?
     weak var delegate: AssetDateSectionHeaderViewDelegate?
@@ -46,6 +58,7 @@ class AssetDateSectionHeaderView: UICollectionReusableView {
             }
         }
         delegate?.didPushPickButton()
+        nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectAssetDateSectionAssets: assets.compactMap { ($0 as? PhotoKitAsset)?.originalAsset }, date: date)
     }
 
     func update(assets: [Asset], indexPath: IndexPath, nohanaImagePickerController: NohanaImagePickerController) {

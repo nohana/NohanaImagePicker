@@ -177,6 +177,10 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
     func nohanaImagePicker(_ picker: NohanaImagePickerController, didSelectPhotoKitAsset asset: PHAsset) {
         print("🐷\(#function)\n\tasset = \(asset)\n\t")
     }
+    
+    func nohanaImagePicker(_ picker: NohanaImagePickerController, didSelectAssetDateSectionAssets assets: [PHAsset], date: Date?) {
+        print("🐷\(#function)\n\tasset = \(assets)\n\tDate = \(String(describing: date))")
+    }
 
     func nohanaImagePicker(_ picker: NohanaImagePickerController, didSelectPhotoKitAssetList assetList: PHAssetCollection) {
         print("🐷\(#function)\n\t\tassetList = \(assetList)\n\t")
