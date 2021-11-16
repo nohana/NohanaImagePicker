@@ -227,11 +227,18 @@ extension AssetListSelectableDateSectionController: AssetDateSectionHeaderViewDe
 extension AssetListSelectableDateSectionController: AssetCellDelegate {
     func didPushPickButton(cell: AssetCell) {
         if let indexPath = collectionView.indexPath(for: cell) {
-            UIView.animate(withDuration: 0) { [weak self] in
-                self?.collectionView.performBatchUpdates({ [weak self] in
-                    let indexSet = IndexSet(integer: indexPath.section)
-                    self?.collectionView.reloadSections(indexSet)
-                }, completion: nil)
+            if #available(iOS 9.0, *) {
+                let rowResetIndexPath = IndexPath(row: 0, section: indexPath.section)
+                let header = collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: rowResetIndexPath) as? AssetDateSectionHeaderView
+                let assets = dateSectionList[indexPath.section].assetResult.map { PhotoKitAsset(asset: $0) }
+                header?.update(assets: assets, indexPath: indexPath, nohanaImagePickerController: nohanaImagePickerController!)
+            } else {
+                UIView.animate(withDuration: 0) { [weak self] in
+                    self?.collectionView.performBatchUpdates({ [weak self] in
+                        let indexSet = IndexSet(integer: indexPath.section)
+                        self?.collectionView.reloadSections(indexSet)
+                    }, completion: nil)
+                }
             }
         }
     }
