@@ -22,7 +22,7 @@ protocol AssetDateSectionHeaderViewDelegate: AnyObject {
 
 class AssetDateSectionHeaderView: UICollectionReusableView {
     @IBOutlet weak private var dateLabel: UILabel!
-    @IBOutlet weak var pickButton: UIButton!
+    @IBOutlet weak private var pickButton: UIButton!
     var date: Date? {
         didSet {
             if let dete = date {
