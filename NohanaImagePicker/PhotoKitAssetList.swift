@@ -18,7 +18,7 @@ import Photos
 
 open class PhotoKitAssetList: ItemList {
 
-    fileprivate let mediaType: MediaType
+    public let mediaType: MediaType
     public let assetList: PHAssetCollection
     fileprivate var fetchResult: PHFetchResult<PHAsset>!
 
@@ -45,6 +45,7 @@ open class PhotoKitAssetList: ItemList {
         switch mediaType {
         case .photo:
             options.predicate = NSPredicate(format: "mediaType == %ld", PHAssetMediaType.image.rawValue)
+            options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
         default:
             fatalError("not supported .Video and .Any yet")
         }
