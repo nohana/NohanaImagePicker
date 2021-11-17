@@ -65,8 +65,8 @@ class AssetDateSectionHeaderView: UICollectionReusableView {
         self.assets = assets
         self.nohanaImagePickerController = nohanaImagePickerController
         if pickButton.image(for: UIControl.State()) == nil, pickButton.image(for: .selected) == nil {
-            let droppedImage: UIImage? = nohanaImagePickerController.config.image.droppedSmall ?? UIImage(named: "btn_select_l", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
-            let pickedImage: UIImage? = nohanaImagePickerController.config.image.pickedSmall ?? UIImage(named: "btn_selected_l", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
+            let droppedImage: UIImage? = nohanaImagePickerController.config.image.droppedLarge ?? UIImage(named: "btn_select_l", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
+            let pickedImage: UIImage? = nohanaImagePickerController.config.image.pickedLarge ?? UIImage(named: "btn_selected_l", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
             pickButton.setImage(droppedImage, for: UIControl.State())
             pickButton.setImage(pickedImage, for: .selected)
         }
