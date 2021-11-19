@@ -121,6 +121,7 @@ open class NohanaImagePickerController: UIViewController {
                 assetCollectionSubtypes: assetCollectionSubtypes,
                 mediaType: mediaType,
                 shouldShowEmptyAlbum: shouldShowEmptyAlbum,
+                ascending: !canPickDateSection,
                 handler: { [weak albumListViewController] in
                 DispatchQueue.main.async(execute: { () -> Void in
                     albumListViewController?.isLoading = false

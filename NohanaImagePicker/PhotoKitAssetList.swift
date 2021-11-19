@@ -20,11 +20,13 @@ open class PhotoKitAssetList: ItemList {
 
     public let mediaType: MediaType
     public let assetList: PHAssetCollection
+    private let ascending: Bool
     fileprivate var fetchResult: PHFetchResult<PHAsset>!
 
-    init(album: PHAssetCollection, mediaType: MediaType) {
+    init(album: PHAssetCollection, mediaType: MediaType, ascending: Bool) {
         self.assetList = album
         self.mediaType = mediaType
+        self.ascending = ascending
         update()
     }
 
@@ -53,14 +55,10 @@ open class PhotoKitAssetList: ItemList {
     }
 
     open func update(_ handler: (() -> Void)? = nil) {
-        fetchResult = PHAsset.fetchAssets(in: assetList, options: PhotoKitAssetList.fetchOptions(mediaType))
+        fetchResult = PHAsset.fetchAssets(in: assetList, options: PhotoKitAssetList.fetchOptions(mediaType, ascending: ascending))
         if let handler = handler {
             handler()
         }
-    }
-
-    open func sortDate(ascending: Bool) {
-        fetchResult = PHAsset.fetchAssets(in: assetList, options: PhotoKitAssetList.fetchOptions(mediaType, ascending: ascending))
     }
 
     open subscript (index: Int) -> Item {
