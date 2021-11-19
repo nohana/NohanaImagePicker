@@ -288,6 +288,13 @@
                         <navigationBarAppearance key="compactScrollEdgeAppearance"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QJ2-8E-fPl">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <toolbarAppearance key="standardAppearance"/>
+                        <toolbarAppearance key="compactAppearance"/>
+                        <toolbarAppearance key="scrollEdgeAppearance"/>
+                        <toolbarAppearance key="compactScrollEdgeAppearance"/>
+                    </toolbar>
                     <connections>
                         <segue destination="KD8-91-yw0" kind="relationship" relationship="rootViewController" id="sZ8-aF-u4m"/>
                     </connections>
@@ -310,6 +317,13 @@
                         <navigationBarAppearance key="scrollEdgeAppearance"/>
                         <navigationBarAppearance key="compactScrollEdgeAppearance"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ebY-KC-gsl">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <toolbarAppearance key="standardAppearance"/>
+                        <toolbarAppearance key="compactAppearance"/>
+                        <toolbarAppearance key="scrollEdgeAppearance"/>
+                        <toolbarAppearance key="compactScrollEdgeAppearance"/>
+                    </toolbar>
                     <connections>
                         <segue destination="KD8-91-yw0" kind="relationship" relationship="rootViewController" id="tQI-o9-h2w"/>
                     </connections>
