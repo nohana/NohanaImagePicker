@@ -40,12 +40,12 @@ open class PhotoKitAssetList: ItemList {
         return assetList.startDate
     }
 
-    class func fetchOptions(_ mediaType: MediaType) -> PHFetchOptions {
+    class func fetchOptions(_ mediaType: MediaType, ascending: Bool = true) -> PHFetchOptions {
         let options = PHFetchOptions()
         switch mediaType {
         case .photo:
             options.predicate = NSPredicate(format: "mediaType == %ld", PHAssetMediaType.image.rawValue)
-            options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+            options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: ascending)]
         default:
             fatalError("not supported .Video and .Any yet")
         }
@@ -57,6 +57,10 @@ open class PhotoKitAssetList: ItemList {
         if let handler = handler {
             handler()
         }
+    }
+
+    open func sortDate(ascending: Bool) {
+        fetchResult = PHAsset.fetchAssets(in: assetList, options: PhotoKitAssetList.fetchOptions(mediaType, ascending: ascending))
     }
 
     open subscript (index: Int) -> Item {

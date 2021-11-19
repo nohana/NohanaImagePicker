@@ -196,6 +196,7 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
                 assetListViewController.nohanaImagePickerController = nohanaImagePickerController
             case "toAssetListViewSelectableDateSectionController":
                 let assetListSelectableDateSectionController = segue.destination as! AssetListSelectableDateSectionController
+                photoKitAlbumList[tableView.indexPathForSelectedRow!.row].sortDate(ascending: false)
                 assetListSelectableDateSectionController.photoKitAssetList = photoKitAlbumList[tableView.indexPathForSelectedRow!.row]
                 assetListSelectableDateSectionController.nohanaImagePickerController = nohanaImagePickerController
             default:
