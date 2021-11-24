@@ -82,12 +82,12 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
         case .moment:
             nohanaImagePickerController.delegate?.nohanaImagePickerDidSelectMoment?(nohanaImagePickerController)
         case .albums:
-            nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAssetList: photoKitAlbumList[indexPath.row].assetList)
             if nohanaImagePickerController.canPickDateSection {
                 performSegue(withIdentifier: "toAssetListViewSelectableDateSectionController", sender: nil)
             } else {
                 performSegue(withIdentifier: "toAssetListViewController", sender: nil)
             }
+            nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAssetList: photoKitAlbumList[indexPath.row].assetList)
         }
     }
 
