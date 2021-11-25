@@ -82,12 +82,12 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
         case .moment:
             nohanaImagePickerController.delegate?.nohanaImagePickerDidSelectMoment?(nohanaImagePickerController)
         case .albums:
-            nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAssetList: photoKitAlbumList[indexPath.row].assetList)
             if nohanaImagePickerController.canPickDateSection {
                 performSegue(withIdentifier: "toAssetListViewSelectableDateSectionController", sender: nil)
             } else {
                 performSegue(withIdentifier: "toAssetListViewController", sender: nil)
             }
+            nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAssetList: photoKitAlbumList[indexPath.row].assetList)
         }
     }
 
@@ -161,7 +161,7 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
             )
             let albumCount = albumList.count
             if albumCount > 0 {
-                let lastAsset = albumList[albumCount - 1]
+                let lastAsset = nohanaImagePickerController?.canPickDateSection ?? false ? albumList[0] : albumList[albumCount - 1]
                 lastAsset.image(targetSize: imageSize, handler: { (imageData) -> Void in
                     DispatchQueue.main.async(execute: { () -> Void in
                         if let imageData = imageData {

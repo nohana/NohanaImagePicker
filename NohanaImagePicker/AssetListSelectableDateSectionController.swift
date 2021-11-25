@@ -22,7 +22,6 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     weak var nohanaImagePickerController: NohanaImagePickerController?
     var photoKitAssetList: PhotoKitAssetList!
     var dateSectionList: [AssetDateSection] = []
-    var isFirstAppearance = true
     
     var cellSize: CGSize {
         guard let nohanaImagePickerController = nohanaImagePickerController else {
@@ -46,11 +45,9 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         setUpActivityIndicator()
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.dateSectionList = AssetDateSectionCreater().createSections(assetList: self.photoKitAssetList.assetList, options: PhotoKitAssetList.fetchOptions(self.photoKitAssetList.mediaType))
+            self.dateSectionList = AssetDateSectionCreater().createSections(assetList: self.photoKitAssetList.assetList, options: PhotoKitAssetList.fetchOptions(self.photoKitAssetList.mediaType, ascending: false))
             self.isLoading = false
             self.collectionView?.reloadData()
-            self.isFirstAppearance = true
-            self.scrollCollectionViewToInitialPosition()
         }
     }
     
@@ -60,7 +57,6 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
             setToolbarTitle(nohanaImagePickerController)
         }
         collectionView?.reloadData()
-        scrollCollectionViewToInitialPosition()
     }
     
     func updateTitle() {
@@ -75,19 +71,6 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         DispatchQueue.main.async {
             self.collectionView?.scrollToItem(at: indexPath, at: .bottom, animated: false)
         }
-    }
-
-    func scrollCollectionViewToInitialPosition() {
-        guard isFirstAppearance else {
-            return
-        }
-        let lastSection = dateSectionList.count - 1
-        guard lastSection >= 0 else {
-            return
-        }
-        let indexPath = IndexPath(item: dateSectionList[lastSection].assetResult.count - 1, section: lastSection)
-        scrollCollectionView(to: indexPath)
-        isFirstAppearance = false
     }
 
     // MARK: - UICollectionViewDataSource
