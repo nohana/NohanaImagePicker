@@ -48,8 +48,9 @@ class AssetDateSectionHeaderView: UICollectionReusableView {
                 _ = nohanaImagePickerController.pickedAssetList.drop(asset: asset)
                 sender.isSelected = false
             } else {
-                
-                if nohanaImagePickerController.pickedAssetList.pick(asset: asset) {
+                if nohanaImagePickerController.pickedAssetList.isPicked(asset) {
+                    continue
+                } else if nohanaImagePickerController.pickedAssetList.pick(asset: asset) {
                     sender.isSelected = true
                 } else if nohanaImagePickerController.pickedAssetList.count == nohanaImagePickerController.maximumNumberOfSelection {
                     sender.isSelected = false
