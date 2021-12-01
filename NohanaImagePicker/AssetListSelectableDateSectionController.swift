@@ -179,6 +179,9 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
                 assetListDetailCurrentRow += dateSectionList[section].assetResult.count
             }
         }
+        if assetListDetailCurrentRow >= photoKitAssetList.count {
+            assetListDetailCurrentRow = photoKitAssetList.count - 1
+        }
         
         let assetListDetailViewController = segue.destination as! AssetDetailListViewController
         assetListDetailViewController.photoKitAssetList = photoKitAssetList

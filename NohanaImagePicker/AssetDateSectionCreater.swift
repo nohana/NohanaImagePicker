@@ -26,15 +26,15 @@ final class AssetDateSectionCreater {
         var assetsByDateIndex = 0
         for asset in allAssets {
             if  assetsByDateIndex > 0 {
-                if assetsByDate[assetsByDateIndex - 1].0 == calender.dateComponents([.day, .year, .month], from: (asset.creationDate)!) {
+                if assetsByDate[assetsByDateIndex - 1].0 == calender.dateComponents([.day, .year, .month], from: (asset.creationDate ?? Date(timeIntervalSince1970: 0))) {
                     assetsByDate[assetsByDateIndex - 1].1.append(asset)
                 } else {
-                    let value = (calender.dateComponents([.day, .year, .month], from: (asset.creationDate)!), [asset])
+                    let value = (calender.dateComponents([.day, .year, .month], from: (asset.creationDate ?? Date(timeIntervalSince1970: 0))), [asset])
                     assetsByDate.append(value)
                     assetsByDateIndex += 1
                 }
             } else if assetsByDate.count == assetsByDateIndex {
-                let value = (calender.dateComponents([.day, .year, .month], from: (asset.creationDate)!), [asset])
+                let value = (calender.dateComponents([.day, .year, .month], from: (asset.creationDate ?? Date(timeIntervalSince1970: 0))), [asset])
                 assetsByDate.append(value)
                 assetsByDateIndex += 1
             }
