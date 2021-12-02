@@ -18,13 +18,15 @@ import Photos
 
 open class PhotoKitAssetList: ItemList {
 
-    fileprivate let mediaType: MediaType
+    public let mediaType: MediaType
     public let assetList: PHAssetCollection
+    private let ascending: Bool
     fileprivate var fetchResult: PHFetchResult<PHAsset>!
 
-    init(album: PHAssetCollection, mediaType: MediaType) {
+    init(album: PHAssetCollection, mediaType: MediaType, ascending: Bool) {
         self.assetList = album
         self.mediaType = mediaType
+        self.ascending = ascending
         update()
     }
 
@@ -40,11 +42,12 @@ open class PhotoKitAssetList: ItemList {
         return assetList.startDate
     }
 
-    class func fetchOptions(_ mediaType: MediaType) -> PHFetchOptions {
+    class func fetchOptions(_ mediaType: MediaType, ascending: Bool = true) -> PHFetchOptions {
         let options = PHFetchOptions()
         switch mediaType {
         case .photo:
             options.predicate = NSPredicate(format: "mediaType == %ld", PHAssetMediaType.image.rawValue)
+            options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: ascending)]
         default:
             fatalError("not supported .Video and .Any yet")
         }
@@ -52,7 +55,7 @@ open class PhotoKitAssetList: ItemList {
     }
 
     open func update(_ handler: (() -> Void)? = nil) {
-        fetchResult = PHAsset.fetchAssets(in: assetList, options: PhotoKitAssetList.fetchOptions(mediaType))
+        fetchResult = PHAsset.fetchAssets(in: assetList, options: PhotoKitAssetList.fetchOptions(mediaType, ascending: ascending))
         if let handler = handler {
             handler()
         }

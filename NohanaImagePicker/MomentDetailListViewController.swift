@@ -35,6 +35,11 @@ final class MomentDetailListViewController: UICollectionViewController, UICollec
     weak var nohanaImagePickerController: NohanaImagePickerController?
     var momentInfoSection: MomentInfoSection?
     var isFirstAppearance = true
+    
+    override func loadView() {
+        super.loadView()
+        self.collectionView.backgroundColor = .black
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -82,6 +82,11 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
         case .moment:
             nohanaImagePickerController.delegate?.nohanaImagePickerDidSelectMoment?(nohanaImagePickerController)
         case .albums:
+            if nohanaImagePickerController.canPickDateSection {
+                performSegue(withIdentifier: "toAssetListViewSelectableDateSectionController", sender: nil)
+            } else {
+                performSegue(withIdentifier: "toAssetListViewController", sender: nil)
+            }
             nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAssetList: photoKitAlbumList[indexPath.row].assetList)
         }
     }
@@ -156,7 +161,7 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
             )
             let albumCount = albumList.count
             if albumCount > 0 {
-                let lastAsset = albumList[albumCount - 1]
+                let lastAsset = nohanaImagePickerController?.canPickDateSection ?? false ? albumList[0] : albumList[albumCount - 1]
                 lastAsset.image(targetSize: imageSize, handler: { (imageData) -> Void in
                     DispatchQueue.main.async(execute: { () -> Void in
                         if let imageData = imageData {
@@ -184,9 +189,18 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
             let momentViewController = segue.destination as! MomentViewController
             momentViewController.nohanaImagePickerController = nohanaImagePickerController
         case .albums:
-            let assetListViewController = segue.destination as! AssetListViewController
-            assetListViewController.photoKitAssetList = photoKitAlbumList[tableView.indexPathForSelectedRow!.row]
-            assetListViewController.nohanaImagePickerController = nohanaImagePickerController
+            switch segue.identifier {
+            case "toAssetListViewController":
+                let assetListViewController = segue.destination as! AssetListViewController
+                assetListViewController.photoKitAssetList = photoKitAlbumList[tableView.indexPathForSelectedRow!.row]
+                assetListViewController.nohanaImagePickerController = nohanaImagePickerController
+            case "toAssetListViewSelectableDateSectionController":
+                let assetListSelectableDateSectionController = segue.destination as! AssetListSelectableDateSectionController
+                assetListSelectableDateSectionController.photoKitAssetList = photoKitAlbumList[tableView.indexPathForSelectedRow!.row]
+                assetListSelectableDateSectionController.nohanaImagePickerController = nohanaImagePickerController
+            default:
+                fatalError("unexpected segue identifer")
+            }
         }
     }
 

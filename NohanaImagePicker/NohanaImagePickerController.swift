@@ -29,12 +29,12 @@ public enum MediaType: Int {
     @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, willDropPhotoKitAsset asset: PHAsset, pickedAssetsCount: Int) -> Bool
     @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, didDropPhotoKitAsset asset: PHAsset, pickedAssetsCount: Int)
     @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, didSelectPhotoKitAsset asset: PHAsset)
+    @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, didSelectAssetDateSectionAssets assets: [PHAsset], date: Date?)
     @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, didSelectPhotoKitAssetList assetList: PHAssetCollection)
     @objc optional func nohanaImagePickerDidSelectMoment(_ picker: NohanaImagePickerController) -> Void
     @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, assetListViewController: UICollectionViewController, cell: UICollectionViewCell, indexPath: IndexPath, photoKitAsset: PHAsset) -> UICollectionViewCell
     @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, assetDetailListViewController: UICollectionViewController, cell: UICollectionViewCell, indexPath: IndexPath, photoKitAsset: PHAsset) -> UICollectionViewCell
     @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, assetDetailListViewController: UICollectionViewController, didChangeAssetDetailPage indexPath: IndexPath, photoKitAsset: PHAsset)
-
 }
 
 open class NohanaImagePickerController: UIViewController {
@@ -50,6 +50,7 @@ open class NohanaImagePickerController: UIViewController {
         return true
     }
     open var config: Config = Config()
+    open var canPickDateSection: Bool = false
 
     lazy var assetBundle: Bundle = {
         let bundle = Bundle(for: type(of: self))
@@ -120,6 +121,7 @@ open class NohanaImagePickerController: UIViewController {
                 assetCollectionSubtypes: assetCollectionSubtypes,
                 mediaType: mediaType,
                 shouldShowEmptyAlbum: shouldShowEmptyAlbum,
+                ascending: !canPickDateSection,
                 handler: { [weak albumListViewController] in
                 DispatchQueue.main.async(execute: { () -> Void in
                     albumListViewController?.isLoading = false

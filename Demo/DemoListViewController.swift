@@ -30,6 +30,7 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
         Cell(title: "No toolbar", selector: #selector(DemoListViewController.showNoToolbarPicker)),
         Cell(title: "Disable to pick assets", selector: #selector(DemoListViewController.showDisableToPickAssetsPicker)),
         Cell(title: "Custom UI", selector: #selector(DemoListViewController.showCustomUIPicker)),
+        Cell(title: "Selectable Album Date Section", selector: #selector(DemoListViewController.showSelectableDateSectionPicker)),
     ]
 
     override func viewDidAppear(_ animated: Bool) {
@@ -136,6 +137,13 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
         present(picker, animated: true, completion: nil)
     }
 
+    @objc func showSelectableDateSectionPicker() {
+        let picker = NohanaImagePickerController()
+        picker.canPickDateSection = true
+        picker.delegate = self
+        present(picker, animated: true, completion: nil)
+    }
+
     // MARK: - NohanaImagePickerControllerDelegate
 
     func nohanaImagePickerDidCancel(_ picker: NohanaImagePickerController) {
@@ -168,6 +176,10 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
 
     func nohanaImagePicker(_ picker: NohanaImagePickerController, didSelectPhotoKitAsset asset: PHAsset) {
         print("🐷\(#function)\n\tasset = \(asset)\n\t")
+    }
+    
+    func nohanaImagePicker(_ picker: NohanaImagePickerController, didSelectAssetDateSectionAssets assets: [PHAsset], date: Date?) {
+        print("🐷\(#function)\n\tasset = \(assets)\n\tDate = \(String(describing: date))")
     }
 
     func nohanaImagePicker(_ picker: NohanaImagePickerController, didSelectPhotoKitAssetList assetList: PHAssetCollection) {
