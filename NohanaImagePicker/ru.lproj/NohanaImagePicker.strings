@@ -20,3 +20,5 @@
 "albumlist.moment.title" = "Моменты";
 "toolbar.title.nolimit" = "Выбрано: %ld";
 "toolbar.title.haslimit" = "Выбрано: %ld / %ld";
+"action.title.select" = "Выбирать";
+"action.title.deselect" = "Отменить выбор";
