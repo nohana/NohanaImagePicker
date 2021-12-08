@@ -29,9 +29,14 @@ class ImagePreviewViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
 
         asset.image(targetSize: UIScreen.main.bounds.size) { [weak self] (imageData) -> Void in
-            guard let self = self, let imageData = imageData else { return }
+            guard let self = self, let image = imageData?.image else { return }
             DispatchQueue.main.async { [weak self] in
-                self?.imageView.image = imageData.image
+                guard let self = self else { return }
+                self.imageView.image = image
+                let width = UIScreen.main.bounds.size.width
+                let height = image.size.height * (width / image.size.width)
+                let contentSize = CGSize(width: width, height: height)
+                self.preferredContentSize = contentSize
             }
         }
     }
