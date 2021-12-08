@@ -17,7 +17,7 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="AlbumCell" rowHeight="82" id="HiQ-6b-xqZ" customClass="AlbumCell" customModule="NohanaImagePicker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="24.5" width="320" height="82"/>
+                                <rect key="frame" x="0.0" y="44.5" width="320" height="82"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HiQ-6b-xqZ" id="Nuf-ja-Ajg">
                                     <rect key="frame" x="0.0" y="0.0" width="294.5" height="82"/>
@@ -52,7 +52,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MomentAlbumCell" rowHeight="52" id="URZ-ke-kYw" customClass="MomentCell" customModule="NohanaImagePicker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="106.5" width="320" height="52"/>
+                                <rect key="frame" x="0.0" y="126.5" width="320" height="52"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="URZ-ke-kYw" id="ZzC-oj-tew">
                                     <rect key="frame" x="0.0" y="0.0" width="294.5" height="52"/>
@@ -162,7 +162,7 @@
                                     <outlet property="imageView" destination="WKb-lP-sq5" id="ejZ-cu-f5Y"/>
                                     <outlet property="overlayView" destination="MT5-kg-1gq" id="yGO-Ix-xoL"/>
                                     <outlet property="pickButton" destination="oDB-be-mWY" id="hf7-6i-k62"/>
-                                    <segue destination="r7t-t8-AuE" kind="show" id="vma-iJ-kti"/>
+                                    <segue destination="r7t-t8-AuE" kind="show" identifier="toAssetDetailListViewController" id="vma-iJ-kti"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -393,7 +393,7 @@
                                     <outlet property="imageView" destination="TB3-Xf-nik" id="HVf-Zj-nzV"/>
                                     <outlet property="overlayView" destination="SnZ-bd-Zia" id="27X-Fy-OP9"/>
                                     <outlet property="pickButton" destination="vrt-tc-b54" id="MVQ-KJ-OAp"/>
-                                    <segue destination="X3p-l4-RO9" kind="show" id="sm7-ta-2Ax"/>
+                                    <segue destination="X3p-l4-RO9" kind="show" identifier="toMomentDetailListViewController" id="sm7-ta-2Ax"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -550,6 +550,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="tQI-o9-h2w"/>
+        <segue reference="sZ8-aF-u4m"/>
     </inferredMetricsTieBreakers>
 </document>
