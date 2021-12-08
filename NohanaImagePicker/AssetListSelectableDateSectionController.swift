@@ -180,13 +180,15 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
                 return previewViewController
             }, actionProvider: { _ in
                 if nohanaImagePickerController.pickedAssetList.isPicked(asset) {
-                    let deselect = UIAction(title: "選択を外す", image: UIImage(systemName: "minus.circle"), attributes: [.destructive]) { _ in
+                    let title = nohanaImagePickerController.config.strings.albumListTitle ?? NSLocalizedString("action.title.deselect", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
+                    let deselect = UIAction(title: title, image: UIImage(systemName: "minus.circle"), attributes: [.destructive]) { _ in
                         nohanaImagePickerController.dropAsset(asset)
                         collectionView.reloadItems(at: [indexPath])
                     }
                     return UIMenu(title: "", children: [deselect])
                 } else {
-                    let select = UIAction(title: "選択する", image: UIImage(systemName: "checkmark.circle")) { _ in
+                    let title = nohanaImagePickerController.config.strings.albumListTitle ?? NSLocalizedString("action.title.select", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
+                    let select = UIAction(title: title, image: UIImage(systemName: "checkmark.circle")) { _ in
                         nohanaImagePickerController.pickAsset(asset)
                         collectionView.reloadItems(at: [indexPath])
                     }
