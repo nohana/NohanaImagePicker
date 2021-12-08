@@ -20,3 +20,5 @@
 "albumlist.moment.title" = "Moment";
 "toolbar.title.nolimit" = "Selected Items: %ld";
 "toolbar.title.haslimit" = "Selected Items: %ld / %ld";
+"action.title.select" = "Select";
+"action.title.deselect" = "Deselect";

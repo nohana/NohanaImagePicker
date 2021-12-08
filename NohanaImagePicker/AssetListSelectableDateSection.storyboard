@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Y8D-wX-eXv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Y8D-wX-eXv">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -65,7 +65,7 @@
                                     <outlet property="imageView" destination="gBL-Tw-h3e" id="3MR-ED-vnu"/>
                                     <outlet property="overlayView" destination="7pN-6U-K6c" id="iAv-Uk-1Kx"/>
                                     <outlet property="pickButton" destination="byV-w7-CIM" id="t52-nd-9qH"/>
-                                    <segue destination="kYg-Jb-RU3" kind="show" id="UZz-4U-64b"/>
+                                    <segue destination="kYg-Jb-RU3" kind="show" identifier="toAssetDetailListViewController" id="UZz-4U-64b"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

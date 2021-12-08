@@ -20,3 +20,5 @@
 "albumlist.moment.title" = "日付から選択";
 "toolbar.title.nolimit" = "%ld枚選択中";
 "toolbar.title.haslimit" = "%ld枚選択中（最大%ld枚）";
+"action.title.select" = "選択する";
+"action.title.deselect" = "選択を外す";
