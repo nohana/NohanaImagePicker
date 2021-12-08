@@ -163,6 +163,51 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
             nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: dateSectionList[indexPath.section].assetResult[indexPath.row])
         }
     }
+    
+    @available(iOS 13.0, *)
+    override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let asset = PhotoKitAsset(asset: dateSectionList[indexPath.section].assetResult[indexPath.row])
+        if let cell = collectionView.cellForItem(at: indexPath) as? AssetCell, let nohanaImagePickerController = self.nohanaImagePickerController {
+            return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { [weak self] in
+                // Create a preview view controller and return it
+                guard let self = self else { return nil }
+                let previewViewController = ImagePreviewViewController(asset: asset)
+                let imageSize = cell.imageView.image?.size ?? .zero
+                let width = self.view.bounds.width
+                let height = imageSize.height * (width / imageSize.width)
+                let contentSize = CGSize(width: width, height: height)
+                previewViewController.preferredContentSize = contentSize
+                return previewViewController
+            }, actionProvider: { _ in
+                if nohanaImagePickerController.pickedAssetList.isPicked(asset) {
+                    let deselect = UIAction(title: "選択を外す", image: UIImage(systemName: "minus.circle"), attributes: [.destructive]) { _ in
+                        nohanaImagePickerController.dropAsset(asset)
+                        collectionView.reloadItems(at: [indexPath])
+                    }
+                    return UIMenu(title: "", children: [deselect])
+                } else {
+                    let select = UIAction(title: "選択する", image: UIImage(systemName: "checkmark.circle")) { _ in
+                        nohanaImagePickerController.pickAsset(asset)
+                        collectionView.reloadItems(at: [indexPath])
+                    }
+                    return UIMenu(title: "", children: [select])
+                }
+            })
+        } else {
+            return nil
+        }
+    }
+
+    @available(iOS 13.0, *)
+    override func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        animator.addCompletion { [weak self] in
+            guard let self = self else { return }
+            if let indexPath = configuration.identifier as? IndexPath {
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+                self.performSegue(withIdentifier: "toAssetDetailListViewController", sender: nil)
+            }
+        }
+    }
 
     // MARK: - Storyboard
 
