@@ -20,7 +20,7 @@ import Photos
 class AssetListSelectableDateSectionController: UICollectionViewController, UICollectionViewDelegateFlowLayout, ActivityIndicatable {
     
     weak var nohanaImagePickerController: NohanaImagePickerController?
-    var photoKitAssetList: PhotoKitAssetList!
+    var photoKitAssetList: PhotoKitAssetList?
     var dateSectionList: [AssetDateSection] = []
     
     var cellSize: CGSize {
@@ -43,12 +43,6 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         setUpToolbarItems()
         addPickPhotoKitAssetNotificationObservers()
         setUpActivityIndicator()
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.dateSectionList = AssetDateSectionCreater().createSections(assetList: self.photoKitAssetList.assetList, options: PhotoKitAssetList.fetchOptions(self.photoKitAssetList.mediaType, ascending: false))
-            self.isLoading = false
-            self.collectionView?.reloadData()
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,7 +54,9 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     }
     
     func updateTitle() {
-        title = photoKitAssetList.title
+        if let title = photoKitAssetList?.title {
+            self.title = title
+        }
     }
 
     func scrollCollectionView(to indexPath: IndexPath) {
@@ -71,6 +67,14 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         DispatchQueue.main.async {
             self.collectionView?.scrollToItem(at: indexPath, at: .bottom, animated: false)
         }
+    }
+    
+    func reloadData() {
+        guard let photoKitAssetList = self.photoKitAssetList else { return }
+        updateTitle()
+        dateSectionList = AssetDateSectionCreater().createSections(assetList: photoKitAssetList.assetList, options: PhotoKitAssetList.fetchOptions(photoKitAssetList.mediaType, ascending: false))
+        isLoading = false
+        collectionView?.reloadData()
     }
 
     // MARK: - UICollectionViewDataSource
@@ -214,6 +218,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     // MARK: - Storyboard
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let photoKitAssetList = photoKitAssetList else { return }
         guard let selectedIndexPath = collectionView?.indexPathsForSelectedItems?.first,
               selectedIndexPath.section < dateSectionList.count else {
             return

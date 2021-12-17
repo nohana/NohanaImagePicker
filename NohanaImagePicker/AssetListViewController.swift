@@ -20,7 +20,7 @@ import Photos
 class AssetListViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     weak var nohanaImagePickerController: NohanaImagePickerController?
-    var photoKitAssetList: PhotoKitAssetList!
+    var photoKitAssetList: PhotoKitAssetList?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +73,9 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
     var isFirstAppearance = true
 
     func updateTitle() {
-        title = photoKitAssetList.title
+        if let title = photoKitAssetList?.title {
+            self.title = title
+        }
     }
 
     func scrollCollectionView(to indexPath: IndexPath) {
@@ -90,20 +92,28 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
         guard isFirstAppearance else {
             return
         }
-        let indexPath = IndexPath(item: self.photoKitAssetList.count - 1, section: 0)
+        guard let photoKitAssetList = photoKitAssetList else { return }
+        let indexPath = IndexPath(item: photoKitAssetList.count - 1, section: 0)
         self.scrollCollectionView(to: indexPath)
         isFirstAppearance = false
+    }
+    
+    func reloadData() {
+        updateTitle()
+        self.collectionView.reloadData()
     }
 
     // MARK: - UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let photoKitAssetList = photoKitAssetList else { return 0 }
         return photoKitAssetList.count
     }
 
     // MARK: - UICollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let photoKitAssetList = photoKitAssetList else { return }
         if let nohanaImagePickerController = nohanaImagePickerController {
             nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: photoKitAssetList[indexPath.item].originalAsset)
         }
@@ -157,6 +167,9 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let photoKitAssetList = photoKitAssetList else {
+            fatalError("failed to no data")
+        }
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssetCell", for: indexPath) as? AssetCell,
             let nohanaImagePickerController  = nohanaImagePickerController else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetCell\")")

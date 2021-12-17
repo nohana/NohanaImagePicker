@@ -68,6 +68,7 @@ class AssetDetailListViewController: AssetListViewController, DetailListViewCont
         guard let nohanaImagePickerController = nohanaImagePickerController else {
             return
         }
+        guard let photoKitAssetList = photoKitAssetList else { return }
         let asset = photoKitAssetList[indexPath.item]
         pickButton.isSelected = nohanaImagePickerController.pickedAssetList.isPicked(asset)
         pickButton.isHidden = !(nohanaImagePickerController.canPickAsset(asset) )
@@ -97,6 +98,7 @@ class AssetDetailListViewController: AssetListViewController, DetailListViewCont
     // MARK: - IBAction
 
     @IBAction func didPushPickButton(_ sender: UIButton) {
+        guard let photoKitAssetList = photoKitAssetList else { return }
         let asset = photoKitAssetList[currentIndexPath.row]
         if pickButton.isSelected {
             if nohanaImagePickerController!.pickedAssetList.drop(asset: asset) {
@@ -112,6 +114,9 @@ class AssetDetailListViewController: AssetListViewController, DetailListViewCont
     // MARK: - UICollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let photoKitAssetList = photoKitAssetList else {
+            fatalError("failed to no data")
+        }
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssetDetailCell", for: indexPath) as? AssetDetailCell,
             let nohanaImagePickerController = nohanaImagePickerController else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetDetailCell\")")

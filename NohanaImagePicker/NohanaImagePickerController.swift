@@ -63,6 +63,7 @@ open class NohanaImagePickerController: UIViewController {
     let mediaType: MediaType
     let enableExpandingPhotoAnimation: Bool
     fileprivate let assetCollectionSubtypes: [PHAssetCollectionSubtype]
+    private var albumList: PhotoKitAlbumList!
 
     public init() {
         assetCollectionSubtypes = [
@@ -107,28 +108,13 @@ open class NohanaImagePickerController: UIViewController {
         guard let navigationController = storyboard.instantiateViewController(withIdentifier: viewControllerId) as? UINavigationController else {
             fatalError("navigationController init failed.")
         }
+        
+        let viewControllers = viewControllers()
+        navigationController.setViewControllers(viewControllers, animated: false)
+        
         addChild(navigationController)
         view.addSubview(navigationController.view)
         navigationController.didMove(toParent: self)
-
-        // setup albumListViewController
-        guard let albumListViewController = navigationController.topViewController as? AlbumListViewController else {
-            fatalError("albumListViewController is not topViewController.")
-        }
-        albumListViewController.photoKitAlbumList =
-            PhotoKitAlbumList(
-                assetCollectionTypes: [.smartAlbum, .album],
-                assetCollectionSubtypes: assetCollectionSubtypes,
-                mediaType: mediaType,
-                shouldShowEmptyAlbum: shouldShowEmptyAlbum,
-                ascending: !canPickDateSection,
-                handler: { [weak albumListViewController] in
-                DispatchQueue.main.async(execute: { () -> Void in
-                    albumListViewController?.isLoading = false
-                    albumListViewController?.tableView.reloadData()
-                })
-            })
-        albumListViewController.nohanaImagePickerController = self
     }
 
     open func pickAsset(_ asset: Asset) {
@@ -137,6 +123,52 @@ open class NohanaImagePickerController: UIViewController {
 
     open func dropAsset(_ asset: Asset) {
         _ = pickedAssetList.drop(asset: asset)
+    }
+    
+    func viewControllers() -> [UIViewController] {
+        if canPickDateSection {
+            guard let assetListViewController = UIStoryboard(name: "AssetListSelectableDateSection", bundle: assetBundle).instantiateInitialViewController() as? AssetListSelectableDateSectionController else {
+                fatalError("Invalid ViewController")
+            }
+            
+            self.albumList = PhotoKitAlbumList(
+                assetCollectionTypes: [.smartAlbum, .album],
+                assetCollectionSubtypes: assetCollectionSubtypes,
+                mediaType: mediaType,
+                shouldShowEmptyAlbum: shouldShowEmptyAlbum,
+                ascending: !canPickDateSection,
+                handler: { [weak self] in
+                    guard let self = self else { return }
+                    DispatchQueue.main.async {
+                        assetListViewController.photoKitAssetList = self.albumList[0]
+                        assetListViewController.reloadData()
+                    }
+                })
+
+            assetListViewController.nohanaImagePickerController = self
+            return [assetListViewController]
+        } else {
+            guard let assetListViewController = UIStoryboard(name: "AssetList", bundle: assetBundle).instantiateInitialViewController() as? AssetListViewController else {
+                fatalError("Invalid ViewController")
+            }
+            
+            self.albumList = PhotoKitAlbumList(
+                assetCollectionTypes: [.smartAlbum, .album],
+                assetCollectionSubtypes: assetCollectionSubtypes,
+                mediaType: mediaType,
+                shouldShowEmptyAlbum: shouldShowEmptyAlbum,
+                ascending: !canPickDateSection,
+                handler: { [weak self] in
+                    guard let self = self else { return }
+                    DispatchQueue.main.async {
+                        assetListViewController.photoKitAssetList = self.albumList[0]
+                        assetListViewController.reloadData()
+                    }
+                })
+
+            assetListViewController.nohanaImagePickerController = self
+            return [assetListViewController]
+        }
     }
 }
 
