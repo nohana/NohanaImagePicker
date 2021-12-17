@@ -248,4 +248,8 @@ final class MomentViewController: UICollectionViewController, UICollectionViewDe
             nohanaImagePickerController.delegate?.nohanaImagePicker(nohanaImagePickerController, didFinishPickingPhotoKitAssets: pickedPhotoKitAssets)
         }
     }
+    
+    @IBAction func didTapClose(_ sender: AnyObject) {
+        dismiss(animated: true)
+    }
 }

@@ -252,6 +252,10 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
             nohanaImagePickerController.delegate?.nohanaImagePicker(nohanaImagePickerController, didFinishPickingPhotoKitAssets: pickedPhotoKitAssets)
         }
     }
+    
+    @IBAction func didTapClose(_ sender: AnyObject) {
+        dismiss(animated: true)
+    }
 }
 
 // MARK: - AssetDateSectionHeaderViewDelegate

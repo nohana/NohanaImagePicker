@@ -221,4 +221,8 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
         let pickedPhotoKitAssets = nohanaImagePickerController!.pickedAssetList.map { ($0 as! PhotoKitAsset).originalAsset }
         nohanaImagePickerController!.delegate?.nohanaImagePicker(nohanaImagePickerController!, didFinishPickingPhotoKitAssets: pickedPhotoKitAssets )
     }
+    
+    @IBAction func didTapClose(_ sender: AnyObject) {
+        dismiss(animated: true)
+    }
 }

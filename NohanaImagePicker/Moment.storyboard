@@ -97,8 +97,8 @@
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
-                                    <exclude reference="sd3-eY-Wnn"/>
                                     <exclude reference="56u-pS-Lq8"/>
+                                    <exclude reference="sd3-eY-Wnn"/>
                                 </mask>
                             </variation>
                             <connections>
@@ -111,6 +111,11 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="0rt-E5-kaK">
+                        <barButtonItem key="leftBarButtonItem" image="xmark" catalog="system" style="plain" id="xfD-jX-D8z">
+                            <connections>
+                                <action selector="didTapClose:" destination="JbP-bI-EnW" id="jvo-2t-QQS"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="mVU-Ne-z42">
                             <connections>
                                 <action selector="didPushDone:" destination="JbP-bI-EnW" id="Lil-GA-lEH"/>
@@ -211,4 +216,7 @@
             <point key="canvasLocation" x="1768" y="935"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+    </resources>
 </document>
