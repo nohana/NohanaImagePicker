@@ -204,10 +204,8 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
 
     // MARK: - IBAction
 
-    @IBAction func didPushCancel(_ sender: AnyObject) {
-        if let nohanaImagePickerController = nohanaImagePickerController {
-            nohanaImagePickerController.delegate?.nohanaImagePickerDidCancel(nohanaImagePickerController)
-        }
+    @IBAction func didTapClose(_ sender: AnyObject) {
+        dismiss(animated: true, completion: nil)
     }
 
     // MARK: - EmptyIndicatable

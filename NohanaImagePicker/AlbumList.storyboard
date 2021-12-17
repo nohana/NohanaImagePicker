@@ -86,9 +86,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="8x3-ib-H9x">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="aBC-F8-J82">
+                        <barButtonItem key="leftBarButtonItem" image="xmark" catalog="system" style="plain" id="aBC-F8-J82">
                             <connections>
-                                <action selector="didPushCancel:" destination="KMy-V3-MzH" id="uA0-bt-oqV"/>
+                                <action selector="didTapClose:" destination="KMy-V3-MzH" id="psc-EK-8ME"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -131,4 +131,7 @@
             <point key="canvasLocation" x="12" y="-508"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+    </resources>
 </document>
