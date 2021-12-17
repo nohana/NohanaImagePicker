@@ -43,8 +43,6 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
         if let nohanaImagePickerController = nohanaImagePickerController {
             view.backgroundColor = nohanaImagePickerController.config.color.background ?? .white
             title = nohanaImagePickerController.config.strings.albumListTitle ?? NSLocalizedString("albumlist.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
-            setUpToolbarItems()
-            navigationController?.setToolbarHidden(nohanaImagePickerController.toolbarHidden, animated: false)
         }
         setUpEmptyIndicator()
         setUpActivityIndicator()

@@ -26,7 +26,10 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
         super.viewDidLoad()
         view.backgroundColor = nohanaImagePickerController?.config.color.background ?? .white
         updateTitle()
-        setUpToolbarItems()
+        if let nohanaImagePickerController = nohanaImagePickerController {
+            navigationController?.setToolbarHidden(nohanaImagePickerController.toolbarHidden, animated: false)
+            setUpToolbarItems()
+        }
         addPickPhotoKitAssetNotificationObservers()
     }
 
