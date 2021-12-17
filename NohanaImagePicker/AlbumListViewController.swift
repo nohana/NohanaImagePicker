@@ -17,6 +17,11 @@
 import UIKit
 import Photos
 
+protocol AlbumListViewControllerDelegate: AnyObject {
+    func didSelectMoment()
+    func didSelectAlbum(album: PhotoKitAssetList)
+}
+
 class AlbumListViewController: UITableViewController, EmptyIndicatable, ActivityIndicatable {
 
     enum AlbumListViewControllerSectionType: Int {
@@ -37,6 +42,7 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
 
     weak var nohanaImagePickerController: NohanaImagePickerController?
     var photoKitAlbumList: PhotoKitAlbumList!
+    weak var delegate: AlbumListViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,14 +84,13 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
         }
         switch sectionType {
         case .moment:
+            delegate?.didSelectMoment()
             nohanaImagePickerController.delegate?.nohanaImagePickerDidSelectMoment?(nohanaImagePickerController)
+            dismiss(animated: true, completion: nil)
         case .albums:
-            if nohanaImagePickerController.canPickDateSection {
-                performSegue(withIdentifier: "toAssetListViewSelectableDateSectionController", sender: nil)
-            } else {
-                performSegue(withIdentifier: "toAssetListViewController", sender: nil)
-            }
+            delegate?.didSelectAlbum(album: photoKitAlbumList[indexPath.row])
             nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAssetList: photoKitAlbumList[indexPath.row].assetList)
+            dismiss(animated: true, completion: nil)
         }
     }
 
@@ -173,32 +178,6 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
                 cell.thumbnailImageView.image = nil
             }
             return cell
-        }
-    }
-
-    // MARK: - Storyboard
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let sectionType = AlbumListViewControllerSectionType(rawValue: tableView.indexPathForSelectedRow!.section) else {
-            fatalError("Invalid section")
-        }
-        switch sectionType {
-        case .moment:
-            let momentViewController = segue.destination as! MomentViewController
-            momentViewController.nohanaImagePickerController = nohanaImagePickerController
-        case .albums:
-            switch segue.identifier {
-            case "toAssetListViewController":
-                let assetListViewController = segue.destination as! AssetListViewController
-                assetListViewController.photoKitAssetList = photoKitAlbumList[tableView.indexPathForSelectedRow!.row]
-                assetListViewController.nohanaImagePickerController = nohanaImagePickerController
-            case "toAssetListViewSelectableDateSectionController":
-                let assetListSelectableDateSectionController = segue.destination as! AssetListSelectableDateSectionController
-                assetListSelectableDateSectionController.photoKitAssetList = photoKitAlbumList[tableView.indexPathForSelectedRow!.row]
-                assetListSelectableDateSectionController.nohanaImagePickerController = nohanaImagePickerController
-            default:
-                fatalError("unexpected segue identifer")
-            }
         }
     }
 

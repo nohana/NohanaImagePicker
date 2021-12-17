@@ -17,6 +17,10 @@
 import Foundation
 import Photos
 
+protocol AssetListSelectableDateSectionControllerDelegate: AnyObject {
+    func didSelectMoment(controller: AssetListSelectableDateSectionController)
+}
+
 class AssetListSelectableDateSectionController: UICollectionViewController, UICollectionViewDelegateFlowLayout, ActivityIndicatable {
     
     weak var nohanaImagePickerController: NohanaImagePickerController?
@@ -35,6 +39,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         let cellWidth = (view.frame.width - cellMargin * (CGFloat(numberOfColumns) - 1)) / CGFloat(numberOfColumns)
         return CGSize(width: cellWidth, height: cellWidth)
     }
+    weak var delegate: AssetListSelectableDateSectionControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,6 +125,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
             }
         })
         albumListViewController.nohanaImagePickerController = nohanaImagePickerController
+        albumListViewController.delegate = self
         present(navigationController, animated: true, completion: nil)
     }
 
@@ -326,5 +332,16 @@ extension AssetListSelectableDateSectionController: AssetCellDelegate {
                 }
             }
         }
+    }
+}
+
+extension AssetListSelectableDateSectionController: AlbumListViewControllerDelegate {
+    func didSelectMoment() {
+        delegate?.didSelectMoment(controller: self)
+    }
+    
+    func didSelectAlbum(album: PhotoKitAssetList) {
+        self.photoKitAssetList = album
+        reloadData()
     }
 }

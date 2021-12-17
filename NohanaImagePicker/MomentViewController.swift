@@ -17,6 +17,10 @@
 import UIKit
 import Photos
 
+protocol MomentViewControllerDelegate: AnyObject {
+    func didSelectAlbum(album: PhotoKitAssetList)
+}
+
 final class MomentViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, ActivityIndicatable {
 
     weak var nohanaImagePickerController: NohanaImagePickerController?
@@ -35,6 +39,7 @@ final class MomentViewController: UICollectionViewController, UICollectionViewDe
         let cellWidth = (view.frame.width - cellMargin * (CGFloat(numberOfColumns) - 1)) / CGFloat(numberOfColumns)
         return CGSize(width: cellWidth, height: cellWidth)
     }
+    weak var delegate: MomentViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,6 +137,7 @@ final class MomentViewController: UICollectionViewController, UICollectionViewDe
             }
         })
         albumListViewController.nohanaImagePickerController = nohanaImagePickerController
+        albumListViewController.delegate = self
         present(navigationController, animated: true, completion: nil)
     }
 
@@ -294,5 +300,15 @@ final class MomentViewController: UICollectionViewController, UICollectionViewDe
     
     @IBAction func didTapClose(_ sender: AnyObject) {
         dismiss(animated: true)
+    }
+}
+
+extension MomentViewController: AlbumListViewControllerDelegate {
+    func didSelectMoment() {
+        // Nothing to do
+    }
+    
+    func didSelectAlbum(album: PhotoKitAssetList) {
+        delegate?.didSelectAlbum(album: album)
     }
 }

@@ -152,6 +152,7 @@ open class NohanaImagePickerController: UIViewController {
                 })
 
             assetListViewController.nohanaImagePickerController = self
+            assetListViewController.delegate = self
             return [assetListViewController]
         } else {
             guard let assetListViewController = UIStoryboard(name: "AssetList", bundle: assetBundle).instantiateInitialViewController() as? AssetListViewController else {
@@ -173,6 +174,7 @@ open class NohanaImagePickerController: UIViewController {
                 })
 
             assetListViewController.nohanaImagePickerController = self
+            assetListViewController.delegate = self
             return [assetListViewController]
         }
     }
@@ -211,5 +213,60 @@ extension NohanaImagePickerController {
             public var toolbarTitleHasLimit: String?
         }
         public var strings = Strings()
+    }
+}
+
+extension NohanaImagePickerController: AssetListViewControllerDelegate {
+    func didSelectMoment(controller: AssetListViewController) {
+        guard let momentViewController = UIStoryboard(name: "Moment", bundle: assetBundle).instantiateInitialViewController() as? MomentViewController else {
+            fatalError("Invalid ViewController")
+        }
+        momentViewController.nohanaImagePickerController = self
+        momentViewController.delegate = self
+        if let navigationController = children.first(where: { $0 is UINavigationController} ) as? UINavigationController {
+            navigationController.setViewControllers([momentViewController], animated: false)
+        }
+    }
+}
+
+extension NohanaImagePickerController: AssetListSelectableDateSectionControllerDelegate {
+    func didSelectMoment(controller: AssetListSelectableDateSectionController) {
+        guard let momentViewController = UIStoryboard(name: "Moment", bundle: assetBundle).instantiateInitialViewController() as? MomentViewController else {
+            fatalError("Invalid ViewController")
+        }
+        momentViewController.nohanaImagePickerController = self
+        momentViewController.delegate = self
+        if let navigationController = children.first(where: { $0 is UINavigationController} ) as? UINavigationController {
+            navigationController.setViewControllers([momentViewController], animated: false)
+        }
+    }
+}
+
+extension NohanaImagePickerController: MomentViewControllerDelegate {
+    func didSelectAlbum(album: PhotoKitAssetList) {
+        if canPickDateSection {
+            guard let assetListViewController = UIStoryboard(name: "AssetListSelectableDateSection", bundle: assetBundle).instantiateInitialViewController() as? AssetListSelectableDateSectionController else {
+                fatalError("Invalid ViewController")
+            }
+            
+            assetListViewController.photoKitAssetList = album
+            assetListViewController.reloadData()
+            assetListViewController.nohanaImagePickerController = self
+            assetListViewController.delegate = self
+            if let navigationController = children.first(where: { $0 is UINavigationController} ) as? UINavigationController {
+                navigationController.setViewControllers([assetListViewController], animated: false)
+            }
+        } else {
+            guard let assetListViewController = UIStoryboard(name: "AssetList", bundle: assetBundle).instantiateInitialViewController() as? AssetListViewController else {
+                fatalError("Invalid ViewController")
+            }
+            assetListViewController.photoKitAssetList = album
+            assetListViewController.reloadData()
+            assetListViewController.nohanaImagePickerController = self
+            assetListViewController.delegate = self
+            if let navigationController = children.first(where: { $0 is UINavigationController} ) as? UINavigationController {
+                navigationController.setViewControllers([assetListViewController], animated: false)
+            }
+        }
     }
 }

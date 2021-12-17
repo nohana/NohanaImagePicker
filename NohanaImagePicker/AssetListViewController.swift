@@ -17,11 +17,16 @@
 import UIKit
 import Photos
 
+protocol AssetListViewControllerDelegate: AnyObject {
+    func didSelectMoment(controller: AssetListViewController)
+}
+
 class AssetListViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     weak var nohanaImagePickerController: NohanaImagePickerController?
     var photoKitAssetList: PhotoKitAssetList?
     private let titleView = NohanaImagePickerController.titleView()
+    weak var delegate: AssetListViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,6 +152,7 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
             }
         })
         albumListViewController.nohanaImagePickerController = nohanaImagePickerController
+        albumListViewController.delegate = self
         present(navigationController, animated: true, completion: nil)
     }
 
@@ -268,5 +274,16 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
     
     @IBAction func didTapClose(_ sender: AnyObject) {
         dismiss(animated: true)
+    }
+}
+
+extension AssetListViewController: AlbumListViewControllerDelegate {
+    func didSelectMoment() {
+        delegate?.didSelectMoment(controller: self)
+    }
+    
+    func didSelectAlbum(album: PhotoKitAssetList) {
+        self.photoKitAssetList = album
+        reloadData()
     }
 }
