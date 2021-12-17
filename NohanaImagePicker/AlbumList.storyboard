@@ -16,11 +16,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="AlbumCell" rowHeight="82" id="qvk-ez-ppx" customClass="AlbumCell" customModule="NohanaImagePicker" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AlbumCell" rowHeight="82" id="qvk-ez-ppx" customClass="AlbumCell" customModule="NohanaImagePicker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44.5" width="320" height="82"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qvk-ez-ppx" id="6mF-Zx-ek3">
-                                    <rect key="frame" x="0.0" y="0.0" width="294.5" height="82"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="82"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MGl-5S-9tU">
@@ -31,7 +31,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Album Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ma1-xv-kQ5">
-                                            <rect key="frame" x="108" y="31.5" width="186.5" height="19.5"/>
+                                            <rect key="frame" x="108" y="31.5" width="204" height="19.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -51,15 +51,15 @@
                                     <outlet property="titleLabel" destination="ma1-xv-kQ5" id="vu2-Qg-gFH"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MomentAlbumCell" rowHeight="52" id="aYa-j0-GaK" customClass="MomentCell" customModule="NohanaImagePicker" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MomentAlbumCell" rowHeight="52" id="aYa-j0-GaK" customClass="MomentCell" customModule="NohanaImagePicker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="126.5" width="320" height="52"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aYa-j0-GaK" id="rck-Bb-u1F">
-                                    <rect key="frame" x="0.0" y="0.0" width="294.5" height="52"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Moment Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ro1-c6-hyT">
-                                            <rect key="frame" x="24" y="18" width="270.5" height="16"/>
+                                            <rect key="frame" x="24" y="18" width="288" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="16" id="bri-5S-hpu"/>
                                             </constraints>
