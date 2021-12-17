@@ -60,10 +60,6 @@ class AssetDetailListViewController: AssetListViewController, DetailListViewCont
         }
     }
 
-    override func updateTitle() {
-        self.title = ""
-    }
-
     func didChangeAssetDetailPage(_ indexPath: IndexPath) {
         guard let nohanaImagePickerController = nohanaImagePickerController else {
             return

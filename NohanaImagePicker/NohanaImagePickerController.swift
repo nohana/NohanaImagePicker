@@ -51,6 +51,12 @@ open class NohanaImagePickerController: UIViewController {
     }
     open var config: Config = Config()
     open var canPickDateSection: Bool = false
+    open var titleTextAttributes: [NSAttributedString.Key: Any] = {
+        return [
+            .foregroundColor: UIColor.black,
+            .font: UIFont.systemFont(ofSize: 17, weight: .semibold)
+        ]
+    }()
 
     lazy var assetBundle: Bundle = {
         let bundle = Bundle(for: type(of: self))
@@ -62,7 +68,7 @@ open class NohanaImagePickerController: UIViewController {
     let pickedAssetList: PickedAssetList
     let mediaType: MediaType
     let enableExpandingPhotoAnimation: Bool
-    fileprivate let assetCollectionSubtypes: [PHAssetCollectionSubtype]
+    internal let assetCollectionSubtypes: [PHAssetCollectionSubtype]
     private var albumList: PhotoKitAlbumList!
 
     public init() {
@@ -169,6 +175,13 @@ open class NohanaImagePickerController: UIViewController {
             assetListViewController.nohanaImagePickerController = self
             return [assetListViewController]
         }
+    }
+    
+    internal class func titleView() -> UIButton {
+        let button = UIButton(type: .system)
+        let image = UIImage(systemName: "chevron.down", withConfiguration: UIImage.SymbolConfiguration(pointSize: 9, weight: .semibold))
+        button.setImage(image, for: .normal)
+        return button
     }
 }
 

@@ -20,10 +20,9 @@ import Photos
 final class MomentViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, ActivityIndicatable {
 
     weak var nohanaImagePickerController: NohanaImagePickerController?
-    var photoKitAssetList: PhotoKitAssetList!
     var momentInfoSectionList: [MomentInfoSection] = []
     var isFirstAppearance = true
-    
+    private let titleView = NohanaImagePickerController.titleView()
     var cellSize: CGSize {
         guard let nohanaImagePickerController = nohanaImagePickerController else {
             return CGSize.zero
@@ -40,6 +39,8 @@ final class MomentViewController: UICollectionViewController, UICollectionViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = nohanaImagePickerController?.config.color.background ?? .white
+        titleView.addTarget(self, action: #selector(didTapTitleView), for: .touchUpInside)
+        navigationItem.titleView = titleView
         updateTitle()
         setUpToolbarItems()
         addPickPhotoKitAssetNotificationObservers()
@@ -63,12 +64,6 @@ final class MomentViewController: UICollectionViewController, UICollectionViewDe
         scrollCollectionViewToInitialPosition()
     }
 
-    func updateTitle() {
-        if let nohanaImagePickerController = nohanaImagePickerController {
-            title = NSLocalizedString("albumlist.moment.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
-        }
-    }
-
     func scrollCollectionView(to indexPath: IndexPath) {
         let count: Int? = momentInfoSectionList.count
         guard count != nil && count! > 0 else {
@@ -90,6 +85,54 @@ final class MomentViewController: UICollectionViewController, UICollectionViewDe
         let indexPath = IndexPath(item: momentInfoSectionList[lastSection].assetResult.count - 1, section: lastSection)
         scrollCollectionView(to: indexPath)
         isFirstAppearance = false
+    }
+    
+    private func updateTitle() {
+        if let nohanaImagePickerController = nohanaImagePickerController {
+            let title = NSLocalizedString("albumlist.moment.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
+            let attributedTitle = NSAttributedString(string: title, attributes: nohanaImagePickerController.titleTextAttributes)
+            self.titleView.setAttributedTitle(attributedTitle, for: .normal)
+            self.titleView.sizeToFit()
+            self.navigationController?.navigationBar.setNeedsLayout()
+            if let titleLabel = self.titleView.titleLabel, let imageView = self.titleView.imageView {
+                let titleLabelWidth = titleLabel.frame.width
+                let imageWidth = imageView.frame.width
+                let space: CGFloat = 2.0
+                self.titleView.imageEdgeInsets = UIEdgeInsets(top: 0, left: titleLabelWidth + space, bottom: 0, right: -titleLabelWidth - space)
+                self.titleView.titleEdgeInsets = UIEdgeInsets(top: 0, left: -imageWidth - space, bottom: 0, right: imageWidth + space)
+            }
+        }
+    }
+    
+    @objc private func didTapTitleView() {
+        showAlbumList()
+        if let targetView = titleView.imageView {
+            transformAnimation(targetView: targetView)
+        }
+    }
+    
+    private func showAlbumList() {
+        guard let nohanaImagePickerController = nohanaImagePickerController else { return }
+        let storyboard = UIStoryboard(name: "AlbumList", bundle: nohanaImagePickerController.assetBundle)
+        guard let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController else {
+            fatalError("navigationController init failed.")
+        }
+        guard let albumListViewController = navigationController.topViewController as? AlbumListViewController else {
+            fatalError("albumListViewController is not topViewController.")
+        }
+        albumListViewController.photoKitAlbumList = PhotoKitAlbumList(assetCollectionTypes: [.smartAlbum, .album],
+                                                                      assetCollectionSubtypes: nohanaImagePickerController.assetCollectionSubtypes,
+                                                                      mediaType: nohanaImagePickerController.mediaType,
+                                                                      shouldShowEmptyAlbum: nohanaImagePickerController.shouldShowMoment,
+                                                                      ascending: !nohanaImagePickerController.canPickDateSection,
+                                                                      handler: { [weak albumListViewController] in
+            DispatchQueue.main.async {
+                albumListViewController?.isLoading = false
+                albumListViewController?.tableView.reloadData()
+            }
+        })
+        albumListViewController.nohanaImagePickerController = nohanaImagePickerController
+        present(navigationController, animated: true, completion: nil)
     }
 
     // MARK: - UICollectionViewDataSource
