@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ym2-Dv-78L">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Asset List View Controller-->
+        <scene sceneID="I2V-N0-01e">
+            <objects>
+                <collectionViewController id="Ym2-Dv-78L" customClass="AssetListViewController" customModule="NohanaImagePicker" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="NJV-41-7YA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="VXr-gK-wkO">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="44" height="44"/>
+                            <inset key="sectionInset" minX="0.0" minY="8" maxX="0.0" maxY="2"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AssetCell" id="USA-Rj-caY" customClass="AssetCell" customModule="NohanaImagePicker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="8" width="78" height="78"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="78" height="78"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JfI-OC-0MD">
+                                            <rect key="frame" x="0.0" y="0.0" width="78" height="78"/>
+                                        </imageView>
+                                        <view hidden="YES" alpha="0.30000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dOy-5G-KY1">
+                                            <rect key="frame" x="0.0" y="0.0" width="78" height="78"/>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GnO-HG-Cfq">
+                                            <rect key="frame" x="34" y="0.0" width="44" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="44" id="qwp-EF-i69"/>
+                                                <constraint firstAttribute="width" constant="44" id="xSB-On-5mY"/>
+                                            </constraints>
+                                            <connections>
+                                                <action selector="didPushPickButton:" destination="USA-Rj-caY" eventType="touchUpInside" id="K5K-lk-4jM"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="dOy-5G-KY1" firstAttribute="top" secondItem="USA-Rj-caY" secondAttribute="topMargin" constant="-8" id="CFu-I3-HYr"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="dOy-5G-KY1" secondAttribute="trailing" constant="-8" id="Ig4-wb-3zZ"/>
+                                    <constraint firstItem="GnO-HG-Cfq" firstAttribute="top" secondItem="USA-Rj-caY" secondAttribute="topMargin" constant="-8" id="LZf-Ki-fet"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="JfI-OC-0MD" secondAttribute="trailing" constant="-8" id="Oc9-l6-TWz"/>
+                                    <constraint firstItem="JfI-OC-0MD" firstAttribute="leading" secondItem="USA-Rj-caY" secondAttribute="leadingMargin" constant="-8" id="PQb-ad-KM2"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="dOy-5G-KY1" secondAttribute="bottom" constant="-8" id="Vcg-Pp-MlI"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="JfI-OC-0MD" secondAttribute="bottom" constant="-8" id="cI2-Ji-sRJ"/>
+                                    <constraint firstItem="dOy-5G-KY1" firstAttribute="leading" secondItem="USA-Rj-caY" secondAttribute="leadingMargin" constant="-8" id="eO4-Gm-g12"/>
+                                    <constraint firstItem="JfI-OC-0MD" firstAttribute="top" secondItem="USA-Rj-caY" secondAttribute="topMargin" constant="-8" id="mfl-vu-Jaz"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="GnO-HG-Cfq" secondAttribute="trailing" constant="-8" id="ozd-Mn-7n5"/>
+                                </constraints>
+                                <size key="customSize" width="78" height="78"/>
+                                <connections>
+                                    <outlet property="imageView" destination="JfI-OC-0MD" id="xXv-1J-Qmf"/>
+                                    <outlet property="overlayView" destination="dOy-5G-KY1" id="UYe-e3-UTg"/>
+                                    <outlet property="pickButton" destination="GnO-HG-Cfq" id="CFH-ET-kyg"/>
+                                    <segue destination="Dav-bY-SLK" kind="show" identifier="toAssetDetailListViewController" id="Ke0-Ol-wdx"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AssetListFooter" id="zzn-Sj-epX">
+                            <rect key="frame" x="0.0" y="88" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </collectionReusableView>
+                        <connections>
+                            <outlet property="dataSource" destination="Ym2-Dv-78L" id="h4Z-dv-f5q"/>
+                            <outlet property="delegate" destination="Ym2-Dv-78L" id="Y0U-3q-tEg"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="yD3-jr-tlJ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="25g-zK-DKH">
+                            <connections>
+                                <action selector="didPushDone:" destination="Ym2-Dv-78L" id="5kA-mK-ry6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jCB-s6-MsD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="894" y="214"/>
+        </scene>
+        <!--Asset Detail List View Controller-->
+        <scene sceneID="Wdd-Di-sbg">
+            <objects>
+                <collectionViewController id="Dav-bY-SLK" customClass="AssetDetailListViewController" customModule="NohanaImagePicker" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" id="336-vb-qGk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="514"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="7wd-Zl-g95">
+                            <size key="itemSize" width="320" height="320"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AssetDetailCell" id="gnw-Y3-IoB" customClass="AssetDetailCell" customModule="NohanaImagePicker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="97" width="320" height="320"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="3" translatesAutoresizingMaskIntoConstraints="NO" id="FF0-FW-f55">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AdF-qG-pjv">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                                    <gestureRecognizers/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="320" id="H0f-jc-fRZ"/>
+                                                        <constraint firstAttribute="height" constant="320" id="IHf-g9-Joy"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="AdF-qG-pjv" firstAttribute="leading" secondItem="FF0-FW-f55" secondAttribute="leading" id="7cE-fl-iwi"/>
+                                                <constraint firstAttribute="trailing" secondItem="AdF-qG-pjv" secondAttribute="trailing" id="UWv-pu-6LX"/>
+                                                <constraint firstAttribute="bottom" secondItem="AdF-qG-pjv" secondAttribute="bottom" id="jJA-t8-6bl"/>
+                                                <constraint firstItem="AdF-qG-pjv" firstAttribute="top" secondItem="FF0-FW-f55" secondAttribute="top" id="skn-2f-4p2"/>
+                                            </constraints>
+                                            <connections>
+                                                <outlet property="delegate" destination="gnw-Y3-IoB" id="zFt-cK-rKm"/>
+                                            </connections>
+                                        </scrollView>
+                                    </subviews>
+                                </view>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="FF0-FW-f55" firstAttribute="leading" secondItem="gnw-Y3-IoB" secondAttribute="leadingMargin" constant="-8" id="0id-ff-BxP"/>
+                                    <constraint firstItem="FF0-FW-f55" firstAttribute="top" secondItem="gnw-Y3-IoB" secondAttribute="topMargin" constant="-8" id="bLr-pg-b9K"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="FF0-FW-f55" secondAttribute="trailing" constant="-8" id="cfs-2c-XQo"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="FF0-FW-f55" secondAttribute="bottom" constant="-8" id="vPQ-kx-muU"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="imageView" destination="AdF-qG-pjv" id="KmV-Jj-XA5"/>
+                                    <outlet property="imageViewHeightConstraint" destination="IHf-g9-Joy" id="RuJ-a7-feE"/>
+                                    <outlet property="imageViewWidthConstraint" destination="H0f-jc-fRZ" id="4BR-8c-Ohw"/>
+                                    <outlet property="scrollView" destination="FF0-FW-f55" id="IeQ-l1-LAY"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Dav-bY-SLK" id="D1v-PI-OSB"/>
+                            <outlet property="delegate" destination="Dav-bY-SLK" id="gIP-15-e4T"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="50Z-7g-lqz">
+                        <barButtonItem key="rightBarButtonItem" id="uwQ-Nb-cGs">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1SX-dT-KcO">
+                                <rect key="frame" x="274" y="5" width="30" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="didPushPickButton:" destination="Dav-bY-SLK" eventType="touchUpInside" id="QQO-AO-aTz"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
+                    <connections>
+                        <outlet property="pickButton" destination="1SX-dT-KcO" id="4s5-PF-Qjw"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TRf-ea-4le" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1729" y="214"/>
+        </scene>
+    </scenes>
+</document>
