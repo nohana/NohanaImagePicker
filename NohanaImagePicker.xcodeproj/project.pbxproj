@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		3569CAA91EC1918E000C41C0 /* NohanaImagePicker.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */; };
 		6ACE6617276051F6008AA84D /* ImagePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACE6616276051F6008AA84D /* ImagePreviewViewController.swift */; };
+		6A8047FF276C3D77000F3B28 /* AlbumList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A8047FE276C3D77000F3B28 /* AlbumList.storyboard */; };
+		6A804801276C3E80000F3B28 /* Moment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A804800276C3E80000F3B28 /* Moment.storyboard */; };
+		6A804803276C3F01000F3B28 /* AssetList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A804802276C3F01000F3B28 /* AssetList.storyboard */; };
 		F117F732273B6A2600E11BC7 /* AssetDateSectionCreater.swift in Sources */ = {isa = PBXBuildFile; fileRef = F117F731273B6A2600E11BC7 /* AssetDateSectionCreater.swift */; };
 		F181095026A5361A001C2BDE /* MomentDetailListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F181094F26A5361A001C2BDE /* MomentDetailListViewController.swift */; };
 		F1A26CCD2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1A26CCC2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard */; };
@@ -84,6 +87,9 @@
 		3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NohanaImagePicker.xcassets; sourceTree = "<group>"; };
 		3590F1F51EC1A79400F32E06 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/NohanaImagePicker.strings; sourceTree = "<group>"; };
 		6ACE6616276051F6008AA84D /* ImagePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewController.swift; sourceTree = "<group>"; };
+		6A8047FE276C3D77000F3B28 /* AlbumList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AlbumList.storyboard; sourceTree = "<group>"; };
+		6A804800276C3E80000F3B28 /* Moment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Moment.storyboard; sourceTree = "<group>"; };
+		6A804802276C3F01000F3B28 /* AssetList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetList.storyboard; sourceTree = "<group>"; };
 		F117F731273B6A2600E11BC7 /* AssetDateSectionCreater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDateSectionCreater.swift; sourceTree = "<group>"; };
 		F181094F26A5361A001C2BDE /* MomentDetailListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentDetailListViewController.swift; sourceTree = "<group>"; };
 		F1A26CCC2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetListSelectableDateSection.storyboard; sourceTree = "<group>"; };
@@ -203,6 +209,9 @@
 			isa = PBXGroup;
 			children = (
 				F23554251C69D19C00796DCA /* NohanaImagePicker.storyboard */,
+				6A804802276C3F01000F3B28 /* AssetList.storyboard */,
+				6A8047FE276C3D77000F3B28 /* AlbumList.storyboard */,
+				6A804800276C3E80000F3B28 /* Moment.storyboard */,
 				F1A26CCC2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard */,
 				F27029CD1C71C43A001647AB /* NohanaImagePicker.strings */,
 				F237249A1C6DCF96005D1E8A /* NohanaImagePicker.xcassets */,
@@ -404,8 +413,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F23554261C69D19C00796DCA /* NohanaImagePicker.storyboard in Resources */,
+				6A804803276C3F01000F3B28 /* AssetList.storyboard in Resources */,
 				F27029CB1C71C43A001647AB /* NohanaImagePicker.strings in Resources */,
+				6A804801276C3E80000F3B28 /* Moment.storyboard in Resources */,
 				F237249B1C6DCF96005D1E8A /* NohanaImagePicker.xcassets in Resources */,
+				6A8047FF276C3D77000F3B28 /* AlbumList.storyboard in Resources */,
 				F1A26CCD2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
