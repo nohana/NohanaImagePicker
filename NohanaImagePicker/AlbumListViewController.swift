@@ -20,7 +20,7 @@ import Photos
 protocol AlbumListViewControllerDelegate: AnyObject {
     func didSelectMoment()
     func didSelectAlbum(album: PhotoKitAssetList)
-    func dissmissWithoutDoingAnything()
+    func didDissmissViewController(viewController: AlbumListViewController)
 }
 
 class AlbumListViewController: UITableViewController, EmptyIndicatable, ActivityIndicatable {
@@ -88,11 +88,17 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
         case .moment:
             delegate?.didSelectMoment()
             nohanaImagePickerController.delegate?.nohanaImagePickerDidSelectMoment?(nohanaImagePickerController)
-            dismiss(animated: true, completion: nil)
+            dismiss(animated: true) { [weak self] in
+                guard let self = self else { return }
+                self.delegate?.didDissmissViewController(viewController: self)
+            }
         case .albums:
             delegate?.didSelectAlbum(album: photoKitAlbumList[indexPath.row])
             nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAssetList: photoKitAlbumList[indexPath.row].assetList)
-            dismiss(animated: true, completion: nil)
+            dismiss(animated: true) { [weak self] in
+                guard let self = self else { return }
+                self.delegate?.didDissmissViewController(viewController: self)
+            }
         }
     }
 
@@ -186,8 +192,10 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
     // MARK: - IBAction
 
     @IBAction func didTapClose(_ sender: AnyObject) {
-        delegate?.dissmissWithoutDoingAnything()
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true) { [weak self] in
+            guard let self = self else { return }
+            self.delegate?.didDissmissViewController(viewController: self)
+        }
     }
 
     // MARK: - EmptyIndicatable

@@ -205,17 +205,15 @@ extension RootViewController: AlbumListViewControllerDelegate {
         let title = NSLocalizedString("albumlist.moment.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
         updateTitle(title: title)
         setToolbarTitle(nohanaImagePickerController)
-        transformAnimation()
     }
     
     func didSelectAlbum(album: PhotoKitAssetList) {
         switchChildViewController(currentChildViewController, toViewController: fetchAssetListViewController(album: album))
         updateTitle(title: album.title)
         setToolbarTitle(nohanaImagePickerController)
-        transformAnimation()
     }
     
-    func dissmissWithoutDoingAnything() {
+    func didDissmissViewController(viewController: AlbumListViewController) {
         transformAnimation()
     }
 }
