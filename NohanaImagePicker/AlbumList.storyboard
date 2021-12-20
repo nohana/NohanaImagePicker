@@ -112,7 +112,6 @@
                         <navigationBarAppearance key="standardAppearance"/>
                         <navigationBarAppearance key="compactAppearance"/>
                         <navigationBarAppearance key="scrollEdgeAppearance"/>
-                        <navigationBarAppearance key="compactScrollEdgeAppearance"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
