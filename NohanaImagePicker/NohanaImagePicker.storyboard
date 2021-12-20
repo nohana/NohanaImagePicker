@@ -21,7 +21,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="lps-BL-jWk"/>
+                    <navigationItem key="navigationItem" id="lps-BL-jWk">
+                        <barButtonItem key="leftBarButtonItem" image="xmark" catalog="system" style="plain" id="Re4-k9-2u2">
+                            <connections>
+                                <action selector="didTapClose:" destination="dus-yD-G7d" id="7jR-EK-RMy"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="fI9-e7-1xu">
+                            <connections>
+                                <action selector="didTapDone:" destination="dus-yD-G7d" id="9jr-gm-vw2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E1I-yM-83j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -29,6 +40,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

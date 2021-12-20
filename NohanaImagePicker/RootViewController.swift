@@ -34,5 +34,15 @@ class RootViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // MARK: - IBAction
+    @IBAction func didTapDone(_ sender: AnyObject) {
+        let pickedPhotoKitAssets = nohanaImagePickerController.pickedAssetList.map { ($0 as! PhotoKitAsset).originalAsset }
+        nohanaImagePickerController.delegate?.nohanaImagePicker(nohanaImagePickerController, didFinishPickingPhotoKitAssets: pickedPhotoKitAssets )
+    }
+    
+    @IBAction func didTapClose(_ sender: AnyObject) {
+        dismiss(animated: true)
+    }
 
 }
