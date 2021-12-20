@@ -113,6 +113,7 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
     
     @available(iOS 13.0, *)
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        guard let photoKitAssetList = photoKitAssetList else { return nil }
         let asset = photoKitAssetList[indexPath.item]
         if let cell = collectionView.cellForItem(at: indexPath) as? AssetCell, let nohanaImagePickerController = self.nohanaImagePickerController {
             return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { [weak self] in

@@ -65,7 +65,7 @@
                                     <outlet property="imageView" destination="uIX-eu-LJS" id="56K-fr-dNL"/>
                                     <outlet property="overlayView" destination="SAB-CG-yTH" id="sBQ-fh-QDQ"/>
                                     <outlet property="pickButton" destination="p52-oV-luk" id="PcE-a7-sar"/>
-                                    <segue destination="jUV-MP-za7" kind="show" id="uQU-jU-rgb"/>
+                                    <segue destination="jUV-MP-za7" kind="show" identifier="toMomentDetailListViewController" id="uQU-jU-rgb"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
