@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -30,6 +31,9 @@
                         <toolbarAppearance key="scrollEdgeAppearance"/>
                         <toolbarAppearance key="compactScrollEdgeAppearance"/>
                     </toolbar>
+                    <connections>
+                        <segue destination="dus-yD-G7d" kind="relationship" relationship="rootViewController" id="X9h-L3-jY7"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3iI-ph-cZF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -56,10 +60,40 @@
                         <toolbarAppearance key="scrollEdgeAppearance"/>
                         <toolbarAppearance key="compactScrollEdgeAppearance"/>
                     </toolbar>
+                    <connections>
+                        <segue destination="dus-yD-G7d" kind="relationship" relationship="rootViewController" id="f4P-ar-ElA"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sfb-mw-QnO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-458" y="963"/>
         </scene>
+        <!--Root View Controller-->
+        <scene sceneID="PQ6-Db-Ux5">
+            <objects>
+                <viewController storyboardIdentifier="RootViewController" id="dus-yD-G7d" customClass="RootViewController" customModule="NohanaImagePicker" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Cp7-CU-v4b"/>
+                        <viewControllerLayoutGuide type="bottom" id="Qco-o1-e3k"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XSv-hy-3Ei">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="lps-BL-jWk"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E1I-yM-83j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="718" y="575"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="f4P-ar-ElA"/>
+    </inferredMetricsTieBreakers>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
