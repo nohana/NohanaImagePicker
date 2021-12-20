@@ -32,8 +32,8 @@ extension UIApplication {
     }
     
     var currentStatusBarHidden: Bool {
-        if let frame = windows.first(where: { $0.isKeyWindow })?.windowScene?.statusBarManager?.isStatusBarHidden {
-            return frame
+        if let isStatusBarHidden = windows.first(where: { $0.isKeyWindow })?.windowScene?.statusBarManager?.isStatusBarHidden {
+            return isStatusBarHidden
         }
         return false
     }
