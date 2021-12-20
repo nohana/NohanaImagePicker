@@ -268,6 +268,13 @@ extension UIViewController {
         }
     }
     
+    func toolBarAppearance(_ nohanaImagePickerController: NohanaImagePickerController) -> UIToolbarAppearance {
+        let appearance = UIToolbarAppearance()
+        appearance.configureWithDefaultBackground()
+        appearance.backgroundColor = nohanaImagePickerController.config.color.navigationBarBackground
+        return appearance
+    }
+    
     // MARK: UINavigationBarAppearance
     func navigationBarAppearance(_ nohanaImagePickerController: NohanaImagePickerController) -> UINavigationBarAppearance {
         let appearance = UINavigationBarAppearance()

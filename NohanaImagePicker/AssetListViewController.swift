@@ -25,6 +25,7 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = nohanaImagePickerController?.config.color.background ?? .white
+        setUpToolbarItems()
         addPickPhotoKitAssetNotificationObservers()
     }
 
@@ -47,6 +48,9 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if let nohanaImagePickerController = nohanaImagePickerController {
+            setToolbarTitle(nohanaImagePickerController)
+        }
         collectionView?.reloadData()
         scrollCollectionViewToInitialPosition()
     }
