@@ -8,66 +8,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="RR9-zr-Qlw">
-            <objects>
-                <navigationController storyboardIdentifier="DisableAnimationNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="tkA-yz-hIq" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="568"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tdZ-Dj-Unr">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <navigationBarAppearance key="standardAppearance"/>
-                        <navigationBarAppearance key="compactAppearance"/>
-                        <navigationBarAppearance key="scrollEdgeAppearance"/>
-                        <navigationBarAppearance key="compactScrollEdgeAppearance"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QJ2-8E-fPl">
-                        <autoresizingMask key="autoresizingMask"/>
-                        <toolbarAppearance key="standardAppearance"/>
-                        <toolbarAppearance key="compactAppearance"/>
-                        <toolbarAppearance key="scrollEdgeAppearance"/>
-                        <toolbarAppearance key="compactScrollEdgeAppearance"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="dus-yD-G7d" kind="relationship" relationship="rootViewController" id="X9h-L3-jY7"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3iI-ph-cZF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-456" y="215"/>
-        </scene>
-        <!--Animatable Navigation Controller-->
-        <scene sceneID="Zpb-f1-dmj">
-            <objects>
-                <navigationController storyboardIdentifier="EnableAnimationNavigationController" id="Htb-sV-6b9" customClass="AnimatableNavigationController" customModule="NohanaImagePicker" customModuleProvider="target" sceneMemberID="viewController">
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="568"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="BOZ-Zf-lAN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <navigationBarAppearance key="standardAppearance"/>
-                        <navigationBarAppearance key="compactAppearance"/>
-                        <navigationBarAppearance key="scrollEdgeAppearance"/>
-                        <navigationBarAppearance key="compactScrollEdgeAppearance"/>
-                    </navigationBar>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ebY-KC-gsl">
-                        <autoresizingMask key="autoresizingMask"/>
-                        <toolbarAppearance key="standardAppearance"/>
-                        <toolbarAppearance key="compactAppearance"/>
-                        <toolbarAppearance key="scrollEdgeAppearance"/>
-                        <toolbarAppearance key="compactScrollEdgeAppearance"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="dus-yD-G7d" kind="relationship" relationship="rootViewController" id="f4P-ar-ElA"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Sfb-mw-QnO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-458" y="963"/>
-        </scene>
         <!--Root View Controller-->
         <scene sceneID="PQ6-Db-Ux5">
             <objects>
@@ -88,9 +28,6 @@
             <point key="canvasLocation" x="718" y="575"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="f4P-ar-ElA"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
