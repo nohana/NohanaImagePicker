@@ -119,11 +119,20 @@ open class NohanaImagePickerController: UIViewController {
             }
         }()
 
-        let appearance = navigationBarAppearance(self)
-        navigationController.navigationBar.standardAppearance = appearance
-        navigationController.navigationBar.scrollEdgeAppearance = appearance
-        navigationController.navigationBar.compactAppearance = appearance
-
+        let navigationBarAppearance = navigationBarAppearance(self)
+        navigationController.navigationBar.standardAppearance = navigationBarAppearance
+        navigationController.navigationBar.scrollEdgeAppearance = navigationBarAppearance
+        navigationController.navigationBar.compactAppearance = navigationBarAppearance
+        navigationController.navigationBar.tintColor = config.color.navigationBarForeground
+        
+        let toobarAppearance = toolBarAppearance(self)
+        navigationController.toolbar.standardAppearance = toobarAppearance
+        if #available(iOS 15.0, *) {
+            navigationController.toolbar.scrollEdgeAppearance = toobarAppearance
+        }
+        navigationController.toolbar.compactAppearance = toobarAppearance
+        navigationController.toolbar.tintColor = config.color.navigationBarForeground
+        
         addChild(navigationController)
         view.addSubview(navigationController.view)
         NSLayoutConstraint.activate([
