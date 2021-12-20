@@ -120,6 +120,11 @@ open class NohanaImagePickerController: UIViewController {
             }
         }()
         
+        let appearance = navigationBarAppearance(self)
+        navigationController.navigationBar.standardAppearance = appearance
+        navigationController.navigationBar.scrollEdgeAppearance = appearance
+        navigationController.navigationBar.compactAppearance = appearance
+        
         addChild(navigationController)
         view.addSubview(navigationController.view)
         navigationController.didMove(toParent: self)
@@ -140,6 +145,8 @@ extension NohanaImagePickerController {
             public var background: UIColor?
             public var empty: UIColor?
             public var separator: UIColor?
+            public var navigationBarBackground: UIColor = .white
+            public var navigationBarForeground: UIColor = .black
         }
         public var color = Color()
 
