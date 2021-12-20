@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3569CAA91EC1918E000C41C0 /* NohanaImagePicker.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */; };
 		6ACE6617276051F6008AA84D /* ImagePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACE6616276051F6008AA84D /* ImagePreviewViewController.swift */; };
+		6AD1607F2770B23D00A8B066 /* UIApplication+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD1607E2770B23D00A8B066 /* UIApplication+Ex.swift */; };
 		F117F732273B6A2600E11BC7 /* AssetDateSectionCreater.swift in Sources */ = {isa = PBXBuildFile; fileRef = F117F731273B6A2600E11BC7 /* AssetDateSectionCreater.swift */; };
 		F181095026A5361A001C2BDE /* MomentDetailListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F181094F26A5361A001C2BDE /* MomentDetailListViewController.swift */; };
 		F1A26CCD2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1A26CCC2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard */; };
@@ -84,6 +85,7 @@
 		3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NohanaImagePicker.xcassets; sourceTree = "<group>"; };
 		3590F1F51EC1A79400F32E06 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/NohanaImagePicker.strings; sourceTree = "<group>"; };
 		6ACE6616276051F6008AA84D /* ImagePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewController.swift; sourceTree = "<group>"; };
+		6AD1607E2770B23D00A8B066 /* UIApplication+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ex.swift"; sourceTree = "<group>"; };
 		F117F731273B6A2600E11BC7 /* AssetDateSectionCreater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDateSectionCreater.swift; sourceTree = "<group>"; };
 		F181094F26A5361A001C2BDE /* MomentDetailListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentDetailListViewController.swift; sourceTree = "<group>"; };
 		F1A26CCC2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetListSelectableDateSection.storyboard; sourceTree = "<group>"; };
@@ -158,6 +160,14 @@
 				3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		6AD1607D2770B22500A8B066 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6AD1607E2770B23D00A8B066 /* UIApplication+Ex.swift */,
+			);
+			name = Extension;
 			sourceTree = "<group>";
 		};
 		F1E5DE7E26A5831D004B9EDE /* Models */ = {
@@ -268,6 +278,7 @@
 				F2C08D771C68651900B00181 /* NohanaImagePicker.h */,
 				F2C08D791C68651900B00181 /* Info.plist */,
 				F26775E61C7073B1002E786C /* Common */,
+				6AD1607D2770B22500A8B066 /* Extension */,
 				F23554291C69F38900796DCA /* Photos */,
 				F218D7DC1C6C3A3E001FCED1 /* Views */,
 				F2E508901C68B1770082EF93 /* ViewControllers */,
@@ -432,6 +443,7 @@
 				F26775DE1C701FA7002E786C /* ItemList.swift in Sources */,
 				F23CC89E1CB745C800BCE443 /* ActivityIndicatable.swift in Sources */,
 				F202573C1C7418920069B33A /* PickedAssetList.swift in Sources */,
+				6AD1607F2770B23D00A8B066 /* UIApplication+Ex.swift in Sources */,
 				F25C10C21C8ED9BF007453C3 /* MomentViewController.swift in Sources */,
 				F25C69881CA23A0A005935D6 /* MomentCell.swift in Sources */,
 				F2FE1F781C901D9400FDBE7B /* MomentSectionHeaderView.swift in Sources */,
