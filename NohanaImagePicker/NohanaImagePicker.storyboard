@@ -27,7 +27,7 @@
                                 <action selector="didTapClose:" destination="dus-yD-G7d" id="7jR-EK-RMy"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="fI9-e7-1xu">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="fI9-e7-1xu">
                             <connections>
                                 <action selector="didTapDone:" destination="dus-yD-G7d" id="9jr-gm-vw2"/>
                             </connections>

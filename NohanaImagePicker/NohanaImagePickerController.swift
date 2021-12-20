@@ -118,6 +118,12 @@ open class NohanaImagePickerController: UIViewController {
                 return UINavigationController(rootViewController: rootViewController)
             }
         }()
+
+        let appearance = navigationBarAppearance(self)
+        navigationController.navigationBar.standardAppearance = appearance
+        navigationController.navigationBar.scrollEdgeAppearance = appearance
+        navigationController.navigationBar.compactAppearance = appearance
+
         addChild(navigationController)
         view.addSubview(navigationController.view)
         NSLayoutConstraint.activate([
@@ -149,6 +155,8 @@ extension NohanaImagePickerController {
             public var background: UIColor?
             public var empty: UIColor?
             public var separator: UIColor?
+            public var navigationBarBackground: UIColor = .white
+            public var navigationBarForeground: UIColor = .black
         }
         public var color = Color()
 

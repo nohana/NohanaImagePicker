@@ -50,6 +50,7 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
         if let nohanaImagePickerController = nohanaImagePickerController {
             view.backgroundColor = nohanaImagePickerController.config.color.background ?? .white
             title = nohanaImagePickerController.config.strings.albumListTitle ?? NSLocalizedString("albumlist.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
+            navigationItem.leftBarButtonItem?.tintColor = nohanaImagePickerController.config.color.navigationBarForeground
         }
         setUpEmptyIndicator()
         setUpActivityIndicator()
@@ -274,6 +275,24 @@ extension UIViewController {
             titleLabel.text = title
             titleLabel.sizeToFit()
         }
+    }
+    
+    // MARK: UINavigationBarAppearance
+    func navigationBarAppearance(_ nohanaImagePickerController: NohanaImagePickerController) -> UINavigationBarAppearance {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = nohanaImagePickerController.config.color.navigationBarBackground
+        appearance.titleTextAttributes =  [
+            .foregroundColor: nohanaImagePickerController.config.color.navigationBarForeground,
+            .font: UIFont.systemFont(ofSize: 17, weight: .semibold)
+        ]
+        let donebuttonAppearance = UIBarButtonItemAppearance()
+        donebuttonAppearance.normal.titleTextAttributes = [
+            .foregroundColor: nohanaImagePickerController.config.color.navigationBarForeground,
+            .font: UIFont.systemFont(ofSize: 17, weight: .semibold)
+        ]
+        appearance.doneButtonAppearance = donebuttonAppearance
+        return appearance
     }
 
     // MARK: - Notification

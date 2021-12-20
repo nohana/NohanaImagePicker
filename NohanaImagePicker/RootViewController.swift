@@ -41,8 +41,10 @@ class RootViewController: UIViewController {
         super.viewDidLoad()
         
         // titleView
+        titleView.tintColor = nohanaImagePickerController.config.color.navigationBarForeground
         titleView.addTarget(self, action: #selector(didTapTitleView), for: .touchUpInside)
         navigationItem.titleView = titleView
+        navigationItem.leftBarButtonItem?.tintColor = nohanaImagePickerController.config.color.navigationBarForeground
         
         // toolbar
         navigationController?.setToolbarHidden(nohanaImagePickerController.toolbarHidden, animated: false)
@@ -101,6 +103,10 @@ class RootViewController: UIViewController {
         albumListViewController.nohanaImagePickerController = nohanaImagePickerController
         albumListViewController.delegate = self
         navigationController.presentationController?.delegate = self
+        let appearance = navigationBarAppearance(nohanaImagePickerController)
+        navigationController.navigationBar.standardAppearance = appearance
+        navigationController.navigationBar.scrollEdgeAppearance = appearance
+        navigationController.navigationBar.compactAppearance = appearance
         present(navigationController, animated: true, completion: nil)
     }
     
