@@ -26,7 +26,6 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     weak var nohanaImagePickerController: NohanaImagePickerController?
     var photoKitAssetList: PhotoKitAssetList?
     var dateSectionList: [AssetDateSection] = []
-    private let titleView = NohanaImagePickerController.titleView()
     var cellSize: CGSize {
         guard let nohanaImagePickerController = nohanaImagePickerController else {
             return CGSize.zero
@@ -43,23 +42,13 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleView.addTarget(self, action: #selector(didTapTitleView), for: .touchUpInside)
-        navigationItem.titleView = titleView
         view.backgroundColor = nohanaImagePickerController?.config.color.background ?? .white
-        updateTitle()
-        if let nohanaImagePickerController = nohanaImagePickerController {
-            navigationController?.setToolbarHidden(nohanaImagePickerController.toolbarHidden, animated: false)
-            setUpToolbarItems()
-        }
         addPickPhotoKitAssetNotificationObservers()
         setUpActivityIndicator()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let nohanaImagePickerController = nohanaImagePickerController {
-            setToolbarTitle(nohanaImagePickerController)
-        }
         collectionView?.reloadData()
     }
 
@@ -75,58 +64,9 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     
     func reloadData() {
         guard let photoKitAssetList = self.photoKitAssetList else { return }
-        updateTitle()
         dateSectionList = AssetDateSectionCreater().createSections(assetList: photoKitAssetList.assetList, options: PhotoKitAssetList.fetchOptions(photoKitAssetList.mediaType, ascending: false))
         isLoading = false
         collectionView?.reloadData()
-    }
-    
-    private func updateTitle() {
-        if let title = photoKitAssetList?.title {
-            let attributedTitle = NSAttributedString(string: title, attributes: nohanaImagePickerController?.titleTextAttributes)
-            self.titleView.setAttributedTitle(attributedTitle, for: .normal)
-            self.titleView.sizeToFit()
-            self.navigationController?.navigationBar.setNeedsLayout()
-            if let titleLabel = self.titleView.titleLabel, let imageView = self.titleView.imageView {
-                let titleLabelWidth = titleLabel.frame.width
-                let imageWidth = imageView.frame.width
-                let space: CGFloat = 2.0
-                self.titleView.imageEdgeInsets = UIEdgeInsets(top: 0, left: titleLabelWidth + space, bottom: 0, right: -titleLabelWidth - space)
-                self.titleView.titleEdgeInsets = UIEdgeInsets(top: 0, left: -imageWidth - space, bottom: 0, right: imageWidth + space)
-            }
-        }
-    }
-    
-    @objc private func didTapTitleView() {
-        showAlbumList()
-        if let targetView = titleView.imageView {
-            transformAnimation(targetView: targetView)
-        }
-    }
-    
-    private func showAlbumList() {
-        guard let nohanaImagePickerController = nohanaImagePickerController else { return }
-        let storyboard = UIStoryboard(name: "AlbumList", bundle: nohanaImagePickerController.assetBundle)
-        guard let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController else {
-            fatalError("navigationController init failed.")
-        }
-        guard let albumListViewController = navigationController.topViewController as? AlbumListViewController else {
-            fatalError("albumListViewController is not topViewController.")
-        }
-        albumListViewController.photoKitAlbumList = PhotoKitAlbumList(assetCollectionTypes: [.smartAlbum, .album],
-                                                                      assetCollectionSubtypes: nohanaImagePickerController.assetCollectionSubtypes,
-                                                                      mediaType: nohanaImagePickerController.mediaType,
-                                                                      shouldShowEmptyAlbum: nohanaImagePickerController.shouldShowMoment,
-                                                                      ascending: !nohanaImagePickerController.canPickDateSection,
-                                                                      handler: { [weak albumListViewController] in
-            DispatchQueue.main.async {
-                albumListViewController?.isLoading = false
-                albumListViewController?.tableView.reloadData()
-            }
-        })
-        albumListViewController.nohanaImagePickerController = nohanaImagePickerController
-        albumListViewController.delegate = self
-        present(navigationController, animated: true, completion: nil)
     }
 
     // MARK: - UICollectionViewDataSource
@@ -292,19 +232,6 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         assetListDetailViewController.nohanaImagePickerController = nohanaImagePickerController
         assetListDetailViewController.currentIndexPath = IndexPath(item: assetListDetailCurrentRow, section: 0)
     }
-
-    // MARK: - IBAction
-
-    @IBAction func didPushDone(_ sender: AnyObject) {
-        if let nohanaImagePickerController = nohanaImagePickerController {
-            let pickedPhotoKitAssets = nohanaImagePickerController.pickedAssetList.map { ($0 as! PhotoKitAsset).originalAsset }
-            nohanaImagePickerController.delegate?.nohanaImagePicker(nohanaImagePickerController, didFinishPickingPhotoKitAssets: pickedPhotoKitAssets)
-        }
-    }
-    
-    @IBAction func didTapClose(_ sender: AnyObject) {
-        dismiss(animated: true)
-    }
 }
 
 // MARK: - AssetDateSectionHeaderViewDelegate
@@ -332,16 +259,5 @@ extension AssetListSelectableDateSectionController: AssetCellDelegate {
                 }
             }
         }
-    }
-}
-
-extension AssetListSelectableDateSectionController: AlbumListViewControllerDelegate {
-    func didSelectMoment() {
-        delegate?.didSelectMoment(controller: self)
-    }
-    
-    func didSelectAlbum(album: PhotoKitAssetList) {
-        self.photoKitAssetList = album
-        reloadData()
     }
 }

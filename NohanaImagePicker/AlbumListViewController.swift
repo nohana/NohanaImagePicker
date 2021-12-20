@@ -285,18 +285,4 @@ extension UIViewController {
         }
         setToolbarTitle(picker)
     }
-    
-    // MARK: - Animation
-    internal func transformAnimation(targetView: UIView) {
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: [.curveEaseInOut], animations: {
-            if targetView.transform.isIdentity {
-                let angle = 180 * CGFloat.pi / 180
-                targetView.transform = CGAffineTransform(rotationAngle: angle)
-            } else {
-                let angle = -360 * CGFloat.pi / 180
-                targetView.transform = CGAffineTransform(rotationAngle: angle)
-                targetView.transform = .identity
-            }
-        })
-    }
 }

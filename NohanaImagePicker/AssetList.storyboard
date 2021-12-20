@@ -78,18 +78,7 @@
                             <outlet property="delegate" destination="Ym2-Dv-78L" id="Y0U-3q-tEg"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="yD3-jr-tlJ">
-                        <barButtonItem key="leftBarButtonItem" image="xmark" catalog="system" style="plain" id="JbY-T3-wpQ">
-                            <connections>
-                                <action selector="didTapClose:" destination="Ym2-Dv-78L" id="Wio-hi-XWq"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="25g-zK-DKH">
-                            <connections>
-                                <action selector="didPushDone:" destination="Ym2-Dv-78L" id="5kA-mK-ry6"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="yD3-jr-tlJ"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
                 </collectionViewController>
@@ -184,7 +173,4 @@
             <point key="canvasLocation" x="1729" y="214"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="xmark" catalog="system" width="128" height="113"/>
-    </resources>
 </document>
