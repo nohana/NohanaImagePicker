@@ -24,6 +24,11 @@ class AnimatableNavigationController: UINavigationController, UINavigationContro
         super.init(coder: aDecoder)
         self.delegate = self
     }
+    
+    override init(rootViewController: UIViewController) {
+        super.init(rootViewController: rootViewController)
+        self.delegate = self
+    }
 
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         switch operation {
