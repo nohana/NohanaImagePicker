@@ -214,6 +214,10 @@ extension RootViewController: AlbumListViewControllerDelegate {
         setToolbarTitle(nohanaImagePickerController)
         transformAnimation()
     }
+    
+    func dissmissWithoutDoingAnything() {
+        transformAnimation()
+    }
 }
 
 extension RootViewController: UIAdaptivePresentationControllerDelegate {

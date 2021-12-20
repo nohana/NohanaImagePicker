@@ -20,6 +20,7 @@ import Photos
 protocol AlbumListViewControllerDelegate: AnyObject {
     func didSelectMoment()
     func didSelectAlbum(album: PhotoKitAssetList)
+    func dissmissWithoutDoingAnything()
 }
 
 class AlbumListViewController: UITableViewController, EmptyIndicatable, ActivityIndicatable {
@@ -185,6 +186,7 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
     // MARK: - IBAction
 
     @IBAction func didTapClose(_ sender: AnyObject) {
+        delegate?.dissmissWithoutDoingAnything()
         dismiss(animated: true, completion: nil)
     }
 
