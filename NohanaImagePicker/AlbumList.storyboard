@@ -115,13 +115,6 @@
                         <navigationBarAppearance key="compactScrollEdgeAppearance"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fXR-lD-WFT">
-                        <autoresizingMask key="autoresizingMask"/>
-                        <toolbarAppearance key="standardAppearance"/>
-                        <toolbarAppearance key="compactAppearance"/>
-                        <toolbarAppearance key="scrollEdgeAppearance"/>
-                        <toolbarAppearance key="compactScrollEdgeAppearance"/>
-                    </toolbar>
                     <connections>
                         <segue destination="KMy-V3-MzH" kind="relationship" relationship="rootViewController" id="qNU-CZ-ekh"/>
                     </connections>
