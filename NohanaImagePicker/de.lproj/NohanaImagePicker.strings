@@ -20,3 +20,5 @@
 "albumlist.moment.title" = "Moment";
 "toolbar.title.nolimit" = "Ausgewählte Fotos: %ld";
 "toolbar.title.haslimit" = "Ausgewählte Fotos: %ld / %ld";
+"action.title.select" = "Auswählen";
+"action.title.deselect" = "Abwählen";
