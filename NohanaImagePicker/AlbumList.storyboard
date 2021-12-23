@@ -86,7 +86,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="8x3-ib-H9x">
-                        <barButtonItem key="leftBarButtonItem" image="xmark" catalog="system" style="plain" id="aBC-F8-J82">
+                        <barButtonItem key="leftBarButtonItem" image="xmark" catalog="system" id="aBC-F8-J82">
                             <connections>
                                 <action selector="didTapClose:" destination="KMy-V3-MzH" id="psc-EK-8ME"/>
                             </connections>
