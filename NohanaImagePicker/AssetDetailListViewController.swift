@@ -58,10 +58,6 @@ class AssetDetailListViewController: AssetListViewController, DetailListViewCont
         }
     }
 
-    override func updateTitle() {
-        self.title = ""
-    }
-
     func didChangeAssetDetailPage(_ indexPath: IndexPath) {
         let asset = photoKitAssetList[indexPath.item]
         pickButton.isSelected = nohanaImagePickerController.pickedAssetList.isPicked(asset)

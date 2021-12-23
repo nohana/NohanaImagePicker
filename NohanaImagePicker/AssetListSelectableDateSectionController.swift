@@ -46,7 +46,6 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = nohanaImagePickerController.config.color.background ?? .white
-        updateTitle()
         setUpToolbarItems()
         addPickPhotoKitAssetNotificationObservers()
         setUpActivityIndicator()
@@ -62,10 +61,6 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         super.viewWillAppear(animated)
         setToolbarTitle(nohanaImagePickerController)
         collectionView?.reloadData()
-    }
-    
-    func updateTitle() {
-        title = photoKitAssetList.title
     }
 
     func scrollCollectionView(to indexPath: IndexPath) {
@@ -237,13 +232,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         assetListDetailViewController.currentIndexPath = IndexPath(item: assetListDetailCurrentRow, section: 0)
     }
 
-    // MARK: - IBAction
-
-    @IBAction func didPushDone(_ sender: AnyObject) {
-        let pickedPhotoKitAssets = nohanaImagePickerController.pickedAssetList.map { ($0 as! PhotoKitAsset).originalAsset }
-            nohanaImagePickerController.delegate?.nohanaImagePicker(nohanaImagePickerController, didFinishPickingPhotoKitAssets: pickedPhotoKitAssets)
-    }
-    
+    // MARK: - IBSegueAction
     @IBSegueAction func makeDetailList(_ coder: NSCoder) -> AssetDetailListViewController? {
         AssetDetailListViewController(coder: coder, nohanaImagePickerController: nohanaImagePickerController, photoKitAssetList: photoKitAssetList)
     }

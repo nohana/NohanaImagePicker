@@ -45,7 +45,6 @@ final class MomentViewController: UICollectionViewController, UICollectionViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = nohanaImagePickerController.config.color.background ?? .white
-        updateTitle()
         setUpToolbarItems()
         addPickPhotoKitAssetNotificationObservers()
         setUpActivityIndicator()
@@ -65,10 +64,6 @@ final class MomentViewController: UICollectionViewController, UICollectionViewDe
         setToolbarTitle(nohanaImagePickerController)
         collectionView?.reloadData()
         scrollCollectionViewToInitialPosition()
-    }
-
-    func updateTitle() {
-        title = NSLocalizedString("albumlist.moment.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
     }
 
     func scrollCollectionView(to indexPath: IndexPath) {
@@ -240,13 +235,7 @@ final class MomentViewController: UICollectionViewController, UICollectionViewDe
         momentDetailListViewController.currentIndexPath = selectedIndexPath
     }
 
-    // MARK: - IBAction
-
-    @IBAction func didPushDone(_ sender: AnyObject) {
-        let pickedPhotoKitAssets = nohanaImagePickerController.pickedAssetList.map { ($0 as! PhotoKitAsset).originalAsset }
-            nohanaImagePickerController.delegate?.nohanaImagePicker(nohanaImagePickerController, didFinishPickingPhotoKitAssets: pickedPhotoKitAssets)
-    }
-    
+    // MARK: - IBSegueAction
     @IBSegueAction func makeMomentDetail(_ coder: NSCoder) -> MomentDetailListViewController? {
         return MomentDetailListViewController(coder: coder, nohanaImagePickerController: nohanaImagePickerController)
     }

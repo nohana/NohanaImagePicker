@@ -35,7 +35,6 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = nohanaImagePickerController.config.color.background ?? .white
-        updateTitle()
         setUpToolbarItems()
         addPickPhotoKitAssetNotificationObservers()
     }
@@ -76,10 +75,6 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
     }
 
     var isFirstAppearance = true
-
-    func updateTitle() {
-        title = photoKitAssetList.title
-    }
 
     func scrollCollectionView(to indexPath: IndexPath) {
         guard photoKitAssetList.count > 0 else {
@@ -200,12 +195,7 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
         assetListDetailViewController.currentIndexPath = selectedIndexPath
     }
 
-    // MARK: - IBAction
-    @IBAction func didPushDone(_ sender: AnyObject) {
-        let pickedPhotoKitAssets = nohanaImagePickerController.pickedAssetList.map { ($0 as! PhotoKitAsset).originalAsset }
-        nohanaImagePickerController.delegate?.nohanaImagePicker(nohanaImagePickerController, didFinishPickingPhotoKitAssets: pickedPhotoKitAssets )
-    }
-    
+    // MARK: - IBSegueAction
     @IBSegueAction func makeDetailList(_ coder: NSCoder) -> AssetDetailListViewController? {
         return AssetDetailListViewController(coder: coder, nohanaImagePickerController: nohanaImagePickerController, photoKitAssetList: photoKitAssetList)
     }
