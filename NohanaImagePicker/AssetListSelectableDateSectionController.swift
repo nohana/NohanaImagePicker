@@ -28,7 +28,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
             return CGSize.zero
         }
         var numberOfColumns = nohanaImagePickerController.numberOfColumnsInLandscape
-        if UIApplication.shared.statusBarOrientation.isPortrait {
+        if UIApplication.shared.currentStatusBarOrientation.isPortrait {
             numberOfColumns = nohanaImagePickerController.numberOfColumnsInPortrait
         }
         let cellMargin: CGFloat = 2
@@ -146,7 +146,8 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     var isLoading = true
 
     func setUpActivityIndicator() {
-        activityIndicator = UIActivityIndicatorView(style: .gray)
+        activityIndicator = UIActivityIndicatorView(style: .medium)
+        activityIndicator?.color = .gray
         let screenRect = Size.screenRectWithoutAppBar(self)
         activityIndicator?.center = CGPoint(x: screenRect.size.width / 2, y: screenRect.size.height / 2)
         activityIndicator?.startAnimating()
