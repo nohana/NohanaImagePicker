@@ -51,7 +51,12 @@ open class NohanaImagePickerController: UIViewController {
     }
     open var config: Config = Config()
     open var canPickDateSection: Bool = false
-
+    open var titleTextAttributes: [NSAttributedString.Key: Any] = {
+        return [
+            .foregroundColor: UIColor.black,
+            .font: UIFont.systemFont(ofSize: 17, weight: .semibold)
+        ]
+    }()
     lazy var assetBundle: Bundle = {
         let bundle = Bundle(for: type(of: self))
         if let path = bundle.path(forResource: "NohanaImagePicker", ofType: "bundle") {
@@ -62,7 +67,7 @@ open class NohanaImagePickerController: UIViewController {
     let pickedAssetList: PickedAssetList
     let mediaType: MediaType
     let enableExpandingPhotoAnimation: Bool
-    fileprivate let assetCollectionSubtypes: [PHAssetCollectionSubtype]
+    let assetCollectionSubtypes: [PHAssetCollectionSubtype]
 
     public init() {
         assetCollectionSubtypes = [
