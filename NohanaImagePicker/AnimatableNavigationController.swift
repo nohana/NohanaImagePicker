@@ -20,11 +20,15 @@ class AnimatableNavigationController: UINavigationController, UINavigationContro
 
     let swipeInteractionController = SwipeInteractionController()
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    override init(rootViewController: UIViewController) {
+        super.init(rootViewController: rootViewController)
         self.delegate = self
     }
-
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         switch operation {
         case .push where fromVC is AssetListViewController || fromVC is MomentViewController:
