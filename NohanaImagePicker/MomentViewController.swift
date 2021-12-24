@@ -224,19 +224,11 @@ final class MomentViewController: UICollectionViewController, UICollectionViewDe
         }
     }
 
-    // MARK: - Storyboard
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let selectedIndexPath = collectionView?.indexPathsForSelectedItems?.first else {
-            return
-        }
-        let momentDetailListViewController = segue.destination as! MomentDetailListViewController
-        momentDetailListViewController.momentInfoSection = momentInfoSectionList[selectedIndexPath.section]
-        momentDetailListViewController.currentIndexPath = selectedIndexPath
-    }
-
     // MARK: - IBSegueAction
     @IBSegueAction func makeMomentDetail(_ coder: NSCoder) -> MomentDetailListViewController? {
-        return MomentDetailListViewController(coder: coder, nohanaImagePickerController: nohanaImagePickerController)
+        guard let selectedIndexPath = collectionView?.indexPathsForSelectedItems?.first else {
+            return nil
+        }
+        return MomentDetailListViewController(coder: coder, nohanaImagePickerController: nohanaImagePickerController, momentInfoSection: momentInfoSectionList[selectedIndexPath.section], currentIndexPath: selectedIndexPath)
     }
 }

@@ -18,7 +18,7 @@ import UIKit
 
 final class MomentDetailListViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, DetailListViewControllerProtocol {
 
-    var currentIndexPath: IndexPath = IndexPath() {
+    var currentIndexPath: IndexPath {
         willSet {
             if currentIndexPath != newValue {
                 didChangeAssetDetailPage(newValue)
@@ -33,11 +33,13 @@ final class MomentDetailListViewController: UICollectionViewController, UICollec
     }
     
     let nohanaImagePickerController: NohanaImagePickerController
-    var momentInfoSection: MomentInfoSection?
+    let momentInfoSection: MomentInfoSection
     var isFirstAppearance = true
     
-    init?(coder: NSCoder, nohanaImagePickerController: NohanaImagePickerController) {
+    init?(coder: NSCoder, nohanaImagePickerController: NohanaImagePickerController, momentInfoSection: MomentInfoSection, currentIndexPath: IndexPath) {
         self.nohanaImagePickerController = nohanaImagePickerController
+        self.momentInfoSection = momentInfoSection
+        self.currentIndexPath = currentIndexPath
         super.init(coder: coder)
     }
     
@@ -98,9 +100,6 @@ final class MomentDetailListViewController: UICollectionViewController, UICollec
     }
     
     func didChangeAssetDetailPage(_ indexPath: IndexPath) {
-        guard let momentInfoSection = momentInfoSection else {
-            return
-        }
         let asset = PhotoKitAsset(asset: momentInfoSection.assetResult[indexPath.item])
         pickButton.isSelected = nohanaImagePickerController.pickedAssetList.isPicked(asset)
         pickButton.isHidden = !(nohanaImagePickerController.canPickAsset(asset))
@@ -108,7 +107,7 @@ final class MomentDetailListViewController: UICollectionViewController, UICollec
     }
 
     func scrollCollectionView(to indexPath: IndexPath) {
-        guard let count = momentInfoSection?.assetResult.count, count > 0 else {
+        guard momentInfoSection.assetResult.count > 0 else {
             return
         }
         DispatchQueue.main.async {
@@ -129,19 +128,17 @@ final class MomentDetailListViewController: UICollectionViewController, UICollec
     // MARK: - UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return momentInfoSection?.assetResult.count ?? 0
+        return momentInfoSection.assetResult.count
     }
 
     // MARK: - UICollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let momentInfoSection = momentInfoSection {
-            nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: momentInfoSection.assetResult[indexPath.item])
-        }
+        nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: momentInfoSection.assetResult[indexPath.item])
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssetDetailCell", for: indexPath) as? AssetDetailCell, let momentInfoSection = momentInfoSection else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssetDetailCell", for: indexPath) as? AssetDetailCell else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetDetailCell\")")
         }
         cell.scrollView.zoomScale = 1
@@ -191,7 +188,6 @@ final class MomentDetailListViewController: UICollectionViewController, UICollec
     // MARK: - IBAction
     
     @IBAction func didPushPickButton(_ sender: UIButton) {
-        guard let momentInfoSection = momentInfoSection else { return }
         let asset = PhotoKitAsset(asset: momentInfoSection.assetResult[currentIndexPath.item])
         if pickButton.isSelected {
             if nohanaImagePickerController.pickedAssetList.drop(asset: asset) {
