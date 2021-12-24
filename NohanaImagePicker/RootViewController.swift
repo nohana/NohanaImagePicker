@@ -83,12 +83,13 @@ class RootViewController: UIViewController {
     
     private func showAlbumList() {
         let storyboard = UIStoryboard(name: "AlbumList", bundle: nohanaImagePickerController.assetBundle)
-        guard let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController else {
-            fatalError("navigationController init failed.")
+        guard let albumListViewController = storyboard.instantiateInitialViewController(creator: { corder in
+            AlbumListViewController(coder: corder, nohanaImagePickerController: self.nohanaImagePickerController)
+        }) else {
+            fatalError("albumListViewController init failed.")
         }
-        guard let albumListViewController = navigationController.topViewController as? AlbumListViewController else {
-            fatalError("albumListViewController is not topViewController.")
-        }
+        let navigationController = UINavigationController(rootViewController: albumListViewController)
+        
         albumListViewController.photoKitAlbumList = PhotoKitAlbumList(assetCollectionTypes: [.smartAlbum, .album],
                                                                       assetCollectionSubtypes: nohanaImagePickerController.assetCollectionSubtypes,
                                                                       mediaType: nohanaImagePickerController.mediaType,
@@ -100,7 +101,6 @@ class RootViewController: UIViewController {
                 albumListViewController?.tableView.reloadData()
             }
         })
-        albumListViewController.nohanaImagePickerController = nohanaImagePickerController
         albumListViewController.delegate = self
         navigationController.presentationController?.delegate = self
         let appearance = navigationBarAppearance(nohanaImagePickerController)
