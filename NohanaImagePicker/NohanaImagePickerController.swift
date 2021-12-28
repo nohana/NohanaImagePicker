@@ -154,10 +154,6 @@ open class NohanaImagePickerController: UIViewController {
     open func dropAsset(_ asset: Asset) {
         _ = pickedAssetList.drop(asset: asset)
     }
-    
-    open override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print(#function)
-    }
 }
 
 extension NohanaImagePickerController {
