@@ -201,7 +201,7 @@ class RootViewController: UIViewController {
     }
     
     @IBAction func didTapClose(_ sender: AnyObject) {
-        dismiss(animated: true)
+        nohanaImagePickerController.delegate?.nohanaImagePickerDidCancel(nohanaImagePickerController)
     }
 }
 
