@@ -51,7 +51,12 @@ open class NohanaImagePickerController: UIViewController {
     }
     open var config: Config = Config()
     open var canPickDateSection: Bool = false
-
+    open var titleTextAttributes: [NSAttributedString.Key: Any] = {
+        return [
+            .foregroundColor: UIColor.black,
+            .font: UIFont.systemFont(ofSize: 17, weight: .semibold)
+        ]
+    }()
     lazy var assetBundle: Bundle = {
         let bundle = Bundle(for: type(of: self))
         if let path = bundle.path(forResource: "NohanaImagePicker", ofType: "bundle") {
@@ -62,7 +67,7 @@ open class NohanaImagePickerController: UIViewController {
     let pickedAssetList: PickedAssetList
     let mediaType: MediaType
     let enableExpandingPhotoAnimation: Bool
-    fileprivate let assetCollectionSubtypes: [PHAssetCollectionSubtype]
+    let assetCollectionSubtypes: [PHAssetCollectionSubtype]
 
     public init() {
         assetCollectionSubtypes = [
@@ -101,34 +106,45 @@ open class NohanaImagePickerController: UIViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
 
-        // show albumListViewController
+        // show rootViewController
         let storyboard = UIStoryboard(name: "NohanaImagePicker", bundle: assetBundle)
-        let viewControllerId = enableExpandingPhotoAnimation ? "EnableAnimationNavigationController" : "DisableAnimationNavigationController"
-        guard let navigationController = storyboard.instantiateViewController(withIdentifier: viewControllerId) as? UINavigationController else {
-            fatalError("navigationController init failed.")
+        let rootViewController = storyboard.instantiateViewController(identifier: "RootViewController", creator: { coder in
+            RootViewController(coder: coder, nohanaImagePickerController: self)
+        })
+        let navigationController: UINavigationController = {
+            if enableExpandingPhotoAnimation {
+                return AnimatableNavigationController(rootViewController: rootViewController)
+            } else {
+                return UINavigationController(rootViewController: rootViewController)
+            }
+        }()
+
+        let navigationBarAppearance = navigationBarAppearance(self)
+        navigationController.navigationBar.standardAppearance = navigationBarAppearance
+        navigationController.navigationBar.scrollEdgeAppearance = navigationBarAppearance
+        navigationController.navigationBar.compactAppearance = navigationBarAppearance
+        navigationController.navigationBar.tintColor = config.color.navigationBarForeground
+        
+        let toobarAppearance = toolBarAppearance(self)
+        navigationController.toolbar.standardAppearance = toobarAppearance
+#if swift(>=5.5)
+        if #available(iOS 15.0, *) {
+            navigationController.toolbar.scrollEdgeAppearance = toobarAppearance
         }
+#endif
+        navigationController.toolbar.compactAppearance = toobarAppearance
+        navigationController.toolbar.tintColor = config.color.navigationBarForeground
+        
         addChild(navigationController)
         view.addSubview(navigationController.view)
+        NSLayoutConstraint.activate([
+            navigationController.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            navigationController.view.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            navigationController.view.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            navigationController.view.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+        ])
+        navigationController.view.layoutIfNeeded()
         navigationController.didMove(toParent: self)
-
-        // setup albumListViewController
-        guard let albumListViewController = navigationController.topViewController as? AlbumListViewController else {
-            fatalError("albumListViewController is not topViewController.")
-        }
-        albumListViewController.photoKitAlbumList =
-            PhotoKitAlbumList(
-                assetCollectionTypes: [.smartAlbum, .album],
-                assetCollectionSubtypes: assetCollectionSubtypes,
-                mediaType: mediaType,
-                shouldShowEmptyAlbum: shouldShowEmptyAlbum,
-                ascending: !canPickDateSection,
-                handler: { [weak albumListViewController] in
-                DispatchQueue.main.async(execute: { () -> Void in
-                    albumListViewController?.isLoading = false
-                    albumListViewController?.tableView.reloadData()
-                })
-            })
-        albumListViewController.nohanaImagePickerController = self
     }
 
     open func pickAsset(_ asset: Asset) {
@@ -146,6 +162,8 @@ extension NohanaImagePickerController {
             public var background: UIColor?
             public var empty: UIColor?
             public var separator: UIColor?
+            public var navigationBarBackground: UIColor = .white
+            public var navigationBarForeground: UIColor = .black
         }
         public var color = Color()
 

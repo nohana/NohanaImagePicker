@@ -19,14 +19,11 @@ import Photos
 
 class AssetListSelectableDateSectionController: UICollectionViewController, UICollectionViewDelegateFlowLayout, ActivityIndicatable {
     
-    weak var nohanaImagePickerController: NohanaImagePickerController?
-    var photoKitAssetList: PhotoKitAssetList!
+    private let nohanaImagePickerController: NohanaImagePickerController
+    let photoKitAssetList: PhotoKitAssetList
     var dateSectionList: [AssetDateSection] = []
     
     var cellSize: CGSize {
-        guard let nohanaImagePickerController = nohanaImagePickerController else {
-            return CGSize.zero
-        }
         var numberOfColumns = nohanaImagePickerController.numberOfColumnsInLandscape
         if UIApplication.shared.currentStatusBarOrientation.isPortrait {
             numberOfColumns = nohanaImagePickerController.numberOfColumnsInPortrait
@@ -35,11 +32,20 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         let cellWidth = (view.frame.width - cellMargin * (CGFloat(numberOfColumns) - 1)) / CGFloat(numberOfColumns)
         return CGSize(width: cellWidth, height: cellWidth)
     }
+    
+    init?(coder: NSCoder, nohanaImagePickerController: NohanaImagePickerController, photoKitAssetList: PhotoKitAssetList) {
+        self.nohanaImagePickerController = nohanaImagePickerController
+        self.photoKitAssetList = photoKitAssetList
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = nohanaImagePickerController?.config.color.background ?? .white
-        updateTitle()
+        view.backgroundColor = nohanaImagePickerController.config.color.background ?? .white
         setUpToolbarItems()
         addPickPhotoKitAssetNotificationObservers()
         setUpActivityIndicator()
@@ -53,14 +59,8 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let nohanaImagePickerController = nohanaImagePickerController {
-            setToolbarTitle(nohanaImagePickerController)
-        }
+        setToolbarTitle(nohanaImagePickerController)
         collectionView?.reloadData()
-    }
-    
-    func updateTitle() {
-        title = photoKitAssetList.title
     }
 
     func scrollCollectionView(to indexPath: IndexPath) {
@@ -90,8 +90,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     // MARK: - UICollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssetCell", for: indexPath) as? AssetCell,
-            let nohanaImagePickerController = nohanaImagePickerController else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssetCell", for: indexPath) as? AssetCell else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetCell\")")
         }
 
@@ -120,8 +119,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let album = dateSectionList[indexPath.section]
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "AssetDateSectionHeader", for: indexPath) as? AssetDateSectionHeaderView,
-                  let nohanaImagePickerController = nohanaImagePickerController else {
+            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "AssetDateSectionHeader", for: indexPath) as? AssetDateSectionHeaderView else {
                 fatalError("failed to create AssetDateSectionHeader")
             }
             header.date = album.creationDate
@@ -160,15 +158,13 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     // MARK: - UICollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let nohanaImagePickerController = nohanaImagePickerController {
-            nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: dateSectionList[indexPath.section].assetResult[indexPath.row])
-        }
+        nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: dateSectionList[indexPath.section].assetResult[indexPath.row])
     }
     
     @available(iOS 13.0, *)
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let asset = PhotoKitAsset(asset: dateSectionList[indexPath.section].assetResult[indexPath.row])
-        if let cell = collectionView.cellForItem(at: indexPath) as? AssetCell, let nohanaImagePickerController = self.nohanaImagePickerController {
+        if let cell = collectionView.cellForItem(at: indexPath) as? AssetCell {
             return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { [weak self] in
                 // Create a preview view controller and return it
                 guard let self = self else { return nil }
@@ -179,18 +175,19 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
                 let contentSize = CGSize(width: width, height: height)
                 previewViewController.preferredContentSize = contentSize
                 return previewViewController
-            }, actionProvider: { _ in
-                if nohanaImagePickerController.pickedAssetList.isPicked(asset) {
-                    let title = nohanaImagePickerController.config.strings.albumListTitle ?? NSLocalizedString("action.title.deselect", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
+            }, actionProvider: { [weak self] _ in
+                guard let self = self else { return nil }
+                if self.nohanaImagePickerController.pickedAssetList.isPicked(asset) {
+                    let title = self.nohanaImagePickerController.config.strings.albumListTitle ?? NSLocalizedString("action.title.deselect", tableName: "NohanaImagePicker", bundle: self.nohanaImagePickerController.assetBundle, comment: "")
                     let deselect = UIAction(title: title, image: UIImage(systemName: "minus.circle"), attributes: [.destructive]) { _ in
-                        nohanaImagePickerController.dropAsset(asset)
+                        self.nohanaImagePickerController.dropAsset(asset)
                         collectionView.reloadSections(IndexSet(integer: indexPath.section))
                     }
                     return UIMenu(title: "", children: [deselect])
                 } else {
-                    let title = nohanaImagePickerController.config.strings.albumListTitle ?? NSLocalizedString("action.title.select", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
+                    let title = self.nohanaImagePickerController.config.strings.albumListTitle ?? NSLocalizedString("action.title.select", tableName: "NohanaImagePicker", bundle: self.nohanaImagePickerController.assetBundle, comment: "")
                     let select = UIAction(title: title, image: UIImage(systemName: "checkmark.circle")) { _ in
-                        nohanaImagePickerController.pickAsset(asset)
+                        self.nohanaImagePickerController.pickAsset(asset)
                         collectionView.reloadSections(IndexSet(integer: indexPath.section))
                     }
                     return UIMenu(title: "", children: [select])
@@ -232,18 +229,12 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         }
         
         let assetListDetailViewController = segue.destination as! AssetDetailListViewController
-        assetListDetailViewController.photoKitAssetList = photoKitAssetList
-        assetListDetailViewController.nohanaImagePickerController = nohanaImagePickerController
         assetListDetailViewController.currentIndexPath = IndexPath(item: assetListDetailCurrentRow, section: 0)
     }
 
-    // MARK: - IBAction
-
-    @IBAction func didPushDone(_ sender: AnyObject) {
-        if let nohanaImagePickerController = nohanaImagePickerController {
-            let pickedPhotoKitAssets = nohanaImagePickerController.pickedAssetList.map { ($0 as! PhotoKitAsset).originalAsset }
-            nohanaImagePickerController.delegate?.nohanaImagePicker(nohanaImagePickerController, didFinishPickingPhotoKitAssets: pickedPhotoKitAssets)
-        }
+    // MARK: - IBSegueAction
+    @IBSegueAction func makeDetailList(_ coder: NSCoder) -> AssetDetailListViewController? {
+        AssetDetailListViewController(coder: coder, nohanaImagePickerController: nohanaImagePickerController, photoKitAssetList: photoKitAssetList)
     }
 }
 
@@ -262,7 +253,7 @@ extension AssetListSelectableDateSectionController: AssetCellDelegate {
                 let rowResetIndexPath = IndexPath(row: 0, section: indexPath.section)
                 let header = collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: rowResetIndexPath) as? AssetDateSectionHeaderView
                 let assets = dateSectionList[indexPath.section].assetResult.map { PhotoKitAsset(asset: $0) }
-                header?.update(assets: assets, indexPath: indexPath, nohanaImagePickerController: nohanaImagePickerController!)
+                header?.update(assets: assets, indexPath: indexPath, nohanaImagePickerController: nohanaImagePickerController)
             } else {
                 UIView.animate(withDuration: 0) { [weak self] in
                     self?.collectionView.performBatchUpdates({ [weak self] in

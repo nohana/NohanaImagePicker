@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-"albumlist.title" = "Photos";
+"albumlist.title" = "Select Photos";
 "albumlist.empty.message" = "No Photos";
 "albumlist.empty.description" = "Take some photos with Camera app.";
 "albumlist.moment.title" = "Moment";

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KMy-V3-MzH">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Album List View Controller-->
+        <scene sceneID="vgh-Mw-ZD3">
+            <objects>
+                <tableViewController id="KMy-V3-MzH" customClass="AlbumListViewController" customModule="NohanaImagePicker" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="UGs-yG-nCa">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AlbumCell" rowHeight="82" id="qvk-ez-ppx" customClass="AlbumCell" customModule="NohanaImagePicker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="320" height="82"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qvk-ez-ppx" id="6mF-Zx-ek3">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="82"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MGl-5S-9tU">
+                                            <rect key="frame" x="20" y="6" width="70" height="70"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="70" id="k0p-zh-9GJ"/>
+                                                <constraint firstAttribute="width" constant="70" id="xnb-Xf-GcP"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Album Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ma1-xv-kQ5">
+                                            <rect key="frame" x="108" y="31.5" width="204" height="19.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="MGl-5S-9tU" firstAttribute="centerY" secondItem="6mF-Zx-ek3" secondAttribute="centerY" id="4ua-ue-f3Y"/>
+                                        <constraint firstItem="ma1-xv-kQ5" firstAttribute="leading" secondItem="MGl-5S-9tU" secondAttribute="trailing" constant="18" id="JZp-DO-qMP"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="ma1-xv-kQ5" secondAttribute="trailing" constant="-8" id="bRb-AX-e5z"/>
+                                        <constraint firstItem="MGl-5S-9tU" firstAttribute="leading" secondItem="6mF-Zx-ek3" secondAttribute="leadingMargin" constant="4" id="trW-eD-krL"/>
+                                        <constraint firstItem="ma1-xv-kQ5" firstAttribute="centerY" secondItem="6mF-Zx-ek3" secondAttribute="centerY" id="ws5-Xo-Bcj"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="thumbnailImageView" destination="MGl-5S-9tU" id="Y9T-j1-BaT"/>
+                                    <outlet property="titleLabel" destination="ma1-xv-kQ5" id="vu2-Qg-gFH"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MomentAlbumCell" rowHeight="52" id="aYa-j0-GaK" customClass="MomentCell" customModule="NohanaImagePicker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="126.5" width="320" height="52"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aYa-j0-GaK" id="rck-Bb-u1F">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Moment Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ro1-c6-hyT">
+                                            <rect key="frame" x="24" y="18" width="288" height="16"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="16" id="bri-5S-hpu"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="ro1-c6-hyT" secondAttribute="trailing" constant="-8" id="9Uj-V9-4UF"/>
+                                        <constraint firstItem="ro1-c6-hyT" firstAttribute="centerY" secondItem="rck-Bb-u1F" secondAttribute="centerY" id="KrQ-ct-8Kd"/>
+                                        <constraint firstItem="ro1-c6-hyT" firstAttribute="leading" secondItem="rck-Bb-u1F" secondAttribute="leadingMargin" constant="8" id="smU-ku-M4R"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="titleLabel" destination="ro1-c6-hyT" id="dJN-w1-dw1"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="KMy-V3-MzH" id="ZAT-fA-Aqu"/>
+                            <outlet property="delegate" destination="KMy-V3-MzH" id="K4d-qh-Rm0"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="8x3-ib-H9x">
+                        <barButtonItem key="leftBarButtonItem" image="xmark" catalog="system" id="aBC-F8-J82">
+                            <connections>
+                                <action selector="didTapClose:" destination="KMy-V3-MzH" id="psc-EK-8ME"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Apk-Zv-NVN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="893" y="-508"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+    </resources>
+</document>

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-"albumlist.title" = "アルバム";
+"albumlist.title" = "アルバムを選択";
 "albumlist.empty.message" = "アルバムに\n写真がありません";
 "albumlist.empty.description" = "カメラで写真を撮影しましょう";
 "albumlist.moment.title" = "日付から選択";

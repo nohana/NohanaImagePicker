@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-"albumlist.title" = "Фотографии";
+"albumlist.title" = "Выберите фотографии";
 "albumlist.empty.message" = "Нет фотографий";
 "albumlist.empty.description" = "Получить фото с камеры";
 "albumlist.moment.title" = "Моменты";

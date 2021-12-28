@@ -18,7 +18,7 @@ import UIKit
 
 final class MomentDetailListViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, DetailListViewControllerProtocol {
 
-    var currentIndexPath: IndexPath = IndexPath() {
+    var currentIndexPath: IndexPath {
         willSet {
             if currentIndexPath != newValue {
                 didChangeAssetDetailPage(newValue)
@@ -32,9 +32,20 @@ final class MomentDetailListViewController: UICollectionViewController, UICollec
         return Size.screenRectWithoutAppBar(self).size
     }
     
-    weak var nohanaImagePickerController: NohanaImagePickerController?
-    var momentInfoSection: MomentInfoSection?
+    let nohanaImagePickerController: NohanaImagePickerController
+    let momentInfoSection: MomentInfoSection
     var isFirstAppearance = true
+    
+    init?(coder: NSCoder, nohanaImagePickerController: NohanaImagePickerController, momentInfoSection: MomentInfoSection, currentIndexPath: IndexPath) {
+        self.nohanaImagePickerController = nohanaImagePickerController
+        self.momentInfoSection = momentInfoSection
+        self.currentIndexPath = currentIndexPath
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         super.loadView()
@@ -43,18 +54,16 @@ final class MomentDetailListViewController: UICollectionViewController, UICollec
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = nohanaImagePickerController?.config.color.background ?? .white
+        view.backgroundColor = nohanaImagePickerController.config.color.background ?? .white
         title = ""
         setUpToolbarItems()
         addPickPhotoKitAssetNotificationObservers()
         
-        if let nohanaImagePickerController = nohanaImagePickerController {
-            let droppedImage: UIImage? = nohanaImagePickerController.config.image.droppedLarge ?? UIImage(named: "btn_select_l", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
-            let pickedImage: UIImage? = nohanaImagePickerController.config.image.pickedLarge ?? UIImage(named: "btn_selected_l", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
-
-            pickButton.setImage(droppedImage, for: UIControl.State())
-            pickButton.setImage(pickedImage, for: .selected)
-        }
+        let droppedImage: UIImage? = nohanaImagePickerController.config.image.droppedLarge ?? UIImage(named: "btn_select_l", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
+        let pickedImage: UIImage? = nohanaImagePickerController.config.image.pickedLarge ?? UIImage(named: "btn_selected_l", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
+        
+        pickButton.setImage(droppedImage, for: UIControl.State())
+        pickButton.setImage(pickedImage, for: .selected)
     }
 
     deinit {
@@ -63,9 +72,7 @@ final class MomentDetailListViewController: UICollectionViewController, UICollec
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let nohanaImagePickerController = nohanaImagePickerController {
-            setToolbarTitle(nohanaImagePickerController)
-        }
+        setToolbarTitle(nohanaImagePickerController)
         collectionView?.reloadData()
         scrollCollectionViewToInitialPosition()
     }
@@ -93,9 +100,6 @@ final class MomentDetailListViewController: UICollectionViewController, UICollec
     }
     
     func didChangeAssetDetailPage(_ indexPath: IndexPath) {
-        guard let nohanaImagePickerController = nohanaImagePickerController, let momentInfoSection = momentInfoSection else {
-            return
-        }
         let asset = PhotoKitAsset(asset: momentInfoSection.assetResult[indexPath.item])
         pickButton.isSelected = nohanaImagePickerController.pickedAssetList.isPicked(asset)
         pickButton.isHidden = !(nohanaImagePickerController.canPickAsset(asset))
@@ -103,7 +107,7 @@ final class MomentDetailListViewController: UICollectionViewController, UICollec
     }
 
     func scrollCollectionView(to indexPath: IndexPath) {
-        guard let count = momentInfoSection?.assetResult.count, count > 0 else {
+        guard momentInfoSection.assetResult.count > 0 else {
             return
         }
         DispatchQueue.main.async {
@@ -124,21 +128,17 @@ final class MomentDetailListViewController: UICollectionViewController, UICollec
     // MARK: - UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return momentInfoSection?.assetResult.count ?? 0
+        return momentInfoSection.assetResult.count
     }
 
     // MARK: - UICollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let nohanaImagePickerController = nohanaImagePickerController, let momentInfoSection = momentInfoSection {
-            nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: momentInfoSection.assetResult[indexPath.item])
-        }
+        nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: momentInfoSection.assetResult[indexPath.item])
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssetDetailCell", for: indexPath) as? AssetDetailCell,
-            let nohanaImagePickerController = nohanaImagePickerController,
-            let momentInfoSection = momentInfoSection else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssetDetailCell", for: indexPath) as? AssetDetailCell else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetDetailCell\")")
         }
         cell.scrollView.zoomScale = 1
@@ -188,7 +188,6 @@ final class MomentDetailListViewController: UICollectionViewController, UICollec
     // MARK: - IBAction
     
     @IBAction func didPushPickButton(_ sender: UIButton) {
-        guard let nohanaImagePickerController = nohanaImagePickerController, let momentInfoSection = momentInfoSection else { return }
         let asset = PhotoKitAsset(asset: momentInfoSection.assetResult[currentIndexPath.item])
         if pickButton.isSelected {
             if nohanaImagePickerController.pickedAssetList.drop(asset: asset) {

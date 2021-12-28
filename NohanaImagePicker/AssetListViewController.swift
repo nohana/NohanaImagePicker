@@ -19,21 +19,27 @@ import Photos
 
 class AssetListViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    weak var nohanaImagePickerController: NohanaImagePickerController?
-    var photoKitAssetList: PhotoKitAssetList!
-
+    let nohanaImagePickerController: NohanaImagePickerController
+    let photoKitAssetList: PhotoKitAssetList
+    
+    init?(coder: NSCoder, nohanaImagePickerController: NohanaImagePickerController, photoKitAssetList: PhotoKitAssetList) {
+        self.nohanaImagePickerController = nohanaImagePickerController
+        self.photoKitAssetList = photoKitAssetList
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = nohanaImagePickerController?.config.color.background ?? .white
-        updateTitle()
+        view.backgroundColor = nohanaImagePickerController.config.color.background ?? .white
         setUpToolbarItems()
         addPickPhotoKitAssetNotificationObservers()
     }
 
     var cellSize: CGSize {
-        guard let nohanaImagePickerController = nohanaImagePickerController else {
-            return CGSize.zero
-        }
         var numberOfColumns = nohanaImagePickerController.numberOfColumnsInLandscape
         if UIApplication.shared.currentStatusBarOrientation.isPortrait {
             numberOfColumns = nohanaImagePickerController.numberOfColumnsInPortrait
@@ -49,9 +55,7 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let nohanaImagePickerController = nohanaImagePickerController {
-            setToolbarTitle(nohanaImagePickerController)
-        }
+        setToolbarTitle(nohanaImagePickerController)
         collectionView?.reloadData()
         scrollCollectionViewToInitialPosition()
     }
@@ -72,13 +76,8 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
 
     var isFirstAppearance = true
 
-    func updateTitle() {
-        title = photoKitAssetList.title
-    }
-
     func scrollCollectionView(to indexPath: IndexPath) {
-        let count: Int? = photoKitAssetList?.count
-        guard count != nil && count! > 0 else {
+        guard photoKitAssetList.count > 0 else {
             return
         }
         DispatchQueue.main.async {
@@ -104,15 +103,13 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
     // MARK: - UICollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let nohanaImagePickerController = nohanaImagePickerController {
-            nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: photoKitAssetList[indexPath.item].originalAsset)
-        }
+        nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: photoKitAssetList[indexPath.item].originalAsset)
     }
     
     @available(iOS 13.0, *)
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let asset = photoKitAssetList[indexPath.item]
-        if let cell = collectionView.cellForItem(at: indexPath) as? AssetCell, let nohanaImagePickerController = self.nohanaImagePickerController {
+        if let cell = collectionView.cellForItem(at: indexPath) as? AssetCell {
             return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { [weak self] in
                 // Create a preview view controller and return it
                 guard let self = self else { return nil }
@@ -123,18 +120,19 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
                 let contentSize = CGSize(width: width, height: height)
                 previewViewController.preferredContentSize = contentSize
                 return previewViewController
-            }, actionProvider: { _ in
-                if nohanaImagePickerController.pickedAssetList.isPicked(asset) {
-                    let title = nohanaImagePickerController.config.strings.albumListTitle ?? NSLocalizedString("action.title.deselect", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
+            }, actionProvider: { [weak self] _ in
+                guard let self = self else { return nil }
+                if self.nohanaImagePickerController.pickedAssetList.isPicked(asset) {
+                    let title = self.nohanaImagePickerController.config.strings.albumListTitle ?? NSLocalizedString("action.title.deselect", tableName: "NohanaImagePicker", bundle: self.nohanaImagePickerController.assetBundle, comment: "")
                     let deselect = UIAction(title: title, image: UIImage(systemName: "minus.circle"), attributes: [.destructive]) { _ in
-                        nohanaImagePickerController.dropAsset(asset)
+                        self.nohanaImagePickerController.dropAsset(asset)
                         collectionView.reloadItems(at: [indexPath])
                     }
                     return UIMenu(title: "", children: [deselect])
                 } else {
-                    let title = nohanaImagePickerController.config.strings.albumListTitle ?? NSLocalizedString("action.title.select", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
+                    let title = self.nohanaImagePickerController.config.strings.albumListTitle ?? NSLocalizedString("action.title.select", tableName: "NohanaImagePicker", bundle: self.nohanaImagePickerController.assetBundle, comment: "")
                     let select = UIAction(title: title, image: UIImage(systemName: "checkmark.circle")) { _ in
-                        nohanaImagePickerController.pickAsset(asset)
+                        self.nohanaImagePickerController.pickAsset(asset)
                         collectionView.reloadItems(at: [indexPath])
                     }
                     return UIMenu(title: "", children: [select])
@@ -157,8 +155,7 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssetCell", for: indexPath) as? AssetCell,
-            let nohanaImagePickerController  = nohanaImagePickerController else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssetCell", for: indexPath) as? AssetCell else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetCell\")")
         }
         cell.tag = indexPath.item
@@ -195,14 +192,11 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
         }
 
         let assetListDetailViewController = segue.destination as! AssetDetailListViewController
-        assetListDetailViewController.photoKitAssetList = photoKitAssetList
-        assetListDetailViewController.nohanaImagePickerController = nohanaImagePickerController
         assetListDetailViewController.currentIndexPath = selectedIndexPath
     }
 
-    // MARK: - IBAction
-    @IBAction func didPushDone(_ sender: AnyObject) {
-        let pickedPhotoKitAssets = nohanaImagePickerController!.pickedAssetList.map { ($0 as! PhotoKitAsset).originalAsset }
-        nohanaImagePickerController!.delegate?.nohanaImagePicker(nohanaImagePickerController!, didFinishPickingPhotoKitAssets: pickedPhotoKitAssets )
+    // MARK: - IBSegueAction
+    @IBSegueAction func makeDetailList(_ coder: NSCoder) -> AssetDetailListViewController? {
+        return AssetDetailListViewController(coder: coder, nohanaImagePickerController: nohanaImagePickerController, photoKitAssetList: photoKitAssetList)
     }
 }
