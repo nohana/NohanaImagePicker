@@ -219,7 +219,7 @@ extension RootViewController: AlbumListViewControllerDelegate {
         setToolbarTitle(nohanaImagePickerController)
     }
     
-    func didDissmissViewController(viewController: AlbumListViewController) {
+    func willDissmissViewController(viewController: AlbumListViewController) {
         transformAnimation()
     }
 }
@@ -229,7 +229,15 @@ extension RootViewController: UIAdaptivePresentationControllerDelegate {
         return true
     }
 
-    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
         transformAnimation()
+        transitionCoordinator?.animate(alongsideTransition: { context in
+            //Dismissal is animating. Could be finishing or canceling the dismissal
+        }, completion: { [weak self] context in
+            if context.isCancelled {
+                // cancelled dismiss
+                self?.transformAnimation()
+            }
+        })
     }
 }
