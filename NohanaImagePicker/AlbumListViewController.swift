@@ -20,7 +20,7 @@ import Photos
 protocol AlbumListViewControllerDelegate: AnyObject {
     func didSelectMoment()
     func didSelectAlbum(album: PhotoKitAssetList)
-    func willDissmissViewController(viewController: AlbumListViewController)
+    func willDismissViewController(viewController: AlbumListViewController)
 }
 
 class AlbumListViewController: UITableViewController, EmptyIndicatable, ActivityIndicatable {
@@ -90,12 +90,12 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
         case .moment:
             delegate?.didSelectMoment()
             nohanaImagePickerController.delegate?.nohanaImagePickerDidSelectMoment?(nohanaImagePickerController)
-            delegate?.willDissmissViewController(viewController: self)
+            delegate?.willDismissViewController(viewController: self)
             dismiss(animated: true, completion: nil)
         case .albums:
             delegate?.didSelectAlbum(album: photoKitAlbumList[indexPath.row])
             nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAssetList: photoKitAlbumList[indexPath.row].assetList)
-            delegate?.willDissmissViewController(viewController: self)
+            delegate?.willDismissViewController(viewController: self)
             dismiss(animated: true, completion: nil)
         }
     }
@@ -184,7 +184,7 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
     // MARK: - IBAction
 
     @IBAction func didTapClose(_ sender: AnyObject) {
-        delegate?.willDissmissViewController(viewController: self)
+        delegate?.willDismissViewController(viewController: self)
         dismiss(animated: true, completion: nil)
     }
 
