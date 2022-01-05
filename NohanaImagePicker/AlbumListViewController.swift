@@ -20,7 +20,7 @@ import Photos
 protocol AlbumListViewControllerDelegate: AnyObject {
     func didSelectMoment()
     func didSelectAlbum(album: PhotoKitAssetList)
-    func didDissmissViewController(viewController: AlbumListViewController)
+    func willDismissViewController(viewController: AlbumListViewController)
 }
 
 class AlbumListViewController: UITableViewController, EmptyIndicatable, ActivityIndicatable {
@@ -90,17 +90,13 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
         case .moment:
             delegate?.didSelectMoment()
             nohanaImagePickerController.delegate?.nohanaImagePickerDidSelectMoment?(nohanaImagePickerController)
-            dismiss(animated: true) { [weak self] in
-                guard let self = self else { return }
-                self.delegate?.didDissmissViewController(viewController: self)
-            }
+            delegate?.willDismissViewController(viewController: self)
+            dismiss(animated: true, completion: nil)
         case .albums:
             delegate?.didSelectAlbum(album: photoKitAlbumList[indexPath.row])
             nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAssetList: photoKitAlbumList[indexPath.row].assetList)
-            dismiss(animated: true) { [weak self] in
-                guard let self = self else { return }
-                self.delegate?.didDissmissViewController(viewController: self)
-            }
+            delegate?.willDismissViewController(viewController: self)
+            dismiss(animated: true, completion: nil)
         }
     }
 
@@ -188,10 +184,8 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
     // MARK: - IBAction
 
     @IBAction func didTapClose(_ sender: AnyObject) {
-        dismiss(animated: true) { [weak self] in
-            guard let self = self else { return }
-            self.delegate?.didDissmissViewController(viewController: self)
-        }
+        delegate?.willDismissViewController(viewController: self)
+        dismiss(animated: true, completion: nil)
     }
 
     // MARK: - EmptyIndicatable
