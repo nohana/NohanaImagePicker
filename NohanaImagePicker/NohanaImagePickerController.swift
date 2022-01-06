@@ -68,6 +68,7 @@ open class NohanaImagePickerController: UIViewController {
     let mediaType: MediaType
     let enableExpandingPhotoAnimation: Bool
     let assetCollectionSubtypes: [PHAssetCollectionSubtype]
+    let defaultAssetCollection: PHAssetCollection?
 
     public init() {
         assetCollectionSubtypes = [
@@ -86,14 +87,16 @@ open class NohanaImagePickerController: UIViewController {
         mediaType = .photo
         pickedAssetList = PickedAssetList()
         enableExpandingPhotoAnimation = true
+        defaultAssetCollection = nil
         super.init(nibName: nil, bundle: nil)
         self.pickedAssetList.nohanaImagePickerController = self
     }
 
-    public init(assetCollectionSubtypes: [PHAssetCollectionSubtype], mediaType: MediaType, enableExpandingPhotoAnimation: Bool) {
+    public init(assetCollectionSubtypes: [PHAssetCollectionSubtype], mediaType: MediaType, enableExpandingPhotoAnimation: Bool, defaultAssetCollection: PHAssetCollection?) {
         self.assetCollectionSubtypes = assetCollectionSubtypes
         self.mediaType = mediaType
         self.enableExpandingPhotoAnimation = enableExpandingPhotoAnimation
+        self.defaultAssetCollection = defaultAssetCollection
         pickedAssetList = PickedAssetList()
         super.init(nibName: nil, bundle: nil)
         self.pickedAssetList.nohanaImagePickerController = self
