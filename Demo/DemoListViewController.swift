@@ -31,6 +31,7 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
         Cell(title: "Disable to pick assets", selector: #selector(DemoListViewController.showDisableToPickAssetsPicker)),
         Cell(title: "Custom UI", selector: #selector(DemoListViewController.showCustomUIPicker)),
         Cell(title: "Selectable Album Date Section", selector: #selector(DemoListViewController.showSelectableDateSectionPicker)),
+        Cell(title: "Specify the default album", selector: #selector(DemoListViewController.showSpecifyDefaultAlbumPicker)),
     ]
 
     override func viewDidAppear(_ animated: Bool) {
@@ -142,6 +143,38 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
     @objc func showSelectableDateSectionPicker() {
         let picker = NohanaImagePickerController()
         picker.canPickDateSection = true
+        picker.delegate = self
+        present(picker, animated: true, completion: nil)
+    }
+    
+    @objc func showSpecifyDefaultAlbumPicker() {
+        let subtypes: [PHAssetCollectionSubtype] = [
+            .albumRegular,
+            .albumSyncedEvent,
+            .albumSyncedFaces,
+            .albumSyncedAlbum,
+            .albumImported,
+            .albumMyPhotoStream,
+            .albumCloudShared,
+            .smartAlbumGeneric,
+            .smartAlbumFavorites,
+            .smartAlbumRecentlyAdded,
+            .smartAlbumUserLibrary
+        ]
+        var albumListFetchResult: [PHFetchResult<PHAssetCollection>] = []
+        let assetCollectionTypes: [PHAssetCollectionType] = [.smartAlbum, .album]
+        assetCollectionTypes.forEach {
+            albumListFetchResult += [PHAssetCollection.fetchAssetCollections(with: $0, subtype: .any, options: nil)]
+        }
+        var assetCollections: [PHAssetCollection] = []
+        albumListFetchResult.forEach {
+            $0.enumerateObjects { (assetCollection, _, _) in
+                if subtypes.contains(assetCollection.assetCollectionSubtype) {
+                    assetCollections.append(assetCollection)
+                }
+            }
+        }
+        let picker = NohanaImagePickerController(assetCollectionSubtypes: subtypes, mediaType: .photo, enableExpandingPhotoAnimation: false, defaultAssetCollection: assetCollections.last)
         picker.delegate = self
         present(picker, animated: true, completion: nil)
     }
