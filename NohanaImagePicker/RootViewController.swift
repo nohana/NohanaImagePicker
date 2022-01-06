@@ -186,6 +186,7 @@ class RootViewController: UIViewController {
         oldViewController?.view.removeFromSuperview()
         oldViewController?.removeFromParent()
         newViewController.didMove(toParent: self)
+        currentChildViewController = newViewController
     }
     
     private func transformAnimation() {
