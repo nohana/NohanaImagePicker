@@ -146,10 +146,10 @@ open class NohanaImagePickerController: UIViewController {
         addChild(navigationController)
         view.addSubview(navigationController.view)
         NSLayoutConstraint.activate([
-            navigationController.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            navigationController.view.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            navigationController.view.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-            navigationController.view.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            navigationController.view.topAnchor.constraint(equalTo: view.topAnchor),
+            navigationController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            navigationController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            navigationController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
         navigationController.view.layoutIfNeeded()
         navigationController.didMove(toParent: self)
