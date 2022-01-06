@@ -97,6 +97,11 @@ open class NohanaImagePickerController: UIViewController {
         self.mediaType = mediaType
         self.enableExpandingPhotoAnimation = enableExpandingPhotoAnimation
         self.defaultAssetCollection = defaultAssetCollection
+        if let assetCollection = self.defaultAssetCollection {
+            if !assetCollectionSubtypes.contains(assetCollection.assetCollectionSubtype) {
+                fatalError("defaultAssetCollection doesn't contain the specified PHAssetCollectionSubtype")
+            }
+        }
         pickedAssetList = PickedAssetList()
         super.init(nibName: nil, bundle: nil)
         self.pickedAssetList.nohanaImagePickerController = self
