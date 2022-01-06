@@ -15,6 +15,7 @@
  */
 
 import UIKit
+import Photos
 
 class RootViewController: UIViewController {
     
@@ -53,7 +54,11 @@ class RootViewController: UIViewController {
         // Notification
         addPickPhotoKitAssetNotificationObservers()
         
-        showRecentPhotos()
+        if let assetCollection = nohanaImagePickerController.defaultAssetCollection {
+            showPhotosFromDefaultAlbum(album: assetCollection)
+        } else {
+            showRecentPhotos()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -117,6 +122,12 @@ class RootViewController: UIViewController {
         present(navigationController, animated: true, completion: nil)
     }
     
+    private func showPhotosFromDefaultAlbum(album: PHAssetCollection) {
+        let album = PhotoKitAssetList(album: album, mediaType: nohanaImagePickerController.mediaType, ascending: !nohanaImagePickerController.canPickDateSection)
+        switchChildViewController(currentChildViewController, toViewController: fetchAssetListViewController(album: album))
+        updateTitle(title: album.title)
+    }
+    
     private func showRecentPhotos() {
         albumList = PhotoKitAlbumList(
             assetCollectionTypes: [.smartAlbum, .album],
@@ -128,7 +139,7 @@ class RootViewController: UIViewController {
                 guard let self = self else { return }
                 DispatchQueue.main.async {
                     let album = self.albumList[0]
-                    self.switchChildViewController(nil, toViewController: self.fetchAssetListViewController(album: album))
+                    self.switchChildViewController(self.currentChildViewController, toViewController: self.fetchAssetListViewController(album: album))
                     self.updateTitle(title: album.title)
                 }
             })
