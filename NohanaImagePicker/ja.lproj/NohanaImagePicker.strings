@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-"albumlist.title" = "アルバム";
+"albumlist.title" = "アルバムを選択";
 "albumlist.empty.message" = "アルバムに\n写真がありません";
 "albumlist.empty.description" = "カメラで写真を撮影しましょう";
+"albumlist.empty.alert.button.ok" = "OK";
 "albumlist.moment.title" = "日付から選択";
 "toolbar.title.nolimit" = "%ld枚選択中";
 "toolbar.title.haslimit" = "%ld枚選択中（最大%ld枚）";

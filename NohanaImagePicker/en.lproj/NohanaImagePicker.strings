@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-"albumlist.title" = "Photos";
+"albumlist.title" = "Select Photos";
 "albumlist.empty.message" = "No Photos";
 "albumlist.empty.description" = "Take some photos with Camera app.";
+"albumlist.empty.alert.button.ok" = "OK";
 "albumlist.moment.title" = "Moment";
 "toolbar.title.nolimit" = "Selected Items: %ld";
 "toolbar.title.haslimit" = "Selected Items: %ld / %ld";

@@ -67,8 +67,8 @@ picker.canPickAsset = { (asset:Asset) -> Bool in
 
 ## Requirements
 
-- Swift 2.2 later
-- iOS 8.0 later
+- Swift 5.0 later
+- iOS 13.0 later
 
 ## Installation
 

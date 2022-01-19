@@ -65,7 +65,7 @@
                                     <outlet property="imageView" destination="gBL-Tw-h3e" id="3MR-ED-vnu"/>
                                     <outlet property="overlayView" destination="7pN-6U-K6c" id="iAv-Uk-1Kx"/>
                                     <outlet property="pickButton" destination="byV-w7-CIM" id="t52-nd-9qH"/>
-                                    <segue destination="kYg-Jb-RU3" kind="show" identifier="toAssetDetailListViewController" id="UZz-4U-64b"/>
+                                    <segue destination="kYg-Jb-RU3" kind="show" identifier="toAssetDetailListViewController" destinationCreationSelector="makeDetailList:" id="UZz-4U-64b"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

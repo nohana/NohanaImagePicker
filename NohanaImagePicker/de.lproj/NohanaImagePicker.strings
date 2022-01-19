@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-"albumlist.title" = "Fotos";
+"albumlist.title" = "Fotos auswählen";
 "albumlist.empty.message" = "Keine Fotos";
 "albumlist.empty.description" = "Nimm Fotos mit der Kamera App auf.";
+"albumlist.empty.alert.button.ok" = "OK";
 "albumlist.moment.title" = "Moment";
 "toolbar.title.nolimit" = "Ausgewählte Fotos: %ld";
 "toolbar.title.haslimit" = "Ausgewählte Fotos: %ld / %ld";

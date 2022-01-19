@@ -39,13 +39,11 @@ class AssetDetailListViewController: AssetListViewController, DetailListViewCont
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let nohanaImagePickerController = nohanaImagePickerController {
-            let droppedImage: UIImage? = nohanaImagePickerController.config.image.droppedLarge ?? UIImage(named: "btn_select_l", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
-            let pickedImage: UIImage? = nohanaImagePickerController.config.image.pickedLarge ?? UIImage(named: "btn_selected_l", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
-
-            pickButton.setImage(droppedImage, for: UIControl.State())
-            pickButton.setImage(pickedImage, for: .selected)
-        }
+        let droppedImage: UIImage? = nohanaImagePickerController.config.image.droppedLarge ?? UIImage(named: "btn_select_l", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
+        let pickedImage: UIImage? = nohanaImagePickerController.config.image.pickedLarge ?? UIImage(named: "btn_selected_l", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
+        
+        pickButton.setImage(droppedImage, for: UIControl.State())
+        pickButton.setImage(pickedImage, for: .selected)
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -60,14 +58,7 @@ class AssetDetailListViewController: AssetListViewController, DetailListViewCont
         }
     }
 
-    override func updateTitle() {
-        self.title = ""
-    }
-
     func didChangeAssetDetailPage(_ indexPath: IndexPath) {
-        guard let nohanaImagePickerController = nohanaImagePickerController else {
-            return
-        }
         let asset = photoKitAssetList[indexPath.item]
         pickButton.isSelected = nohanaImagePickerController.pickedAssetList.isPicked(asset)
         pickButton.isHidden = !(nohanaImagePickerController.canPickAsset(asset) )
@@ -75,8 +66,7 @@ class AssetDetailListViewController: AssetListViewController, DetailListViewCont
     }
 
     override func scrollCollectionView(to indexPath: IndexPath) {
-        let count: Int? = photoKitAssetList?.count
-        guard count != nil && count! > 0 else {
+        guard photoKitAssetList.count > 0 else {
             return
         }
         DispatchQueue.main.async {
@@ -99,11 +89,11 @@ class AssetDetailListViewController: AssetListViewController, DetailListViewCont
     @IBAction func didPushPickButton(_ sender: UIButton) {
         let asset = photoKitAssetList[currentIndexPath.row]
         if pickButton.isSelected {
-            if nohanaImagePickerController!.pickedAssetList.drop(asset: asset) {
+            if nohanaImagePickerController.pickedAssetList.drop(asset: asset) {
                 pickButton.isSelected = false
             }
         } else {
-            if nohanaImagePickerController!.pickedAssetList.pick(asset: asset) {
+            if nohanaImagePickerController.pickedAssetList.pick(asset: asset) {
                 pickButton.isSelected = true
             }
         }
@@ -112,8 +102,7 @@ class AssetDetailListViewController: AssetListViewController, DetailListViewCont
     // MARK: - UICollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssetDetailCell", for: indexPath) as? AssetDetailCell,
-            let nohanaImagePickerController = nohanaImagePickerController else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssetDetailCell", for: indexPath) as? AssetDetailCell else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetDetailCell\")")
         }
         cell.scrollView.zoomScale = 1
