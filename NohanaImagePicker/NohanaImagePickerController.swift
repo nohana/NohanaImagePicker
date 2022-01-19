@@ -180,6 +180,7 @@ extension NohanaImagePickerController {
             public var albumListMomentTitle: String?
             public var albumListEmptyMessage: String?
             public var albumListEmptyDescription: String?
+            public var albumListEmptyAlertButtonOK: String?
             public var toolbarTitleNoLimit: String?
             public var toolbarTitleHasLimit: String?
         }
