@@ -17,6 +17,7 @@
 "albumlist.title" = "Выберите фотографии";
 "albumlist.empty.message" = "Нет фотографий";
 "albumlist.empty.description" = "Получить фото с камеры";
+"albumlist.empty.alert.button.ok" = "ла́дно";
 "albumlist.moment.title" = "Моменты";
 "toolbar.title.nolimit" = "Выбрано: %ld";
 "toolbar.title.haslimit" = "Выбрано: %ld / %ld";

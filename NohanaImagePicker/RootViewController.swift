@@ -126,8 +126,16 @@ class RootViewController: UIViewController {
             ascending: !nohanaImagePickerController.canPickDateSection,
             handler: { [weak self] in
                 guard let self = self else { return }
-                DispatchQueue.main.async {
-                    let album = self.albumList[0]
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else  { return }
+                    guard let album = self.albumList.first else {
+                        let title = self.nohanaImagePickerController.config.strings.albumListEmptyMessage ?? NSLocalizedString("albumlist.empty.message", tableName: "NohanaImagePicker", bundle: self.nohanaImagePickerController.assetBundle, comment: "")
+                        let ok = self.nohanaImagePickerController.config.strings.albumListEmptyAlertButtonOK ?? NSLocalizedString("albumlist.empty.alert.button.ok", tableName: "NohanaImagePicker", bundle: self.nohanaImagePickerController.assetBundle, comment: "")
+                        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: ok, style: .cancel, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        return
+                    }
                     self.switchChildViewController(nil, toViewController: self.fetchAssetListViewController(album: album))
                     self.updateTitle(title: album.title)
                 }
