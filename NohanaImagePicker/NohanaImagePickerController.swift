@@ -68,6 +68,7 @@ open class NohanaImagePickerController: UIViewController {
     let mediaType: MediaType
     let enableExpandingPhotoAnimation: Bool
     let assetCollectionSubtypes: [PHAssetCollectionSubtype]
+    let defaultAssetCollection: PHAssetCollection?
 
     public init() {
         assetCollectionSubtypes = [
@@ -86,14 +87,21 @@ open class NohanaImagePickerController: UIViewController {
         mediaType = .photo
         pickedAssetList = PickedAssetList()
         enableExpandingPhotoAnimation = true
+        defaultAssetCollection = nil
         super.init(nibName: nil, bundle: nil)
         self.pickedAssetList.nohanaImagePickerController = self
     }
 
-    public init(assetCollectionSubtypes: [PHAssetCollectionSubtype], mediaType: MediaType, enableExpandingPhotoAnimation: Bool) {
+    public init(assetCollectionSubtypes: [PHAssetCollectionSubtype], mediaType: MediaType, enableExpandingPhotoAnimation: Bool, defaultAssetCollection: PHAssetCollection?) {
         self.assetCollectionSubtypes = assetCollectionSubtypes
         self.mediaType = mediaType
         self.enableExpandingPhotoAnimation = enableExpandingPhotoAnimation
+        self.defaultAssetCollection = defaultAssetCollection
+        if let assetCollection = self.defaultAssetCollection {
+            if !assetCollectionSubtypes.contains(assetCollection.assetCollectionSubtype) {
+                fatalError("defaultAssetCollection doesn't contain the specified PHAssetCollectionSubtype")
+            }
+        }
         pickedAssetList = PickedAssetList()
         super.init(nibName: nil, bundle: nil)
         self.pickedAssetList.nohanaImagePickerController = self
@@ -138,10 +146,10 @@ open class NohanaImagePickerController: UIViewController {
         addChild(navigationController)
         view.addSubview(navigationController.view)
         NSLayoutConstraint.activate([
-            navigationController.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            navigationController.view.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            navigationController.view.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-            navigationController.view.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            navigationController.view.topAnchor.constraint(equalTo: view.topAnchor),
+            navigationController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            navigationController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            navigationController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
         navigationController.view.layoutIfNeeded()
         navigationController.didMove(toParent: self)
