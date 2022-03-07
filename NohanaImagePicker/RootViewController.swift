@@ -28,6 +28,26 @@ class RootViewController: UIViewController {
     }()
     private var currentChildViewController: UIViewController?
     private var albumList: PhotoKitAlbumList!
+    private lazy var albumListViewController: AlbumListViewController = {
+        let storyboard = UIStoryboard(name: "AlbumList", bundle: nohanaImagePickerController.assetBundle)
+        guard let albumListViewController = storyboard.instantiateInitialViewController(creator: { corder in
+            AlbumListViewController(coder: corder, nohanaImagePickerController: self.nohanaImagePickerController)
+        }) else {
+            fatalError("albumListViewController init failed.")
+        }
+        albumListViewController.photoKitAlbumList = PhotoKitAlbumList(assetCollectionTypes: [.smartAlbum, .album],
+                                                                      assetCollectionSubtypes: nohanaImagePickerController.assetCollectionSubtypes,
+                                                                      mediaType: nohanaImagePickerController.mediaType,
+                                                                      shouldShowEmptyAlbum: nohanaImagePickerController.shouldShowMoment,
+                                                                      ascending: !nohanaImagePickerController.canPickDateSection,
+                                                                      handler: { [weak albumListViewController] in
+            DispatchQueue.main.async {
+                albumListViewController?.isLoading = false
+                albumListViewController?.tableView.reloadData()
+            }
+        })
+        return albumListViewController
+    }()
     
     init?(coder: NSCoder, nohanaImagePickerController: NohanaImagePickerController) {
         self.nohanaImagePickerController = nohanaImagePickerController
@@ -94,25 +114,7 @@ class RootViewController: UIViewController {
     }
     
     private func showAlbumList() {
-        let storyboard = UIStoryboard(name: "AlbumList", bundle: nohanaImagePickerController.assetBundle)
-        guard let albumListViewController = storyboard.instantiateInitialViewController(creator: { corder in
-            AlbumListViewController(coder: corder, nohanaImagePickerController: self.nohanaImagePickerController)
-        }) else {
-            fatalError("albumListViewController init failed.")
-        }
         let navigationController = UINavigationController(rootViewController: albumListViewController)
-        
-        albumListViewController.photoKitAlbumList = PhotoKitAlbumList(assetCollectionTypes: [.smartAlbum, .album],
-                                                                      assetCollectionSubtypes: nohanaImagePickerController.assetCollectionSubtypes,
-                                                                      mediaType: nohanaImagePickerController.mediaType,
-                                                                      shouldShowEmptyAlbum: nohanaImagePickerController.shouldShowMoment,
-                                                                      ascending: !nohanaImagePickerController.canPickDateSection,
-                                                                      handler: { [weak albumListViewController] in
-            DispatchQueue.main.async {
-                albumListViewController?.isLoading = false
-                albumListViewController?.tableView.reloadData()
-            }
-        })
         albumListViewController.delegate = self
         navigationController.presentationController?.delegate = self
         let appearance = navigationBarAppearance(nohanaImagePickerController)
