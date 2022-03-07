@@ -130,8 +130,8 @@ class RootViewController: UIViewController {
     
     private func showRecentPhotos() {
         albumList = PhotoKitAlbumList(
-            assetCollectionTypes: [.smartAlbum, .album],
-            assetCollectionSubtypes: nohanaImagePickerController.assetCollectionSubtypes,
+            assetCollectionTypes: [.smartAlbum],
+            assetCollectionSubtypes: [.smartAlbumUserLibrary],
             mediaType: nohanaImagePickerController.mediaType,
             shouldShowEmptyAlbum: nohanaImagePickerController.shouldShowEmptyAlbum,
             ascending: !nohanaImagePickerController.canPickDateSection,
