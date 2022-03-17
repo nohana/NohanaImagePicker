@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3569CAA91EC1918E000C41C0 /* NohanaImagePicker.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */; };
+		6A0117BE27D6011500B868F9 /* Array+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0117BD27D6011500B868F9 /* Array+Ex.swift */; };
 		6A434AE72775631C009526D3 /* UIViewController+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A434AE62775631C009526D3 /* UIViewController+Ex.swift */; };
 		6A8047FF276C3D77000F3B28 /* AlbumList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A8047FE276C3D77000F3B28 /* AlbumList.storyboard */; };
 		6A804801276C3E80000F3B28 /* Moment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A804800276C3E80000F3B28 /* Moment.storyboard */; };
@@ -89,6 +90,7 @@
 		23D1CD93207CEB1200F8115E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/NohanaImagePicker.strings; sourceTree = "<group>"; };
 		3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NohanaImagePicker.xcassets; sourceTree = "<group>"; };
 		3590F1F51EC1A79400F32E06 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/NohanaImagePicker.strings; sourceTree = "<group>"; };
+		6A0117BD27D6011500B868F9 /* Array+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ex.swift"; sourceTree = "<group>"; };
 		6A434AE62775631C009526D3 /* UIViewController+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ex.swift"; sourceTree = "<group>"; };
 		6A8047FE276C3D77000F3B28 /* AlbumList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AlbumList.storyboard; sourceTree = "<group>"; };
 		6A804800276C3E80000F3B28 /* Moment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Moment.storyboard; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			children = (
 				6AD1607E2770B23D00A8B066 /* UIApplication+Ex.swift */,
 				6A434AE62775631C009526D3 /* UIViewController+Ex.swift */,
+				6A0117BD27D6011500B868F9 /* Array+Ex.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 				6AD1607F2770B23D00A8B066 /* UIApplication+Ex.swift in Sources */,
 				F25C10C21C8ED9BF007453C3 /* MomentViewController.swift in Sources */,
 				F25C69881CA23A0A005935D6 /* MomentCell.swift in Sources */,
+				6A0117BE27D6011500B868F9 /* Array+Ex.swift in Sources */,
 				F2FE1F781C901D9400FDBE7B /* MomentSectionHeaderView.swift in Sources */,
 				F1A26CD12738E88700433E9F /* AssetDateSection.swift in Sources */,
 				F23554281C69D5DB00796DCA /* NohanaImagePickerController.swift in Sources */,
