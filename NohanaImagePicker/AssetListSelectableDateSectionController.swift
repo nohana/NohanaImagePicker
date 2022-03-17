@@ -60,6 +60,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setToolbarTitle(nohanaImagePickerController)
+        updateDoneBarButtonColor()
         collectionView?.reloadData()
     }
 
@@ -71,6 +72,13 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         DispatchQueue.main.async {
             self.collectionView?.scrollToItem(at: indexPath, at: .bottom, animated: false)
         }
+    }
+
+    private func updateDoneBarButtonColor() {
+        parent?.navigationItem.rightBarButtonItem?.setTitleTextAttributes([
+            .foregroundColor: nohanaImagePickerController.config.color.navigationBarDoneBarButtonItem,
+            .font: UIFont.systemFont(ofSize: 17, weight: .semibold)
+        ], for: .normal)
     }
 
     // MARK: - UICollectionViewDataSource
@@ -242,6 +250,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
 extension AssetListSelectableDateSectionController: AssetDateSectionHeaderViewDelegate {
     func didPushPickButton() {
         collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+        updateDoneBarButtonColor()
     }
 }
 
@@ -263,5 +272,6 @@ extension AssetListSelectableDateSectionController: AssetCellDelegate {
                 }
             }
         }
+        updateDoneBarButtonColor()
     }
 }

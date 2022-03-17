@@ -172,6 +172,7 @@ extension NohanaImagePickerController {
             public var separator: UIColor?
             public var navigationBarBackground: UIColor = .white
             public var navigationBarForeground: UIColor = .black
+            public var navigationBarDoneBarButtonItem: UIColor = .black
         }
         public var color = Color()
 

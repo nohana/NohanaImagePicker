@@ -88,7 +88,7 @@ class RootViewController: UIViewController {
         // FIXME: The settings of UIBarButtonItemAppearance may not be reflected.
         // Probably, this problem occurs when the settings are set to reflect the entire application.
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([
-            .foregroundColor: nohanaImagePickerController.config.color.navigationBarForeground,
+            .foregroundColor: nohanaImagePickerController.config.color.navigationBarDoneBarButtonItem,
             .font: UIFont.systemFont(ofSize: 17, weight: .semibold)
         ], for: .normal)
     }
