@@ -249,7 +249,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
 // MARK: - AssetDateSectionHeaderViewDelegate
 extension AssetListSelectableDateSectionController: AssetDateSectionHeaderViewDelegate {
     func didPushPickButton() {
-        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+        collectionView.reloadData()
         updateDoneBarButtonColor()
     }
 }
