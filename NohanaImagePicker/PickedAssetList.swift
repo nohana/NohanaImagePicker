@@ -50,16 +50,7 @@ class PickedAssetList: ItemList {
     // MARK: - Manage assetlist
 
     func pick(asset: Asset) -> Bool {
-        guard !isPicked(asset) else {
-            return false
-        }
-        let assetsCountBeforePicking = self.count
-        if asset is PhotoKitAsset {
-            if let canPick = nohanaImagePickerController!.delegate?.nohanaImagePicker?(nohanaImagePickerController!, willPickPhotoKitAsset: (asset as! PhotoKitAsset).originalAsset, pickedAssetsCount: assetsCountBeforePicking), !canPick {
-                return false
-            }
-        }
-        guard nohanaImagePickerController!.maximumNumberOfSelection == 0 || assetsCountBeforePicking < nohanaImagePickerController!.maximumNumberOfSelection else {
+        guard canPick(asset: asset) else {
             return false
         }
         assetlist.append(asset)
@@ -112,4 +103,19 @@ class PickedAssetList: ItemList {
         return assetlist.contains { $0.identifier == asset.identifier }
     }
 
+    func canPick(asset: Asset) -> Bool {
+        guard !isPicked(asset) else {
+            return false
+        }
+        let assetsCountBeforePicking = self.count
+        if asset is PhotoKitAsset {
+            if let canPick = nohanaImagePickerController!.delegate?.nohanaImagePicker?(nohanaImagePickerController!, willPickPhotoKitAsset: (asset as! PhotoKitAsset).originalAsset, pickedAssetsCount: assetsCountBeforePicking), !canPick {
+                return false
+            }
+        }
+        guard nohanaImagePickerController!.maximumNumberOfSelection == 0 || assetsCountBeforePicking < nohanaImagePickerController!.maximumNumberOfSelection else {
+            return false
+        }
+        return true
+    }
 }

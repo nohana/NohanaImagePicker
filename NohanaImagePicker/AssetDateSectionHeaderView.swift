@@ -42,6 +42,7 @@ class AssetDateSectionHeaderView: UICollectionReusableView {
     @IBAction func didPushPickButton(_ sender: UIButton) {
         guard let nohanaImagePickerController = nohanaImagePickerController else { return }
         let firstButtonState = sender.isSelected
+        var addAssets = [Asset]()
         for asset in assets {
             guard nohanaImagePickerController.canPickAsset(asset) else { continue }
             if firstButtonState {
@@ -50,13 +51,17 @@ class AssetDateSectionHeaderView: UICollectionReusableView {
             } else {
                 if nohanaImagePickerController.pickedAssetList.isPicked(asset) {
                     continue
-                } else if nohanaImagePickerController.pickedAssetList.pick(asset: asset) {
-                    sender.isSelected = true
-                } else if nohanaImagePickerController.pickedAssetList.count == nohanaImagePickerController.maximumNumberOfSelection {
+                } else if nohanaImagePickerController.pickedAssetList.count + addAssets.count == nohanaImagePickerController.maximumNumberOfSelection {
                     sender.isSelected = false
                     break
+                } else if nohanaImagePickerController.pickedAssetList.canPick(asset: asset) {
+                    addAssets.append(asset)
+                    sender.isSelected = true
                 }
             }
+        }
+        addAssets.reversed().forEach {
+            _ = nohanaImagePickerController.pickedAssetList.pick(asset: $0)
         }
         delegate?.didPushPickButton()
         nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectAssetDateSectionAssets: assets.compactMap { ($0 as? PhotoKitAsset)?.originalAsset }, date: date)
