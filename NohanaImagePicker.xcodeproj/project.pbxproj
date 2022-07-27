@@ -17,6 +17,8 @@
 		6AD1607C27700F0C00A8B066 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD1607B27700F0C00A8B066 /* RootViewController.swift */; };
 		6AD1607F2770B23D00A8B066 /* UIApplication+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD1607E2770B23D00A8B066 /* UIApplication+Ex.swift */; };
 		F117F732273B6A2600E11BC7 /* AssetDateSectionCreater.swift in Sources */ = {isa = PBXBuildFile; fileRef = F117F731273B6A2600E11BC7 /* AssetDateSectionCreater.swift */; };
+		F145C5E22890F8DC0070A4E2 /* PhotoAuthorizationLimitedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F145C5E02890F8DC0070A4E2 /* PhotoAuthorizationLimitedCell.swift */; };
+		F145C5E32890F8DC0070A4E2 /* PhotoAuthorizationLimitedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F145C5E12890F8DC0070A4E2 /* PhotoAuthorizationLimitedCell.xib */; };
 		F181095026A5361A001C2BDE /* MomentDetailListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F181094F26A5361A001C2BDE /* MomentDetailListViewController.swift */; };
 		F1A26CCD2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1A26CCC2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard */; };
 		F1A26CCF2738E7E400433E9F /* AssetListSelectableDateSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A26CCE2738E7E400433E9F /* AssetListSelectableDateSectionController.swift */; };
@@ -99,6 +101,8 @@
 		6AD1607B27700F0C00A8B066 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		6AD1607E2770B23D00A8B066 /* UIApplication+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ex.swift"; sourceTree = "<group>"; };
 		F117F731273B6A2600E11BC7 /* AssetDateSectionCreater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDateSectionCreater.swift; sourceTree = "<group>"; };
+		F145C5E02890F8DC0070A4E2 /* PhotoAuthorizationLimitedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAuthorizationLimitedCell.swift; sourceTree = "<group>"; };
+		F145C5E12890F8DC0070A4E2 /* PhotoAuthorizationLimitedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoAuthorizationLimitedCell.xib; sourceTree = "<group>"; };
 		F181094F26A5361A001C2BDE /* MomentDetailListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentDetailListViewController.swift; sourceTree = "<group>"; };
 		F1A26CCC2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetListSelectableDateSection.storyboard; sourceTree = "<group>"; };
 		F1A26CCE2738E7E400433E9F /* AssetListSelectableDateSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetListSelectableDateSectionController.swift; sourceTree = "<group>"; };
@@ -233,6 +237,8 @@
 				F1A26CCC2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard */,
 				F27029CD1C71C43A001647AB /* NohanaImagePicker.strings */,
 				F237249A1C6DCF96005D1E8A /* NohanaImagePicker.xcassets */,
+				F145C5E02890F8DC0070A4E2 /* PhotoAuthorizationLimitedCell.swift */,
+				F145C5E12890F8DC0070A4E2 /* PhotoAuthorizationLimitedCell.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -439,6 +445,7 @@
 				F237249B1C6DCF96005D1E8A /* NohanaImagePicker.xcassets in Resources */,
 				6A8047FF276C3D77000F3B28 /* AlbumList.storyboard in Resources */,
 				F1A26CCD2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard in Resources */,
+				F145C5E32890F8DC0070A4E2 /* PhotoAuthorizationLimitedCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,6 +486,7 @@
 				F2131F431C79615700797887 /* SwipeInteractionController.swift in Sources */,
 				F2DF3B2D1C6D780100C1C0E4 /* AssetDetailCell.swift in Sources */,
 				F25C69901CA27311005935D6 /* EmptyIndicatable.swift in Sources */,
+				F145C5E22890F8DC0070A4E2 /* PhotoAuthorizationLimitedCell.swift in Sources */,
 				F117F732273B6A2600E11BC7 /* AssetDateSectionCreater.swift in Sources */,
 				F2DA29771C7749D600B0A8E3 /* NotificationInfo.swift in Sources */,
 				F1A26CCF2738E7E400433E9F /* AssetListSelectableDateSectionController.swift in Sources */,

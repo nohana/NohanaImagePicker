@@ -49,6 +49,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         setUpToolbarItems()
         addPickPhotoKitAssetNotificationObservers()
         setUpActivityIndicator()
+        collectionView.register(UINib(nibName: "PhotoAuthorizationLimitedCell", bundle: self.nohanaImagePickerController.assetBundle), forCellWithReuseIdentifier: PhotoAuthorizationLimitedCell.defaultReusableId)
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.dateSectionList = AssetDateSectionCreater().createSections(assetList: self.photoKitAssetList.assetList, options: PhotoKitAssetList.fetchOptions(self.photoKitAssetList.mediaType, ascending: false))
@@ -88,21 +89,60 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
             updateVisibilityOfActivityIndicator(activityIndicator)
         }
 
-        return dateSectionList.count
+//        return dateSectionList.count
+        // DEBUG
+        return dateSectionList.count + 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dateSectionList[section].assetResult.count
+//        return dateSectionList[section].assetResult.count
+        // DEBUG
+        if section == 0 {
+            return 1
+        } else {
+            return dateSectionList[section - 1].assetResult.count
+        }
     }
 
     // MARK: - UICollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssetCell", for: indexPath) as? AssetCell else {
+//                fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetCell\")")
+//        }
+//
+//        let asset = PhotoKitAsset(asset: dateSectionList[indexPath.section].assetResult[indexPath.row])
+//        cell.tag = indexPath.item
+//        cell.delegate = self
+//        cell.update(asset: asset, nohanaImagePickerController: nohanaImagePickerController)
+//
+//        let imageSize = CGSize(
+//            width: cellSize.width * UIScreen.main.scale,
+//            height: cellSize.height * UIScreen.main.scale
+//        )
+//        asset.image(targetSize: imageSize) { (imageData) -> Void in
+//            DispatchQueue.main.async(execute: { () -> Void in
+//                if let imageData = imageData {
+//                    if cell.tag == indexPath.item {
+//                        cell.imageView.image = imageData.image
+//                    }
+//                }
+//            })
+//        }
+//        return (nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, assetListViewController: self, cell: cell, indexPath: indexPath, photoKitAsset: asset.originalAsset)) ?? cell
+        // DEBUG
+        if indexPath.section == 0 {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoAuthorizationLimitedCell.defaultReusableId, for: indexPath) as? PhotoAuthorizationLimitedCell else {
+                fatalError("failed to dequeueReusableCellWithIdentifier(\"PhotoAuthorizationLimitedCell\")")
+            }
+            return cell
+        }
+        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssetCell", for: indexPath) as? AssetCell else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetCell\")")
         }
-
-        let asset = PhotoKitAsset(asset: dateSectionList[indexPath.section].assetResult[indexPath.row])
+        let sectionListIndex = indexPath.section - 1
+        let asset = PhotoKitAsset(asset: dateSectionList[sectionListIndex].assetResult[indexPath.row])
         cell.tag = indexPath.item
         cell.delegate = self
         cell.update(asset: asset, nohanaImagePickerController: nohanaImagePickerController)
@@ -126,15 +166,30 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            let album = dateSectionList[indexPath.section]
+//            let album = dateSectionList[indexPath.section]
+//            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "AssetDateSectionHeader", for: indexPath) as? AssetDateSectionHeaderView else {
+//                fatalError("failed to create AssetDateSectionHeader")
+//            }
+//            header.date = album.creationDate
+//            header.delegate = self
+//            let assets = dateSectionList[indexPath.section].assetResult.map { PhotoKitAsset(asset: $0) }
+//            header.update(assets: assets, indexPath: indexPath, nohanaImagePickerController: nohanaImagePickerController)
+//            return header
+            // DEBUG
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "AssetDateSectionHeader", for: indexPath) as? AssetDateSectionHeaderView else {
                 fatalError("failed to create AssetDateSectionHeader")
             }
+            if indexPath.section == 0 {
+                return header
+            }
+            let sectionListIndex = indexPath.section - 1
+            let album = dateSectionList[sectionListIndex]
             header.date = album.creationDate
             header.delegate = self
-            let assets = dateSectionList[indexPath.section].assetResult.map { PhotoKitAsset(asset: $0) }
+            let assets = dateSectionList[sectionListIndex].assetResult.map { PhotoKitAsset(asset: $0) }
             header.update(assets: assets, indexPath: indexPath, nohanaImagePickerController: nohanaImagePickerController)
             return header
+
         default:
             fatalError("failed to create AssetDateSectionHeader")
         }
@@ -143,7 +198,12 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     // MARK: - UICollectionViewDelegateFlowLayout
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return cellSize
+//        return cellSize
+        if indexPath.section == 0 {
+            return CGSize(width: collectionView.frame.width, height: 300)
+        } else {
+            return cellSize
+        }
     }
 
     // MARK: - ActivityIndicatable
