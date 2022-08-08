@@ -82,6 +82,18 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         ], for: .normal)
     }
 
+    private func menuButtonStates() -> (Bool, Bool) {
+        switch PHPhotoLibrary.authorizationStatus() {
+        case .notDetermined, .restricted, .denied, .limited:
+            return (false, false)
+        case .authorized:
+            return (true, true)
+        @unknown default:
+            fatalError()
+        }
+    }
+
+
     // MARK: - UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -89,7 +101,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
             updateVisibilityOfActivityIndicator(activityIndicator)
         }
 
-//        return dateSectionList.count
+        return dateSectionList.count
         // DEBUG
         return dateSectionList.count + 1
     }
@@ -130,14 +142,17 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
 //            })
 //        }
 //        return (nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, assetListViewController: self, cell: cell, indexPath: indexPath, photoKitAsset: asset.originalAsset)) ?? cell
+
         // DEBUG
         if indexPath.section == 0 {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoAuthorizationLimitedCell.defaultReusableId, for: indexPath) as? PhotoAuthorizationLimitedCell else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"PhotoAuthorizationLimitedCell\")")
             }
+            cell.delegate = self
+            cell.setMenuButtonStates(menuButtonStates())
             return cell
         }
-        
+
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssetCell", for: indexPath) as? AssetCell else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetCell\")")
         }
@@ -166,6 +181,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
+            // 既存
 //            let album = dateSectionList[indexPath.section]
 //            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "AssetDateSectionHeader", for: indexPath) as? AssetDateSectionHeaderView else {
 //                fatalError("failed to create AssetDateSectionHeader")
@@ -200,11 +216,21 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 //        return cellSize
         if indexPath.section == 0 {
-            return CGSize(width: collectionView.frame.width, height: 300)
+            // TODO: 文言 + ボタンの数で高さを計算する必要がある
+            return CGSize(width: collectionView.frame.width, height: 227)
         } else {
             return cellSize
         }
     }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if section == 0 {
+            return .zero
+        }
+
+        return .init(width: .infinity, height: 44.0)
+    }
+
 
     // MARK: - ActivityIndicatable
 
@@ -333,5 +359,14 @@ extension AssetListSelectableDateSectionController: AssetCellDelegate {
             }
         }
         updateDoneBarButtonColor()
+    }
+}
+
+extension AssetListSelectableDateSectionController: PhotoAuthorizationLimitedCellDeletate {
+    func didSelectAddPhotoButton(_ cell: PhotoAuthorizationLimitedCell) {
+
+    }
+    func didSelectauthorizeAllPhotoButton(_ cell: PhotoAuthorizationLimitedCell) {
+
     }
 }
