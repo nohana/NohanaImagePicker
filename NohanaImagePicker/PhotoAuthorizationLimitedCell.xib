@@ -12,20 +12,20 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoAuthorizationLimitedCell" id="gTV-IL-0wX" customClass="PhotoAuthorizationLimitedCell" customModule="NohanaImagePicker" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="199"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="227"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="199"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="227"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ykc-V6-9Gd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="199"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="227"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="qQk-G4-EBj">
-                                <rect key="frame" x="10" y="16" width="355" height="167"/>
+                                <rect key="frame" x="10" y="16" width="355" height="195"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="59M-IU-B2O">
-                                        <rect key="frame" x="0.0" y="0.0" width="355" height="53"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="81"/>
                                         <string key="text">現在「選択した写真」のみ許可されています。
 設定画面の「写真」で「すべての写真」に✓を入れると、端末内のすべての写真から選べるようになります。</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="13.5"/>
@@ -33,7 +33,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="h9k-yE-aas">
-                                        <rect key="frame" x="0.0" y="69" width="355" height="98"/>
+                                        <rect key="frame" x="0.0" y="97" width="355" height="98"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jOd-oB-6LC">
                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="44"/>
@@ -137,10 +137,9 @@
             <size key="customSize" width="324" height="199"/>
             <connections>
                 <outlet property="addPhotoButton" destination="PEb-zt-1Fl" id="bgN-Bu-3yo"/>
-                <outlet property="addPhotoContainerView" destination="jOd-oB-6LC" id="8Jb-zI-Jdu"/>
                 <outlet property="attentionLabel" destination="59M-IU-B2O" id="Dfb-b1-NEa"/>
                 <outlet property="authorizeAllPhotoButton" destination="lke-XO-gdG" id="Uec-fz-EoG"/>
-                <outlet property="authorizeAllPhotoContainerView" destination="Xnc-mK-k5n" id="50i-SX-AcA"/>
+                <outlet property="menuContainerView" destination="h9k-yE-aas" id="FuM-DG-eQi"/>
             </connections>
             <point key="canvasLocation" x="73.188405797101453" y="200.55803571428569"/>
         </collectionViewCell>

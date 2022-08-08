@@ -21,8 +21,8 @@ class PhotoAuthorizationLimitedCell: UICollectionViewCell {
 
     var delegate: PhotoAuthorizationLimitedCellDeletate?
 
+    @IBOutlet weak private var menuContainerView: UIStackView!
     @IBOutlet weak private var attentionLabel: UILabel!
-    @IBOutlet weak private var addPhotoContainerView: UIView!
     @IBOutlet weak private var addPhotoButton: UIButton! {
         didSet {
             self.addPhotoButton.layer.cornerRadius = 6
@@ -30,7 +30,6 @@ class PhotoAuthorizationLimitedCell: UICollectionViewCell {
             self.addPhotoButton.layer.borderWidth = 1
         }
     }
-    @IBOutlet weak private var authorizeAllPhotoContainerView: UIView!
     @IBOutlet weak private var authorizeAllPhotoButton: UIButton! {
         didSet {
             self.authorizeAllPhotoButton.layer.cornerRadius = 6
@@ -52,8 +51,7 @@ class PhotoAuthorizationLimitedCell: UICollectionViewCell {
         delegate?.didSelectauthorizeAllPhotoButton(self)
     }
 
-    func setMenuButtonStates(_ states: (Bool, Bool)) {
-        addPhotoButton.isHidden = states.0
-        authorizeAllPhotoButton.isHidden = states.1
+    func isHiddenMenu(_ isHidden: Bool) {
+        menuContainerView.isHidden = isHidden
     }
 }
