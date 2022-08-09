@@ -135,8 +135,8 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssetCell", for: indexPath) as? AssetCell else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetCell\")")
         }
-        let sectionListIndex = indexPath.section - 1
-        let asset = PhotoKitAsset(asset: dateSectionList[sectionListIndex].assetResult[indexPath.row])
+        let indexPath: IndexPath = .init(row: indexPath.row, section: indexPath.section - 1)
+        let asset = PhotoKitAsset(asset: dateSectionList[indexPath.section].assetResult[indexPath.row])
         cell.tag = indexPath.item
         cell.delegate = self
         cell.update(asset: asset, nohanaImagePickerController: nohanaImagePickerController)
