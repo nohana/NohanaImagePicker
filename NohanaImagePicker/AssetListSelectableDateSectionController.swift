@@ -36,12 +36,10 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
 
     private var isHiddenMenu: Bool {
         switch PHPhotoLibrary.authorizationStatus() {
-        case .notDetermined, .restricted, .denied, .limited:
+        case .limited:
             return false
-        case .authorized:
+        default:
             return true
-        @unknown default:
-            fatalError()
         }
     }
 
@@ -175,7 +173,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0 {
-            return CGSize(width: collectionView.frame.width, height: isHiddenMenu ? 84 : 217)
+            return CGSize(width: collectionView.frame.width, height: isHiddenMenu ? 1 : 217)
         } else {
             return cellSize
         }
@@ -185,7 +183,6 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         if section == 0 {
             return .zero
         }
-
         return .init(width: .infinity, height: 44.0)
     }
 
