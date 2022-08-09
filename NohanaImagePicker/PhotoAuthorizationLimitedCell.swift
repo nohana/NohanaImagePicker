@@ -18,7 +18,7 @@ import UIKit
 
 protocol PhotoAuthorizationLimitedCellDeletate {
     func didSelectAddPhotoButton(_ cell: PhotoAuthorizationLimitedCell)
-    func didSelectauthorizeAllPhotoButton(_ cell: PhotoAuthorizationLimitedCell)
+    func didSelectAuthorizeAllPhotoButton(_ cell: PhotoAuthorizationLimitedCell)
 }
 
 class PhotoAuthorizationLimitedCell: UICollectionViewCell {
@@ -56,7 +56,7 @@ class PhotoAuthorizationLimitedCell: UICollectionViewCell {
     }
 
     @IBAction func tappedAuthorizeAllPhotoButton(_ sender: UIButton) {
-        delegate?.didSelectauthorizeAllPhotoButton(self)
+        delegate?.didSelectAuthorizeAllPhotoButton(self)
     }
 
     func isHiddenMenu(_ isHidden: Bool) {

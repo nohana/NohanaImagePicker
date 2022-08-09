@@ -317,11 +317,12 @@ extension AssetListSelectableDateSectionController: AssetCellDelegate {
     }
 }
 
+// MARK: - PhotoAuthorizationLimitedCellDeletate
 extension AssetListSelectableDateSectionController: PhotoAuthorizationLimitedCellDeletate {
     func didSelectAddPhotoButton(_ cell: PhotoAuthorizationLimitedCell) {
 
     }
-    func didSelectauthorizeAllPhotoButton(_ cell: PhotoAuthorizationLimitedCell) {
+    func didSelectAuthorizeAllPhotoButton(_ cell: PhotoAuthorizationLimitedCell) {
 
     }
 }
