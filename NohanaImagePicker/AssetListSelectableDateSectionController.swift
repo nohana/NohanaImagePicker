@@ -312,7 +312,7 @@ extension AssetListSelectableDateSectionController: AssetCellDelegate {
             if #available(iOS 9.0, *) {
                 let rowResetIndexPath = IndexPath(row: 0, section: indexPath.section)
                 let header = collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: rowResetIndexPath) as? AssetDateSectionHeaderView
-                let assets = dateSectionList[indexPath.section].assetResult.map { PhotoKitAsset(asset: $0) }
+                let assets = dateSectionList[indexPath.section - 1].assetResult.map { PhotoKitAsset(asset: $0) }
                 header?.update(assets: assets, indexPath: indexPath, nohanaImagePickerController: nohanaImagePickerController)
             } else {
                 UIView.animate(withDuration: 0) { [weak self] in
