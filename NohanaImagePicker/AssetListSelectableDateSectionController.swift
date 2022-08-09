@@ -332,12 +332,25 @@ extension AssetListSelectableDateSectionController: AssetCellDelegate {
 }
 
 // MARK: - PhotoAuthorizationLimitedCellDeletate
+
 extension AssetListSelectableDateSectionController: PhotoAuthorizationLimitedCellDeletate {
     func didSelectAddPhotoButton(_ cell: PhotoAuthorizationLimitedCell) {
-
+        NotificationCenter.default.post(
+            Notification(
+                name: NotificationInfo.PhotoAuthorization.didTapAddPhoto,
+                object: nil,
+                userInfo: nil
+            )
+        )
     }
     func didSelectAuthorizeAllPhotoButton(_ cell: PhotoAuthorizationLimitedCell) {
-
+        NotificationCenter.default.post(
+            Notification(
+                name: NotificationInfo.PhotoAuthorization.didTapAuthorizeAllPhoto,
+                object: nil,
+                userInfo: nil
+            )
+        )
     }
 }
 

@@ -73,6 +73,7 @@ class RootViewController: UIViewController {
         
         // Notification
         addPickPhotoKitAssetNotificationObservers()
+        addPhotoAuthorizationButtonNotificationObservers()
         
         if let assetCollection = nohanaImagePickerController.defaultAssetCollection {
             showPhotosFromDefaultAlbum(album: assetCollection)
@@ -215,6 +216,16 @@ class RootViewController: UIViewController {
             }
         })
     }
+
+    @objc func didTapAddPhoto(_ notification: Notification) {
+        print("didTapAddPhoto")
+
+    }
+
+    @objc func didTapAuthorizeAllPhoto(_ notification: Notification) {
+        print("didTapAuthorizeAllPhoto")
+    }
+
     
     // MARK: - IBAction
     @IBAction func didTapDone(_ sender: AnyObject) {

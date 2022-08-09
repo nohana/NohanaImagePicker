@@ -35,6 +35,8 @@ public enum MediaType: Int {
     @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, assetListViewController: UICollectionViewController, cell: UICollectionViewCell, indexPath: IndexPath, photoKitAsset: PHAsset) -> UICollectionViewCell
     @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, assetDetailListViewController: UICollectionViewController, cell: UICollectionViewCell, indexPath: IndexPath, photoKitAsset: PHAsset) -> UICollectionViewCell
     @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, assetDetailListViewController: UICollectionViewController, didChangeAssetDetailPage indexPath: IndexPath, photoKitAsset: PHAsset)
+    @objc optional func nohanaImagePickerDidTapAddPhotoButton(_ picker: NohanaImagePickerController)
+    @objc optional func nohanaImagePickerDidTapAuthorizeAllPhotoButton(_ picker: NohanaImagePickerController)
 }
 
 open class NohanaImagePickerController: UIViewController {
