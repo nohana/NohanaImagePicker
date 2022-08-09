@@ -35,7 +35,13 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     }
 
     private var isHiddenMenu: Bool {
-        switch PHPhotoLibrary.authorizationStatus() {
+        let status: PHAuthorizationStatus
+        if #available(iOS 14, *) {
+            status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        } else {
+            status = PHPhotoLibrary.authorizationStatus()
+        }
+        switch status {
         case .limited:
             return false
         default:
