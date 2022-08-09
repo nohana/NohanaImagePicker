@@ -213,12 +213,15 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     // MARK: - UICollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: dateSectionList[indexPath.section].assetResult[indexPath.row])
+
+        let sectionListIndex = indexPath.section - 1
+
+        nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: dateSectionList[sectionListIndex].assetResult[indexPath.row])
     }
     
     @available(iOS 13.0, *)
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        let asset = PhotoKitAsset(asset: dateSectionList[indexPath.section].assetResult[indexPath.row])
+        let asset = PhotoKitAsset(asset: dateSectionList[indexPath.section - 1].assetResult[indexPath.row])
         if let cell = collectionView.cellForItem(at: indexPath) as? AssetCell {
             return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { [weak self] in
                 // Create a preview view controller and return it
@@ -268,12 +271,13 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let selectedIndexPath = collectionView?.indexPathsForSelectedItems?.first,
-              selectedIndexPath.section < dateSectionList.count else {
+              selectedIndexPath.section != 0,
+              selectedIndexPath.section - 1 < dateSectionList.count else {
             return
         }
         var assetListDetailCurrentRow = 0
-        for section in 0..<(selectedIndexPath.section + 1) {
-            if selectedIndexPath.section == section {
+        for section in 0..<(selectedIndexPath.section) {
+            if selectedIndexPath.section == (section + 1) {
                 assetListDetailCurrentRow += selectedIndexPath.row
             } else {
                 assetListDetailCurrentRow += dateSectionList[section].assetResult.count
