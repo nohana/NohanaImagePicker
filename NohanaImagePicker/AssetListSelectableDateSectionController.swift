@@ -19,7 +19,11 @@ import Photos
 import UIKit
 
 class AssetListSelectableDateSectionController: UICollectionViewController, UICollectionViewDelegateFlowLayout, ActivityIndicatable {
-    
+
+    private enum Section: Int {
+        case photoAuthorizationLimited = 0
+    }
+
     private let nohanaImagePickerController: NohanaImagePickerController
     let photoKitAssetList: PhotoKitAssetList
     var dateSectionList: [AssetDateSection] = []
@@ -109,7 +113,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
+        if Section(rawValue: section) == .photoAuthorizationLimited {
             return 1
         } else {
             return dateSectionList[section - 1].assetResult.count
@@ -119,7 +123,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     // MARK: - UICollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == 0 {
+        if Section(rawValue: indexPath.section) == .photoAuthorizationLimited {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoAuthorizationLimitedCell.defaultReusableId, for: indexPath) as? PhotoAuthorizationLimitedCell else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"PhotoAuthorizationLimitedCell\")")
             }
@@ -159,7 +163,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "AssetDateSectionHeader", for: indexPath) as? AssetDateSectionHeaderView else {
                 fatalError("failed to create AssetDateSectionHeader")
             }
-            if indexPath.section == 0 {
+            if Section(rawValue: indexPath.section) == .photoAuthorizationLimited {
                 return header
             }
             let sectionListIndex = indexPath.section - 1
@@ -178,7 +182,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     // MARK: - UICollectionViewDelegateFlowLayout
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.section == 0 {
+        if Section(rawValue: indexPath.section) == .photoAuthorizationLimited {
             return CGSize(width: collectionView.frame.width, height: isHiddenMenu ? 1 : 217)
         } else {
             return cellSize
@@ -186,7 +190,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        if section == 0 {
+        if Section(rawValue: section) == .photoAuthorizationLimited {
             return .zero
         }
         return .init(width: .infinity, height: 44.0)
