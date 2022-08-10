@@ -16,6 +16,7 @@
 import UIKit
 import NohanaImagePicker
 import Photos
+import PhotosUI
 
 struct Cell {
     let title: String
@@ -247,9 +248,18 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
 
     func nohanaImagePickerDidTapAddPhotoButton(_ picker: NohanaImagePickerController) {
         print("🐷\(#function)")
+        if #available(iOS 14, *) {
+            PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: picker)
+        }
     }
 
     func nohanaImagePickerDidTapAuthorizeAllPhotoButton(_ picker: NohanaImagePickerController) {
         print("🐷\(#function)")
+        guard let url = URL(string: UIApplication.openSettingsURLString),
+            UIApplication.shared.canOpenURL(url) else {
+                assertionFailure("Not able to open App privacy settings")
+                return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 }

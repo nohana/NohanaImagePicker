@@ -70,6 +70,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         addPickPhotoKitAssetNotificationObservers()
         setUpActivityIndicator()
         collectionView.register(UINib(nibName: "PhotoAuthorizationLimitedCell", bundle: self.nohanaImagePickerController.assetBundle), forCellWithReuseIdentifier: PhotoAuthorizationLimitedCell.defaultReusableId)
+        PHPhotoLibrary.shared().register(self)
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.dateSectionList = AssetDateSectionCreater().createSections(assetList: self.photoKitAssetList.assetList, options: PhotoKitAssetList.fetchOptions(self.photoKitAssetList.mediaType, ascending: false))
@@ -355,5 +356,18 @@ extension String {
         let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
 
         return ceil(boundingBox.width)
+    }
+}
+
+// MARK: - PHPhotoLibraryChangeObserver
+
+extension AssetListSelectableDateSectionController: PHPhotoLibraryChangeObserver {
+    func photoLibraryDidChange(_ changeInstance: PHChange) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.dateSectionList = AssetDateSectionCreater().createSections(assetList: self.photoKitAssetList.assetList, options: PhotoKitAssetList.fetchOptions(self.photoKitAssetList.mediaType, ascending: false))
+            self.isLoading = false
+            self.collectionView?.reloadData()
+        }
     }
 }
