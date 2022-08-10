@@ -25,9 +25,4 @@ struct NotificationInfo {
             static let didDropUserInfoKeyPickedAssetsCount = "pickedAssetsCount"
         }
     }
-
-    struct PhotoAuthorization {
-        static let didTapAddPhoto = Notification.Name("jp.co.nohana.NotificationName.PhotoAuthorization.didTapAddPhoto")
-        static let didTapAuthorizeAllPhoto = Notification.Name("jp.co.nohana.NotificationName.PhotoAuthorization.didTapAuthorizeAllPhoto")
-    }
 }

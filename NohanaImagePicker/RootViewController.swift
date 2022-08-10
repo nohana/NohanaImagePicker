@@ -73,7 +73,6 @@ class RootViewController: UIViewController {
         
         // Notification
         addPickPhotoKitAssetNotificationObservers()
-        addPhotoAuthorizationButtonNotificationObservers()
         
         if let assetCollection = nohanaImagePickerController.defaultAssetCollection {
             showPhotosFromDefaultAlbum(album: assetCollection)

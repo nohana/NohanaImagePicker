@@ -334,22 +334,11 @@ extension AssetListSelectableDateSectionController: AssetCellDelegate {
 
 extension AssetListSelectableDateSectionController: PhotoAuthorizationLimitedCellDeletate {
     func didSelectAddPhotoButton(_ cell: PhotoAuthorizationLimitedCell) {
-        NotificationCenter.default.post(
-            Notification(
-                name: NotificationInfo.PhotoAuthorization.didTapAddPhoto,
-                object: nil,
-                userInfo: nil
-            )
-        )
+        nohanaImagePickerController.delegate?.nohanaImagePickerDidTapAddPhotoButton?(nohanaImagePickerController)
     }
+    
     func didSelectAuthorizeAllPhotoButton(_ cell: PhotoAuthorizationLimitedCell) {
-        NotificationCenter.default.post(
-            Notification(
-                name: NotificationInfo.PhotoAuthorization.didTapAuthorizeAllPhoto,
-                object: nil,
-                userInfo: nil
-            )
-        )
+        nohanaImagePickerController.delegate?.nohanaImagePickerDidTapAuthorizeAllPhotoButton?(nohanaImagePickerController)
     }
 }
 
