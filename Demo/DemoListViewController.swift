@@ -244,4 +244,12 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
     func nohanaImagePicker(_ picker: NohanaImagePickerController, assetDetailListViewController: UICollectionViewController, didChangeAssetDetailPage indexPath: IndexPath, photoKitAsset: PHAsset) {
         print("🐷\(#function)\n\tindexPath = \(indexPath)")
     }
+
+    func nohanaImagePickerDidTapAddPhotoButton(_ picker: NohanaImagePickerController) {
+        print("🐷\(#function)")
+    }
+
+    func nohanaImagePickerDidTapAuthorizeAllPhotoButton(_ picker: NohanaImagePickerController) {
+        print("🐷\(#function)")
+    }
 }
