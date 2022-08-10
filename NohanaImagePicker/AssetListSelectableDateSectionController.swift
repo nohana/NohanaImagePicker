@@ -52,7 +52,6 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
             return true
         }
     }
-
     
     init?(coder: NSCoder, nohanaImagePickerController: NohanaImagePickerController, photoKitAssetList: PhotoKitAssetList) {
         self.nohanaImagePickerController = nohanaImagePickerController

@@ -101,7 +101,6 @@ extension UIViewController {
     }
 
     @objc func addPhotoAuthorizationButtonNotificationObservers() {
-
         NotificationCenter.default.addObserver(self, selector: #selector(RootViewController.didTapAddPhoto(_:)), name: NotificationInfo.PhotoAuthorization.didTapAddPhoto, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(RootViewController.didTapAuthorizeAllPhoto(_:)), name:  NotificationInfo.PhotoAuthorization.didTapAuthorizeAllPhoto, object: nil)
     }
