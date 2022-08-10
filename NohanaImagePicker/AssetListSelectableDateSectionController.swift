@@ -16,9 +16,14 @@
 
 import Foundation
 import Photos
+import UIKit
 
 class AssetListSelectableDateSectionController: UICollectionViewController, UICollectionViewDelegateFlowLayout, ActivityIndicatable {
-    
+
+    private enum Section: Int {
+        case photoAuthorizationLimited = 0
+    }
+
     private let nohanaImagePickerController: NohanaImagePickerController
     let photoKitAssetList: PhotoKitAssetList
     var dateSectionList: [AssetDateSection] = []
@@ -32,6 +37,22 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         let cellWidth = (view.frame.width - cellMargin * (CGFloat(numberOfColumns) - 1)) / CGFloat(numberOfColumns)
         return CGSize(width: cellWidth, height: cellWidth)
     }
+
+    private var isHiddenMenu: Bool {
+        let status: PHAuthorizationStatus
+        if #available(iOS 14, *) {
+            status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        } else {
+            status = PHPhotoLibrary.authorizationStatus()
+        }
+        switch status {
+        case .limited:
+            return false
+        default:
+            return true
+        }
+    }
+
     
     init?(coder: NSCoder, nohanaImagePickerController: NohanaImagePickerController, photoKitAssetList: PhotoKitAssetList) {
         self.nohanaImagePickerController = nohanaImagePickerController
@@ -49,6 +70,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         setUpToolbarItems()
         addPickPhotoKitAssetNotificationObservers()
         setUpActivityIndicator()
+        collectionView.register(UINib(nibName: "PhotoAuthorizationLimitedCell", bundle: self.nohanaImagePickerController.assetBundle), forCellWithReuseIdentifier: PhotoAuthorizationLimitedCell.defaultReusableId)
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.dateSectionList = AssetDateSectionCreater().createSections(assetList: self.photoKitAssetList.assetList, options: PhotoKitAssetList.fetchOptions(self.photoKitAssetList.mediaType, ascending: false))
@@ -87,21 +109,33 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         if let activityIndicator = activityIndicator {
             updateVisibilityOfActivityIndicator(activityIndicator)
         }
-
-        return dateSectionList.count
+        return dateSectionList.count + 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dateSectionList[section].assetResult.count
+        if Section(rawValue: section) == .photoAuthorizationLimited {
+            return 1
+        } else {
+            return dateSectionList[section - 1].assetResult.count
+        }
     }
 
     // MARK: - UICollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if Section(rawValue: indexPath.section) == .photoAuthorizationLimited {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoAuthorizationLimitedCell.defaultReusableId, for: indexPath) as? PhotoAuthorizationLimitedCell else {
+                fatalError("failed to dequeueReusableCellWithIdentifier(\"PhotoAuthorizationLimitedCell\")")
+            }
+            cell.delegate = self
+            cell.isHiddenMenu(isHiddenMenu)
+            return cell
+        }
+
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssetCell", for: indexPath) as? AssetCell else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetCell\")")
         }
-
+        let indexPath: IndexPath = .init(row: indexPath.row, section: indexPath.section - 1)
         let asset = PhotoKitAsset(asset: dateSectionList[indexPath.section].assetResult[indexPath.row])
         cell.tag = indexPath.item
         cell.delegate = self
@@ -126,15 +160,20 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            let album = dateSectionList[indexPath.section]
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "AssetDateSectionHeader", for: indexPath) as? AssetDateSectionHeaderView else {
                 fatalError("failed to create AssetDateSectionHeader")
             }
+            if Section(rawValue: indexPath.section) == .photoAuthorizationLimited {
+                return header
+            }
+            let sectionListIndex = indexPath.section - 1
+            let album = dateSectionList[sectionListIndex]
             header.date = album.creationDate
             header.delegate = self
-            let assets = dateSectionList[indexPath.section].assetResult.map { PhotoKitAsset(asset: $0) }
+            let assets = dateSectionList[sectionListIndex].assetResult.map { PhotoKitAsset(asset: $0) }
             header.update(assets: assets, indexPath: indexPath, nohanaImagePickerController: nohanaImagePickerController)
             return header
+
         default:
             fatalError("failed to create AssetDateSectionHeader")
         }
@@ -143,8 +182,20 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     // MARK: - UICollectionViewDelegateFlowLayout
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return cellSize
+        if Section(rawValue: indexPath.section) == .photoAuthorizationLimited {
+            return CGSize(width: collectionView.frame.width, height: isHiddenMenu ? 1 : 217)
+        } else {
+            return cellSize
+        }
     }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if Section(rawValue: section) == .photoAuthorizationLimited {
+            return .zero
+        }
+        return .init(width: .infinity, height: 44.0)
+    }
+
 
     // MARK: - ActivityIndicatable
 
@@ -166,12 +217,15 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     // MARK: - UICollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: dateSectionList[indexPath.section].assetResult[indexPath.row])
+
+        let sectionListIndex = indexPath.section - 1
+
+        nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: dateSectionList[sectionListIndex].assetResult[indexPath.row])
     }
     
     @available(iOS 13.0, *)
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        let asset = PhotoKitAsset(asset: dateSectionList[indexPath.section].assetResult[indexPath.row])
+        let asset = PhotoKitAsset(asset: dateSectionList[indexPath.section - 1].assetResult[indexPath.row])
         if let cell = collectionView.cellForItem(at: indexPath) as? AssetCell {
             return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { [weak self] in
                 // Create a preview view controller and return it
@@ -221,12 +275,13 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let selectedIndexPath = collectionView?.indexPathsForSelectedItems?.first,
-              selectedIndexPath.section < dateSectionList.count else {
+              selectedIndexPath.section != 0,
+              selectedIndexPath.section - 1 < dateSectionList.count else {
             return
         }
         var assetListDetailCurrentRow = 0
-        for section in 0..<(selectedIndexPath.section + 1) {
-            if selectedIndexPath.section == section {
+        for section in 0..<(selectedIndexPath.section) {
+            if selectedIndexPath.section == (section + 1) {
                 assetListDetailCurrentRow += selectedIndexPath.row
             } else {
                 assetListDetailCurrentRow += dateSectionList[section].assetResult.count
@@ -261,7 +316,7 @@ extension AssetListSelectableDateSectionController: AssetCellDelegate {
             if #available(iOS 9.0, *) {
                 let rowResetIndexPath = IndexPath(row: 0, section: indexPath.section)
                 let header = collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: rowResetIndexPath) as? AssetDateSectionHeaderView
-                let assets = dateSectionList[indexPath.section].assetResult.map { PhotoKitAsset(asset: $0) }
+                let assets = dateSectionList[indexPath.section - 1].assetResult.map { PhotoKitAsset(asset: $0) }
                 header?.update(assets: assets, indexPath: indexPath, nohanaImagePickerController: nohanaImagePickerController)
             } else {
                 UIView.animate(withDuration: 0) { [weak self] in
@@ -273,5 +328,31 @@ extension AssetListSelectableDateSectionController: AssetCellDelegate {
             }
         }
         updateDoneBarButtonColor()
+    }
+}
+
+// MARK: - PhotoAuthorizationLimitedCellDeletate
+extension AssetListSelectableDateSectionController: PhotoAuthorizationLimitedCellDeletate {
+    func didSelectAddPhotoButton(_ cell: PhotoAuthorizationLimitedCell) {
+
+    }
+    func didSelectAuthorizeAllPhotoButton(_ cell: PhotoAuthorizationLimitedCell) {
+
+    }
+}
+
+extension String {
+    func height(withConstrainedWidth width: CGFloat, font: UIFont = .systemFont(ofSize: 13.5)) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+
+        return ceil(boundingBox.height)
+    }
+
+    func width(withConstrainedHeight height: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+
+        return ceil(boundingBox.width)
     }
 }
