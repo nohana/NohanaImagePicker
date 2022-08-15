@@ -59,7 +59,7 @@ class PhotoAuthorizationLimitedCell: UICollectionViewCell {
         delegate?.didSelectAuthorizeAllPhotoButton(self)
     }
 
-    func isHiddenMenu(_ isHidden: Bool) {
+    func isHiddenCell(_ isHidden: Bool) {
         containerView.isHidden = isHidden
     }
 }
