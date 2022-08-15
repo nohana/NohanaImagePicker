@@ -30,14 +30,26 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="CCJ-dC-VgH">
                                                 <rect key="frame" x="10" y="16" width="355" height="195"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="59M-IU-B2O">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZK1-yv-aoo">
                                                         <rect key="frame" x="0.0" y="0.0" width="355" height="81"/>
-                                                        <string key="text">現在「選択した写真」のみ許可されています。
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="59M-IU-B2O">
+                                                                <rect key="frame" x="4" y="0.0" width="347" height="81"/>
+                                                                <string key="text">現在「選択した写真」のみ許可されています。
 設定画面の「写真」で「すべての写真」に✓を入れると、端末内のすべての写真から選べるようになります。</string>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13.5"/>
-                                                        <color key="textColor" red="0.29019607843137252" green="0.24313725490196078" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="13.5"/>
+                                                                <color key="textColor" red="0.29019607843137252" green="0.24313725490196078" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="59M-IU-B2O" secondAttribute="bottom" id="0rA-E7-v92"/>
+                                                            <constraint firstItem="59M-IU-B2O" firstAttribute="top" secondItem="ZK1-yv-aoo" secondAttribute="top" id="6Ee-G5-Joa"/>
+                                                            <constraint firstAttribute="trailing" secondItem="59M-IU-B2O" secondAttribute="trailing" constant="4" id="JrJ-uR-2rn"/>
+                                                            <constraint firstItem="59M-IU-B2O" firstAttribute="leading" secondItem="ZK1-yv-aoo" secondAttribute="leading" constant="4" id="xKS-x0-JPv"/>
+                                                        </constraints>
+                                                    </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="h9k-yE-aas">
                                                         <rect key="frame" x="0.0" y="97" width="355" height="98"/>
                                                         <subviews>
@@ -45,7 +57,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="44"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PEb-zt-1Fl">
-                                                                        <rect key="frame" x="4" y="0.0" width="347" height="44"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="44"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="44" id="ZO8-hj-ATv"/>
@@ -62,8 +74,8 @@
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
-                                                                    <constraint firstItem="PEb-zt-1Fl" firstAttribute="leading" secondItem="jOd-oB-6LC" secondAttribute="leading" constant="4" id="LKj-tz-vjE"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="PEb-zt-1Fl" secondAttribute="trailing" constant="4" id="eya-62-Fhd"/>
+                                                                    <constraint firstItem="PEb-zt-1Fl" firstAttribute="leading" secondItem="jOd-oB-6LC" secondAttribute="leading" id="LKj-tz-vjE"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="PEb-zt-1Fl" secondAttribute="trailing" id="eya-62-Fhd"/>
                                                                     <constraint firstAttribute="bottom" secondItem="PEb-zt-1Fl" secondAttribute="bottom" id="jAW-KE-rzS"/>
                                                                     <constraint firstItem="PEb-zt-1Fl" firstAttribute="top" secondItem="jOd-oB-6LC" secondAttribute="top" id="vxl-L1-vSy"/>
                                                                 </constraints>
@@ -84,7 +96,7 @@
                                                                 <rect key="frame" x="0.0" y="54" width="355" height="44"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lke-XO-gdG">
-                                                                        <rect key="frame" x="4" y="0.0" width="347" height="44"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="44"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="44" id="haZ-Ck-3Rx"/>
@@ -101,9 +113,9 @@
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
-                                                                    <constraint firstItem="lke-XO-gdG" firstAttribute="leading" secondItem="Xnc-mK-k5n" secondAttribute="leading" constant="4" id="3yc-og-VHo"/>
+                                                                    <constraint firstItem="lke-XO-gdG" firstAttribute="leading" secondItem="Xnc-mK-k5n" secondAttribute="leading" id="3yc-og-VHo"/>
                                                                     <constraint firstItem="lke-XO-gdG" firstAttribute="top" secondItem="Xnc-mK-k5n" secondAttribute="top" id="Ruh-CU-vGg"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="lke-XO-gdG" secondAttribute="trailing" constant="4" id="X38-Hd-n0B"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="lke-XO-gdG" secondAttribute="trailing" id="X38-Hd-n0B"/>
                                                                     <constraint firstAttribute="bottom" secondItem="lke-XO-gdG" secondAttribute="bottom" id="r7C-Rn-Ufv"/>
                                                                 </constraints>
                                                                 <userDefinedRuntimeAttributes>

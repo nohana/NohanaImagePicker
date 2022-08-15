@@ -19,7 +19,12 @@
 "albumlist.empty.description" = "Take some photos with Camera app.";
 "albumlist.empty.alert.button.ok" = "OK";
 "albumlist.moment.title" = "Moment";
+"albumlist.menu.description" = "Currently only \"selected photos\" are allowed.\n
+If you put ✓ in \"All photos\" in \"Photos\" on the setting screen, you will be able to select from all the photos in the terminal.";
+"albumlist.menu.addPhoto.title" = "Add permission photo";
+"albumlist.menu.authorizeAllPhoto.title" = "Allow all photos";
 "toolbar.title.nolimit" = "Selected Items: %ld";
 "toolbar.title.haslimit" = "Selected Items: %ld / %ld";
 "action.title.select" = "Select";
 "action.title.deselect" = "Deselect";
+

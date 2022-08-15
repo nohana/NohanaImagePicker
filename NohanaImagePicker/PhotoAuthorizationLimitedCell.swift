@@ -59,7 +59,48 @@ class PhotoAuthorizationLimitedCell: UICollectionViewCell {
         delegate?.didSelectAuthorizeAllPhotoButton(self)
     }
 
+    func update(_ isHidden: Bool, nohanaImagePickerController: NohanaImagePickerController) {
+
+        containerView.isHidden = isHidden
+        attentionLabel.text = NSLocalizedString(
+            "albumlist.menu.description",
+            tableName: "NohanaImagePicker",
+            bundle: nohanaImagePickerController.assetBundle,
+            comment: ""
+        )
+
+        addPhotoButton.setTitle(
+            NSLocalizedString(
+                "albumlist.menu.addPhoto.title",
+                tableName: "NohanaImagePicker",
+                bundle: nohanaImagePickerController.assetBundle,
+                comment: ""
+            ),
+            for: .normal
+        )
+
+        authorizeAllPhotoButton.setTitle(
+            NSLocalizedString(
+                "albumlist.menu.authorizeAllPhoto.title",
+                tableName: "NohanaImagePicker",
+                bundle: nohanaImagePickerController.assetBundle,
+                comment: ""
+            ),
+            for: .normal
+        )
+    }
+    
     func isHiddenCell(_ isHidden: Bool) {
         containerView.isHidden = isHidden
+    }
+
+    static func cellSize(_ nohanaImagePickerController: NohanaImagePickerController) -> CGSize {
+        let descriptionLabel = UILabel()
+        descriptionLabel.text = NSLocalizedString("albumlist.menu.description", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
+            descriptionLabel.frame = .init(x: 0, y: 0, width: UIScreen.main.bounds.width - 28, height: 0)
+            descriptionLabel.sizeToFit()
+
+        let height: CGFloat = descriptionLabel.frame.height + 44 * 2 + 10 + 16 * 3
+        return .init(width: UIScreen.main.bounds.width, height: height)
     }
 }
