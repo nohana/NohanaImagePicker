@@ -59,6 +59,7 @@ open class NohanaImagePickerController: UIViewController {
             .font: UIFont.systemFont(ofSize: 17, weight: .semibold)
         ]
     }()
+    open var isHiddenPhotoAuthorizationLimitedView: Bool = false
     lazy var assetBundle: Bundle = {
         let bundle = Bundle(for: type(of: self))
         if let path = bundle.path(forResource: "NohanaImagePicker", ofType: "bundle") {

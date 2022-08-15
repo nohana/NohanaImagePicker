@@ -38,7 +38,11 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         return CGSize(width: cellWidth, height: cellWidth)
     }
 
-    private var isHiddenMenu: Bool {
+    private lazy var isHiddenPhotoAuthorizationLimitedCell: Bool = {
+        guard !nohanaImagePickerController.isHiddenPhotoAuthorizationLimitedView else {
+            return true
+        }
+
         let status: PHAuthorizationStatus
         if #available(iOS 14, *) {
             status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
@@ -51,7 +55,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         default:
             return true
         }
-    }
+    }()
     
     init?(coder: NSCoder, nohanaImagePickerController: NohanaImagePickerController, photoKitAssetList: PhotoKitAssetList) {
         self.nohanaImagePickerController = nohanaImagePickerController
@@ -128,7 +132,8 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"PhotoAuthorizationLimitedCell\")")
             }
             cell.delegate = self
-            cell.isHiddenMenu(isHiddenMenu)
+            let isHidden = isHiddenPhotoAuthorizationLimitedCell
+            cell.isHiddenCell(isHidden)
             return cell
         }
 
@@ -183,7 +188,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if Section(rawValue: indexPath.section) == .photoAuthorizationLimited {
-            return CGSize(width: collectionView.frame.width, height: isHiddenMenu ? 1 : 217)
+            return CGSize(width: collectionView.frame.width, height: isHiddenPhotoAuthorizationLimitedCell ? 1 : 217)
         } else {
             return cellSize
         }

@@ -45,5 +45,7 @@
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To pick some photos.</string>
+	<key>PHPhotoLibraryPreventAutomaticLimitedAccessAlert</key>
+	<true/>
 </dict>
 </plist>
