@@ -96,11 +96,11 @@ class PhotoAuthorizationLimitedCell: UICollectionViewCell {
 
     static func cellSize(_ nohanaImagePickerController: NohanaImagePickerController) -> CGSize {
         let descriptionLabel = UILabel()
+        descriptionLabel.numberOfLines = 0
+        descriptionLabel.font = .systemFont(ofSize: 13.5)
         descriptionLabel.text = NSLocalizedString("albumlist.menu.description", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
-            descriptionLabel.frame = .init(x: 0, y: 0, width: UIScreen.main.bounds.width - 28, height: 0)
-            descriptionLabel.sizeToFit()
-
-        let height: CGFloat = descriptionLabel.frame.height + 44 * 2 + 10 + 16 * 3
+        let maxSize: CGSize = .init(width: UIScreen.main.bounds.width - 28, height: .infinity)
+        let height: CGFloat = descriptionLabel.sizeThatFits(maxSize).height + 44 * 2 + 10 + 16 * 3
         return .init(width: UIScreen.main.bounds.width, height: height)
     }
 }
