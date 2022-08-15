@@ -223,8 +223,11 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        let sectionListIndex = indexPath.section - 1
+        guard Section(rawValue: indexPath.section) != .photoAuthorizationLimited else {
+            return
+        }
 
+        let sectionListIndex = indexPath.section - 1
         nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: dateSectionList[sectionListIndex].assetResult[indexPath.row])
     }
     
