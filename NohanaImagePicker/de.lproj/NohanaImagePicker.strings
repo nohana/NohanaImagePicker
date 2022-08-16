@@ -19,6 +19,10 @@
 "albumlist.empty.description" = "Nimm Fotos mit der Kamera App auf.";
 "albumlist.empty.alert.button.ok" = "OK";
 "albumlist.moment.title" = "Moment";
+"albumlist.menu.description" = "Derzeit sind nur \"ausgewählte Fotos\" erlaubt. \n
+Wenn Sie auf dem Einstellungsbildschirm unter „Fotos“ unter „Alle Fotos“ ✓ eingeben, können Sie aus allen Fotos im Terminal auswählen.";
+"albumlist.menu.addPhoto.title" = "Genehmigungsfoto hinzufügen";
+"albumlist.menu.authorizeAllPhoto.title" = "alle Fotos zulassen";
 "toolbar.title.nolimit" = "Ausgewählte Fotos: %ld";
 "toolbar.title.haslimit" = "Ausgewählte Fotos: %ld / %ld";
 "action.title.select" = "Auswählen";

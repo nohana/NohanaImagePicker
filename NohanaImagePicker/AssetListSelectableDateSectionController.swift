@@ -133,7 +133,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
             }
             cell.delegate = self
             let isHidden = isHiddenPhotoAuthorizationLimitedCell
-            cell.isHiddenCell(isHidden)
+            cell.update(isHidden, nohanaImagePickerController: nohanaImagePickerController)
             return cell
         }
 
@@ -188,7 +188,11 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if Section(rawValue: indexPath.section) == .photoAuthorizationLimited {
-            return CGSize(width: collectionView.frame.width, height: isHiddenPhotoAuthorizationLimitedCell ? 1 : 217)
+            if isHiddenPhotoAuthorizationLimitedCell {
+                return CGSize(width: collectionView.frame.width, height: 1)
+            } else {
+                return PhotoAuthorizationLimitedCell.cellSize(nohanaImagePickerController)
+            }
         } else {
             return cellSize
         }
