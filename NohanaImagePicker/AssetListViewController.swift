@@ -20,7 +20,7 @@ import Photos
 class AssetListViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     let nohanaImagePickerController: NohanaImagePickerController
-    let photoKitAssetList: PhotoKitAssetList
+    var photoKitAssetList: PhotoKitAssetList
     
     init?(coder: NSCoder, nohanaImagePickerController: NohanaImagePickerController, photoKitAssetList: PhotoKitAssetList) {
         self.nohanaImagePickerController = nohanaImagePickerController

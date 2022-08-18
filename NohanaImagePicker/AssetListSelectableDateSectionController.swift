@@ -299,11 +299,10 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
                 assetListDetailCurrentRow += dateSectionList[section].assetResult.count
             }
         }
-        if assetListDetailCurrentRow >= photoKitAssetList.count {
-            assetListDetailCurrentRow = photoKitAssetList.count - 1
-        }
         
         let assetListDetailViewController = segue.destination as! AssetDetailListViewController
+
+        assetListDetailViewController.photoKitAssetList = PhotoKitAssetList(album: self.photoKitAssetList.assetList, mediaType: self.photoKitAssetList.mediaType, ascending: false)
         assetListDetailViewController.currentIndexPath = IndexPath(item: assetListDetailCurrentRow, section: 0)
     }
 
