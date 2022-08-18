@@ -25,7 +25,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     }
 
     private let nohanaImagePickerController: NohanaImagePickerController
-    let photoKitAssetList: PhotoKitAssetList
+    private var photoKitAssetList: PhotoKitAssetList
     var dateSectionList: [AssetDateSection] = []
     
     var cellSize: CGSize {
@@ -299,10 +299,12 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
                 assetListDetailCurrentRow += dateSectionList[section].assetResult.count
             }
         }
-        
-        let assetListDetailViewController = segue.destination as! AssetDetailListViewController
 
-        assetListDetailViewController.photoKitAssetList = PhotoKitAssetList(album: self.photoKitAssetList.assetList, mediaType: self.photoKitAssetList.mediaType, ascending: false)
+        if assetListDetailCurrentRow >= photoKitAssetList.count {
+            assetListDetailCurrentRow = photoKitAssetList.count - 1
+        }
+
+        let assetListDetailViewController = segue.destination as! AssetDetailListViewController
         assetListDetailViewController.currentIndexPath = IndexPath(item: assetListDetailCurrentRow, section: 0)
     }
 
@@ -376,6 +378,7 @@ extension AssetListSelectableDateSectionController: PHPhotoLibraryChangeObserver
     func photoLibraryDidChange(_ changeInstance: PHChange) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
+            self.photoKitAssetList = PhotoKitAssetList(album: self.photoKitAssetList.assetList, mediaType: self.photoKitAssetList.mediaType, ascending: false)
             self.dateSectionList = AssetDateSectionCreater().createSections(assetList: self.photoKitAssetList.assetList, options: PhotoKitAssetList.fetchOptions(self.photoKitAssetList.mediaType, ascending: false))
             self.isLoading = false
             self.collectionView?.reloadData()
