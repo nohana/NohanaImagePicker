@@ -215,6 +215,14 @@ class RootViewController: UIViewController {
             }
         })
     }
+
+    @objc func didTapAddPhoto(_ notification: Notification) {
+        nohanaImagePickerController.delegate?.nohanaImagePickerDidTapAddPhotoButton?(nohanaImagePickerController)
+    }
+
+    @objc func didTapAuthorizeAllPhoto(_ notification: Notification) {
+        nohanaImagePickerController.delegate?.nohanaImagePickerDidTapAuthorizeAllPhotoButton?(nohanaImagePickerController)
+    }
     
     // MARK: - IBAction
     @IBAction func didTapDone(_ sender: AnyObject) {

@@ -19,6 +19,10 @@
 "albumlist.empty.description" = "Получить фото с камеры";
 "albumlist.empty.alert.button.ok" = "ла́дно";
 "albumlist.moment.title" = "Моменты";
+"albumlist.menu.description" = "В настоящее время разрешены только «избранные фотографии». \n
+Если вы поместите ✓ в «Все фотографии» в «Фотографии» на экране настроек, вы сможете выбрать из всех фотографий в терминале.";
+"albumlist.menu.addPhoto.title" = "добавить фото разрешения";
+"albumlist.menu.authorizeAllPhoto.title" = "разрешить все фото";
 "toolbar.title.nolimit" = "Выбрано: %ld";
 "toolbar.title.haslimit" = "Выбрано: %ld / %ld";
 "action.title.select" = "Выбирать";

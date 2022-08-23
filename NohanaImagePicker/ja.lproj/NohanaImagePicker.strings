@@ -19,6 +19,10 @@
 "albumlist.empty.description" = "カメラで写真を撮影しましょう";
 "albumlist.empty.alert.button.ok" = "OK";
 "albumlist.moment.title" = "日付から選択";
+"albumlist.menu.description" = "現在「選択した写真」のみ許可されています。\n
+設定画面の「写真」で「すべての写真」に✓を入れると、端末内のすべての写真から選べるようになります。";
+"albumlist.menu.addPhoto.title" = "許可写真を追加する";
+"albumlist.menu.authorizeAllPhoto.title" = "すべての写真を許可する";
 "toolbar.title.nolimit" = "%ld枚選択中";
 "toolbar.title.haslimit" = "%ld枚選択中（最大%ld枚）";
 "action.title.select" = "選択する";

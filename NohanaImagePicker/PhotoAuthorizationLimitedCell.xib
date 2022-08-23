@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoAuthorizationLimitedCell" id="gTV-IL-0wX" customClass="PhotoAuthorizationLimitedCell" customModule="NohanaImagePicker" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="227"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="227"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ykc-V6-9Gd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="227"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="qQk-G4-EBj">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="227"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yMZ-KC-OE3">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="227"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="CCJ-dC-VgH">
+                                                <rect key="frame" x="10" y="16" width="355" height="195"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZK1-yv-aoo">
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="81"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="59M-IU-B2O">
+                                                                <rect key="frame" x="4" y="0.0" width="347" height="81"/>
+                                                                <string key="text">現在「選択した写真」のみ許可されています。
+設定画面の「写真」で「すべての写真」に✓を入れると、端末内のすべての写真から選べるようになります。</string>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="13.5"/>
+                                                                <color key="textColor" red="0.29019607843137252" green="0.24313725490196078" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="59M-IU-B2O" secondAttribute="bottom" id="0rA-E7-v92"/>
+                                                            <constraint firstItem="59M-IU-B2O" firstAttribute="top" secondItem="ZK1-yv-aoo" secondAttribute="top" id="6Ee-G5-Joa"/>
+                                                            <constraint firstAttribute="trailing" secondItem="59M-IU-B2O" secondAttribute="trailing" constant="4" id="JrJ-uR-2rn"/>
+                                                            <constraint firstItem="59M-IU-B2O" firstAttribute="leading" secondItem="ZK1-yv-aoo" secondAttribute="leading" constant="4" id="xKS-x0-JPv"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="h9k-yE-aas">
+                                                        <rect key="frame" x="0.0" y="97" width="355" height="98"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jOd-oB-6LC">
+                                                                <rect key="frame" x="0.0" y="0.0" width="355" height="44"/>
+                                                                <subviews>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PEb-zt-1Fl">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="44"/>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="44" id="ZO8-hj-ATv"/>
+                                                                        </constraints>
+                                                                        <state key="normal" title="Button"/>
+                                                                        <buttonConfiguration key="configuration" style="plain" title="許可写真を追加する">
+                                                                            <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
+                                                                            <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        </buttonConfiguration>
+                                                                        <connections>
+                                                                            <action selector="tappedAddPhotoButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="ADg-cA-ohk"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstItem="PEb-zt-1Fl" firstAttribute="leading" secondItem="jOd-oB-6LC" secondAttribute="leading" id="LKj-tz-vjE"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="PEb-zt-1Fl" secondAttribute="trailing" id="eya-62-Fhd"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="PEb-zt-1Fl" secondAttribute="bottom" id="jAW-KE-rzS"/>
+                                                                    <constraint firstItem="PEb-zt-1Fl" firstAttribute="top" secondItem="jOd-oB-6LC" secondAttribute="top" id="vxl-L1-vSy"/>
+                                                                </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer. borderWidth">
+                                                                        <integer key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                        <integer key="value" value="6"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="layer. borderUIColor">
+                                                                        <color key="value" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xnc-mK-k5n">
+                                                                <rect key="frame" x="0.0" y="54" width="355" height="44"/>
+                                                                <subviews>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lke-XO-gdG">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="44"/>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="44" id="haZ-Ck-3Rx"/>
+                                                                        </constraints>
+                                                                        <state key="normal" title="Button"/>
+                                                                        <buttonConfiguration key="configuration" style="plain" title="すべての写真を許可する">
+                                                                            <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
+                                                                            <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        </buttonConfiguration>
+                                                                        <connections>
+                                                                            <action selector="tappedAuthorizeAllPhotoButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="wCi-pM-w85"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstItem="lke-XO-gdG" firstAttribute="leading" secondItem="Xnc-mK-k5n" secondAttribute="leading" id="3yc-og-VHo"/>
+                                                                    <constraint firstItem="lke-XO-gdG" firstAttribute="top" secondItem="Xnc-mK-k5n" secondAttribute="top" id="Ruh-CU-vGg"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="lke-XO-gdG" secondAttribute="trailing" id="X38-Hd-n0B"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="lke-XO-gdG" secondAttribute="bottom" id="r7C-Rn-Ufv"/>
+                                                                </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer. borderWidth">
+                                                                        <integer key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                        <integer key="value" value="6"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="layer. borderColor">
+                                                                        <color key="value" systemColor="tintColor"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="CCJ-dC-VgH" secondAttribute="trailing" constant="10" id="HRQ-Dq-08G"/>
+                                            <constraint firstItem="CCJ-dC-VgH" firstAttribute="top" secondItem="yMZ-KC-OE3" secondAttribute="top" constant="16" id="Q1b-aY-35x"/>
+                                            <constraint firstAttribute="bottom" secondItem="CCJ-dC-VgH" secondAttribute="bottom" constant="16" id="SMs-n5-qWZ"/>
+                                            <constraint firstItem="CCJ-dC-VgH" firstAttribute="leading" secondItem="yMZ-KC-OE3" secondAttribute="leading" constant="10" id="xJQ-S2-reO"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="qQk-G4-EBj" firstAttribute="top" secondItem="Ykc-V6-9Gd" secondAttribute="top" id="37r-VX-g6o"/>
+                            <constraint firstAttribute="bottom" secondItem="qQk-G4-EBj" secondAttribute="bottom" id="LnK-Vs-VfI"/>
+                            <constraint firstAttribute="trailing" secondItem="qQk-G4-EBj" secondAttribute="trailing" id="M6b-o9-7je"/>
+                            <constraint firstItem="qQk-G4-EBj" firstAttribute="leading" secondItem="Ykc-V6-9Gd" secondAttribute="leading" id="lEH-NB-iYF"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Ykc-V6-9Gd" secondAttribute="trailing" id="2SO-8D-j8Q"/>
+                <constraint firstItem="Ykc-V6-9Gd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="9bb-5d-MGP"/>
+                <constraint firstAttribute="bottom" secondItem="Ykc-V6-9Gd" secondAttribute="bottom" id="TgC-qS-dpb"/>
+                <constraint firstItem="Ykc-V6-9Gd" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="blu-CX-wKo"/>
+            </constraints>
+            <size key="customSize" width="324" height="199"/>
+            <connections>
+                <outlet property="addPhotoButton" destination="PEb-zt-1Fl" id="bgN-Bu-3yo"/>
+                <outlet property="attentionLabel" destination="59M-IU-B2O" id="Dfb-b1-NEa"/>
+                <outlet property="authorizeAllPhotoButton" destination="lke-XO-gdG" id="Uec-fz-EoG"/>
+                <outlet property="containerView" destination="qQk-G4-EBj" id="aG5-yq-pMR"/>
+            </connections>
+            <point key="canvasLocation" x="73.188405797101453" y="200.55803571428569"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

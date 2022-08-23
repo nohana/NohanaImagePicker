@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Y8D-wX-eXv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Y8D-wX-eXv">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -73,8 +73,8 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zez-RG-eKO">
-                                    <rect key="frame" x="12" y="13.666666666666664" width="255" height="17"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zez-RG-eKO">
+                                    <rect key="frame" x="12" y="0.0" width="255" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="aZE-cw-Q5P"/>
                                     </constraints>
@@ -99,13 +99,14 @@
                                 </button>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="zez-RG-eKO" firstAttribute="centerY" secondItem="XXe-ul-EPT" secondAttribute="centerY" id="LuP-NY-gzM"/>
                                 <constraint firstItem="zez-RG-eKO" firstAttribute="leading" secondItem="XXe-ul-EPT" secondAttribute="leadingMargin" id="N3P-bG-NqX"/>
                                 <constraint firstItem="3Za-Il-RY8" firstAttribute="leading" secondItem="zez-RG-eKO" secondAttribute="trailing" constant="8" id="PAM-Fp-Mvv"/>
                                 <constraint firstAttribute="trailing" secondItem="3Za-Il-RY8" secondAttribute="trailing" constant="17" id="Qeo-BS-VpK"/>
                                 <constraint firstItem="3Za-Il-RY8" firstAttribute="centerY" secondItem="XXe-ul-EPT" secondAttribute="centerY" id="W69-Gg-fMe"/>
                                 <constraint firstItem="zez-RG-eKO" firstAttribute="centerY" secondItem="XXe-ul-EPT" secondAttribute="centerY" id="eKF-zk-Lja"/>
+                                <constraint firstAttribute="bottom" secondItem="zez-RG-eKO" secondAttribute="bottom" id="jsw-Ve-KxN"/>
                                 <constraint firstItem="zez-RG-eKO" firstAttribute="leading" secondItem="XXe-ul-EPT" secondAttribute="leadingMargin" constant="4" id="r97-8Y-s4a"/>
+                                <constraint firstItem="zez-RG-eKO" firstAttribute="top" secondItem="XXe-ul-EPT" secondAttribute="top" id="sa7-LF-zzM"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
@@ -135,7 +136,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gV9-4e-BRv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="142" y="738"/>
+            <point key="canvasLocation" x="140.57971014492756" y="737.94642857142856"/>
         </scene>
         <!--Asset Detail List View Controller-->
         <scene sceneID="Bzc-Dg-VdR">

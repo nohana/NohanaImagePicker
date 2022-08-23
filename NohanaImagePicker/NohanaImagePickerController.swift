@@ -35,6 +35,8 @@ public enum MediaType: Int {
     @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, assetListViewController: UICollectionViewController, cell: UICollectionViewCell, indexPath: IndexPath, photoKitAsset: PHAsset) -> UICollectionViewCell
     @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, assetDetailListViewController: UICollectionViewController, cell: UICollectionViewCell, indexPath: IndexPath, photoKitAsset: PHAsset) -> UICollectionViewCell
     @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, assetDetailListViewController: UICollectionViewController, didChangeAssetDetailPage indexPath: IndexPath, photoKitAsset: PHAsset)
+    @objc optional func nohanaImagePickerDidTapAddPhotoButton(_ picker: NohanaImagePickerController)
+    @objc optional func nohanaImagePickerDidTapAuthorizeAllPhotoButton(_ picker: NohanaImagePickerController)
 }
 
 open class NohanaImagePickerController: UIViewController {
@@ -57,6 +59,7 @@ open class NohanaImagePickerController: UIViewController {
             .font: UIFont.systemFont(ofSize: 17, weight: .semibold)
         ]
     }()
+    open var isHiddenPhotoAuthorizationLimitedView: Bool = false
     lazy var assetBundle: Bundle = {
         let bundle = Bundle(for: type(of: self))
         if let path = bundle.path(forResource: "NohanaImagePicker", ofType: "bundle") {
