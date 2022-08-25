@@ -390,6 +390,9 @@ extension AssetListSelectableDateSectionController: PHPhotoLibraryChangeObserver
             for removedAsset in removedAssets {
                 self.nohanaImagePickerController.dropAsset(removedAsset)
             }
+            if !removedAssets.isEmpty {
+                self.setToolbarTitle(self.nohanaImagePickerController)
+            }
 
             self.photoKitAssetList = PhotoKitAssetList(album: self.photoKitAssetList.assetList, mediaType: self.photoKitAssetList.mediaType, ascending: false)
             self.dateSectionList = AssetDateSectionCreater().createSections(assetList: self.photoKitAssetList.assetList, options: PhotoKitAssetList.fetchOptions(self.photoKitAssetList.mediaType, ascending: false))
