@@ -74,9 +74,4 @@ open class PhotoKitAssetList: ItemList {
     open var endIndex: Int {
         return fetchResult.count
     }
-
-    open func changeDetails(_ changeInstance: PHChange) -> PHFetchResultChangeDetails<PHAsset>? {
-        changeInstance.changeDetails(for: fetchResult)
-    }
-
 }
