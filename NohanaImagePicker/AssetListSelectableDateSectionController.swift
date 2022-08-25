@@ -378,6 +378,22 @@ extension AssetListSelectableDateSectionController: PHPhotoLibraryChangeObserver
     func photoLibraryDidChange(_ changeInstance: PHChange) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
+
+            var removedAssets: [PhotoKitAsset] = []
+            self.nohanaImagePickerController.pickedAssetList.forEach { item in
+                if let asset = item as? PhotoKitAsset, let changeDetail = changeInstance.changeDetails(for: asset.asset) {
+                    if changeDetail.objectWasDeleted {
+                        removedAssets.append(asset)
+                    }
+                }
+            }
+            for removedAsset in removedAssets {
+                self.nohanaImagePickerController.dropAsset(removedAsset)
+            }
+            if !removedAssets.isEmpty {
+                self.setToolbarTitle(self.nohanaImagePickerController)
+            }
+
             self.photoKitAssetList = PhotoKitAssetList(album: self.photoKitAssetList.assetList, mediaType: self.photoKitAssetList.mediaType, ascending: false)
             self.dateSectionList = AssetDateSectionCreater().createSections(assetList: self.photoKitAssetList.assetList, options: PhotoKitAssetList.fetchOptions(self.photoKitAssetList.mediaType, ascending: false))
             self.isLoading = false
