@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Y8D-wX-eXv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Y8D-wX-eXv">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Asset List Selectable Date Section Controller-->
         <scene sceneID="nNs-bz-pLI">
             <objects>
-                <collectionViewController id="Y8D-wX-eXv" customClass="AssetListSelectableDateSectionController" customModule="NohanaImagePicker" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="Y8D-wX-eXv" customClass="AssetListSelectableDateSectionController" customModule="NohanaImagePicker" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="u96-G1-tlm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -141,7 +141,7 @@
         <!--Asset Detail List View Controller-->
         <scene sceneID="Bzc-Dg-VdR">
             <objects>
-                <collectionViewController id="kYg-Jb-RU3" customClass="AssetDetailListViewController" customModule="NohanaImagePicker" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="kYg-Jb-RU3" customClass="AssetDetailListViewController" customModule="NohanaImagePicker" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" id="6qd-HU-9qw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="514"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
