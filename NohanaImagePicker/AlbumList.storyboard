@@ -10,7 +10,7 @@
         <!--Album List View Controller-->
         <scene sceneID="vgh-Mw-ZD3">
             <objects>
-                <tableViewController id="KMy-V3-MzH" customClass="AlbumListViewController" customModule="NohanaImagePicker" sceneMemberID="viewController">
+                <tableViewController id="KMy-V3-MzH" customClass="AlbumListViewController" customModule="NohanaImagePicker" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="UGs-yG-nCa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -31,7 +31,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Album Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ma1-xv-kQ5">
-                                            <rect key="frame" x="108" y="31.5" width="204" height="19.5"/>
+                                            <rect key="frame" x="108" y="31.5" width="204" height="19"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -51,7 +51,7 @@
                                     <outlet property="titleLabel" destination="ma1-xv-kQ5" id="vu2-Qg-gFH"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MomentAlbumCell" rowHeight="52" id="aYa-j0-GaK" customClass="MomentCell" customModule="NohanaImagePicker" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MomentAlbumCell" rowHeight="52" id="aYa-j0-GaK" customClass="MomentCell" customModule="NohanaImagePicker">
                                 <rect key="frame" x="0.0" y="132" width="320" height="52"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aYa-j0-GaK" id="rck-Bb-u1F">

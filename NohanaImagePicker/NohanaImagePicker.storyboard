@@ -11,7 +11,7 @@
         <!--Root View Controller-->
         <scene sceneID="PQ6-Db-Ux5">
             <objects>
-                <viewController storyboardIdentifier="RootViewController" id="dus-yD-G7d" customClass="RootViewController" customModule="NohanaImagePicker" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RootViewController" id="dus-yD-G7d" customClass="RootViewController" customModule="NohanaImagePicker" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Cp7-CU-v4b"/>
                         <viewControllerLayoutGuide type="bottom" id="Qco-o1-e3k"/>

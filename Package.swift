@@ -29,7 +29,8 @@ let package = Package(
         .target(
             name: "NohanaImagePicker",
             dependencies: [],
-            path: "NohanaImagePicker")
+            path: "NohanaImagePicker"
+            )
     ],
     swiftLanguageVersions: [.v5]
 )

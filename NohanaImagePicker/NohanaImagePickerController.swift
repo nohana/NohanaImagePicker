@@ -61,11 +61,15 @@ open class NohanaImagePickerController: UIViewController {
     }()
     open var isHiddenPhotoAuthorizationLimitedView: Bool = false
     lazy var assetBundle: Bundle = {
-        let bundle = Bundle(for: type(of: self))
-        if let path = bundle.path(forResource: "NohanaImagePicker", ofType: "bundle") {
-            return Bundle(path: path)!
-        }
-        return bundle
+        #if SWIFT_PACKAGE
+            return Bundle.module
+        #else
+            let bundle = Bundle(for: type(of: self))
+            if let path = bundle.path(forResource: "NohanaImagePicker", ofType: "bundle") {
+                return Bundle(path: path)!
+            }
+            return bundle
+        #endif
     }()
     let pickedAssetList: PickedAssetList
     let mediaType: MediaType
