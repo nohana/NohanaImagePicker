@@ -89,6 +89,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0318909529529D770094438E /* NohanaImagePickerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NohanaImagePickerTests.swift; sourceTree = "<group>"; };
 		23D1CD93207CEB1200F8115E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/NohanaImagePicker.strings; sourceTree = "<group>"; };
 		3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NohanaImagePicker.xcassets; sourceTree = "<group>"; };
 		3590F1F51EC1A79400F32E06 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/NohanaImagePicker.strings; sourceTree = "<group>"; };
@@ -170,6 +171,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0318909429529D770094438E /* NohanaImagePickerTests */ = {
+			isa = PBXGroup;
+			children = (
+				0318909529529D770094438E /* NohanaImagePickerTests.swift */,
+			);
+			path = NohanaImagePickerTests;
+			sourceTree = "<group>";
+		};
 		3569CAA31EC1918E000C41C0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -282,6 +291,7 @@
 			children = (
 				F2C08D761C68651900B00181 /* NohanaImagePicker */,
 				F208E5521CD7370B00FFC9F6 /* Demo */,
+				0318909429529D770094438E /* NohanaImagePickerTests */,
 				F2C08D751C68651900B00181 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -386,7 +396,7 @@
 		F2C08D6B1C68651900B00181 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1310;
 				ORGANIZATIONNAME = nohana;
 				TargetAttributes = {
