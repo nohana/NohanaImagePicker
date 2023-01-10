@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import UIKit
+
 protocol DetailListViewControllerProtocol where Self: UICollectionViewController {
     var currentIndexPath: IndexPath { get set }
 }

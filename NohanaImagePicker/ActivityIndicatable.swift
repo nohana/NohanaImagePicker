@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import UIKit
+
 public protocol ActivityIndicatable {
     func isProgressing() -> Bool
     func updateVisibilityOfActivityIndicator(_ activityIndicator: UIView)

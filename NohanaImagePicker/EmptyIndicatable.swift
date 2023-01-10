@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import UIKit
+
 public protocol EmptyIndicatable {
     func isEmpty() -> Bool
     func updateVisibilityOfEmptyIndicator(_ emptyIndicator: UIView)

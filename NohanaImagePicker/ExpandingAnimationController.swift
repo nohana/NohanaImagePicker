@@ -15,6 +15,7 @@
  */
 
 import AVFoundation
+import UIKit
 
 extension Size {
 
