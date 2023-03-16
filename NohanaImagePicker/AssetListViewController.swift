@@ -37,6 +37,12 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
         view.backgroundColor = nohanaImagePickerController.config.color.background ?? .white
         setUpToolbarItems()
         addPickPhotoKitAssetNotificationObservers()
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
     }
 
     var cellSize: CGSize {
