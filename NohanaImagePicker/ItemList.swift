@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+import UIKit
+import CoreFoundation
+import CoreGraphics
+
 public protocol ItemList: Collection {
     associatedtype Item
     var title: String { get }

@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import UIKit
+
 struct Size {
 
     static var statusBarHeight: CGFloat {

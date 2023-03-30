@@ -6,7 +6,7 @@
 
 NohanaImagePicker enables your app to pick images from multiple album, and the moment.
 
-<img src="./Images/collection.gif" width="216" /> 
+<img src="./Images/collection.gif" width="216" />
 
 ## Usage
 
@@ -88,6 +88,18 @@ Use [Carthage](https://github.com/Carthage/Carthage).
 <key>NSPhotoLibraryUsageDescription</key>
 <string>To pick some photos.</string>
 ```
+
+### Swift Package Manager
+Use [Swift Package Manager](https://github.com/apple/swift-package-manager).
+
+- Open **Project > Package Dependencies** and click a **+** button to add a package.
+
+- Search NohanaImagePicker with URL.(`https://github.com/nohana/NohanaImagePicker.git`).
+<img src="https://user-images.githubusercontent.com/5136313/210693382-019f9341-c1f9-4f2d-812b-fdaa5cbd4bf0.png">
+
+- Set a project's target to install the NohanaImagePicker.
+<img src="https://user-images.githubusercontent.com/5136313/210699957-2e07afbf-91b0-48c6-8e15-8bd0d0cc2014.jpg">
+
 
 ## License
 

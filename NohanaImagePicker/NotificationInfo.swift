@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+import Foundation
+import UIKit
+
 struct NotificationInfo {
     struct Asset {
         struct PhotoKit {
