@@ -23,15 +23,17 @@ public class PhotoKitAlbumList: ItemList {
     private let mediaType: MediaType
     private var shouldShowEmptyAlbum: Bool
     private let ascending: Bool
+    private let customAssetCollection: CustomAssetCollection?
 
     // MARK: - init
 
-    init(assetCollectionTypes: [PHAssetCollectionType], assetCollectionSubtypes: [PHAssetCollectionSubtype], mediaType: MediaType, shouldShowEmptyAlbum: Bool, ascending: Bool, handler:(() -> Void)?) {
+    init(assetCollectionTypes: [PHAssetCollectionType], assetCollectionSubtypes: [PHAssetCollectionSubtype], mediaType: MediaType, shouldShowEmptyAlbum: Bool, ascending: Bool, customAssetCollection: CustomAssetCollection?, handler:(() -> Void)?) {
         self.assetCollectionTypes = assetCollectionTypes
         self.assetCollectionSubtypes = assetCollectionSubtypes
         self.mediaType = mediaType
         self.shouldShowEmptyAlbum = shouldShowEmptyAlbum
         self.ascending = ascending
+        self.customAssetCollection = customAssetCollection
         update { () -> Void in
             if let handler = handler {
                 handler()
@@ -67,6 +69,10 @@ public class PhotoKitAlbumList: ItemList {
                     }
                     handler?()
                 }
+            }
+            if let customAssetCollection = self.customAssetCollection {
+                let asset = PhotoKitAssetList(album: customAssetCollection, mediaType: self.mediaType, ascending: self.ascending)
+                self.albumList.insert(asset, at: 0)
             }
         }
     }

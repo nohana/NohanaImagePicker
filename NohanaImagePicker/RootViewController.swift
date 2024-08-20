@@ -40,6 +40,7 @@ class RootViewController: UIViewController {
                                                                       mediaType: nohanaImagePickerController.mediaType,
                                                                       shouldShowEmptyAlbum: nohanaImagePickerController.shouldShowMoment,
                                                                       ascending: !nohanaImagePickerController.canPickDateSection,
+                                                                      customAssetCollection: nohanaImagePickerController.customAssetCollection,
                                                                       handler: { [weak albumListViewController] in
             DispatchQueue.main.async {
                 albumListViewController?.isLoading = false
@@ -124,7 +125,7 @@ class RootViewController: UIViewController {
         present(navigationController, animated: true, completion: nil)
     }
     
-    private func showPhotosFromDefaultAlbum(album: PHAssetCollection) {
+    private func showPhotosFromDefaultAlbum(album: AssetCollection) {
         let album = PhotoKitAssetList(album: album, mediaType: nohanaImagePickerController.mediaType, ascending: !nohanaImagePickerController.canPickDateSection)
         switchChildViewController(currentChildViewController, toViewController: fetchAssetListViewController(album: album))
         updateTitle(title: album.title)
@@ -137,6 +138,7 @@ class RootViewController: UIViewController {
             mediaType: nohanaImagePickerController.mediaType,
             shouldShowEmptyAlbum: nohanaImagePickerController.shouldShowEmptyAlbum,
             ascending: !nohanaImagePickerController.canPickDateSection,
+            customAssetCollection: nohanaImagePickerController.customAssetCollection,
             handler: { [weak self] in
                 guard let self = self else { return }
                 DispatchQueue.main.async { [weak self] in
