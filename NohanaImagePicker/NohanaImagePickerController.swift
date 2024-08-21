@@ -30,7 +30,7 @@ public enum MediaType: Int {
     @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, didDropPhotoKitAsset asset: PHAsset, pickedAssetsCount: Int)
     @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, didSelectPhotoKitAsset asset: PHAsset)
     @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, didSelectAssetDateSectionAssets assets: [PHAsset], date: Date?)
-    @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, didSelectPhotoKitAssetList assetList: PHAssetCollection)
+    @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, didSelectPhotoKitAssetList assetList: AssetCollection)
     @objc optional func nohanaImagePickerDidSelectMoment(_ picker: NohanaImagePickerController) -> Void
     @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, assetListViewController: UICollectionViewController, cell: UICollectionViewCell, indexPath: IndexPath, photoKitAsset: PHAsset) -> UICollectionViewCell
     @objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, assetDetailListViewController: UICollectionViewController, cell: UICollectionViewCell, indexPath: IndexPath, photoKitAsset: PHAsset) -> UICollectionViewCell
@@ -75,7 +75,8 @@ open class NohanaImagePickerController: UIViewController {
     let mediaType: MediaType
     let enableExpandingPhotoAnimation: Bool
     let assetCollectionSubtypes: [PHAssetCollectionSubtype]
-    let defaultAssetCollection: PHAssetCollection?
+    let defaultAssetCollection: AssetCollection?
+    let customAssetCollection: CustomAssetCollection?
 
     public init() {
         assetCollectionSubtypes = [
@@ -95,16 +96,18 @@ open class NohanaImagePickerController: UIViewController {
         pickedAssetList = PickedAssetList()
         enableExpandingPhotoAnimation = true
         defaultAssetCollection = nil
+        customAssetCollection = nil
         super.init(nibName: nil, bundle: nil)
         self.pickedAssetList.nohanaImagePickerController = self
     }
 
-    public init(assetCollectionSubtypes: [PHAssetCollectionSubtype], mediaType: MediaType, enableExpandingPhotoAnimation: Bool, defaultAssetCollection: PHAssetCollection?) {
+    public init(assetCollectionSubtypes: [PHAssetCollectionSubtype], mediaType: MediaType, enableExpandingPhotoAnimation: Bool, defaultAssetCollection: AssetCollection?, customAssetCollection: CustomAssetCollection? = nil) {
         self.assetCollectionSubtypes = assetCollectionSubtypes
         self.mediaType = mediaType
         self.enableExpandingPhotoAnimation = enableExpandingPhotoAnimation
         self.defaultAssetCollection = defaultAssetCollection
-        if let assetCollection = self.defaultAssetCollection {
+        self.customAssetCollection = customAssetCollection
+        if let assetCollection = self.defaultAssetCollection as? PHAssetCollection {
             if !assetCollectionSubtypes.contains(assetCollection.assetCollectionSubtype) {
                 fatalError("defaultAssetCollection doesn't contain the specified PHAssetCollectionSubtype")
             }

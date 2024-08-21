@@ -17,9 +17,9 @@
 import Photos
 
 final class AssetDateSectionCreater {
-    func createSections(assetList: PHAssetCollection, options: PHFetchOptions) -> [AssetDateSection] {
+    func createSections(assetList: AssetCollection, options: PHFetchOptions) -> [AssetDateSection] {
         var albumDateSectionList = [AssetDateSection]()
-        let fetchAssetlist = PHAsset.fetchAssets(in: assetList, options: options)
+        let fetchAssetlist = assetList.fetchAssets(options: options)
         let allAssets = fetchAssetlist.objects(at: IndexSet(0..<fetchAssetlist.count))
         let calender = Calendar.current
         var assetsByDate = [(DateComponents, [PHAsset])]()
