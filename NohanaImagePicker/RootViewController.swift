@@ -30,9 +30,10 @@ class RootViewController: UIViewController {
     private var albumList: PhotoKitAlbumList!
     private lazy var albumListViewController: AlbumListViewController = {
         let storyboard = UIStoryboard(name: "AlbumList", bundle: nohanaImagePickerController.assetBundle)
-        guard let albumListViewController = storyboard.instantiateInitialViewController(creator: { corder in
-            AlbumListViewController(coder: corder, nohanaImagePickerController: self.nohanaImagePickerController)
-        }) else {
+        guard let albumListViewController = storyboard.instantiateInitialViewController(creator: {[weak self] corder in
+            guard let self = self else { return nil }
+            return AlbumListViewController(coder: corder, nohanaImagePickerController: self.nohanaImagePickerController)
+        }) as? AlbumListViewController else {
             fatalError("albumListViewController init failed.")
         }
         albumListViewController.photoKitAlbumList = PhotoKitAlbumList(assetCollectionTypes: [.smartAlbum, .album],
@@ -158,8 +159,9 @@ class RootViewController: UIViewController {
     }
     
     private func fetchMomentViewController() -> UIViewController {
-        guard let momentViewController = UIStoryboard(name: "Moment", bundle: nohanaImagePickerController.assetBundle).instantiateInitialViewController(creator: { corder in
-            MomentViewController(coder: corder, nohanaImagePickerController: self.nohanaImagePickerController)
+        guard let momentViewController = UIStoryboard(name: "Moment", bundle: nohanaImagePickerController.assetBundle).instantiateInitialViewController(creator: {[weak self] corder in
+            guard let self = self else { return nil }
+            return MomentViewController(coder: corder, nohanaImagePickerController: self.nohanaImagePickerController)
         }) else {
             fatalError("Invalid ViewController")
         }
@@ -168,15 +170,17 @@ class RootViewController: UIViewController {
     
     private func fetchAssetListViewController(album: PhotoKitAssetList) -> UIViewController {
         if nohanaImagePickerController.canPickDateSection {
-            guard let assetListViewController = UIStoryboard(name: "AssetListSelectableDateSection", bundle: nohanaImagePickerController.assetBundle).instantiateInitialViewController(creator: { corder in
-                AssetListSelectableDateSectionController(coder: corder, nohanaImagePickerController: self.nohanaImagePickerController, photoKitAssetList: album)
+            guard let assetListViewController = UIStoryboard(name: "AssetListSelectableDateSection", bundle: nohanaImagePickerController.assetBundle).instantiateInitialViewController(creator: {[weak self] corder in
+                guard let self = self else { return nil }
+                return AssetListSelectableDateSectionController(coder: corder, nohanaImagePickerController: self.nohanaImagePickerController, photoKitAssetList: album)
             }) else {
                 fatalError("Invalid ViewController")
             }
             return assetListViewController
         } else {
-            guard let assetListViewController = UIStoryboard(name: "AssetList", bundle: nohanaImagePickerController.assetBundle).instantiateInitialViewController(creator: { corder in
-                AssetListViewController(coder: corder, nohanaImagePickerController: self.nohanaImagePickerController, photoKitAssetList: album)
+            guard let assetListViewController = UIStoryboard(name: "AssetList", bundle: nohanaImagePickerController.assetBundle).instantiateInitialViewController(creator: {[weak self] corder in
+                guard let self = self else { return nil }
+                return AssetListViewController(coder: corder, nohanaImagePickerController: self.nohanaImagePickerController, photoKitAssetList: album)
             }) else {
                 fatalError("Invalid ViewController")
             }

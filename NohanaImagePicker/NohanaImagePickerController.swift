@@ -126,8 +126,9 @@ open class NohanaImagePickerController: UIViewController {
 
         // show rootViewController
         let storyboard = UIStoryboard(name: "NohanaImagePicker", bundle: assetBundle)
-        let rootViewController = storyboard.instantiateViewController(identifier: "RootViewController", creator: { coder in
-            RootViewController(coder: coder, nohanaImagePickerController: self)
+        let rootViewController = storyboard.instantiateViewController(identifier: "RootViewController", creator: {[weak self] coder in
+            guard let self = self else { return nil }
+            return RootViewController(coder: coder, nohanaImagePickerController: self)
         })
         let navigationController: UINavigationController = {
             if enableExpandingPhotoAnimation {
