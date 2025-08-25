@@ -31,13 +31,16 @@ class AssetCell: UICollectionViewCell {
 
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
-        if let nohanaImagePickerController = nohanaImagePickerController {
-            let droppedImage: UIImage? = nohanaImagePickerController.config.image.droppedSmall ?? UIImage(named: "btn_select_m", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
-            let pickedImage: UIImage? = nohanaImagePickerController.config.image.pickedSmall ?? UIImage(named: "btn_selected_m", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
-
-            pickButton.setImage(droppedImage, for: UIControl.State())
-            pickButton.setImage(pickedImage, for: .selected)
-        }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        updateAppearance()
+    }
+    
+    override func prepareForReuse() {
+        super.awakeFromNib()
+        updateAppearance()
     }
 
     @IBAction func didPushPickButton(_ sender: UIButton) {
@@ -63,5 +66,16 @@ class AssetCell: UICollectionViewCell {
         self.pickButton.isSelected = nohanaImagePickerController.pickedAssetList.isPicked(asset)
         self.overlayView.isHidden = !pickButton.isSelected
         self.pickButton.isHidden = !(nohanaImagePickerController.canPickAsset(asset) )
+        updateAppearance()
+    }
+    
+    private func updateAppearance() {
+        if let nohanaImagePickerController = nohanaImagePickerController {
+            let droppedImage: UIImage? = nohanaImagePickerController.config.image.droppedSmall ?? UIImage(named: "btn_select_m", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
+            let pickedImage: UIImage? = nohanaImagePickerController.config.image.pickedSmall ?? UIImage(named: "btn_selected_m", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
+
+            pickButton.setImage(droppedImage, for: UIControl.State())
+            pickButton.setImage(pickedImage, for: .selected)
+        }
     }
 }
