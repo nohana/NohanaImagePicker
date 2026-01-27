@@ -181,7 +181,13 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
                 }
             }
         }
-        let picker = NohanaImagePickerController(assetCollectionSubtypes: subtypes, mediaType: .photo, enableExpandingPhotoAnimation: false, defaultAssetCollection: assetCollections.last)
+        
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.predicate = NSPredicate(format: "creationDate <= %@", Date() as NSDate)
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        let fetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+        let customAssetCollection = CustomAssetCollection(assets: fetchResult, title: "demo")
+        let picker = NohanaImagePickerController(assetCollectionSubtypes: subtypes, mediaType: .photo, enableExpandingPhotoAnimation: false, defaultAssetCollection: assetCollections.last, customAssetCollection: customAssetCollection)
         picker.delegate = self
         present(picker, animated: true, completion: nil)
     }
@@ -224,7 +230,7 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
         print("🐷\(#function)\n\tasset = \(assets)\n\tDate = \(String(describing: date))")
     }
 
-    func nohanaImagePicker(_ picker: NohanaImagePickerController, didSelectPhotoKitAssetList assetList: PHAssetCollection) {
+    func nohanaImagePicker(_ picker: NohanaImagePickerController, didSelectPhotoKitAssetList assetList: AssetCollection) {
         print("🐷\(#function)\n\t\tassetList = \(assetList)\n\t")
     }
 
