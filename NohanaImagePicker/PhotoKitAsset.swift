@@ -36,14 +36,21 @@ public class PhotoKitAsset: Asset {
     public func image(targetSize: CGSize, handler: @escaping (ImageData?) -> Void) {
         let option = PHImageRequestOptions()
         option.isNetworkAccessAllowed = true
+        option.deliveryMode = .highQualityFormat
 
         _ = PHImageManager.default().requestImage(
             for: self.asset,
             targetSize: targetSize,
             contentMode: .aspectFit,
             options: option ) { (image, info) -> Void in
-                guard let image = image else {
+                if let error = info?[PHImageErrorKey] as? NSError {
                     handler(nil)
+                    return
+                }
+                let isDegraded = (
+                    info?[PHImageResultIsDegradedKey] as? Bool
+                ) ?? false
+                guard !isDegraded, let image = image else {
                     return
                 }
                 handler(ImageData(image: image, info: info as Dictionary<NSObject, AnyObject>?))
