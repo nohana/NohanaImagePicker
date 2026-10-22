@@ -19,7 +19,7 @@ import Photos
 
 final class MomentViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, ActivityIndicatable {
 
-    private let nohanaImagePickerController: NohanaImagePickerController
+    private unowned let nohanaImagePickerController: NohanaImagePickerController
     var momentInfoSectionList: [MomentInfoSection] = []
     var isFirstAppearance = true
     
