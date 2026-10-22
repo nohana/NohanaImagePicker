@@ -101,6 +101,12 @@ Use [Swift Package Manager](https://github.com/apple/swift-package-manager).
 <img src="https://user-images.githubusercontent.com/5136313/210699957-2e07afbf-91b0-48c6-8e15-8bd0d0cc2014.jpg">
 
 
+## Development
+
+### Running tests
+
+Tests are defined in the Swift package (`Tests/NohanaImagePickerTests`). Since the repository root also contains `NohanaImagePicker.xcodeproj`, run them by opening `Package.swift` in Xcode and running **Product > Test** (⌘U) with an iOS Simulator destination.
+
 ## License
 
 This library is licensed under Apache License v2.

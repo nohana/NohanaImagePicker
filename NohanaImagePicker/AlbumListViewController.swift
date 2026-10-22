@@ -41,7 +41,7 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
         }
     }
 
-    let nohanaImagePickerController: NohanaImagePickerController
+    unowned let nohanaImagePickerController: NohanaImagePickerController
     var photoKitAlbumList: PhotoKitAlbumList!
     weak var delegate: AlbumListViewControllerDelegate?
     

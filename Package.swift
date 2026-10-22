@@ -19,7 +19,11 @@ let package = Package(
         .target(
             name: "NohanaImagePicker",
             path: "NohanaImagePicker",
-            resources: [.process("NohanaImagePicker.strings")])
+            resources: [.process("NohanaImagePicker.strings")]),
+        .testTarget(
+            name: "NohanaImagePickerTests",
+            dependencies: ["NohanaImagePicker"],
+            path: "Tests/NohanaImagePickerTests")
     ],
     swiftLanguageVersions: [.v5]
 )

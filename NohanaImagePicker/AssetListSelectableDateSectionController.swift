@@ -24,7 +24,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         case photoAuthorizationLimited = 0
     }
 
-    private let nohanaImagePickerController: NohanaImagePickerController
+    private unowned let nohanaImagePickerController: NohanaImagePickerController
     private var photoKitAssetList: PhotoKitAssetList
     var dateSectionList: [AssetDateSection] = []
     
@@ -65,6 +65,10 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    deinit {
+        PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }
 
     override func viewDidLoad() {

@@ -32,7 +32,7 @@ final class MomentDetailListViewController: UICollectionViewController, UICollec
         return Size.screenRectWithoutAppBar(self).size
     }
     
-    let nohanaImagePickerController: NohanaImagePickerController
+    unowned let nohanaImagePickerController: NohanaImagePickerController
     let momentInfoSection: MomentInfoSection
     var isFirstAppearance = true
     
