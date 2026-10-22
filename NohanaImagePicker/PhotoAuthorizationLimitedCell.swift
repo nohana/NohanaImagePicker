@@ -16,7 +16,7 @@
 
 import UIKit
 
-protocol PhotoAuthorizationLimitedCellDeletate {
+protocol PhotoAuthorizationLimitedCellDeletate: AnyObject {
     func didSelectAddPhotoButton(_ cell: PhotoAuthorizationLimitedCell)
     func didSelectAuthorizeAllPhotoButton(_ cell: PhotoAuthorizationLimitedCell)
 }
@@ -27,7 +27,7 @@ class PhotoAuthorizationLimitedCell: UICollectionViewCell {
         String(describing: self)
     }
 
-    var delegate: PhotoAuthorizationLimitedCellDeletate?
+    weak var delegate: PhotoAuthorizationLimitedCellDeletate?
 
     @IBOutlet weak private var containerView: UIStackView!
     @IBOutlet weak private var attentionLabel: UILabel!

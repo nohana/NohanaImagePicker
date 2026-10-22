@@ -19,7 +19,7 @@ import Photos
 
 class RootViewController: UIViewController {
     
-    private let nohanaImagePickerController: NohanaImagePickerController
+    private unowned let nohanaImagePickerController: NohanaImagePickerController
     private let titleView: UIButton = {
         let button = UIButton(type: .system)
         let image = UIImage(systemName: "chevron.down", withConfiguration: UIImage.SymbolConfiguration(pointSize: 9, weight: .semibold))
