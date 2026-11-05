@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import Photos
 import UIKit
 
 @MainActor
@@ -29,6 +30,9 @@ class AssetCell: UICollectionViewCell {
     weak var delegate: AssetCellDelegate?
     weak var nohanaImagePickerController: NohanaImagePickerController?
     var asset: Asset?
+    private var representedAssetIdentifier: String?
+    private var displayedAssetIdentifier: String?
+    private var imageRequestID: PHImageRequestID = PHInvalidImageRequestID
 
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
@@ -43,8 +47,40 @@ class AssetCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
-        super.awakeFromNib()
+        super.prepareForReuse()
+        cancelImageRequest()
         updateAppearance()
+    }
+
+    // MARK: - Image
+
+    func loadThumbnail(of asset: PhotoKitAsset, targetSize: CGSize) {
+        cancelImageRequest()
+        let identifier = asset.originalAsset.localIdentifier
+        // Clear another asset's image, but keep the image when the same asset is shown again (e.g. after reloadData).
+        if displayedAssetIdentifier != identifier {
+            imageView.image = nil
+            displayedAssetIdentifier = nil
+        }
+        representedAssetIdentifier = identifier
+        imageRequestID = asset.requestThumbnail(targetSize: targetSize) { [weak self] image, isDegraded in
+            // The cell may have been reused for another asset in the meantime.
+            guard let self = self, self.representedAssetIdentifier == identifier else {
+                return
+            }
+            // Do not replace this asset's image with a low quality one when it is shown again.
+            if isDegraded && self.displayedAssetIdentifier == identifier {
+                return
+            }
+            self.imageView.image = image
+            self.displayedAssetIdentifier = identifier
+        }
+    }
+
+    private func cancelImageRequest() {
+        PhotoKitAsset.cancelImageRequest(imageRequestID)
+        imageRequestID = PHInvalidImageRequestID
+        representedAssetIdentifier = nil
     }
 
     @IBAction func didPushPickButton(_ sender: UIButton) {

@@ -158,7 +158,6 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
             }
             let albumList = photoKitAlbumList[indexPath.row]
             cell.titleLabel.text = albumList.title
-            cell.tag = indexPath.row
             let imageSize = CGSize(
                 width: cell.thumbnailImageView.frame.size.width * UIScreen.main.scale,
                 height: cell.thumbnailImageView.frame.size.width * UIScreen.main.scale
@@ -166,17 +165,9 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
             let albumCount = albumList.count
             if albumCount > 0 {
                 let lastAsset = nohanaImagePickerController.canPickDateSection ? albumList[0] : albumList[albumCount - 1]
-                lastAsset.image(targetSize: imageSize, handler: { (imageData) -> Void in
-                    DispatchQueue.main.async(execute: { () -> Void in
-                        if let imageData = imageData {
-                            if cell.tag == indexPath.row {
-                                cell.thumbnailImageView.image = imageData.image
-                            }
-                        }
-                    })
-                })
+                cell.loadThumbnail(of: lastAsset, targetSize: imageSize)
             } else {
-                cell.thumbnailImageView.image = nil
+                cell.clearThumbnail()
             }
             return cell
         }

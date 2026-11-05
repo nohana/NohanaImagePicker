@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import Photos
+import UIKit
 
 public class PhotoKitAsset: Asset {
 
@@ -34,16 +35,25 @@ public class PhotoKitAsset: Asset {
     }
 
     public func image(targetSize: CGSize, handler: @escaping (ImageData?) -> Void) {
+        requestImage(targetSize: targetSize, handler: handler)
+    }
+
+    // MARK: - Image requests
+
+    /// Requests the high quality image (never a degraded one), downloading it from iCloud if needed.
+    /// Calls `handler(nil)` when the request fails. Returns the request ID so that the request can be cancelled.
+    @discardableResult
+    func requestImage(targetSize: CGSize, handler: @escaping (ImageData?) -> Void) -> PHImageRequestID {
         let option = PHImageRequestOptions()
         option.isNetworkAccessAllowed = true
         option.deliveryMode = .highQualityFormat
 
-        _ = PHImageManager.default().requestImage(
+        return PHImageManager.default().requestImage(
             for: self.asset,
             targetSize: targetSize,
             contentMode: .aspectFit,
             options: option ) { (image, info) -> Void in
-                if let error = info?[PHImageErrorKey] as? NSError {
+                if info?[PHImageErrorKey] != nil {
                     handler(nil)
                     return
                 }
@@ -55,5 +65,44 @@ public class PhotoKitAsset: Asset {
                 }
                 handler(ImageData(image: image, info: info as Dictionary<NSObject, AnyObject>?))
         }
+    }
+
+    /// Requests a thumbnail. A locally available low quality image is delivered first (e.g. for assets that are
+    /// only in iCloud), followed by the final image, so the handler can be called more than once.
+    /// The handler receives the image and whether it is a low quality (degraded) one. It is called on the main queue
+    /// and is not called when the request fails or is cancelled.
+    @discardableResult
+    func requestThumbnail(targetSize: CGSize, handler: @escaping @MainActor @Sendable (UIImage, Bool) -> Void) -> PHImageRequestID {
+        let option = PHImageRequestOptions()
+        option.isNetworkAccessAllowed = true
+        option.deliveryMode = .opportunistic
+        option.resizeMode = .fast
+
+        return PHImageManager.default().requestImage(
+            for: self.asset,
+            targetSize: targetSize,
+            contentMode: .aspectFit,
+            options: option ) { (image, info) -> Void in
+                guard let image = image else {
+                    return
+                }
+                let isDegraded = (info?[PHImageResultIsDegradedKey] as? Bool) ?? false
+                if Thread.isMainThread {
+                    MainActor.assumeIsolated {
+                        handler(image, isDegraded)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        handler(image, isDegraded)
+                    }
+                }
+        }
+    }
+
+    static func cancelImageRequest(_ requestID: PHImageRequestID) {
+        guard requestID != PHInvalidImageRequestID else {
+            return
+        }
+        PHImageManager.default().cancelImageRequest(requestID)
     }
 }
