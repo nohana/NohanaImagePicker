@@ -46,7 +46,7 @@ class RootViewController: UIViewController {
                                                                       handler: { [weak albumListViewController] in
             DispatchQueue.main.async {
                 albumListViewController?.isLoading = false
-                albumListViewController?.tableView.reloadData()
+                albumListViewController?.applySnapshot()
             }
         })
         return albumListViewController
