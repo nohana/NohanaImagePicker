@@ -17,14 +17,54 @@
 import Photos
 import UIKit
 
-class AlbumCell: UITableViewCell {
-    @IBOutlet weak var thumbnailImageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
+class AlbumCell: UICollectionViewListCell {
+    static let thumbnailSide: CGFloat = 70
+    private static let height: CGFloat = 82
+    // The layout margin of the table view cells used before. List cells have a different margin on each iOS version
+    // (20pt on iOS 17, 16pt on iOS 27), so the content is laid out from the safe area instead.
+    static let horizontalMargin: CGFloat = 20
+
+    let thumbnailImageView = UIImageView()
+    let titleLabel = UILabel()
 
     private var representedAssetIdentifier: String?
     private var displayedAssetIdentifier: String?
     private var imageRequestID: PHImageRequestID = PHInvalidImageRequestID
     private weak var thumbnailLoader: ThumbnailLoader?
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        thumbnailImageView.contentMode = .scaleAspectFill
+        thumbnailImageView.clipsToBounds = true
+        titleLabel.font = .systemFont(ofSize: 16)
+        titleLabel.textColor = .black
+        thumbnailImageView.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(thumbnailImageView)
+        contentView.addSubview(titleLabel)
+        let height = contentView.heightAnchor.constraint(equalToConstant: AlbumCell.height)
+        // Lower than required so that it does not conflict with the temporary size the list gives the cell.
+        height.priority = .defaultHigh
+        NSLayoutConstraint.activate([
+            height,
+            thumbnailImageView.widthAnchor.constraint(equalToConstant: AlbumCell.thumbnailSide),
+            thumbnailImageView.heightAnchor.constraint(equalToConstant: AlbumCell.thumbnailSide),
+            thumbnailImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: AlbumCell.horizontalMargin + 4),
+            thumbnailImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: thumbnailImageView.trailingAnchor, constant: 18),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -AlbumCell.horizontalMargin + 8),
+            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+        ])
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func updateConfiguration(using state: UICellConfigurationState) {
+        super.updateConfiguration(using: state)
+        backgroundConfiguration = .albumListCell(for: state)
+    }
 
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -73,5 +113,14 @@ class AlbumCell: UITableViewCell {
         thumbnailLoader?.cancelRequest(imageRequestID)
         imageRequestID = PHInvalidImageRequestID
         representedAssetIdentifier = nil
+    }
+}
+
+extension UIBackgroundConfiguration {
+    // Clear like the table view cells used before, with the system highlight while the cell is tapped.
+    static func albumListCell(for state: UICellConfigurationState) -> UIBackgroundConfiguration {
+        var background = UIBackgroundConfiguration.clear()
+        background.backgroundColor = state.isHighlighted || state.isSelected ? .systemGray4 : .clear
+        return background
     }
 }
