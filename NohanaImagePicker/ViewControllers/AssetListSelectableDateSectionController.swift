@@ -38,6 +38,11 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         return CGSize(width: cellWidth, height: cellWidth)
     }
 
+    // The same size is used for prefetching and for requests, so that the cached thumbnails are used.
+    var thumbnailSize: CGSize {
+        return CGSize(width: cellSize.width * UIScreen.main.scale, height: cellSize.height * UIScreen.main.scale)
+    }
+
     private lazy var isHiddenPhotoAuthorizationLimitedCell: Bool = {
         guard !nohanaImagePickerController.isHiddenPhotoAuthorizationLimitedView else {
             return true
@@ -72,6 +77,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         setUpToolbarItems()
         addPickPhotoKitAssetNotificationObservers()
         setUpActivityIndicator()
+        collectionView.prefetchDataSource = self
         collectionView.register(UINib(nibName: "PhotoAuthorizationLimitedCell", bundle: self.nohanaImagePickerController.assetBundle), forCellWithReuseIdentifier: PhotoAuthorizationLimitedCell.defaultReusableId)
         PHPhotoLibrary.shared().register(self)
         DispatchQueue.main.async { [weak self] in
@@ -144,11 +150,8 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         cell.delegate = self
         cell.update(asset: asset, nohanaImagePickerController: nohanaImagePickerController)
 
-        let imageSize = CGSize(
-            width: cellSize.width * UIScreen.main.scale,
-            height: cellSize.height * UIScreen.main.scale
-        )
-        cell.loadThumbnail(of: asset, targetSize: imageSize)
+        let imageSize = thumbnailSize
+        cell.loadThumbnail(of: asset, targetSize: imageSize, loader: nohanaImagePickerController.thumbnailLoader)
         return (nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, assetListViewController: self, cell: cell, indexPath: indexPath, photoKitAsset: asset.originalAsset)) ?? cell
     }
 
@@ -377,6 +380,28 @@ extension AssetListSelectableDateSectionController: PHPhotoLibraryChangeObserver
             self.dateSectionList = AssetDateSectionCreater().createSections(assetList: self.photoKitAssetList.assetList, options: PhotoKitAssetList.fetchOptions(self.photoKitAssetList.mediaType, ascending: false))
             self.isLoading = false
             self.collectionView?.reloadData()
+        }
+    }
+}
+
+// MARK: - UICollectionViewDataSourcePrefetching
+
+extension AssetListSelectableDateSectionController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        nohanaImagePickerController.thumbnailLoader.startCaching(prefetchAssets(at: indexPaths), targetSize: thumbnailSize)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
+        nohanaImagePickerController.thumbnailLoader.stopCaching(prefetchAssets(at: indexPaths), targetSize: thumbnailSize)
+    }
+
+    // Section 0 is the limited photo access section; the date sections start at 1.
+    private func prefetchAssets(at indexPaths: [IndexPath]) -> [PHAsset] {
+        return indexPaths.compactMap { indexPath in
+            let sectionIndex = indexPath.section - 1
+            guard sectionIndex >= 0, sectionIndex < dateSectionList.count else { return nil }
+            let assets = dateSectionList[sectionIndex].assetResult
+            return indexPath.item < assets.count ? assets[indexPath.item] : nil
         }
     }
 }

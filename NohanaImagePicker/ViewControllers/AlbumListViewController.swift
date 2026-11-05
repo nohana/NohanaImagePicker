@@ -165,7 +165,7 @@ class AlbumListViewController: UITableViewController, EmptyIndicatable, Activity
             let albumCount = albumList.count
             if albumCount > 0 {
                 let lastAsset = nohanaImagePickerController.canPickDateSection ? albumList[0] : albumList[albumCount - 1]
-                cell.loadThumbnail(of: lastAsset, targetSize: imageSize)
+                cell.loadThumbnail(of: lastAsset, targetSize: imageSize, loader: nohanaImagePickerController.thumbnailLoader)
             } else {
                 cell.clearThumbnail()
             }

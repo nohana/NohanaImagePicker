@@ -24,6 +24,7 @@ class AlbumCell: UITableViewCell {
     private var representedAssetIdentifier: String?
     private var displayedAssetIdentifier: String?
     private var imageRequestID: PHImageRequestID = PHInvalidImageRequestID
+    private weak var thumbnailLoader: ThumbnailLoader?
 
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -32,16 +33,23 @@ class AlbumCell: UITableViewCell {
 
     // MARK: - Image
 
-    func loadThumbnail(of asset: PhotoKitAsset, targetSize: CGSize) {
+    func loadThumbnail(of asset: PhotoKitAsset, targetSize: CGSize, loader: ThumbnailLoader) {
         cancelImageRequest()
+        thumbnailLoader = loader
         let identifier = asset.originalAsset.localIdentifier
-        // Clear another asset's image, but keep the image when the same asset is shown again (e.g. after reloadData).
+        // Show a thumbnail that is still in memory immediately (e.g. after reloadData).
+        if let image = loader.cachedThumbnail(for: asset.originalAsset, targetSize: targetSize) {
+            thumbnailImageView.image = image
+            displayedAssetIdentifier = identifier
+            return
+        }
+        // Clear another asset's image, but keep the image when the same asset is shown again.
         if displayedAssetIdentifier != identifier {
             thumbnailImageView.image = nil
             displayedAssetIdentifier = nil
         }
         representedAssetIdentifier = identifier
-        imageRequestID = asset.requestThumbnail(targetSize: targetSize) { [weak self] image, isDegraded in
+        imageRequestID = loader.requestThumbnail(for: asset.originalAsset, targetSize: targetSize) { [weak self] image, isDegraded in
             // The cell may have been reused for another album in the meantime.
             guard let self = self, self.representedAssetIdentifier == identifier, let image = image else {
                 return
@@ -62,7 +70,7 @@ class AlbumCell: UITableViewCell {
     }
 
     private func cancelImageRequest() {
-        PhotoKitAsset.cancelImageRequest(imageRequestID)
+        thumbnailLoader?.cancelRequest(imageRequestID)
         imageRequestID = PHInvalidImageRequestID
         representedAssetIdentifier = nil
     }

@@ -72,6 +72,7 @@ open class NohanaImagePickerController: UIViewController {
         #endif
     }()
     let pickedAssetList: PickedAssetList
+    let thumbnailLoader = ThumbnailLoader()
     let mediaType: MediaType
     let enableExpandingPhotoAnimation: Bool
     let assetCollectionSubtypes: [PHAssetCollectionSubtype]
