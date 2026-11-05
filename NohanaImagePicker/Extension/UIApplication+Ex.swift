@@ -17,22 +17,29 @@
 import UIKit
 
 extension UIApplication {
+    // The scene of the key window (UIApplication.windows is deprecated).
+    private var keyWindowScene: UIWindowScene? {
+        connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .first { $0.windows.contains(where: { $0.isKeyWindow }) }
+    }
+
     var currentStatusBarOrientation: UIInterfaceOrientation {
-        guard let orientation = windows.first(where: { $0.isKeyWindow })?.windowScene?.interfaceOrientation else {
+        guard let orientation = keyWindowScene?.interfaceOrientation else {
             return .unknown
         }
         return orientation
     }
     
     var currentStatusBarFrame: CGRect {
-        guard let frame = windows.first(where: { $0.isKeyWindow })?.windowScene?.statusBarManager?.statusBarFrame else {
+        guard let frame = keyWindowScene?.statusBarManager?.statusBarFrame else {
             return .zero
         }
         return frame
     }
     
     var currentStatusBarHidden: Bool {
-        guard let isStatusBarHidden = windows.first(where: { $0.isKeyWindow })?.windowScene?.statusBarManager?.isStatusBarHidden else {
+        guard let isStatusBarHidden = keyWindowScene?.statusBarManager?.isStatusBarHidden else {
             return false
         }
         return isStatusBarHidden

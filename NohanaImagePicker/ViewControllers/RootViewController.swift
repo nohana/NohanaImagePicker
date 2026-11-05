@@ -21,10 +21,12 @@ class RootViewController: UIViewController {
     
     private unowned let nohanaImagePickerController: NohanaImagePickerController
     private let titleView: UIButton = {
-        let button = UIButton(type: .system)
-        let image = UIImage(systemName: "chevron.down", withConfiguration: UIImage.SymbolConfiguration(pointSize: 9, weight: .semibold))
-        button.setImage(image, for: .normal)
-        return button
+        var configuration = UIButton.Configuration.plain()
+        configuration.image = UIImage(systemName: "chevron.down", withConfiguration: UIImage.SymbolConfiguration(pointSize: 9, weight: .semibold))
+        configuration.imagePlacement = .trailing
+        configuration.imagePadding = 4
+        configuration.contentInsets = .zero
+        return UIButton(configuration: configuration)
     }()
     private var currentChildViewController: UIViewController?
     private var albumList: PhotoKitAlbumList!
@@ -97,16 +99,9 @@ class RootViewController: UIViewController {
     // MARK: Private
     private func updateTitle(title: String) {
         let attributedTitle = NSAttributedString(string: title, attributes: nohanaImagePickerController.titleTextAttributes)
-        titleView.setAttributedTitle(attributedTitle, for: .normal)
+        titleView.configuration?.attributedTitle = AttributedString(attributedTitle)
         titleView.sizeToFit()
         navigationController?.navigationBar.setNeedsLayout()
-        if let titleLabel = titleView.titleLabel, let imageView = titleView.imageView {
-            let titleLabelWidth = titleLabel.frame.width
-            let imageWidth = imageView.frame.width
-            let space: CGFloat = 2.0
-            self.titleView.imageEdgeInsets = UIEdgeInsets(top: 0, left: titleLabelWidth + space, bottom: 0, right: -titleLabelWidth - space)
-            self.titleView.titleEdgeInsets = UIEdgeInsets(top: 0, left: -imageWidth - space, bottom: 0, right: imageWidth + space)
-        }
     }
     
     @objc private func didTapTitleView() {
