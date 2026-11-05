@@ -35,19 +35,19 @@ class MomentCell: UICollectionViewListCell {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         separatorView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(titleLabel)
-        contentView.addSubview(separatorView)
+        // On the cell, not the content view, so that the line spans the safe area like the table view cell's line did.
+        addSubview(separatorView)
         let height = contentView.heightAnchor.constraint(equalToConstant: MomentCell.height)
         // Lower than required so that it does not conflict with the temporary size the list gives the cell.
         height.priority = .defaultHigh
         NSLayoutConstraint.activate([
             height,
-            // List cells have a 4pt narrower leading margin than the table view cells used before.
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor, constant: 12),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor, constant: 8),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: AlbumCell.horizontalMargin + 8),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -AlbumCell.horizontalMargin + 8),
             titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            separatorView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            separatorView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            separatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            separatorView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            separatorView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            separatorView.bottomAnchor.constraint(equalTo: bottomAnchor),
             separatorView.heightAnchor.constraint(equalToConstant: 1 / UIScreen.main.scale)
         ])
     }

@@ -20,6 +20,9 @@ import UIKit
 class AlbumCell: UICollectionViewListCell {
     static let thumbnailSide: CGFloat = 70
     private static let height: CGFloat = 82
+    // The layout margin of the table view cells used before. List cells have a different margin on each iOS version
+    // (20pt on iOS 17, 16pt on iOS 27), so the content is laid out from the safe area instead.
+    static let horizontalMargin: CGFloat = 20
 
     let thumbnailImageView = UIImageView()
     let titleLabel = UILabel()
@@ -45,11 +48,10 @@ class AlbumCell: UICollectionViewListCell {
             height,
             thumbnailImageView.widthAnchor.constraint(equalToConstant: AlbumCell.thumbnailSide),
             thumbnailImageView.heightAnchor.constraint(equalToConstant: AlbumCell.thumbnailSide),
-            // List cells have a 4pt narrower leading margin than the table view cells used before.
-            thumbnailImageView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor, constant: 8),
+            thumbnailImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: AlbumCell.horizontalMargin + 4),
             thumbnailImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: thumbnailImageView.trailingAnchor, constant: 18),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor, constant: 8),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -AlbumCell.horizontalMargin + 8),
             titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
     }
