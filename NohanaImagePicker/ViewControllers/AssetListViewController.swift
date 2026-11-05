@@ -43,6 +43,7 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
         collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        collectionView.prefetchDataSource = self
     }
 
     var cellSize: CGSize {
@@ -53,6 +54,11 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
         let cellMargin: CGFloat = 2
         let cellWidth = (view.frame.width - cellMargin * (CGFloat(numberOfColumns) - 1)) / CGFloat(numberOfColumns)
         return CGSize(width: cellWidth, height: cellWidth)
+    }
+
+    // The same size is used for prefetching and for requests, so that the cached thumbnails are used.
+    var thumbnailSize: CGSize {
+        return CGSize(width: cellSize.width * UIScreen.main.scale, height: cellSize.height * UIScreen.main.scale)
     }
 
     deinit {
@@ -164,12 +170,9 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
         }
         cell.update(asset: photoKitAssetList[indexPath.row], nohanaImagePickerController: nohanaImagePickerController)
 
-        let imageSize = CGSize(
-            width: cellSize.width * UIScreen.main.scale,
-            height: cellSize.height * UIScreen.main.scale
-        )
+        let imageSize = thumbnailSize
         let asset = photoKitAssetList[indexPath.item]
-        cell.loadThumbnail(of: asset, targetSize: imageSize)
+        cell.loadThumbnail(of: asset, targetSize: imageSize, loader: nohanaImagePickerController.thumbnailLoader)
         return (nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, assetListViewController: self, cell: cell, indexPath: indexPath, photoKitAsset: asset.originalAsset)) ?? cell
     }
 
@@ -193,5 +196,21 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
     // MARK: - IBSegueAction
     @IBSegueAction func makeDetailList(_ coder: NSCoder) -> AssetDetailListViewController? {
         return AssetDetailListViewController(coder: coder, nohanaImagePickerController: nohanaImagePickerController, photoKitAssetList: photoKitAssetList)
+    }
+}
+
+// MARK: - UICollectionViewDataSourcePrefetching
+
+extension AssetListViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        nohanaImagePickerController.thumbnailLoader.startCaching(prefetchAssets(at: indexPaths), targetSize: thumbnailSize)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
+        nohanaImagePickerController.thumbnailLoader.stopCaching(prefetchAssets(at: indexPaths), targetSize: thumbnailSize)
+    }
+
+    private func prefetchAssets(at indexPaths: [IndexPath]) -> [PHAsset] {
+        return indexPaths.filter { $0.item < photoKitAssetList.count }.map { photoKitAssetList[$0.item].originalAsset }
     }
 }

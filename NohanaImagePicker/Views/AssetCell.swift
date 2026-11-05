@@ -33,6 +33,7 @@ class AssetCell: UICollectionViewCell {
     private var representedAssetIdentifier: String?
     private var displayedAssetIdentifier: String?
     private var imageRequestID: PHImageRequestID = PHInvalidImageRequestID
+    private weak var thumbnailLoader: ThumbnailLoader?
     private var showActivityIndicatorWorkItem: DispatchWorkItem?
     private var retryWorkItem: DispatchWorkItem?
     private let activityIndicator: UIActivityIndicatorView = {
@@ -70,21 +71,31 @@ class AssetCell: UICollectionViewCell {
 
     // MARK: - Image
 
-    func loadThumbnail(of asset: PhotoKitAsset, targetSize: CGSize) {
+    func loadThumbnail(of asset: PhotoKitAsset, targetSize: CGSize, loader: ThumbnailLoader) {
         cancelImageRequest()
+        thumbnailLoader = loader
         let identifier = asset.originalAsset.localIdentifier
-        // Clear another asset's image, but keep the image when the same asset is shown again (e.g. after reloadData).
+        representedAssetIdentifier = identifier
+        // Show a thumbnail that is still in memory immediately (e.g. after reloadData).
+        if let image = loader.cachedThumbnail(for: asset.originalAsset, targetSize: targetSize) {
+            imageView.image = image
+            displayedAssetIdentifier = identifier
+            return
+        }
+        // Clear another asset's image, but keep the image when the same asset is shown again.
         if displayedAssetIdentifier != identifier {
             imageView.image = nil
             displayedAssetIdentifier = nil
         }
-        representedAssetIdentifier = identifier
         scheduleActivityIndicator(for: identifier)
         requestThumbnail(of: asset, targetSize: targetSize, identifier: identifier, canRetry: true)
     }
 
     private func requestThumbnail(of asset: PhotoKitAsset, targetSize: CGSize, identifier: String, canRetry: Bool) {
-        imageRequestID = asset.requestThumbnail(targetSize: targetSize) { [weak self] image, isDegraded in
+        guard let loader = thumbnailLoader else {
+            return
+        }
+        imageRequestID = loader.requestThumbnail(for: asset.originalAsset, targetSize: targetSize) { [weak self] image, isDegraded in
             // The cell may have been reused for another asset in the meantime.
             guard let self = self, self.representedAssetIdentifier == identifier else {
                 return
@@ -113,7 +124,7 @@ class AssetCell: UICollectionViewCell {
     }
 
     private func cancelImageRequest() {
-        PhotoKitAsset.cancelImageRequest(imageRequestID)
+        thumbnailLoader?.cancelRequest(imageRequestID)
         imageRequestID = PHInvalidImageRequestID
         representedAssetIdentifier = nil
         stopLoadingViews()

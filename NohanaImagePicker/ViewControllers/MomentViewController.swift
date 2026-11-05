@@ -32,6 +32,11 @@ final class MomentViewController: UICollectionViewController, UICollectionViewDe
         let cellWidth = (view.frame.width - cellMargin * (CGFloat(numberOfColumns) - 1)) / CGFloat(numberOfColumns)
         return CGSize(width: cellWidth, height: cellWidth)
     }
+
+    // The same size is used for prefetching and for requests, so that the cached thumbnails are used.
+    var thumbnailSize: CGSize {
+        return CGSize(width: cellSize.width * UIScreen.main.scale, height: cellSize.height * UIScreen.main.scale)
+    }
     
     init?(coder: NSCoder, nohanaImagePickerController: NohanaImagePickerController) {
         self.nohanaImagePickerController = nohanaImagePickerController
@@ -48,6 +53,7 @@ final class MomentViewController: UICollectionViewController, UICollectionViewDe
         setUpToolbarItems()
         addPickPhotoKitAssetNotificationObservers()
         setUpActivityIndicator()
+        collectionView.prefetchDataSource = self
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             let mediaType = self.nohanaImagePickerController.mediaType
@@ -113,11 +119,8 @@ final class MomentViewController: UICollectionViewController, UICollectionViewDe
         let asset = PhotoKitAsset(asset: momentInfoSectionList[indexPath.section].assetResult[indexPath.row])
         cell.update(asset: asset, nohanaImagePickerController: nohanaImagePickerController)
 
-        let imageSize = CGSize(
-            width: cellSize.width * UIScreen.main.scale,
-            height: cellSize.height * UIScreen.main.scale
-        )
-        cell.loadThumbnail(of: asset, targetSize: imageSize)
+        let imageSize = thumbnailSize
+        cell.loadThumbnail(of: asset, targetSize: imageSize, loader: nohanaImagePickerController.thumbnailLoader)
         return (nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, assetListViewController: self, cell: cell, indexPath: indexPath, photoKitAsset: asset.originalAsset)) ?? cell
     }
 
@@ -219,5 +222,25 @@ final class MomentViewController: UICollectionViewController, UICollectionViewDe
             return nil
         }
         return MomentDetailListViewController(coder: coder, nohanaImagePickerController: nohanaImagePickerController, momentInfoSection: momentInfoSectionList[selectedIndexPath.section], currentIndexPath: selectedIndexPath)
+    }
+}
+
+// MARK: - UICollectionViewDataSourcePrefetching
+
+extension MomentViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        nohanaImagePickerController.thumbnailLoader.startCaching(prefetchAssets(at: indexPaths), targetSize: thumbnailSize)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
+        nohanaImagePickerController.thumbnailLoader.stopCaching(prefetchAssets(at: indexPaths), targetSize: thumbnailSize)
+    }
+
+    private func prefetchAssets(at indexPaths: [IndexPath]) -> [PHAsset] {
+        return indexPaths.compactMap { indexPath in
+            guard indexPath.section < momentInfoSectionList.count else { return nil }
+            let assets = momentInfoSectionList[indexPath.section].assetResult
+            return indexPath.item < assets.count ? assets[indexPath.item] : nil
+        }
     }
 }

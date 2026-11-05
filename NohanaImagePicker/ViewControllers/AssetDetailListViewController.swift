@@ -39,6 +39,8 @@ class AssetDetailListViewController: AssetListViewController, DetailListViewCont
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Detail pages load high quality images instead of thumbnails.
+        collectionView.prefetchDataSource = nil
         let droppedImage: UIImage? = nohanaImagePickerController.config.image.droppedLarge ?? UIImage(named: "btn_select_l", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
         let pickedImage: UIImage? = nohanaImagePickerController.config.image.pickedLarge ?? UIImage(named: "btn_selected_l", in: nohanaImagePickerController.assetBundle, compatibleWith: nil)
         
