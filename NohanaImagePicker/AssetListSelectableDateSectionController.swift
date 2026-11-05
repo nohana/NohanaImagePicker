@@ -43,12 +43,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
             return true
         }
 
-        let status: PHAuthorizationStatus
-        if #available(iOS 14, *) {
-            status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
-        } else {
-            status = PHPhotoLibrary.authorizationStatus()
-        }
+        let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
         switch status {
         case .limited:
             return false
@@ -239,7 +234,6 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: dateSectionList[sectionListIndex].assetResult[indexPath.row])
     }
     
-    @available(iOS 13.0, *)
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let asset = PhotoKitAsset(asset: dateSectionList[indexPath.section - 1].assetResult[indexPath.row])
         if let cell = collectionView.cellForItem(at: indexPath) as? AssetCell {
@@ -276,7 +270,6 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         }
     }
 
-    @available(iOS 13.0, *)
     override func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
         animator.addCompletion { [weak self] in
             guard let self = self else { return }
@@ -330,19 +323,10 @@ extension AssetListSelectableDateSectionController: AssetDateSectionHeaderViewDe
 extension AssetListSelectableDateSectionController: AssetCellDelegate {
     func didPushPickButton(cell: AssetCell) {
         if let indexPath = collectionView.indexPath(for: cell) {
-            if #available(iOS 9.0, *) {
-                let rowResetIndexPath = IndexPath(row: 0, section: indexPath.section)
-                let header = collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: rowResetIndexPath) as? AssetDateSectionHeaderView
-                let assets = dateSectionList[indexPath.section - 1].assetResult.map { PhotoKitAsset(asset: $0) }
-                header?.update(assets: assets, indexPath: indexPath, nohanaImagePickerController: nohanaImagePickerController)
-            } else {
-                UIView.animate(withDuration: 0) { [weak self] in
-                    self?.collectionView.performBatchUpdates({ [weak self] in
-                        let indexSet = IndexSet(integer: indexPath.section)
-                        self?.collectionView.reloadSections(indexSet)
-                    }, completion: nil)
-                }
-            }
+            let rowResetIndexPath = IndexPath(row: 0, section: indexPath.section)
+            let header = collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: rowResetIndexPath) as? AssetDateSectionHeaderView
+            let assets = dateSectionList[indexPath.section - 1].assetResult.map { PhotoKitAsset(asset: $0) }
+            header?.update(assets: assets, indexPath: indexPath, nohanaImagePickerController: nohanaImagePickerController)
         }
         updateDoneBarButtonColor()
     }

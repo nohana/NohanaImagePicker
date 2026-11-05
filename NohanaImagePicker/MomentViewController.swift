@@ -176,7 +176,6 @@ final class MomentViewController: UICollectionViewController, UICollectionViewDe
         nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: momentInfoSectionList[indexPath.section].assetResult[indexPath.row])
     }
     
-    @available(iOS 13.0, *)
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let asset = PhotoKitAsset(asset: momentInfoSectionList[indexPath.section].assetResult[indexPath.row])
         if let cell = collectionView.cellForItem(at: indexPath) as? AssetCell {
@@ -213,7 +212,6 @@ final class MomentViewController: UICollectionViewController, UICollectionViewDe
         }
     }
 
-    @available(iOS 13.0, *)
     override func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
         animator.addCompletion { [weak self] in
             guard let self = self else { return }

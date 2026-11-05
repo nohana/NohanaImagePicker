@@ -145,11 +145,7 @@ open class NohanaImagePickerController: UIViewController {
         
         let toobarAppearance = toolBarAppearance(self)
         navigationController.toolbar.standardAppearance = toobarAppearance
-#if swift(>=5.5)
-        if #available(iOS 15.0, *) {
-            navigationController.toolbar.scrollEdgeAppearance = toobarAppearance
-        }
-#endif
+        navigationController.toolbar.scrollEdgeAppearance = toobarAppearance
         navigationController.toolbar.compactAppearance = toobarAppearance
         navigationController.toolbar.tintColor = config.color.navigationBarForeground
         

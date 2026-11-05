@@ -44,20 +44,8 @@ struct Size {
     }
 
     static func screenRectWithoutAppBar(_ viewController: UIViewController) -> CGRect {
-        let appBarHeight: CGFloat = {
-            if #available(iOS 11.0, *) {
-                return viewController.view.safeAreaInsets.top
-            } else {
-                return Size.appBarHeight(viewController)
-            }
-        }()
-        let toolbarHeight: CGFloat = {
-            if #available(iOS 11.0, *) {
-                return viewController.view.safeAreaInsets.bottom
-            } else {
-                return Size.toolbarHeight(viewController)
-            }
-        }()
+        let appBarHeight = viewController.view.safeAreaInsets.top
+        let toolbarHeight = viewController.view.safeAreaInsets.bottom
         return CGRect(
             x: 0,
             y: appBarHeight,

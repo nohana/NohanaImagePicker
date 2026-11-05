@@ -73,12 +73,7 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
     // MARK: - Photos
 
     func checkIfAuthorizedToAccessPhotos(_ handler: @escaping (_ isAuthorized: Bool) -> Void) {
-        let status: PHAuthorizationStatus
-        if #available(iOS 14, *) {
-            status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
-        } else {
-            status = PHPhotoLibrary.authorizationStatus()
-        }
+        let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
         switch status {
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization { status in
@@ -254,9 +249,7 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
 
     func nohanaImagePickerDidTapAddPhotoButton(_ picker: NohanaImagePickerController) {
         print("🐷\(#function)")
-        if #available(iOS 14, *) {
-            PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: picker)
-        }
+        PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: picker)
     }
 
     func nohanaImagePickerDidTapAuthorizeAllPhotoButton(_ picker: NohanaImagePickerController) {
