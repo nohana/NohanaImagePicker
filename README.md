@@ -67,7 +67,7 @@ picker.canPickAsset = { (asset:Asset) -> Bool in
 
 ## Requirements
 
-- Swift 5.9 later (Xcode 15 or later)
+- Swift 5.9 later (Xcode 15 or later; building the Xcode project, e.g. with Carthage, requires Xcode 16 or later)
 - iOS 17.0 later
 
 If your app supports iOS 13–16, use `0.9.x` (e.g. `github "nohana/NohanaImagePicker" ~> 0.9.19` in your Cartfile, or "Up to Next Minor Version" from `0.9.19` in Swift Package Manager).

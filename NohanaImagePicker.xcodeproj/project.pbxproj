@@ -3,68 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3569CAA91EC1918E000C41C0 /* NohanaImagePicker.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */; };
-		6A0117BE27D6011500B868F9 /* Array+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0117BD27D6011500B868F9 /* Array+Ex.swift */; };
-		6A3D27222C759B6D00A86B57 /* CustomAssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3D27212C759B6D00A86B57 /* CustomAssetCollection.swift */; };
-		6A3D27242C759B8D00A86B57 /* PHAssetCollection+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3D27232C759B8D00A86B57 /* PHAssetCollection+Ex.swift */; };
-		6A434AE72775631C009526D3 /* UIViewController+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A434AE62775631C009526D3 /* UIViewController+Ex.swift */; };
-		6A8047FF276C3D77000F3B28 /* AlbumList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A8047FE276C3D77000F3B28 /* AlbumList.storyboard */; };
-		6A804801276C3E80000F3B28 /* Moment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A804800276C3E80000F3B28 /* Moment.storyboard */; };
-		6A804803276C3F01000F3B28 /* AssetList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A804802276C3F01000F3B28 /* AssetList.storyboard */; };
-		6ACE6617276051F6008AA84D /* ImagePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACE6616276051F6008AA84D /* ImagePreviewViewController.swift */; };
-		6AD1607C27700F0C00A8B066 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD1607B27700F0C00A8B066 /* RootViewController.swift */; };
-		6AD1607F2770B23D00A8B066 /* UIApplication+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD1607E2770B23D00A8B066 /* UIApplication+Ex.swift */; };
-		6ADA2EA82C748F0E00594B02 /* AssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADA2EA72C748F0E00594B02 /* AssetCollection.swift */; };
-		F117F732273B6A2600E11BC7 /* AssetDateSectionCreater.swift in Sources */ = {isa = PBXBuildFile; fileRef = F117F731273B6A2600E11BC7 /* AssetDateSectionCreater.swift */; };
-		F145C5E22890F8DC0070A4E2 /* PhotoAuthorizationLimitedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F145C5E02890F8DC0070A4E2 /* PhotoAuthorizationLimitedCell.swift */; };
-		F145C5E32890F8DC0070A4E2 /* PhotoAuthorizationLimitedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F145C5E12890F8DC0070A4E2 /* PhotoAuthorizationLimitedCell.xib */; };
-		F181095026A5361A001C2BDE /* MomentDetailListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F181094F26A5361A001C2BDE /* MomentDetailListViewController.swift */; };
-		F1A26CCD2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1A26CCC2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard */; };
-		F1A26CCF2738E7E400433E9F /* AssetListSelectableDateSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A26CCE2738E7E400433E9F /* AssetListSelectableDateSectionController.swift */; };
-		F1A26CD12738E88700433E9F /* AssetDateSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A26CD02738E88700433E9F /* AssetDateSection.swift */; };
-		F1A26CD32739194300433E9F /* AssetDateSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A26CD22739194300433E9F /* AssetDateSectionHeaderView.swift */; };
-		F1E5DE7D26A57F0B004B9EDE /* DetailListViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E5DE7C26A57F0B004B9EDE /* DetailListViewControllerProtocol.swift */; };
-		F1E5DE8026A58346004B9EDE /* MomentInfoSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E5DE7F26A58346004B9EDE /* MomentInfoSection.swift */; };
-		F1E5DE8226A58386004B9EDE /* MomentInfoSectionCreater.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E5DE8126A58386004B9EDE /* MomentInfoSectionCreater.swift */; };
-		F202573C1C7418920069B33A /* PickedAssetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F202573B1C7418920069B33A /* PickedAssetList.swift */; };
-		F208E5541CD7370B00FFC9F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F208E5531CD7370B00FFC9F6 /* AppDelegate.swift */; };
-		F208E5591CD7370B00FFC9F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F208E5571CD7370B00FFC9F6 /* Main.storyboard */; };
-		F208E55B1CD7370B00FFC9F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F208E55A1CD7370B00FFC9F6 /* Assets.xcassets */; };
-		F208E55E1CD7370B00FFC9F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F208E55C1CD7370B00FFC9F6 /* LaunchScreen.storyboard */; };
 		F208E5631CD7373900FFC9F6 /* NohanaImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C08D741C68651900B00181 /* NohanaImagePicker.framework */; };
 		F208E5641CD7373900FFC9F6 /* NohanaImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2C08D741C68651900B00181 /* NohanaImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F208E5691CD738CD00FFC9F6 /* DemoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F208E5681CD738CD00FFC9F6 /* DemoListViewController.swift */; };
-		F2131F431C79615700797887 /* SwipeInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2131F421C79615700797887 /* SwipeInteractionController.swift */; };
-		F218D7D61C6B3D22001FCED1 /* PhotoKitAlbumList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F218D7D51C6B3D22001FCED1 /* PhotoKitAlbumList.swift */; };
-		F218D7DE1C6C3A5B001FCED1 /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F218D7DD1C6C3A5B001FCED1 /* AlbumCell.swift */; };
-		F23554261C69D19C00796DCA /* NohanaImagePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F23554251C69D19C00796DCA /* NohanaImagePicker.storyboard */; };
-		F23554281C69D5DB00796DCA /* NohanaImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23554271C69D5DB00796DCA /* NohanaImagePickerController.swift */; };
-		F237249B1C6DCF96005D1E8A /* NohanaImagePicker.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F237249A1C6DCF96005D1E8A /* NohanaImagePicker.xcassets */; };
-		F23CC89E1CB745C800BCE443 /* ActivityIndicatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23CC89D1CB745C800BCE443 /* ActivityIndicatable.swift */; };
-		F24EB6901C68AEED0002EC86 /* AlbumListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24EB68F1C68AEED0002EC86 /* AlbumListViewController.swift */; };
-		F25C10C21C8ED9BF007453C3 /* MomentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C10C11C8ED9BF007453C3 /* MomentViewController.swift */; };
-		F25C69881CA23A0A005935D6 /* MomentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C69871CA23A0A005935D6 /* MomentCell.swift */; };
-		F25C69901CA27311005935D6 /* EmptyIndicatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C698F1CA27311005935D6 /* EmptyIndicatable.swift */; };
-		F25C69921CA28728005935D6 /* AlbumListEmptyIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C69911CA28728005935D6 /* AlbumListEmptyIndicator.swift */; };
-		F26775DE1C701FA7002E786C /* ItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26775DD1C701FA7002E786C /* ItemList.swift */; };
-		F26775E11C7046C7002E786C /* ExpandingAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26775E01C7046C7002E786C /* ExpandingAnimationController.swift */; };
-		F26775E51C70574F002E786C /* AnimatableNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26775E41C70574F002E786C /* AnimatableNavigationController.swift */; };
-		F26775E81C7073CD002E786C /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26775E71C7073CD002E786C /* Size.swift */; };
-		F26775EA1C71645A002E786C /* ContractingAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26775E91C71645A002E786C /* ContractingAnimationController.swift */; };
-		F27029CB1C71C43A001647AB /* NohanaImagePicker.strings in Resources */ = {isa = PBXBuildFile; fileRef = F27029CD1C71C43A001647AB /* NohanaImagePicker.strings */; };
-		F28F4AC31C6C49EE00B7D725 /* PhotoKitAssetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28F4AC21C6C49EE00B7D725 /* PhotoKitAssetList.swift */; };
-		F28F4AC51C6C59A500B7D725 /* PhotoKitAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28F4AC41C6C59A500B7D725 /* PhotoKitAsset.swift */; };
-		F2C08D781C68651900B00181 /* NohanaImagePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = F2C08D771C68651900B00181 /* NohanaImagePicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F2DA29771C7749D600B0A8E3 /* NotificationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DA29761C7749D600B0A8E3 /* NotificationInfo.swift */; };
-		F2DF3B151C6C76E500C1C0E4 /* AssetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF3B141C6C76E500C1C0E4 /* AssetListViewController.swift */; };
-		F2DF3B171C6C868E00C1C0E4 /* AssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF3B161C6C868E00C1C0E4 /* AssetCell.swift */; };
-		F2DF3B2B1C6CC4DB00C1C0E4 /* AssetDetailListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF3B2A1C6CC4DB00C1C0E4 /* AssetDetailListViewController.swift */; };
-		F2DF3B2D1C6D780100C1C0E4 /* AssetDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF3B2C1C6D780100C1C0E4 /* AssetDetailCell.swift */; };
-		F2FE1F781C901D9400FDBE7B /* MomentSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FE1F761C901D9400FDBE7B /* MomentSectionHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,70 +36,48 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		23D1CD93207CEB1200F8115E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/NohanaImagePicker.strings; sourceTree = "<group>"; };
-		3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NohanaImagePicker.xcassets; sourceTree = "<group>"; };
-		3590F1F51EC1A79400F32E06 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/NohanaImagePicker.strings; sourceTree = "<group>"; };
-		6A0117BD27D6011500B868F9 /* Array+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ex.swift"; sourceTree = "<group>"; };
-		6A3D27212C759B6D00A86B57 /* CustomAssetCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAssetCollection.swift; sourceTree = "<group>"; };
-		6A3D27232C759B8D00A86B57 /* PHAssetCollection+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHAssetCollection+Ex.swift"; sourceTree = "<group>"; };
-		6A434AE62775631C009526D3 /* UIViewController+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ex.swift"; sourceTree = "<group>"; };
-		6A8047FE276C3D77000F3B28 /* AlbumList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AlbumList.storyboard; sourceTree = "<group>"; };
-		6A804800276C3E80000F3B28 /* Moment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Moment.storyboard; sourceTree = "<group>"; };
-		6A804802276C3F01000F3B28 /* AssetList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetList.storyboard; sourceTree = "<group>"; };
-		6ACE6616276051F6008AA84D /* ImagePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewController.swift; sourceTree = "<group>"; };
-		6AD1607B27700F0C00A8B066 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
-		6AD1607E2770B23D00A8B066 /* UIApplication+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ex.swift"; sourceTree = "<group>"; };
-		6ADA2EA72C748F0E00594B02 /* AssetCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCollection.swift; sourceTree = "<group>"; };
-		F117F731273B6A2600E11BC7 /* AssetDateSectionCreater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDateSectionCreater.swift; sourceTree = "<group>"; };
-		F145C5E02890F8DC0070A4E2 /* PhotoAuthorizationLimitedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAuthorizationLimitedCell.swift; sourceTree = "<group>"; };
-		F145C5E12890F8DC0070A4E2 /* PhotoAuthorizationLimitedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoAuthorizationLimitedCell.xib; sourceTree = "<group>"; };
-		F181094F26A5361A001C2BDE /* MomentDetailListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentDetailListViewController.swift; sourceTree = "<group>"; };
-		F1A26CCC2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetListSelectableDateSection.storyboard; sourceTree = "<group>"; };
-		F1A26CCE2738E7E400433E9F /* AssetListSelectableDateSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetListSelectableDateSectionController.swift; sourceTree = "<group>"; };
-		F1A26CD02738E88700433E9F /* AssetDateSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDateSection.swift; sourceTree = "<group>"; };
-		F1A26CD22739194300433E9F /* AssetDateSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDateSectionHeaderView.swift; sourceTree = "<group>"; };
-		F1E5DE7C26A57F0B004B9EDE /* DetailListViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailListViewControllerProtocol.swift; sourceTree = "<group>"; };
-		F1E5DE7F26A58346004B9EDE /* MomentInfoSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentInfoSection.swift; sourceTree = "<group>"; };
-		F1E5DE8126A58386004B9EDE /* MomentInfoSectionCreater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentInfoSectionCreater.swift; sourceTree = "<group>"; };
-		F202573B1C7418920069B33A /* PickedAssetList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickedAssetList.swift; sourceTree = "<group>"; };
 		F208E5511CD7370B00FFC9F6 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F208E5531CD7370B00FFC9F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F208E5581CD7370B00FFC9F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F208E55A1CD7370B00FFC9F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F208E55D1CD7370B00FFC9F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		F208E55F1CD7370B00FFC9F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F208E5681CD738CD00FFC9F6 /* DemoListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoListViewController.swift; sourceTree = "<group>"; };
-		F2131F421C79615700797887 /* SwipeInteractionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeInteractionController.swift; sourceTree = "<group>"; };
-		F218D7D51C6B3D22001FCED1 /* PhotoKitAlbumList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoKitAlbumList.swift; sourceTree = "<group>"; };
-		F218D7DD1C6C3A5B001FCED1 /* AlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
-		F23554251C69D19C00796DCA /* NohanaImagePicker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NohanaImagePicker.storyboard; sourceTree = "<group>"; };
-		F23554271C69D5DB00796DCA /* NohanaImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NohanaImagePickerController.swift; sourceTree = "<group>"; };
-		F237249A1C6DCF96005D1E8A /* NohanaImagePicker.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NohanaImagePicker.xcassets; sourceTree = "<group>"; };
-		F23CC89D1CB745C800BCE443 /* ActivityIndicatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatable.swift; sourceTree = "<group>"; };
-		F24EB68F1C68AEED0002EC86 /* AlbumListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumListViewController.swift; sourceTree = "<group>"; };
-		F25C10C11C8ED9BF007453C3 /* MomentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MomentViewController.swift; sourceTree = "<group>"; };
-		F25C69871CA23A0A005935D6 /* MomentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MomentCell.swift; sourceTree = "<group>"; };
-		F25C698F1CA27311005935D6 /* EmptyIndicatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyIndicatable.swift; sourceTree = "<group>"; };
-		F25C69911CA28728005935D6 /* AlbumListEmptyIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumListEmptyIndicator.swift; sourceTree = "<group>"; };
-		F26775DD1C701FA7002E786C /* ItemList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemList.swift; sourceTree = "<group>"; };
-		F26775E01C7046C7002E786C /* ExpandingAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandingAnimationController.swift; sourceTree = "<group>"; };
-		F26775E41C70574F002E786C /* AnimatableNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatableNavigationController.swift; sourceTree = "<group>"; };
-		F26775E71C7073CD002E786C /* Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
-		F26775E91C71645A002E786C /* ContractingAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContractingAnimationController.swift; sourceTree = "<group>"; };
-		F27029CC1C71C43A001647AB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NohanaImagePicker.strings; sourceTree = "<group>"; };
-		F27029CF1C71C4FE001647AB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/NohanaImagePicker.strings; sourceTree = "<group>"; };
-		F28F4AC21C6C49EE00B7D725 /* PhotoKitAssetList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoKitAssetList.swift; sourceTree = "<group>"; };
-		F28F4AC41C6C59A500B7D725 /* PhotoKitAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoKitAsset.swift; sourceTree = "<group>"; };
 		F2C08D741C68651900B00181 /* NohanaImagePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NohanaImagePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F2C08D771C68651900B00181 /* NohanaImagePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NohanaImagePicker.h; sourceTree = "<group>"; };
-		F2C08D791C68651900B00181 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F2DA29761C7749D600B0A8E3 /* NotificationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationInfo.swift; sourceTree = "<group>"; };
-		F2DF3B141C6C76E500C1C0E4 /* AssetListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetListViewController.swift; sourceTree = "<group>"; };
-		F2DF3B161C6C868E00C1C0E4 /* AssetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetCell.swift; sourceTree = "<group>"; };
-		F2DF3B2A1C6CC4DB00C1C0E4 /* AssetDetailListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetDetailListViewController.swift; sourceTree = "<group>"; };
-		F2DF3B2C1C6D780100C1C0E4 /* AssetDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetDetailCell.swift; sourceTree = "<group>"; };
-		F2FE1F761C901D9400FDBE7B /* MomentSectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MomentSectionHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A4E0443F601199056FA24878 /* Exceptions for "Demo" folder in "Demo" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = F208E5501CD7370B00FFC9F6 /* Demo */;
+		};
+		78FB8EE47B4818D957899F6B /* Exceptions for "NohanaImagePicker" folder in "NohanaImagePicker" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			publicHeaders = (
+				NohanaImagePicker.h,
+			);
+			target = F2C08D731C68651900B00181 /* NohanaImagePicker */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		6F21546207E39FBCD461A615 /* Demo */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A4E0443F601199056FA24878 /* Exceptions for "Demo" folder in "Demo" target */,
+			);
+			path = Demo;
+			sourceTree = "<group>";
+		};
+		E76B62115A1E8C009A83C269 /* NohanaImagePicker */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				78FB8EE47B4818D957899F6B /* Exceptions for "NohanaImagePicker" folder in "NohanaImagePicker" target */,
+			);
+			path = NohanaImagePicker;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		F208E54E1CD7370B00FFC9F6 /* Frameworks */ = {
@@ -176,121 +98,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3569CAA31EC1918E000C41C0 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				3569CAA61EC1918E000C41C0 /* NohanaImagePicker.xcassets */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		6AD1607D2770B22500A8B066 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				6AD1607E2770B23D00A8B066 /* UIApplication+Ex.swift */,
-				6A434AE62775631C009526D3 /* UIViewController+Ex.swift */,
-				6A0117BD27D6011500B868F9 /* Array+Ex.swift */,
-				6A3D27232C759B8D00A86B57 /* PHAssetCollection+Ex.swift */,
-			);
-			name = Extension;
-			sourceTree = "<group>";
-		};
-		F1E5DE7E26A5831D004B9EDE /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				F1E5DE7F26A58346004B9EDE /* MomentInfoSection.swift */,
-				F1E5DE8126A58386004B9EDE /* MomentInfoSectionCreater.swift */,
-				F1A26CD02738E88700433E9F /* AssetDateSection.swift */,
-				F117F731273B6A2600E11BC7 /* AssetDateSectionCreater.swift */,
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
-		F208E5521CD7370B00FFC9F6 /* Demo */ = {
-			isa = PBXGroup;
-			children = (
-				3569CAA31EC1918E000C41C0 /* Resources */,
-				F208E5531CD7370B00FFC9F6 /* AppDelegate.swift */,
-				F208E5681CD738CD00FFC9F6 /* DemoListViewController.swift */,
-				F208E5571CD7370B00FFC9F6 /* Main.storyboard */,
-				F208E55A1CD7370B00FFC9F6 /* Assets.xcassets */,
-				F208E55C1CD7370B00FFC9F6 /* LaunchScreen.storyboard */,
-				F208E55F1CD7370B00FFC9F6 /* Info.plist */,
-			);
-			path = Demo;
-			sourceTree = "<group>";
-		};
-		F218D7DC1C6C3A3E001FCED1 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				F218D7DD1C6C3A5B001FCED1 /* AlbumCell.swift */,
-				F2DF3B161C6C868E00C1C0E4 /* AssetCell.swift */,
-				F2DF3B2C1C6D780100C1C0E4 /* AssetDetailCell.swift */,
-				F25C69871CA23A0A005935D6 /* MomentCell.swift */,
-				F2FE1F761C901D9400FDBE7B /* MomentSectionHeaderView.swift */,
-				F25C69911CA28728005935D6 /* AlbumListEmptyIndicator.swift */,
-				F1A26CD22739194300433E9F /* AssetDateSectionHeaderView.swift */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
-		F235541F1C698BE900796DCA /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				F23554251C69D19C00796DCA /* NohanaImagePicker.storyboard */,
-				6A804802276C3F01000F3B28 /* AssetList.storyboard */,
-				6A8047FE276C3D77000F3B28 /* AlbumList.storyboard */,
-				6A804800276C3E80000F3B28 /* Moment.storyboard */,
-				F1A26CCC2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard */,
-				F27029CD1C71C43A001647AB /* NohanaImagePicker.strings */,
-				F237249A1C6DCF96005D1E8A /* NohanaImagePicker.xcassets */,
-				F145C5E02890F8DC0070A4E2 /* PhotoAuthorizationLimitedCell.swift */,
-				F145C5E12890F8DC0070A4E2 /* PhotoAuthorizationLimitedCell.xib */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		F23554291C69F38900796DCA /* Photos */ = {
-			isa = PBXGroup;
-			children = (
-				F218D7D51C6B3D22001FCED1 /* PhotoKitAlbumList.swift */,
-				6ADA2EA72C748F0E00594B02 /* AssetCollection.swift */,
-				6A3D27212C759B6D00A86B57 /* CustomAssetCollection.swift */,
-				F28F4AC21C6C49EE00B7D725 /* PhotoKitAssetList.swift */,
-				F28F4AC41C6C59A500B7D725 /* PhotoKitAsset.swift */,
-			);
-			name = Photos;
-			sourceTree = "<group>";
-		};
-		F26775DF1C704574002E786C /* AnimationController */ = {
-			isa = PBXGroup;
-			children = (
-				F26775E41C70574F002E786C /* AnimatableNavigationController.swift */,
-				F26775E01C7046C7002E786C /* ExpandingAnimationController.swift */,
-				F26775E91C71645A002E786C /* ContractingAnimationController.swift */,
-				F2131F421C79615700797887 /* SwipeInteractionController.swift */,
-			);
-			name = AnimationController;
-			sourceTree = "<group>";
-		};
-		F26775E61C7073B1002E786C /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				F26775DD1C701FA7002E786C /* ItemList.swift */,
-				F202573B1C7418920069B33A /* PickedAssetList.swift */,
-				F26775E71C7073CD002E786C /* Size.swift */,
-				F2DA29761C7749D600B0A8E3 /* NotificationInfo.swift */,
-				F25C698F1CA27311005935D6 /* EmptyIndicatable.swift */,
-				F23CC89D1CB745C800BCE443 /* ActivityIndicatable.swift */,
-			);
-			name = Common;
-			sourceTree = "<group>";
-		};
 		F2C08D6A1C68651900B00181 = {
 			isa = PBXGroup;
 			children = (
-				F2C08D761C68651900B00181 /* NohanaImagePicker */,
-				F208E5521CD7370B00FFC9F6 /* Demo */,
+				E76B62115A1E8C009A83C269 /* NohanaImagePicker */,
+				6F21546207E39FBCD461A615 /* Demo */,
 				F2C08D751C68651900B00181 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -304,40 +116,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F2C08D761C68651900B00181 /* NohanaImagePicker */ = {
-			isa = PBXGroup;
-			children = (
-				F2C08D771C68651900B00181 /* NohanaImagePicker.h */,
-				F2C08D791C68651900B00181 /* Info.plist */,
-				F26775E61C7073B1002E786C /* Common */,
-				6AD1607D2770B22500A8B066 /* Extension */,
-				F23554291C69F38900796DCA /* Photos */,
-				F218D7DC1C6C3A3E001FCED1 /* Views */,
-				F2E508901C68B1770082EF93 /* ViewControllers */,
-				F26775DF1C704574002E786C /* AnimationController */,
-				F235541F1C698BE900796DCA /* Resources */,
-			);
-			path = NohanaImagePicker;
-			sourceTree = "<group>";
-		};
-		F2E508901C68B1770082EF93 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				F1E5DE7E26A5831D004B9EDE /* Models */,
-				F23554271C69D5DB00796DCA /* NohanaImagePickerController.swift */,
-				6AD1607B27700F0C00A8B066 /* RootViewController.swift */,
-				F24EB68F1C68AEED0002EC86 /* AlbumListViewController.swift */,
-				F2DF3B141C6C76E500C1C0E4 /* AssetListViewController.swift */,
-				F25C10C11C8ED9BF007453C3 /* MomentViewController.swift */,
-				F2DF3B2A1C6CC4DB00C1C0E4 /* AssetDetailListViewController.swift */,
-				F181094F26A5361A001C2BDE /* MomentDetailListViewController.swift */,
-				F1E5DE7C26A57F0B004B9EDE /* DetailListViewControllerProtocol.swift */,
-				F1A26CCE2738E7E400433E9F /* AssetListSelectableDateSectionController.swift */,
-				6ACE6616276051F6008AA84D /* ImagePreviewViewController.swift */,
-			);
-			name = ViewControllers;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -345,7 +123,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2C08D781C68651900B00181 /* NohanaImagePicker.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +143,9 @@
 			dependencies = (
 				F208E5661CD7373900FFC9F6 /* PBXTargetDependency */,
 			);
+			fileSystemSynchronizedGroups = (
+				6F21546207E39FBCD461A615 /* Demo */,
+			);
 			name = Demo;
 			productName = Demo;
 			productReference = F208E5511CD7370B00FFC9F6 /* Demo.app */;
@@ -383,6 +163,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				E76B62115A1E8C009A83C269 /* NohanaImagePicker */,
 			);
 			name = NohanaImagePicker;
 			productName = NohanaImagePicker;
@@ -411,7 +194,6 @@
 				};
 			};
 			buildConfigurationList = F2C08D6E1C68651900B00181 /* Build configuration list for PBXProject "NohanaImagePicker" */;
-			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -422,6 +204,7 @@
 				de,
 			);
 			mainGroup = F2C08D6A1C68651900B00181;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = F2C08D751C68651900B00181 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -437,10 +220,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F208E55E1CD7370B00FFC9F6 /* LaunchScreen.storyboard in Resources */,
-				3569CAA91EC1918E000C41C0 /* NohanaImagePicker.xcassets in Resources */,
-				F208E55B1CD7370B00FFC9F6 /* Assets.xcassets in Resources */,
-				F208E5591CD7370B00FFC9F6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,14 +227,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F23554261C69D19C00796DCA /* NohanaImagePicker.storyboard in Resources */,
-				6A804803276C3F01000F3B28 /* AssetList.storyboard in Resources */,
-				F27029CB1C71C43A001647AB /* NohanaImagePicker.strings in Resources */,
-				6A804801276C3E80000F3B28 /* Moment.storyboard in Resources */,
-				F237249B1C6DCF96005D1E8A /* NohanaImagePicker.xcassets in Resources */,
-				6A8047FF276C3D77000F3B28 /* AlbumList.storyboard in Resources */,
-				F1A26CCD2738DE6A00433E9F /* AssetListSelectableDateSection.storyboard in Resources */,
-				F145C5E32890F8DC0070A4E2 /* PhotoAuthorizationLimitedCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,8 +237,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F208E5541CD7370B00FFC9F6 /* AppDelegate.swift in Sources */,
-				F208E5691CD738CD00FFC9F6 /* DemoListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,47 +244,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F1E5DE8226A58386004B9EDE /* MomentInfoSectionCreater.swift in Sources */,
-				6A434AE72775631C009526D3 /* UIViewController+Ex.swift in Sources */,
-				F2DF3B171C6C868E00C1C0E4 /* AssetCell.swift in Sources */,
-				F26775E81C7073CD002E786C /* Size.swift in Sources */,
-				F26775DE1C701FA7002E786C /* ItemList.swift in Sources */,
-				6A3D27222C759B6D00A86B57 /* CustomAssetCollection.swift in Sources */,
-				F23CC89E1CB745C800BCE443 /* ActivityIndicatable.swift in Sources */,
-				F202573C1C7418920069B33A /* PickedAssetList.swift in Sources */,
-				6AD1607F2770B23D00A8B066 /* UIApplication+Ex.swift in Sources */,
-				F25C10C21C8ED9BF007453C3 /* MomentViewController.swift in Sources */,
-				F25C69881CA23A0A005935D6 /* MomentCell.swift in Sources */,
-				6A0117BE27D6011500B868F9 /* Array+Ex.swift in Sources */,
-				F2FE1F781C901D9400FDBE7B /* MomentSectionHeaderView.swift in Sources */,
-				F1A26CD12738E88700433E9F /* AssetDateSection.swift in Sources */,
-				F23554281C69D5DB00796DCA /* NohanaImagePickerController.swift in Sources */,
-				F1E5DE8026A58346004B9EDE /* MomentInfoSection.swift in Sources */,
-				F181095026A5361A001C2BDE /* MomentDetailListViewController.swift in Sources */,
-				F25C69921CA28728005935D6 /* AlbumListEmptyIndicator.swift in Sources */,
-				6AD1607C27700F0C00A8B066 /* RootViewController.swift in Sources */,
-				F2131F431C79615700797887 /* SwipeInteractionController.swift in Sources */,
-				F2DF3B2D1C6D780100C1C0E4 /* AssetDetailCell.swift in Sources */,
-				F25C69901CA27311005935D6 /* EmptyIndicatable.swift in Sources */,
-				F145C5E22890F8DC0070A4E2 /* PhotoAuthorizationLimitedCell.swift in Sources */,
-				6ADA2EA82C748F0E00594B02 /* AssetCollection.swift in Sources */,
-				F117F732273B6A2600E11BC7 /* AssetDateSectionCreater.swift in Sources */,
-				F2DA29771C7749D600B0A8E3 /* NotificationInfo.swift in Sources */,
-				F1A26CCF2738E7E400433E9F /* AssetListSelectableDateSectionController.swift in Sources */,
-				F1E5DE7D26A57F0B004B9EDE /* DetailListViewControllerProtocol.swift in Sources */,
-				F218D7DE1C6C3A5B001FCED1 /* AlbumCell.swift in Sources */,
-				F26775E11C7046C7002E786C /* ExpandingAnimationController.swift in Sources */,
-				F28F4AC51C6C59A500B7D725 /* PhotoKitAsset.swift in Sources */,
-				F2DF3B151C6C76E500C1C0E4 /* AssetListViewController.swift in Sources */,
-				F1A26CD32739194300433E9F /* AssetDateSectionHeaderView.swift in Sources */,
-				F26775E51C70574F002E786C /* AnimatableNavigationController.swift in Sources */,
-				F2DF3B2B1C6CC4DB00C1C0E4 /* AssetDetailListViewController.swift in Sources */,
-				F218D7D61C6B3D22001FCED1 /* PhotoKitAlbumList.swift in Sources */,
-				F24EB6901C68AEED0002EC86 /* AlbumListViewController.swift in Sources */,
-				6A3D27242C759B8D00A86B57 /* PHAssetCollection+Ex.swift in Sources */,
-				F28F4AC31C6C49EE00B7D725 /* PhotoKitAssetList.swift in Sources */,
-				6ACE6617276051F6008AA84D /* ImagePreviewViewController.swift in Sources */,
-				F26775EA1C71645A002E786C /* ContractingAnimationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,36 +256,6 @@
 			targetProxy = F208E5651CD7373900FFC9F6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		F208E5571CD7370B00FFC9F6 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F208E5581CD7370B00FFC9F6 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		F208E55C1CD7370B00FFC9F6 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F208E55D1CD7370B00FFC9F6 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		F27029CD1C71C43A001647AB /* NohanaImagePicker.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F27029CC1C71C43A001647AB /* en */,
-				F27029CF1C71C4FE001647AB /* ja */,
-				3590F1F51EC1A79400F32E06 /* ru */,
-				23D1CD93207CEB1200F8115E /* de */,
-			);
-			name = NohanaImagePicker.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		F208E5601CD7370B00FFC9F6 /* Debug */ = {
