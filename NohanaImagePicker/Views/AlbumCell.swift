@@ -43,7 +43,7 @@ class AlbumCell: UITableViewCell {
         representedAssetIdentifier = identifier
         imageRequestID = asset.requestThumbnail(targetSize: targetSize) { [weak self] image, isDegraded in
             // The cell may have been reused for another album in the meantime.
-            guard let self = self, self.representedAssetIdentifier == identifier else {
+            guard let self = self, self.representedAssetIdentifier == identifier, let image = image else {
                 return
             }
             // Do not replace this asset's image with a low quality one when it is shown again.

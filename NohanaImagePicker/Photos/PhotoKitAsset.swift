@@ -69,10 +69,11 @@ public class PhotoKitAsset: Asset {
 
     /// Requests a thumbnail. A locally available low quality image is delivered first (e.g. for assets that are
     /// only in iCloud), followed by the final image, so the handler can be called more than once.
-    /// The handler receives the image and whether it is a low quality (degraded) one. It is called on the main queue
-    /// and is not called when the request fails or is cancelled.
+    /// The handler receives the image and whether it is a low quality (degraded) one, or `nil` when the request
+    /// fails (e.g. a network error for an iCloud asset). It is called on the main queue and is not called when the
+    /// request is cancelled.
     @discardableResult
-    func requestThumbnail(targetSize: CGSize, handler: @escaping @MainActor @Sendable (UIImage, Bool) -> Void) -> PHImageRequestID {
+    func requestThumbnail(targetSize: CGSize, handler: @escaping @MainActor @Sendable (UIImage?, Bool) -> Void) -> PHImageRequestID {
         let option = PHImageRequestOptions()
         option.isNetworkAccessAllowed = true
         option.deliveryMode = .opportunistic
@@ -83,7 +84,8 @@ public class PhotoKitAsset: Asset {
             targetSize: targetSize,
             contentMode: .aspectFit,
             options: option ) { (image, info) -> Void in
-                guard let image = image else {
+                let isCancelled = (info?[PHImageCancelledKey] as? Bool) ?? false
+                guard image != nil || (!isCancelled && info?[PHImageErrorKey] != nil) else {
                     return
                 }
                 let isDegraded = (info?[PHImageResultIsDegradedKey] as? Bool) ?? false
