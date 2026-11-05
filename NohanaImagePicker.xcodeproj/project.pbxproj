@@ -41,13 +41,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		A4E0443F601199056FA24878 /* Exceptions for "Demo" folder in "Demo" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = F208E5501CD7370B00FFC9F6 /* Demo */;
-		};
 		78FB8EE47B4818D957899F6B /* Exceptions for "NohanaImagePicker" folder in "NohanaImagePicker" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -57,6 +50,13 @@
 				NohanaImagePicker.h,
 			);
 			target = F2C08D731C68651900B00181 /* NohanaImagePicker */;
+		};
+		A4E0443F601199056FA24878 /* Exceptions for "Demo" folder in "Demo" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = F208E5501CD7370B00FFC9F6 /* Demo */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
