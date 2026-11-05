@@ -16,6 +16,7 @@
 
 import UIKit
 
+@MainActor
 public protocol EmptyIndicatable {
     func isEmpty() -> Bool
     func updateVisibilityOfEmptyIndicator(_ emptyIndicator: UIView)

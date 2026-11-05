@@ -15,6 +15,7 @@
  */
 import UIKit
 
+@MainActor
 protocol AssetCellDelegate: AnyObject {
     func didPushPickButton(cell: AssetCell)
 }
@@ -35,7 +36,10 @@ class AssetCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        updateAppearance()
+        // awakeFromNib is not annotated as main actor-isolated, but nibs are always loaded on the main thread.
+        MainActor.assumeIsolated {
+            updateAppearance()
+        }
     }
     
     override func prepareForReuse() {

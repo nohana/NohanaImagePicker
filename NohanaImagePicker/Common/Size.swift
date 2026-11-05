@@ -16,6 +16,7 @@
 
 import UIKit
 
+@MainActor
 struct Size {
 
     static var statusBarHeight: CGFloat {

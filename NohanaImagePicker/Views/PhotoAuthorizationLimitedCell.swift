@@ -16,6 +16,7 @@
 
 import UIKit
 
+@MainActor
 protocol PhotoAuthorizationLimitedCellDeletate: AnyObject {
     func didSelectAddPhotoButton(_ cell: PhotoAuthorizationLimitedCell)
     func didSelectAuthorizeAllPhotoButton(_ cell: PhotoAuthorizationLimitedCell)
