@@ -17,7 +17,7 @@
 import UIKit
 import Photos
 
-public enum MediaType: Int {
+public enum MediaType: Int, Sendable {
     case any = 0, photo, video
 }
 

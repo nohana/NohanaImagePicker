@@ -54,14 +54,19 @@ final class MomentViewController: UICollectionViewController, UICollectionViewDe
         addPickPhotoKitAssetNotificationObservers()
         setUpActivityIndicator()
         collectionView.prefetchDataSource = self
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            let mediaType = self.nohanaImagePickerController.mediaType
-            self.momentInfoSectionList = MomentInfoSectionCreater().createSections(mediaType: mediaType)
-            self.isLoading = false
-            self.collectionView?.reloadData()
-            self.isFirstAppearance = true
-            self.scrollCollectionViewToInitialPosition()
+        // Building the sections reads the whole library, so do it off the main thread
+        // while the activity indicator is shown.
+        let mediaType = nohanaImagePickerController.mediaType
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            let sections = MomentInfoSectionCreater().createSections(mediaType: mediaType)
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.momentInfoSectionList = sections
+                self.isLoading = false
+                self.collectionView?.reloadData()
+                self.isFirstAppearance = true
+                self.scrollCollectionViewToInitialPosition()
+            }
         }
     }
     

@@ -18,5 +18,5 @@ import Photos
 
 struct MomentInfoSection {
     let creationDate: Date
-    let assetResult: PHFetchResult<PHAsset>
+    let assetResult: [PHAsset]
 }
