@@ -111,22 +111,13 @@ final class MomentViewController: UICollectionViewController, UICollectionViewDe
         }
 
         let asset = PhotoKitAsset(asset: momentInfoSectionList[indexPath.section].assetResult[indexPath.row])
-        cell.tag = indexPath.item
         cell.update(asset: asset, nohanaImagePickerController: nohanaImagePickerController)
 
         let imageSize = CGSize(
             width: cellSize.width * UIScreen.main.scale,
             height: cellSize.height * UIScreen.main.scale
         )
-        asset.image(targetSize: imageSize) { (imageData) -> Void in
-            DispatchQueue.main.async(execute: { () -> Void in
-                if let imageData = imageData {
-                    if cell.tag == indexPath.item {
-                        cell.imageView.image = imageData.image
-                    }
-                }
-            })
-        }
+        cell.loadThumbnail(of: asset, targetSize: imageSize)
         return (nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, assetListViewController: self, cell: cell, indexPath: indexPath, photoKitAsset: asset.originalAsset)) ?? cell
     }
 

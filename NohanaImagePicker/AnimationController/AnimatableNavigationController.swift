@@ -32,14 +32,16 @@ class AnimatableNavigationController: UINavigationController, UINavigationContro
         case .push where fromVC is AssetListViewController || fromVC is MomentViewController:
             guard let fromVC = fromVC as? UICollectionViewController,
             let selectedIndex = fromVC.collectionView?.indexPathsForSelectedItems?.first,
-            let fromCell = fromVC.collectionView?.cellForItem(at: selectedIndex) as? AssetCell
+            let fromCell = fromVC.collectionView?.cellForItem(at: selectedIndex) as? AssetCell,
+            fromCell.imageView.image != nil
             else {
                 return nil
             }
             return ExpandingAnimationController(fromCell)
         case .pop where toVC is AssetListViewController || toVC is MomentViewController:
             guard let fromVC = fromVC as? DetailListViewControllerProtocol,
-            let fromCell = fromVC.collectionView?.cellForItem(at: IndexPath(item: fromVC.currentIndexPath.item, section: 0)) as? AssetDetailCell
+            let fromCell = fromVC.collectionView?.cellForItem(at: IndexPath(item: fromVC.currentIndexPath.item, section: 0)) as? AssetDetailCell,
+            fromCell.imageView.image != nil
             else {
                 return nil
             }

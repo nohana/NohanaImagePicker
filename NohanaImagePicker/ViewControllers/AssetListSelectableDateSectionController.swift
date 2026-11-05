@@ -141,7 +141,6 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
         }
         let indexPath: IndexPath = .init(row: indexPath.row, section: indexPath.section - 1)
         let asset = PhotoKitAsset(asset: dateSectionList[indexPath.section].assetResult[indexPath.row])
-        cell.tag = indexPath.item
         cell.delegate = self
         cell.update(asset: asset, nohanaImagePickerController: nohanaImagePickerController)
 
@@ -149,15 +148,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
             width: cellSize.width * UIScreen.main.scale,
             height: cellSize.height * UIScreen.main.scale
         )
-        asset.image(targetSize: imageSize) { (imageData) -> Void in
-            DispatchQueue.main.async(execute: { () -> Void in
-                if let imageData = imageData {
-                    if cell.tag == indexPath.item {
-                        cell.imageView.image = imageData.image
-                    }
-                }
-            })
-        }
+        cell.loadThumbnail(of: asset, targetSize: imageSize)
         return (nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, assetListViewController: self, cell: cell, indexPath: indexPath, photoKitAsset: asset.originalAsset)) ?? cell
     }
 

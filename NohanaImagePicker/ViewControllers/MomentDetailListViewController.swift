@@ -142,23 +142,18 @@ final class MomentDetailListViewController: UICollectionViewController, UICollec
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetDetailCell\")")
         }
         cell.scrollView.zoomScale = 1
-        cell.tag = indexPath.item
 
         let imageSize = CGSize(
             width: cellSize.width * UIScreen.main.scale,
             height: cellSize.height * UIScreen.main.scale
         )
         let asset = PhotoKitAsset(asset: momentInfoSection.assetResult[indexPath.item])
-        asset.image(targetSize: imageSize) { (imageData) -> Void in
-            DispatchQueue.main.async(execute: { () -> Void in
-                if let imageData = imageData {
-                    if cell.tag == indexPath.item {
-                        cell.imageView.image = imageData.image
-                        cell.imageViewHeightConstraint.constant = self.cellSize.height
-                        cell.imageViewWidthConstraint.constant = self.cellSize.width
-                    }
-                }
-            })
+        cell.loadImage(of: asset, targetSize: imageSize) { [weak self, weak cell] in
+            guard let self = self, let cell = cell else {
+                return
+            }
+            cell.imageViewHeightConstraint.constant = self.cellSize.height
+            cell.imageViewWidthConstraint.constant = self.cellSize.width
         }
         return (nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, assetDetailListViewController: self, cell: cell, indexPath: indexPath, photoKitAsset: asset.originalAsset)) ?? cell
     }

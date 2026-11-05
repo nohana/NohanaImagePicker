@@ -162,7 +162,6 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssetCell", for: indexPath) as? AssetCell else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"AssetCell\")")
         }
-        cell.tag = indexPath.item
         cell.update(asset: photoKitAssetList[indexPath.row], nohanaImagePickerController: nohanaImagePickerController)
 
         let imageSize = CGSize(
@@ -170,15 +169,7 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
             height: cellSize.height * UIScreen.main.scale
         )
         let asset = photoKitAssetList[indexPath.item]
-        asset.image(targetSize: imageSize) { (imageData) -> Void in
-            DispatchQueue.main.async(execute: { () -> Void in
-                if let imageData = imageData {
-                    if cell.tag == indexPath.item {
-                        cell.imageView.image = imageData.image
-                    }
-                }
-            })
-        }
+        cell.loadThumbnail(of: asset, targetSize: imageSize)
         return (nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, assetListViewController: self, cell: cell, indexPath: indexPath, photoKitAsset: asset.originalAsset)) ?? cell
     }
 

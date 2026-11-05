@@ -14,9 +14,56 @@
  * limitations under the License.
  */
 
+import Photos
 import UIKit
 
 class AlbumCell: UITableViewCell {
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+
+    private var representedAssetIdentifier: String?
+    private var displayedAssetIdentifier: String?
+    private var imageRequestID: PHImageRequestID = PHInvalidImageRequestID
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        cancelImageRequest()
+    }
+
+    // MARK: - Image
+
+    func loadThumbnail(of asset: PhotoKitAsset, targetSize: CGSize) {
+        cancelImageRequest()
+        let identifier = asset.originalAsset.localIdentifier
+        // Clear another asset's image, but keep the image when the same asset is shown again (e.g. after reloadData).
+        if displayedAssetIdentifier != identifier {
+            thumbnailImageView.image = nil
+            displayedAssetIdentifier = nil
+        }
+        representedAssetIdentifier = identifier
+        imageRequestID = asset.requestThumbnail(targetSize: targetSize) { [weak self] image, isDegraded in
+            // The cell may have been reused for another album in the meantime.
+            guard let self = self, self.representedAssetIdentifier == identifier, let image = image else {
+                return
+            }
+            // Do not replace this asset's image with a low quality one when it is shown again.
+            if isDegraded && self.displayedAssetIdentifier == identifier {
+                return
+            }
+            self.thumbnailImageView.image = image
+            self.displayedAssetIdentifier = identifier
+        }
+    }
+
+    func clearThumbnail() {
+        cancelImageRequest()
+        thumbnailImageView.image = nil
+        displayedAssetIdentifier = nil
+    }
+
+    private func cancelImageRequest() {
+        PhotoKitAsset.cancelImageRequest(imageRequestID)
+        imageRequestID = PHInvalidImageRequestID
+        representedAssetIdentifier = nil
+    }
 }

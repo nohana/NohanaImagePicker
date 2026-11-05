@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import Photos
 import UIKit
 
 class AssetDetailCell: UICollectionViewCell, UIScrollViewDelegate {
@@ -24,6 +25,9 @@ class AssetDetailCell: UICollectionViewCell, UIScrollViewDelegate {
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageViewWidthConstraint: NSLayoutConstraint!
     let doubleTapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer()
+    private var representedAssetIdentifier: String?
+    private var displayedAssetIdentifier: String?
+    private var imageRequestID: PHImageRequestID = PHInvalidImageRequestID
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -35,6 +39,42 @@ class AssetDetailCell: UICollectionViewCell, UIScrollViewDelegate {
         super.willMove(toSuperview: newSuperview)
         scrollView.removeGestureRecognizer(doubleTapGestureRecognizer)
         scrollView.addGestureRecognizer(doubleTapGestureRecognizer)
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        cancelImageRequest()
+    }
+
+    // MARK: - Image
+
+    /// Loads the high quality image and calls `completion` after it is set.
+    func loadImage(of asset: PhotoKitAsset, targetSize: CGSize, completion: @escaping @MainActor () -> Void) {
+        cancelImageRequest()
+        let identifier = asset.originalAsset.localIdentifier
+        // Clear another asset's image, but keep the image when the same asset is shown again (e.g. after reloadData).
+        if displayedAssetIdentifier != identifier {
+            imageView.image = nil
+            displayedAssetIdentifier = nil
+        }
+        representedAssetIdentifier = identifier
+        imageRequestID = asset.requestImage(targetSize: targetSize) { [weak self] imageData in
+            DispatchQueue.main.async {
+                // The cell may have been reused for another asset in the meantime.
+                guard let self = self, self.representedAssetIdentifier == identifier, let imageData = imageData else {
+                    return
+                }
+                self.imageView.image = imageData.image
+                self.displayedAssetIdentifier = identifier
+                completion()
+            }
+        }
+    }
+
+    private func cancelImageRequest() {
+        PhotoKitAsset.cancelImageRequest(imageRequestID)
+        imageRequestID = PHInvalidImageRequestID
+        representedAssetIdentifier = nil
     }
 
     // MARK: - UIScrollViewDelegate
