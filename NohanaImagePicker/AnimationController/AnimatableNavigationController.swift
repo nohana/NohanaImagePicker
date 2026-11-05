@@ -51,14 +51,4 @@ class AnimatableNavigationController: UINavigationController, UINavigationContro
         }
     }
 
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        // The detail page pages its photos horizontally, so its pan gesture would win over the swipe from the
-        // left edge. Let it wait for the standard swipe-back gesture to fail.
-        guard let detailViewController = viewController as? DetailListViewControllerProtocol,
-              let popGesture = interactivePopGestureRecognizer else {
-            return
-        }
-        detailViewController.collectionView?.panGestureRecognizer.require(toFail: popGesture)
-    }
-
 }

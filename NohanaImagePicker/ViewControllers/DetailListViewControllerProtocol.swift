@@ -19,3 +19,15 @@ import UIKit
 protocol DetailListViewControllerProtocol where Self: UICollectionViewController {
     var currentIndexPath: IndexPath { get set }
 }
+
+extension DetailListViewControllerProtocol {
+    /// The detail pages page their photos horizontally, so their pan gesture would win over the swipe from the
+    /// left edge. Let it wait for the navigation controller's standard swipe-back gesture to fail.
+    @MainActor
+    func letSwipeBackWinOverPaging() {
+        guard let popGesture = navigationController?.interactivePopGestureRecognizer else {
+            return
+        }
+        collectionView?.panGestureRecognizer.require(toFail: popGesture)
+    }
+}
