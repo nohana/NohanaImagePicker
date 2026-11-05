@@ -112,7 +112,6 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
         nohanaImagePickerController.delegate?.nohanaImagePicker?(nohanaImagePickerController, didSelectPhotoKitAsset: photoKitAssetList[indexPath.item].originalAsset)
     }
     
-    @available(iOS 13.0, *)
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let asset = photoKitAssetList[indexPath.item]
         if let cell = collectionView.cellForItem(at: indexPath) as? AssetCell {
@@ -149,7 +148,6 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
         }
     }
 
-    @available(iOS 13.0, *)
     override func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
         animator.addCompletion { [weak self] in
             guard let self = self else { return }
