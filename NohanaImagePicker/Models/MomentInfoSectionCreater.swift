@@ -31,27 +31,25 @@ final class MomentInfoSectionCreater {
 
         let calendar = Calendar(identifier: .gregorian)
         var sections = [MomentInfoSection]()
-        var currentDay: DateComponents?
-        var currentDate = Date()
-        var currentAssets = [PHAsset]()
+        // The day being grouped: its date components, the first photo's creation date and its photos.
+        var current: (day: DateComponents, date: Date, assets: [PHAsset])?
         fetchResult.enumerateObjects { asset, _, _ in
             // Photos without a creation date are not shown in Moment.
             guard let creationDate = asset.creationDate else {
                 return
             }
             let day = calendar.dateComponents([.year, .month, .day], from: creationDate)
-            if day != currentDay {
-                if !currentAssets.isEmpty {
-                    sections.append(MomentInfoSection(creationDate: currentDate, assetResult: currentAssets))
+            if current?.day == day {
+                current?.assets.append(asset)
+            } else {
+                if let current = current {
+                    sections.append(MomentInfoSection(creationDate: current.date, assetResult: current.assets))
                 }
-                currentDay = day
-                currentDate = creationDate
-                currentAssets = []
+                current = (day, creationDate, [asset])
             }
-            currentAssets.append(asset)
         }
-        if !currentAssets.isEmpty {
-            sections.append(MomentInfoSection(creationDate: currentDate, assetResult: currentAssets))
+        if let current = current {
+            sections.append(MomentInfoSection(creationDate: current.date, assetResult: current.assets))
         }
         return sections
     }
