@@ -24,11 +24,10 @@ extension UIViewController {
         let leftSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let rightSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
-        let label = UILabel()
-        label.textColor = .black
-        label.textAlignment = .center
-        label.font = .systemFont(ofSize: 17)
-        let labelItem = UIBarButtonItem(customView: label)
+        // A plain title item instead of UIBarButtonItem(customView: UILabel), which leaks on iOS 27 (#171).
+        // Do not set isEnabled = false, because the title is then rendered greyed out.
+        let labelItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
+        labelItem.setTitleTextAttributes([.foregroundColor: UIColor.black, .font: UIFont.systemFont(ofSize: 17)], for: .normal)
         self.toolbarItems = [leftSpace, labelItem, rightSpace]
     }
 
@@ -37,20 +36,18 @@ extension UIViewController {
         guard count != nil && count! >= 2 else {
             return
         }
-        guard let labelItem = toolbarItems?[1], let titleLabel = labelItem.customView as? UILabel else {
+        guard let labelItem = toolbarItems?[1] else {
             return
         }
         if nohanaImagePickerController.maximumNumberOfSelection == 0 {
             let title = String(format: nohanaImagePickerController.config.strings.toolbarTitleNoLimit ?? NSLocalizedString("toolbar.title.nolimit", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: ""),
                 nohanaImagePickerController.pickedAssetList.count)
-            titleLabel.text = title
-            titleLabel.sizeToFit()
+            labelItem.title = title
         } else {
             let title = String(format: nohanaImagePickerController.config.strings.toolbarTitleHasLimit ?? NSLocalizedString("toolbar.title.haslimit", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: ""),
                 nohanaImagePickerController.pickedAssetList.count,
                 nohanaImagePickerController.maximumNumberOfSelection)
-            titleLabel.text = title
-            titleLabel.sizeToFit()
+            labelItem.title = title
         }
     }
     
