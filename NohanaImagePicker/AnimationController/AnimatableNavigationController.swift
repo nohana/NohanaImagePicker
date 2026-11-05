@@ -18,8 +18,6 @@ import UIKit
 
 class AnimatableNavigationController: UINavigationController, UINavigationControllerDelegate {
 
-    let swipeInteractionController = SwipeInteractionController()
-
     override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
         self.delegate = self
@@ -49,20 +47,6 @@ class AnimatableNavigationController: UINavigationController, UINavigationContro
         default:
             return nil
         }
-    }
-
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        swipeInteractionController.attachToViewController(viewController)
-    }
-
-    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        if animationController is ExpandingAnimationController {
-            return nil
-        }
-        if animationController is ContractingAnimationController {
-            return nil
-        }
-        return swipeInteractionController
     }
 
 }
