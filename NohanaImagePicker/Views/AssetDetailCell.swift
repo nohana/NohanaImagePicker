@@ -37,11 +37,6 @@ class AssetDetailCell: UICollectionViewCell, UIScrollViewDelegate {
         scrollView.addGestureRecognizer(doubleTapGestureRecognizer)
     }
 
-    deinit {
-        scrollView.removeGestureRecognizer(doubleTapGestureRecognizer)
-        doubleTapGestureRecognizer.removeTarget(self, action: #selector(AssetDetailCell.didDoubleTap(_:)))
-    }
-
     // MARK: - UIScrollViewDelegate
 
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {

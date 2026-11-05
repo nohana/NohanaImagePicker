@@ -15,13 +15,15 @@
  */
 import Photos
 
-public class PhotoKitAlbumList: ItemList {
+// albumList is only read and written on the main queue; update(_:) fetches on a background queue
+// and publishes the results on the main queue.
+public class PhotoKitAlbumList: ItemList, @unchecked Sendable {
 
     private var albumList: [Item] = []
     private let assetCollectionTypes: [PHAssetCollectionType]
     private let assetCollectionSubtypes: [PHAssetCollectionSubtype]
     private let mediaType: MediaType
-    private var shouldShowEmptyAlbum: Bool
+    private let shouldShowEmptyAlbum: Bool
     private let ascending: Bool
     private let customAssetCollection: CustomAssetCollection?
 
@@ -50,29 +52,39 @@ public class PhotoKitAlbumList: ItemList {
     }
 
     open func update(_ handler:(() -> Void)?) {
+        // The handler is only called on the main queue.
+        let handler = MainQueueHandler(handler: handler)
         DispatchQueue.global(qos: .default).async {
             var albumListFetchResult: [PHFetchResult<PHAssetCollection>] = []
             for type in self.assetCollectionTypes {
                 albumListFetchResult = albumListFetchResult + [PHAssetCollection.fetchAssetCollections(with: type, subtype: .any, options: nil)]
             }
-            self.albumList = []
+            DispatchQueue.main.async {
+                self.albumList = []
+            }
             let isAssetCollectionSubtypeAny = self.assetCollectionSubtypes.contains(.any)
             for fetchResult in albumListFetchResult {
                 Array(0..<fetchResult.count).chunked(by: 20).map({ IndexSet($0) }).forEach {
+                    var chunk: [Item] = []
                     fetchResult.enumerateObjects(at: $0, options: []) { (album, index, stop) in
                         if self.assetCollectionSubtypes.contains(album.assetCollectionSubtype) || isAssetCollectionSubtypeAny {
                             let assets = PhotoKitAssetList(album: album, mediaType: self.mediaType, ascending: self.ascending)
                             if self.shouldShowEmptyAlbum || assets.count > 0 {
-                                self.albumList.append(assets)
+                                chunk.append(assets)
                             }
                         }
                     }
-                    handler?()
+                    DispatchQueue.main.async {
+                        self.albumList.append(contentsOf: chunk)
+                        handler.handler?()
+                    }
                 }
             }
             if let customAssetCollection = self.customAssetCollection {
                 let asset = PhotoKitAssetList(album: customAssetCollection, mediaType: self.mediaType, ascending: self.ascending)
-                self.albumList.insert(asset, at: 0)
+                DispatchQueue.main.async {
+                    self.albumList.insert(asset, at: 0)
+                }
             }
         }
     }
@@ -91,4 +103,9 @@ public class PhotoKitAlbumList: ItemList {
         return albumList.endIndex
     }
 
+}
+
+// Carries a non-Sendable handler to the main queue, where it is called.
+private struct MainQueueHandler: @unchecked Sendable {
+    let handler: (() -> Void)?
 }

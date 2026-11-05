@@ -17,6 +17,7 @@
 import UIKit
 import Photos
 
+@MainActor
 protocol AlbumListViewControllerDelegate: AnyObject {
     func didSelectMoment()
     func didSelectAlbum(album: PhotoKitAssetList)

@@ -363,7 +363,7 @@ extension String {
 // MARK: - PHPhotoLibraryChangeObserver
 
 extension AssetListSelectableDateSectionController: PHPhotoLibraryChangeObserver {
-    func photoLibraryDidChange(_ changeInstance: PHChange) {
+    nonisolated func photoLibraryDidChange(_ changeInstance: PHChange) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
 

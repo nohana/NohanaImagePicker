@@ -16,6 +16,7 @@
 
 import UIKit
 
+@MainActor
 protocol AssetDateSectionHeaderViewDelegate: AnyObject {
     func didPushPickButton()
 }

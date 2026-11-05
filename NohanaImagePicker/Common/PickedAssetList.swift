@@ -49,6 +49,7 @@ class PickedAssetList: ItemList {
 
     // MARK: - Manage assetlist
 
+    @MainActor
     func pick(asset: Asset) -> Bool {
         guard canPick(asset: asset) else {
             return false
@@ -73,6 +74,7 @@ class PickedAssetList: ItemList {
 
     }
 
+    @MainActor
     func drop(asset: Asset) -> Bool {
         let assetsCountBeforeDropping = self.count
         if asset is PhotoKitAsset {
@@ -103,6 +105,7 @@ class PickedAssetList: ItemList {
         return assetlist.contains { $0.identifier == asset.identifier }
     }
 
+    @MainActor
     func canPick(asset: Asset) -> Bool {
         guard !isPicked(asset) else {
             return false

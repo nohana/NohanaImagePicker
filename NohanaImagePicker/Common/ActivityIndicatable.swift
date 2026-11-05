@@ -16,6 +16,7 @@
 
 import UIKit
 
+@MainActor
 public protocol ActivityIndicatable {
     func isProgressing() -> Bool
     func updateVisibilityOfActivityIndicator(_ activityIndicator: UIView)
