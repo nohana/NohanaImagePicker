@@ -72,6 +72,8 @@ picker.canPickAsset = { (asset:Asset) -> Bool in
 
 If your app supports iOS 13–16, use `0.9.x` (e.g. `github "nohana/NohanaImagePicker" ~> 0.9.19` in your Cartfile, or "Up to Next Minor Version" from `0.9.19` in Swift Package Manager).
 
+Apps built with Xcode 27 must adopt the UIScene life cycle to launch on iOS 27. See `Demo/SceneDelegate.swift` and the `UIApplicationSceneManifest` in `Demo/Info.plist` for a minimal setup.
+
 ## Installation
 
 ### Carthage
