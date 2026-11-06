@@ -35,21 +35,42 @@ class PhotoAuthorizationLimitedCell: UICollectionViewCell {
     @IBOutlet weak private var addPhotoButton: UIButton! {
         didSet {
             self.addPhotoButton.layer.cornerRadius = 6
-            self.addPhotoButton.layer.borderColor = UIColor(red: 187/255, green: 187/255, blue: 187/255, alpha: 1).cgColor
             self.addPhotoButton.layer.borderWidth = 1
         }
     }
     @IBOutlet weak private var authorizeAllPhotoButton: UIButton! {
         didSet {
             self.authorizeAllPhotoButton.layer.cornerRadius = 6
-            self.authorizeAllPhotoButton.layer.borderColor = UIColor(red: 187/255, green: 187/255, blue: 187/255, alpha: 1).cgColor
             self.authorizeAllPhotoButton.layer.borderWidth = 1
         }
     }
     
+    // The light colors are the ones set in the nib.
+    private static let attentionColor = UIColor(
+        light: UIColor(red: 74/255, green: 62/255, blue: 54/255, alpha: 1),
+        dark: UIColor(red: 221/255, green: 213/255, blue: 207/255, alpha: 1)
+    )
+    private static let borderColor = UIColor(light: UIColor(white: 187/255, alpha: 1), dark: UIColor(white: 72/255, alpha: 1))
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        // awakeFromNib is not annotated as main actor-isolated, but nibs are always loaded on the main thread.
+        MainActor.assumeIsolated {
+            attentionLabel.textColor = Self.attentionColor
+            addPhotoButton.configuration?.baseForegroundColor = .label
+            authorizeAllPhotoButton.configuration?.baseForegroundColor = .label
+            updateBorderColors()
+            // A CGColor does not follow the appearance, so set it again when the appearance changes.
+            registerForTraitChanges([UITraitUserInterfaceStyle.self]) { (cell: PhotoAuthorizationLimitedCell, _: UITraitCollection) in
+                cell.updateBorderColors()
+            }
+        }
+    }
+
+    private func updateBorderColors() {
+        let borderColor = Self.borderColor.resolvedColor(with: traitCollection).cgColor
+        addPhotoButton.layer.borderColor = borderColor
+        authorizeAllPhotoButton.layer.borderColor = borderColor
     }
 
     @IBAction func tappedAddPhotoButton(_ sender: UIButton) {

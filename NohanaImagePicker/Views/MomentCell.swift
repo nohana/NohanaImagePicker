@@ -24,14 +24,14 @@ class MomentCell: UICollectionViewListCell {
 
     var config: NohanaImagePickerController.Config! {
         didSet {
-            separatorView.backgroundColor = config.color.separator ?? UIColor(red: 0xbb/0xff, green: 0xbb/0xff, blue: 0xbb/0xff, alpha: 1)
+            separatorView.backgroundColor = config.color.separator ?? UIColor(light: UIColor(white: 0xbb/0xff, alpha: 1), dark: UIColor(white: 0x38/0xff, alpha: 1))
         }
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         titleLabel.font = .systemFont(ofSize: 16)
-        titleLabel.textColor = .black
+        titleLabel.textColor = .label
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         separatorView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(titleLabel)

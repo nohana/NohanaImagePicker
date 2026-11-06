@@ -55,7 +55,7 @@ open class NohanaImagePickerController: UIViewController {
     open var canPickDateSection: Bool = false
     open var titleTextAttributes: [NSAttributedString.Key: Any] = {
         return [
-            .foregroundColor: UIColor.black,
+            .foregroundColor: UIColor.label,
             .font: UIFont.systemFont(ofSize: 17, weight: .semibold)
         ]
     }()
@@ -178,12 +178,12 @@ extension NohanaImagePickerController {
             public var empty: UIColor?
             public var separator: UIColor?
             /// The background of the navigation bar and the toolbar. When nil, the bars have no background on iOS 26+
-            /// (Liquid Glass) and are white on earlier versions. On iOS 26+ the system does not draw a toolbar
-            /// background, so only the navigation bar uses this color.
+            /// (Liquid Glass) and are the system background (white in light mode) on earlier versions. On iOS 26+ the
+            /// system does not draw a toolbar background, so only the navigation bar uses this color.
             public var navigationBarBackground: UIColor?
-            public var navigationBarForeground: UIColor = .black
+            public var navigationBarForeground: UIColor = .label
             /// The done button. Before iOS 26 it is the title color; on iOS 26+ it is the fill color of the button.
-            public var navigationBarDoneBarButtonItem: UIColor = .black
+            public var navigationBarDoneBarButtonItem: UIColor = .label
         }
         public var color = Color()
 
