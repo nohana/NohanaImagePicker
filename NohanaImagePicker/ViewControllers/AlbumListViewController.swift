@@ -62,7 +62,7 @@ class AlbumListViewController: UIViewController, UICollectionViewDelegate, Empty
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = nohanaImagePickerController.config.color.background ?? .white
+        view.backgroundColor = nohanaImagePickerController.config.color.background ?? .systemBackground
         title = nohanaImagePickerController.config.strings.albumListTitle ?? NSLocalizedString("albumlist.title", tableName: "NohanaImagePicker", bundle: nohanaImagePickerController.assetBundle, comment: "")
         navigationItem.leftBarButtonItem?.tintColor = nohanaImagePickerController.config.color.navigationBarForeground
         collectionView.delegate = self

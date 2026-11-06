@@ -55,7 +55,7 @@ final class MomentDetailListViewController: UICollectionViewController, UICollec
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = nohanaImagePickerController.config.color.background ?? .white
+        view.backgroundColor = nohanaImagePickerController.config.color.background ?? .systemBackground
         title = ""
         setUpToolbarItems()
         addPickPhotoKitAssetNotificationObservers()

@@ -37,7 +37,7 @@ class AlbumCell: UICollectionViewListCell {
         thumbnailImageView.contentMode = .scaleAspectFill
         thumbnailImageView.clipsToBounds = true
         titleLabel.font = .systemFont(ofSize: 16)
-        titleLabel.textColor = .black
+        titleLabel.textColor = .label
         thumbnailImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(thumbnailImageView)

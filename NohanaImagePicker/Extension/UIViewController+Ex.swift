@@ -27,7 +27,7 @@ extension UIViewController {
         // A plain title item instead of UIBarButtonItem(customView: UILabel), which leaks on iOS 27 (#171).
         // Do not set isEnabled = false, because the title is then rendered greyed out.
         let labelItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
-        labelItem.setTitleTextAttributes([.foregroundColor: UIColor.black, .font: UIFont.systemFont(ofSize: 17)], for: .normal)
+        labelItem.setTitleTextAttributes([.foregroundColor: UIColor.label, .font: UIFont.systemFont(ofSize: 17)], for: .normal)
         #if compiler(>=6.2) // The iOS 26 SDK
         if #available(iOS 26.0, *) {
             // Show the count as text, not as a glass button. Without the glass the text is drawn on the content,
@@ -108,7 +108,8 @@ extension UIViewController {
     }
 
     // On iOS 26+ the bars have no background by default (Liquid Glass), so the photos can scroll under them.
-    // Before iOS 26 the bars stay white as in earlier versions. A color set by the app is used on every version.
+    // Before iOS 26 the bars are the system background (white in light mode). A color set by the app is used on every
+    // version.
     private func barBackgroundColor(_ nohanaImagePickerController: NohanaImagePickerController) -> UIColor? {
         if let backgroundColor = nohanaImagePickerController.config.color.navigationBarBackground {
             return backgroundColor
@@ -116,7 +117,7 @@ extension UIViewController {
         if #available(iOS 26.0, *) {
             return nil
         }
-        return .white
+        return .systemBackground
     }
 
     // MARK: - Notification
