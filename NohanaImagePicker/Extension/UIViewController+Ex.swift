@@ -94,6 +94,19 @@ extension UIViewController {
         return appearance
     }
 
+    // MARK: - Done button
+
+    /// Apply `navigationBarDoneBarButtonItem` to the done button. Before iOS 26 it is the title color. On iOS 26+ the
+    /// done button is a filled glass button with a checkmark and no title, so it is the fill color (the tint).
+    func setDoneButtonColor(_ doneButton: UIBarButtonItem?, _ nohanaImagePickerController: NohanaImagePickerController) {
+        let color = nohanaImagePickerController.config.color.navigationBarDoneBarButtonItem
+        doneButton?.setTitleTextAttributes([
+            .foregroundColor: color,
+            .font: UIFont.systemFont(ofSize: 17, weight: .semibold)
+        ], for: .normal)
+        doneButton?.tintColor = color
+    }
+
     // On iOS 26+ the bars have no background by default (Liquid Glass), so the photos can scroll under them.
     // Before iOS 26 the bars stay white as in earlier versions. A color set by the app is used on every version.
     private func barBackgroundColor(_ nohanaImagePickerController: NohanaImagePickerController) -> UIColor? {

@@ -106,10 +106,7 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     }
 
     private func updateDoneBarButtonColor() {
-        parent?.navigationItem.rightBarButtonItem?.setTitleTextAttributes([
-            .foregroundColor: nohanaImagePickerController.config.color.navigationBarDoneBarButtonItem,
-            .font: UIFont.systemFont(ofSize: 17, weight: .semibold)
-        ], for: .normal)
+        setDoneButtonColor(parent?.navigationItem.rightBarButtonItem, nohanaImagePickerController)
     }
 
     // MARK: - UICollectionViewDataSource

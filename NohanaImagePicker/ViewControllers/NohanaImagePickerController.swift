@@ -182,6 +182,7 @@ extension NohanaImagePickerController {
             /// background, so only the navigation bar uses this color.
             public var navigationBarBackground: UIColor?
             public var navigationBarForeground: UIColor = .black
+            /// The done button. Before iOS 26 it is the title color; on iOS 26+ it is the fill color of the button.
             public var navigationBarDoneBarButtonItem: UIColor = .black
         }
         public var color = Color()
