@@ -24,7 +24,7 @@ class MomentCell: UICollectionViewListCell {
 
     var config: NohanaImagePickerController.Config! {
         didSet {
-            separatorView.backgroundColor = config.color.separator ?? UIColor(light: UIColor(white: 0xbb/0xff, alpha: 1), dark: UIColor(white: 0x38/0xff, alpha: 1))
+            separatorView.backgroundColor = config.color.separator ?? .opaqueSeparator
         }
     }
 

@@ -45,12 +45,11 @@ class PhotoAuthorizationLimitedCell: UICollectionViewCell {
         }
     }
     
-    // The light colors are the ones set in the nib.
+    // The light color is the one set in the nib.
     private static let attentionColor = UIColor(
         light: UIColor(red: 74/255, green: 62/255, blue: 54/255, alpha: 1),
         dark: UIColor(red: 221/255, green: 213/255, blue: 207/255, alpha: 1)
     )
-    private static let borderColor = UIColor(light: UIColor(white: 187/255, alpha: 1), dark: UIColor(white: 72/255, alpha: 1))
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -68,7 +67,7 @@ class PhotoAuthorizationLimitedCell: UICollectionViewCell {
     }
 
     private func updateBorderColors() {
-        let borderColor = Self.borderColor.resolvedColor(with: traitCollection).cgColor
+        let borderColor = UIColor.opaqueSeparator.resolvedColor(with: traitCollection).cgColor
         addPhotoButton.layer.borderColor = borderColor
         authorizeAllPhotoButton.layer.borderColor = borderColor
     }
