@@ -37,6 +37,11 @@ class AssetDetailListViewController: AssetListViewController, DetailListViewCont
         self.collectionView.backgroundColor = .black
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        letSwipeBackWinOverPaging()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Detail pages load high quality images instead of thumbnails.

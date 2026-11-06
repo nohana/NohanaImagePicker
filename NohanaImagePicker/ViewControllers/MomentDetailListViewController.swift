@@ -72,6 +72,7 @@ final class MomentDetailListViewController: UICollectionViewController, UICollec
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        letSwipeBackWinOverPaging()
         setToolbarTitle(nohanaImagePickerController)
         collectionView?.reloadData()
         scrollCollectionViewToInitialPosition()
