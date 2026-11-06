@@ -185,13 +185,19 @@ class RootViewController: UIViewController {
         addChild(newViewController)
         view.addSubview(newViewController.view)
         
+        // Extend the list under the navigation bar and the toolbar; its content inset keeps the first and last rows
+        // clear of the bars. The sides stay in the safe area because the cell sizes are computed from the view width.
         NSLayoutConstraint.activate([
-            newViewController.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            newViewController.view.topAnchor.constraint(equalTo: self.view.topAnchor),
             newViewController.view.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
             newViewController.view.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-            newViewController.view.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            newViewController.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
         ])
         newViewController.view.layoutIfNeeded()
+        // Let the bars find the list for the scroll edge effect, because it is in a child view controller.
+        let scrollView = newViewController.view as? UIScrollView
+        setContentScrollView(scrollView, for: .top)
+        setContentScrollView(scrollView, for: .bottom)
         
         oldViewController?.view.removeFromSuperview()
         oldViewController?.removeFromParent()

@@ -50,6 +50,7 @@ final class MomentDetailListViewController: UICollectionViewController, UICollec
     override func loadView() {
         super.loadView()
         self.collectionView.backgroundColor = .black
+        self.collectionView.contentInsetAdjustmentBehavior = .never
     }
 
     override func viewDidLoad() {
@@ -76,6 +77,11 @@ final class MomentDetailListViewController: UICollectionViewController, UICollec
         setToolbarTitle(nohanaImagePickerController)
         collectionView?.reloadData()
         scrollCollectionViewToInitialPosition()
+    }
+
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        fitPagesBetweenBars()
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

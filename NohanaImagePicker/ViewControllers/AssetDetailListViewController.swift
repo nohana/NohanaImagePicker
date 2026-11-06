@@ -35,11 +35,17 @@ class AssetDetailListViewController: AssetListViewController, DetailListViewCont
     override func loadView() {
         super.loadView()
         self.collectionView.backgroundColor = .black
+        self.collectionView.contentInsetAdjustmentBehavior = .never
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         letSwipeBackWinOverPaging()
+    }
+
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        fitPagesBetweenBars()
     }
 
     override func viewDidLoad() {

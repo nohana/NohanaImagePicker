@@ -177,7 +177,10 @@ extension NohanaImagePickerController {
             public var background: UIColor?
             public var empty: UIColor?
             public var separator: UIColor?
-            public var navigationBarBackground: UIColor = .white
+            /// The background of the navigation bar and the toolbar. When nil, the bars have no background on iOS 26+
+            /// (Liquid Glass) and are white on earlier versions. On iOS 26+ the system does not draw a toolbar
+            /// background, so only the navigation bar uses this color.
+            public var navigationBarBackground: UIColor?
             public var navigationBarForeground: UIColor = .black
             public var navigationBarDoneBarButtonItem: UIColor = .black
         }

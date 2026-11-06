@@ -30,4 +30,12 @@ extension DetailListViewControllerProtocol {
         }
         collectionView?.panGestureRecognizer.require(toFail: popGesture)
     }
+
+    /// The view extends under the bars, but each page is as tall as the area between them. A horizontal collection
+    /// view does not get a top inset automatically, so set the insets so that the pages sit between the bars.
+    /// Call this from viewSafeAreaInsetsDidChange; contentInsetAdjustmentBehavior must be .never.
+    @MainActor
+    func fitPagesBetweenBars() {
+        collectionView?.contentInset = UIEdgeInsets(top: view.safeAreaInsets.top, left: 0, bottom: view.safeAreaInsets.bottom, right: 0)
+    }
 }
