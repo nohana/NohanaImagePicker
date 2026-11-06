@@ -95,7 +95,7 @@
         <!--Asset Detail List View Controller-->
         <scene sceneID="Wdd-Di-sbg">
             <objects>
-                <collectionViewController id="Dav-bY-SLK" customClass="AssetDetailListViewController" customModule="NohanaImagePicker" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="AssetDetailListViewController" id="Dav-bY-SLK" customClass="AssetDetailListViewController" customModule="NohanaImagePicker" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" id="336-vb-qGk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="510"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

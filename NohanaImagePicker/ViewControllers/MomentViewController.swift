@@ -212,13 +212,18 @@ final class MomentViewController: UICollectionViewController, UICollectionViewDe
     }
 
     override func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
-        animator.addCompletion { [weak self] in
-            guard let self = self else { return }
-            if let indexPath = configuration.identifier as? IndexPath {
-                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
-                self.performSegue(withIdentifier: "toMomentDetailListViewController", sender: nil)
-            }
+        guard let indexPath = configuration.identifier as? IndexPath else {
+            return
         }
+        // makeMomentDetail opens the selected item.
+        collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+        guard let detailList = storyboard?.instantiateViewController(identifier: "MomentDetailListViewController", creator: { [weak self] coder in
+            self?.makeMomentDetail(coder)
+        }) else {
+            return
+        }
+        prepareDetailList(detailList, image: (animator.previewViewController as? ImagePreviewViewController)?.image)
+        pushDetailList(detailList, expandingFrom: animator)
     }
 
     // MARK: - Storyboard
@@ -229,6 +234,13 @@ final class MomentViewController: UICollectionViewController, UICollectionViewDe
         guard let momentDetailListViewController = segue.destination as? MomentDetailListViewController else {
             return
         }
+        prepareDetailList(momentDetailListViewController, image: nil)
+    }
+
+    /// `image` is shown until the photo is loaded; the thumbnail is used when it is nil.
+    private func prepareDetailList(_ momentDetailListViewController: MomentDetailListViewController, image: UIImage?) {
+        let tappedCell = collectionView?.cellForItem(at: momentDetailListViewController.currentIndexPath) as? AssetCell
+        momentDetailListViewController.showWhileLoading(image ?? tappedCell?.imageView.image)
         // The pages keep the section of the tapped item.
         zoomDetailList(momentDetailListViewController, nohanaImagePickerController) { page in page }
     }

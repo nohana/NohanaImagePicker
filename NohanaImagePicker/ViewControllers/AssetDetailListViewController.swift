@@ -27,6 +27,7 @@ class AssetDetailListViewController: AssetListViewController, DetailListViewCont
     }
 
     @IBOutlet weak var pickButton: UIButton!
+    var placeholder: (item: Int, image: UIImage)?
 
     override var cellSize: CGSize {
         return Size.screenRectWithoutAppBar(self).size
@@ -124,7 +125,16 @@ class AssetDetailListViewController: AssetListViewController, DetailListViewCont
             height: cellSize.height * UIScreen.main.scale
         )
         let asset = photoKitAssetList[indexPath.item]
-        cell.loadImage(of: asset, targetSize: imageSize) { [weak self, weak cell] in
+        let placeholder = takePlaceholder(for: indexPath)
+        if placeholder != nil {
+            // The page may be laid out during the transition. Lay it out right away, or the image would animate in.
+            UIView.performWithoutAnimation {
+                cell.imageViewHeightConstraint.constant = cellSize.height
+                cell.imageViewWidthConstraint.constant = cellSize.width
+                cell.layoutIfNeeded()
+            }
+        }
+        cell.loadImage(of: asset, targetSize: imageSize, placeholder: placeholder) { [weak self, weak cell] in
             guard let self = self, let cell = cell else {
                 return
             }
