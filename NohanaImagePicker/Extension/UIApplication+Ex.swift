@@ -30,18 +30,4 @@ extension UIApplication {
         }
         return orientation
     }
-    
-    var currentStatusBarFrame: CGRect {
-        guard let frame = keyWindowScene?.statusBarManager?.statusBarFrame else {
-            return .zero
-        }
-        return frame
-    }
-    
-    var currentStatusBarHidden: Bool {
-        guard let isStatusBarHidden = keyWindowScene?.statusBarManager?.isStatusBarHidden else {
-            return false
-        }
-        return isStatusBarHidden
-    }
 }

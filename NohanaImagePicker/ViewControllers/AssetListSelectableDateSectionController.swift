@@ -294,6 +294,22 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
 
         let assetListDetailViewController = segue.destination as! AssetDetailListViewController
         assetListDetailViewController.currentIndexPath = IndexPath(item: assetListDetailCurrentRow, section: 0)
+        zoomDetailList(assetListDetailViewController, nohanaImagePickerController) { [weak self] page in
+            self?.indexPath(forDetailItem: page.item)
+        }
+    }
+
+    // The item in this grid for a page of the detail list, which shows the date sections one after another.
+    private func indexPath(forDetailItem item: Int) -> IndexPath? {
+        var rest = item
+        for (index, dateSection) in dateSectionList.enumerated() {
+            if rest < dateSection.assetResult.count {
+                // Section 0 is the limited access cell.
+                return IndexPath(item: rest, section: index + 1)
+            }
+            rest -= dateSection.assetResult.count
+        }
+        return nil
     }
 
     // MARK: - IBSegueAction

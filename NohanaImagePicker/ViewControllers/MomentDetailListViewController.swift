@@ -127,8 +127,7 @@ final class MomentDetailListViewController: UICollectionViewController, UICollec
         guard isFirstAppearance else {
             return
         }
-        let indexPath = IndexPath(item: currentIndexPath.item, section: 0)
-        self.scrollCollectionView(to: indexPath)
+        scrollToCurrentPage()
         isFirstAppearance = false
     }
 
