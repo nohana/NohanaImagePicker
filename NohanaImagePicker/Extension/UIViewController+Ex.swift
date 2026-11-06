@@ -28,6 +28,16 @@ extension UIViewController {
         // Do not set isEnabled = false, because the title is then rendered greyed out.
         let labelItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
         labelItem.setTitleTextAttributes([.foregroundColor: UIColor.black, .font: UIFont.systemFont(ofSize: 17)], for: .normal)
+        #if compiler(>=6.2) // The iOS 26 SDK
+        if #available(iOS 26.0, *) {
+            // Show the count as text, not as a glass button. Without the glass the text is drawn on the content,
+            // which is black in the detail pages.
+            labelItem.hidesSharedBackground = true
+            if self is DetailListViewControllerProtocol {
+                labelItem.setTitleTextAttributes([.foregroundColor: UIColor.white, .font: UIFont.systemFont(ofSize: 17)], for: .normal)
+            }
+        }
+        #endif
         self.toolbarItems = [leftSpace, labelItem, rightSpace]
     }
 
