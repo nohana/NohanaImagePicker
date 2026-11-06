@@ -18,6 +18,8 @@ import UIKit
 
 protocol DetailListViewControllerProtocol where Self: UICollectionViewController {
     var currentIndexPath: IndexPath { get set }
+    /// An image of the first page to show until its high quality image is loaded. See `showWhileLoading(_:)`.
+    var placeholder: (item: Int, image: UIImage)? { get set }
 }
 
 extension DetailListViewControllerProtocol {
@@ -53,6 +55,23 @@ extension DetailListViewControllerProtocol {
             return
         }
         collectionView.scrollToItem(at: IndexPath(item: item, section: 0), at: .centeredHorizontally, animated: false)
+    }
+
+    /// Show `image` (the preview or the thumbnail of the opened photo) on the page of `currentIndexPath` until its
+    /// high quality image is loaded, so that the page is not empty while it opens.
+    @MainActor
+    func showWhileLoading(_ image: UIImage?) {
+        placeholder = image.map { (item: currentIndexPath.item, image: $0) }
+    }
+
+    /// Returns the placeholder for the page of `indexPath`, only once.
+    @MainActor
+    func takePlaceholder(for indexPath: IndexPath) -> UIImage? {
+        guard let placeholder, placeholder.item == indexPath.item else {
+            return nil
+        }
+        self.placeholder = nil
+        return placeholder.image
     }
 
     /// Whether the photo of the current page is zoomed in. Then a swipe pans the photo instead of going back.
@@ -93,6 +112,17 @@ extension UICollectionViewController {
                 collectionView.layoutIfNeeded()
             }
             return collectionView.cellForItem(at: indexPath)
+        }
+    }
+
+    /// Opens `detailList` from the preview of a context menu. Like the Photos app, the preview expands into it: the
+    /// detail list is pushed right away under the preview, without any animation of its own.
+    func pushDetailList(_ detailList: UIViewController, expandingFrom animator: UIContextMenuInteractionCommitAnimating) {
+        animator.addAnimations { [weak self] in
+            UIView.performWithoutAnimation {
+                self?.navigationController?.pushViewController(detailList, animated: false)
+                self?.navigationController?.view.layoutIfNeeded()
+            }
         }
     }
 

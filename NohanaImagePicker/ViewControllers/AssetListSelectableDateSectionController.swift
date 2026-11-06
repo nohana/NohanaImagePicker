@@ -262,18 +262,29 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
     }
 
     override func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
-        animator.addCompletion { [weak self] in
-            guard let self = self else { return }
-            if let indexPath = configuration.identifier as? IndexPath {
-                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
-                self.performSegue(withIdentifier: "toAssetDetailListViewController", sender: nil)
-            }
+        guard let indexPath = configuration.identifier as? IndexPath,
+              let detailList = storyboard?.instantiateViewController(identifier: "AssetDetailListViewController", creator: { [weak self] coder in
+                  self?.makeDetailList(coder)
+              }) else {
+            return
         }
+        collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+        prepareDetailList(detailList, image: (animator.previewViewController as? ImagePreviewViewController)?.image)
+        pushDetailList(detailList, expandingFrom: animator)
     }
 
     // MARK: - Storyboard
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let detailList = segue.destination as? AssetDetailListViewController else {
+            return
+        }
+        prepareDetailList(detailList, image: nil)
+    }
+
+    /// Opens the detail list at the selected item. `image` is shown until the photo is loaded; the thumbnail is used
+    /// when it is nil.
+    private func prepareDetailList(_ assetListDetailViewController: AssetDetailListViewController, image: UIImage?) {
         guard let selectedIndexPath = collectionView?.indexPathsForSelectedItems?.first,
               selectedIndexPath.section != 0,
               selectedIndexPath.section - 1 < dateSectionList.count else {
@@ -292,8 +303,8 @@ class AssetListSelectableDateSectionController: UICollectionViewController, UICo
             assetListDetailCurrentRow = photoKitAssetList.count - 1
         }
 
-        let assetListDetailViewController = segue.destination as! AssetDetailListViewController
         assetListDetailViewController.currentIndexPath = IndexPath(item: assetListDetailCurrentRow, section: 0)
+        assetListDetailViewController.showWhileLoading(image ?? (collectionView?.cellForItem(at: selectedIndexPath) as? AssetCell)?.imageView.image)
         zoomDetailList(assetListDetailViewController, nohanaImagePickerController) { [weak self] page in
             self?.indexPath(forDetailItem: page.item)
         }

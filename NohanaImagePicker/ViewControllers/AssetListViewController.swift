@@ -149,13 +149,15 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
     }
 
     override func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
-        animator.addCompletion { [weak self] in
-            guard let self = self else { return }
-            if let indexPath = configuration.identifier as? IndexPath {
-                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
-                self.performSegue(withIdentifier: "toAssetDetailListViewController", sender: nil)
-            }
+        guard let indexPath = configuration.identifier as? IndexPath,
+              let detailList = storyboard?.instantiateViewController(identifier: "AssetDetailListViewController", creator: { [weak self] coder in
+                  self?.makeDetailList(coder)
+              }) else {
+            return
         }
+        collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+        prepareDetailList(detailList, at: indexPath, image: (animator.previewViewController as? ImagePreviewViewController)?.image)
+        pushDetailList(detailList, expandingFrom: animator)
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -183,9 +185,14 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
             return
         }
 
-        let assetListDetailViewController = segue.destination as! AssetDetailListViewController
-        assetListDetailViewController.currentIndexPath = selectedIndexPath
-        zoomDetailList(assetListDetailViewController, nohanaImagePickerController) { page in
+        prepareDetailList(segue.destination as! AssetDetailListViewController, at: selectedIndexPath, image: nil)
+    }
+
+    /// `image` is shown until the photo is loaded; the thumbnail is used when it is nil.
+    private func prepareDetailList(_ detailList: AssetDetailListViewController, at indexPath: IndexPath, image: UIImage?) {
+        detailList.currentIndexPath = indexPath
+        detailList.showWhileLoading(image ?? (collectionView?.cellForItem(at: indexPath) as? AssetCell)?.imageView.image)
+        zoomDetailList(detailList, nohanaImagePickerController) { page in
             IndexPath(item: page.item, section: 0)
         }
     }

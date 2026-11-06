@@ -25,6 +25,10 @@ class ImagePreviewViewController: UIViewController {
         return imageView
     }()
 
+    var image: UIImage? {
+        imageView.image
+    }
+
     init(asset: PhotoKitAsset) {
         super.init(nibName: nil, bundle: nil)
 

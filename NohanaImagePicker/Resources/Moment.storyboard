@@ -127,7 +127,7 @@
         <!--Moment Detail List View Controller-->
         <scene sceneID="oI3-Wy-HdK">
             <objects>
-                <collectionViewController id="jUV-MP-za7" customClass="MomentDetailListViewController" customModule="NohanaImagePicker" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="MomentDetailListViewController" id="jUV-MP-za7" customClass="MomentDetailListViewController" customModule="NohanaImagePicker" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" id="m76-dz-ahp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="510"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

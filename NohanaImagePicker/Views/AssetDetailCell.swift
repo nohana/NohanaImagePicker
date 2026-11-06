@@ -48,13 +48,13 @@ class AssetDetailCell: UICollectionViewCell, UIScrollViewDelegate {
 
     // MARK: - Image
 
-    /// Loads the high quality image and calls `completion` after it is set.
-    func loadImage(of asset: PhotoKitAsset, targetSize: CGSize, completion: @escaping @MainActor () -> Void) {
+    /// Loads the high quality image and calls `completion` after it is set. Until then `placeholder` is shown.
+    func loadImage(of asset: PhotoKitAsset, targetSize: CGSize, placeholder: UIImage? = nil, completion: @escaping @MainActor () -> Void) {
         cancelImageRequest()
         let identifier = asset.originalAsset.localIdentifier
         // Clear another asset's image, but keep the image when the same asset is shown again (e.g. after reloadData).
         if displayedAssetIdentifier != identifier {
-            imageView.image = nil
+            imageView.image = placeholder
             displayedAssetIdentifier = nil
         }
         representedAssetIdentifier = identifier
