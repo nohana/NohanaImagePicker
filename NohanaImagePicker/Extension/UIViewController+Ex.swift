@@ -53,16 +53,24 @@ extension UIViewController {
     
     func toolBarAppearance(_ nohanaImagePickerController: NohanaImagePickerController) -> UIToolbarAppearance {
         let appearance = UIToolbarAppearance()
-        appearance.configureWithDefaultBackground()
-        appearance.backgroundColor = nohanaImagePickerController.config.color.navigationBarBackground
+        if let backgroundColor = barBackgroundColor(nohanaImagePickerController) {
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = backgroundColor
+        } else {
+            appearance.configureWithDefaultBackground()
+        }
         return appearance
     }
     
     // MARK: UINavigationBarAppearance
     func navigationBarAppearance(_ nohanaImagePickerController: NohanaImagePickerController) -> UINavigationBarAppearance {
         let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = nohanaImagePickerController.config.color.navigationBarBackground
+        if let backgroundColor = barBackgroundColor(nohanaImagePickerController) {
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = backgroundColor
+        } else {
+            appearance.configureWithDefaultBackground()
+        }
         appearance.titleTextAttributes =  [
             .foregroundColor: nohanaImagePickerController.config.color.navigationBarForeground,
             .font: UIFont.systemFont(ofSize: 17, weight: .semibold)
@@ -74,6 +82,18 @@ extension UIViewController {
         ]
         appearance.doneButtonAppearance = donebuttonAppearance
         return appearance
+    }
+
+    // On iOS 26+ the bars have no background by default (Liquid Glass), so the photos can scroll under them.
+    // Before iOS 26 the bars stay white as in earlier versions. A color set by the app is used on every version.
+    private func barBackgroundColor(_ nohanaImagePickerController: NohanaImagePickerController) -> UIColor? {
+        if let backgroundColor = nohanaImagePickerController.config.color.navigationBarBackground {
+            return backgroundColor
+        }
+        if #available(iOS 26.0, *) {
+            return nil
+        }
+        return .white
     }
 
     // MARK: - Notification
