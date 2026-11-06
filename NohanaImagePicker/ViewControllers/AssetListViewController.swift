@@ -185,6 +185,9 @@ class AssetListViewController: UICollectionViewController, UICollectionViewDeleg
 
         let assetListDetailViewController = segue.destination as! AssetDetailListViewController
         assetListDetailViewController.currentIndexPath = selectedIndexPath
+        zoomDetailList(assetListDetailViewController, nohanaImagePickerController) { page in
+            IndexPath(item: page.item, section: 0)
+        }
     }
 
     // MARK: - IBSegueAction

@@ -221,6 +221,18 @@ final class MomentViewController: UICollectionViewController, UICollectionViewDe
         }
     }
 
+    // MARK: - Storyboard
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Not in makeMomentDetail: setting the transition loads the view, which fails while the storyboard is still
+        // creating the view controller.
+        guard let momentDetailListViewController = segue.destination as? MomentDetailListViewController else {
+            return
+        }
+        // The pages keep the section of the tapped item.
+        zoomDetailList(momentDetailListViewController, nohanaImagePickerController) { page in page }
+    }
+
     // MARK: - IBSegueAction
     @IBSegueAction func makeMomentDetail(_ coder: NSCoder) -> MomentDetailListViewController? {
         guard let selectedIndexPath = collectionView?.indexPathsForSelectedItems?.first else {

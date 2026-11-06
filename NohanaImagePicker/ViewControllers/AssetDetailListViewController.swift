@@ -92,8 +92,7 @@ class AssetDetailListViewController: AssetListViewController, DetailListViewCont
         guard isFirstAppearance else {
             return
         }
-        let indexPath = IndexPath(row: currentIndexPath.item, section: 0)
-        scrollCollectionView(to: indexPath)
+        scrollToCurrentPage()
         isFirstAppearance = false
     }
 

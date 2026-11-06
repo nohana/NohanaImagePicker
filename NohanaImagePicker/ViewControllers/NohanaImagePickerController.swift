@@ -74,6 +74,9 @@ open class NohanaImagePickerController: UIViewController {
     let pickedAssetList: PickedAssetList
     let thumbnailLoader = ThumbnailLoader()
     let mediaType: MediaType
+    /// On iOS 18+, the detail page zooms out of the tapped photo and back into the photo shown when going back.
+    /// Before iOS 18 the standard push and pop are used, and also in a sheet when built with the iOS 27 SDK, where
+    /// the zoom hides the sheet.
     let enableExpandingPhotoAnimation: Bool
     let assetCollectionSubtypes: [PHAssetCollectionSubtype]
     let defaultAssetCollection: AssetCollection?
@@ -130,13 +133,7 @@ open class NohanaImagePickerController: UIViewController {
         let rootViewController = storyboard.instantiateViewController(identifier: "RootViewController", creator: { coder in
             RootViewController(coder: coder, nohanaImagePickerController: self)
         })
-        let navigationController: UINavigationController = {
-            if enableExpandingPhotoAnimation {
-                return AnimatableNavigationController(rootViewController: rootViewController)
-            } else {
-                return UINavigationController(rootViewController: rootViewController)
-            }
-        }()
+        let navigationController = UINavigationController(rootViewController: rootViewController)
 
         let navigationBarAppearance = navigationBarAppearance(self)
         navigationController.navigationBar.standardAppearance = navigationBarAppearance
