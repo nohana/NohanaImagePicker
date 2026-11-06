@@ -87,13 +87,7 @@ class RootViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setToolbarTitle(nohanaImagePickerController)
-        
-        // FIXME: The settings of UIBarButtonItemAppearance may not be reflected.
-        // Probably, this problem occurs when the settings are set to reflect the entire application.
-        navigationItem.rightBarButtonItem?.setTitleTextAttributes([
-            .foregroundColor: nohanaImagePickerController.config.color.navigationBarDoneBarButtonItem,
-            .font: UIFont.systemFont(ofSize: 17, weight: .semibold)
-        ], for: .normal)
+        setDoneButtonColor(navigationItem.rightBarButtonItem, nohanaImagePickerController)
     }
     
     // MARK: Private
