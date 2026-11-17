@@ -44,6 +44,18 @@ struct RetainCycleTests {
         #expect(weakPicker == nil)
     }
 
+    @Test("ThumbnailLoader is deallocated with the picker")
+    func thumbnailLoaderIsDeallocatedWithPicker() {
+        weak var weakLoader: ThumbnailLoader?
+        autoreleasepool {
+            let picker = NohanaImagePickerController()
+            picker.loadViewIfNeeded()
+            weakLoader = picker.thumbnailLoader
+        }
+        runMainLoop(until: { weakLoader == nil })
+        #expect(weakLoader == nil)
+    }
+
     @Test("PhotoAuthorizationLimitedCell does not retain its delegate")
     func limitedCellDoesNotRetainDelegate() {
         let cell = PhotoAuthorizationLimitedCell(frame: .zero)

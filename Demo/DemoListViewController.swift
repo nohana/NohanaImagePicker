@@ -73,12 +73,7 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
     // MARK: - Photos
 
     func checkIfAuthorizedToAccessPhotos(_ handler: @escaping (_ isAuthorized: Bool) -> Void) {
-        let status: PHAuthorizationStatus
-        if #available(iOS 14, *) {
-            status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
-        } else {
-            status = PHPhotoLibrary.authorizationStatus()
-        }
+        let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
         switch status {
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization { status in
@@ -139,7 +134,11 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
     @objc func showCustomUIPicker() {
         let picker = NohanaImagePickerController()
         picker.delegate = self
-        picker.config.color.background = UIColor(red: 0xcc/0xff, green: 0xff/0xff, blue: 0xff/0xff, alpha: 1)
+        picker.config.color.background = UIColor { traitCollection in
+            traitCollection.userInterfaceStyle == .dark
+                ? UIColor(red: 0x00/0xff, green: 0x33/0xff, blue: 0x33/0xff, alpha: 1)
+                : UIColor(red: 0xcc/0xff, green: 0xff/0xff, blue: 0xff/0xff, alpha: 1)
+        }
         picker.config.color.separator = UIColor(red: 0x00/0xff, green: 0x66/0xff, blue: 0x66/0xff, alpha: 1)
         picker.config.strings.albumListTitle = "🏞"
         picker.config.image.droppedSmall = UIImage(named: "btn_select_m")
@@ -254,9 +253,7 @@ class DemoListViewController: UITableViewController, NohanaImagePickerController
 
     func nohanaImagePickerDidTapAddPhotoButton(_ picker: NohanaImagePickerController) {
         print("🐷\(#function)")
-        if #available(iOS 14, *) {
-            PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: picker)
-        }
+        PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: picker)
     }
 
     func nohanaImagePickerDidTapAuthorizeAllPhotoButton(_ picker: NohanaImagePickerController) {
