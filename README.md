@@ -17,7 +17,7 @@ import NohanaImagePicker
 class MyViewController: UIViewController {
     let picker = NohanaImagePickerController()
 
-#     override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.picker.delegate = self
         present(self.picker, animated: true, completion: nil)
@@ -54,10 +54,10 @@ picker.numberOfColumnsInLandscape = 3
 picker.shouldShowMoment = true
 
 // Show empty albums
-picker.shouldShowMoment = shouldShowEmptyAlbum = true
+picker.shouldShowEmptyAlbum = true
 
 // Hide toolbar
-picker.shouldShowEmptyAlbum = true
+picker.toolbarHidden = true
 
 // Disable to pick asset
 picker.canPickAsset = { (asset:Asset) -> Bool in
@@ -67,8 +67,10 @@ picker.canPickAsset = { (asset:Asset) -> Bool in
 
 ## Requirements
 
-- Swift 5.9 later (Xcode 15 or later; building the Xcode project, e.g. with Carthage, requires Xcode 16 or later)
+- Xcode 16 or later
 - iOS 17.0 later
+
+The Liquid Glass appearance on iOS 26 and later needs the app to be built with Xcode 26 or later.
 
 If your app supports iOS 13–16, use `0.9.x` (e.g. `github "nohana/NohanaImagePicker" ~> 0.9.19` in your Cartfile, or "Up to Next Minor Version" from `0.9.19` in Swift Package Manager).
 
